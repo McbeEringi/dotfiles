@@ -1,0 +1,12 @@
+*{font-family:monospace,sans-serif;font-size:16px;color:#fff;transition:.2s;}
+window{background-color:transparent;}
+window>box,tooltip{background-color:alpha(#222,.5);border:4px solid alpha(#222,.2);padding:0 16px;border-radius:16px;}
+tooltip{background-color:alpha(#222,.8);border-color:alpha(#222,.5);}
+#workspaces button,widget>*{background:transparent;border:0;box-shadow:none;border-radius:8px;}widget>*{padding:0 4px;}
+#workspaces button.active{background-color:alpha(#6ca,.5);}
+#battery.low{background-color:alpha(#f44,.8);}
+#battery.low.discharging{animation:blink .25s infinite alternate;}
+#battery.high.charging,#battery.high.full{background-color:alpha(#6ca,.5);}
+#wireplumber.muted{color:alpha(currentColor,.2);}
+
+@keyframes blink{0%{background-color:transparent;}}

@@ -1,0 +1,48 @@
+clock
+timestr=%H:%M
+datestr=%y-%m-%d
+indicator
+screenshot
+effect-blur=8x8
+daemonize
+font=monospace
+fade-in=4
+grace=5
+
+indicator-radius=64
+indicator-thickness=4
+separator-color=00000000
+key-hl-color=66ccaa
+bs-hl-color=ff4444
+# caps-lock-key-hl-color=66ccaa
+# caps-lock-bs-hl-color=ff4444
+
+ring-color=66ccaa88
+ring-clear-color=66ccaa
+# ring-caps-lock-color=66ccaa88
+ring-ver-color=66ccaa
+ring-wrong-color=ff4444
+
+inside-color=222222cc
+inside-clear-color=222222cc
+# inside-caps-lock-color=222222cc
+inside-ver-color=222222cc
+inside-wrong-color=222222cc
+
+line-color=00000000
+line-clear-color=00000000
+# line-caps-lock-color=00000000
+line-ver-color=00000000
+line-wrong-color=00000000
+
+text-color=ffffff
+text-clear-color=ffffff
+text-caps-lock-color=ffffff
+text-ver-color=ffffff
+text-wrong-color=ffffff
+
+text-clear=CLR
+text-caps-lock=CAPS
+text-ver=...
+text-wrong=:(
+

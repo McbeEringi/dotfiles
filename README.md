@@ -1,3 +1,3 @@
 # dotfiles
 
-Hyprland foot hyprpaper waybar wofi tuigreet
+Hyprland foot hyprpaper waybar wofi tuigreet swaylock

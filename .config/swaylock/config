@@ -6,8 +6,6 @@ screenshot
 effect-blur=8x8
 daemonize
 font=monospace
-fade-in=4
-grace=5
 
 indicator-radius=64
 indicator-thickness=4

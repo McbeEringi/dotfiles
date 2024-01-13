@@ -26,7 +26,7 @@
 	"battery":{
 		"format":"<small>B</small>{icon}",
 		"format-charging":"<small>C</small>{icon}",
-		"format-notcharging":"<small>N</small>{icon}","tooltip-format":"Battery: {capacity}%\nTime: {time}",
+		"format-notcharging":"<small>N</small>{icon}","tooltip-format":"Battery: {capacity}%\nTime: {timeTo}",
 		"format-time":"{H}:{m}",
 		"states":{"high":100,"_":95,"low":15},
 		"format-icons": ["\u2800","⡀","⣀","⣄","⣤","⣦","⣶","⣷","⣿"]

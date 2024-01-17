@@ -17,7 +17,8 @@
 	},
 	"wireplumber":{
 		"format":"<small>V</small>{icon}","tooltip-format":"Volume: {volume}%","reverse-scrolling":-1,
-		"format-icons": ["\u2800","⡀","⣀","⣄","⣤","⣦","⣶","⣷","⣿"]
+		"format-icons": ["\u2800","⡀","⣀","⣄","⣤","⣦","⣶","⣷","⣿"],
+		"on-click":"pavucontrol"
 	},
 	"backlight":{
 		"format":"<small>L</small>{icon}","tooltip-format":"Luminance: {percent}%","reverse-scrolling":true,

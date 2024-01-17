@@ -8,5 +8,6 @@ tooltip{background-color:alpha(#222,.8);border-color:alpha(#222,.5);}
 #battery.low.discharging{animation:blink .25s infinite alternate;}
 #battery.high.charging,#battery.high.full{background-color:alpha(#6ca,.5);}
 #wireplumber.muted{color:alpha(currentColor,.2);}
+#tray{background-color:alpha(currentColor,.2);}
 
 @keyframes blink{0%{background-color:transparent;}}

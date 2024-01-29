@@ -5,3 +5,8 @@ border-size=4
 border-color=#66ccaa88
 border-radius=16
 progress-color=#66ccaa
+[urgency=low]
+border-color=#88888888
+[urgency=critical]
+border-color=#ff444488
+

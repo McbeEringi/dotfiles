@@ -104,7 +104,7 @@ bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPlay exec playerctl play-pause 
 bindsym XF86AudioPrev exec playerctl previous
 bindsym print exec grimblast copy
-bindsym SHIFT+print exec grimblast copy areaprint $2
+bindsym SHIFT+print exec grimblast copy area
 
 bindsym $mainMod+V exec cliphist list | $menu -d -p "clipboard..." | cliphist decode | wl-copy
 bindsym $mainMod+Space exec $terminal -T float node

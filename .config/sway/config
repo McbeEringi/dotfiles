@@ -1,7 +1,9 @@
-output DSI-1 {
-	transform 90
+output * {
 	scale 1
 }
+# output DSI-1 {
+# 	transform 90
+# }
 
 exec fcitx5 -d & mako & /usr/lib/xfce-polkit/xfce-polkit
 exec hyprpaper & waybar -c ~/.config/waybar/sway.jsonc & wlsunset -l 35.7 -L 139.7
@@ -25,7 +27,7 @@ input type:touchpad {
 }
 bindgesture swipe:3:right workspace prev
 bindgesture swipe:3:left workspace next
-input 1046:9110:Goodix_Capacitive_TouchScreen map_to_output DSI-1
+# input 1046:9110:Goodix_Capacitive_TouchScreen map_to_output DSI-1
 
 gaps inner 8
 default_border pixel 4 

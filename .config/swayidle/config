@@ -1,6 +1,0 @@
-timeout 60 'brightnessctl -s --exponent=2 s 10%-' resume 'brightnessctl -r'
-timeout 300 'swaylock --fade-in 4 --grace 5'
-# timeout 600 'hyprctl dispatch dpms off'
-timeout 600 'systemctl suspend'
-before-sleep 'swaylock'
-lock 'swaylock'

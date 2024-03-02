@@ -4,9 +4,8 @@ output DSI-1 {
 }
 
 exec fcitx5 -d & mako & /usr/lib/xfce-polkit/xfce-polkit
-exec hyprpaper & waybar -c ~/.config/waybar/sway.jsonc & wlsunset -l 35.7 -L 139.7
+exec hyprpaper & hypridle & waybar -c ~/.config/waybar/sway.jsonc & wlsunset -l 35.7 -L 139.7
 exec wl-paste --watch cliphist store
-exec swayidle -w & idlehack
 seat seat0 xcursor_theme Bibata-Modern-Ice 24
 
 set $terminal foot
@@ -108,4 +107,4 @@ bindsym SHIFT+print exec grimblast copy area
 
 bindsym $mainMod+V exec cliphist list | $menu -d -p "clipboard..." | cliphist decode | wl-copy
 bindsym $mainMod+Space exec $terminal -T float node
-bindsym $mainMod+L exec swaylock --fade-in .2
+bindsym $mainMod+L exec hyprlock

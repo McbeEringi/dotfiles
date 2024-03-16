@@ -1,6 +1,6 @@
 {
 	"layer":"top","position":"top",
-	"height":32,"margin-top":8,"margin-left":8,"margin-right":8,"spacing":8,
+	"height":32,"margin-top":8,"margin-left":8,"margin-right":8,
 
 	"modules-center":["clock"],
 	"modules-right":["mpris","tray","network","wireplumber","backlight","cpu","memory","battery"],
@@ -20,7 +20,7 @@
 		"format-charging":"<small>C</small>{icon}",
 		"format-notcharging":"<small>N</small>{icon}",
 		"format-low":"{capacity}",
-		"tooltip-format":"Battery: {capacity}%\nTime: {timeTo}  {power}","format-time":"{H}:{m}",
+		"tooltip-format":"Battery: {capacity}%\n{timeTo}","format-time":"{H}:{m}",
 		"states":{"high":100,"_":95,"low":15},
 		"format-icons":["\u2800","⡀","⣀","⣄","⣤","⣦","⣶","⣷","⣿"]
 	},

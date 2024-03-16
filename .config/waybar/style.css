@@ -1,11 +1,33 @@
-*{font-family:monospace,sans-serif;font-size:16px;color:#fff;transition:.2s;outline:none;}
-window{background-color:transparent;}
-window>box,tooltip{background-color:alpha(#222,.5);border:4px solid alpha(#222,.2);padding:0 16px;border-radius:16px;}
-window.battery-low>box{background-color:alpha(#f44,.8);}
-tooltip{background-color:alpha(#222,.8);border-color:alpha(#222,.5);}
-#workspaces button,widget>*{background:transparent;border:0;box-shadow:none;border-radius:8px;}widget>*{padding:0 4px;}
-#workspaces button.active,#workspaces button.focused{background-color:alpha(#6ca,.5);}
-#battery.high.charging,#battery.high.full{background-color:alpha(#6ca,.5);}
-#wireplumber.muted{color:alpha(currentColor,.2);}
-#tray{background-color:alpha(currentColor,.2);}
-#mpris.paused,#mpris.stopped{color:alpha(currentColor,.5);}
+/*
+https://docs.gtk.org/gtk3/css-properties.html
+*/
+@define-color k0 #222;
+@define-color k1 alpha(@k0,.8);
+@define-color k2 alpha(@k0,.5);
+@define-color k3 alpha(@k0,.2);
+
+@define-color w0 #fff;
+@define-color w3 alpha(@w0,.2);
+@define-color a alpha(#6ca,.5);
+@define-color u alpha(#f44,.5);
+
+*{
+	font-family:monospace,sans-serif;font-size:16px;color:@w0;transition:.2s;
+	margin:0;outline:none;border:none;padding:0;background:none;
+	box-shadow:none;text-shadow:none;-gtk-icon-shadow:none;
+}
+
+#waybar>box,tooltip{border:4px solid;border-radius:16px;padding:0 16px;}
+#waybar>box{background-color:@k2;border-color:@k3;}
+tooltip{background-color:@k1;border-color:@k2;}
+#waybar.battery-low>box{background-color:@u;}
+
+widget>*,button{border-radius:8px;}
+widget>*{padding:0 4px;margin:2px;}
+button{padding:0 8px;}
+button:hover{background-color:@w3;}
+button.active,button.focused{background-color:@a;}
+
+#battery.high.charging,#battery.high.full{background-color:@a;}
+.muted,.paused,.stopped{opacity:.5;}
+#tray{background-color:@w3;}

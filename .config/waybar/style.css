@@ -33,4 +33,5 @@ button.active,button.focused,radio:checked{background-color:@a;}
 
 #battery.high.charging,#battery.high.full{background-color:@a;}
 .muted,.paused,.stopped{opacity:.5;}
-#workspaces,#taskbar,#tray{background-color:@w3;}
+#taskbar,#tray{background-color:@w3;}
+#workspaces{background-color:@k3;}

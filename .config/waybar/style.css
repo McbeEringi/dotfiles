@@ -17,17 +17,20 @@ https://docs.gtk.org/gtk3/css-properties.html
 	box-shadow:none;text-shadow:none;-gtk-icon-shadow:none;
 }
 
-#waybar>box,tooltip{border:4px solid;border-radius:16px;padding:0 16px;}
-#waybar>box{background-color:@k2;border-color:@k3;}
-tooltip{background-color:@k1;border-color:@k2;}
+#waybar>box,tooltip,menu{border:4px solid;border-radius:16px;}
+#waybar>box,menu{background-color:@k2;border-color:@k3;}
+tooltip,menu{background-color:@k1;border-color:@k2;}
+tooltip>*{margin:8px;}menu{padding:4px;}
 #waybar.battery-low>box{background-color:@u;}
 
-widget>*,button{border-radius:8px;}
-widget>*{padding:0 4px;margin:2px;}
-button{padding:0 8px;}
-button:hover{background-color:@w3;}
-button.active,button.focused{background-color:@a;}
+.module,button,menuitem,separator,#tray>*{border-radius:10px;}
+.module,menuitem{margin:2px;}radio{margin:8px;}
+menuitem{padding:2px;}separator{padding:1px;}
+button,#tray image{padding:0 8px;}.module>label,label.module{padding:0 4px;}
+:hover,separator,radio{background-color:@w3;}
+button.active,button.focused,radio:checked{background-color:@a;}
+#tray>.needs-attention{background-color:@u;}
 
 #battery.high.charging,#battery.high.full{background-color:@a;}
 .muted,.paused,.stopped{opacity:.5;}
-#tray{background-color:@w3;}
+#workspaces,#taskbar,#tray{background-color:@w3;}

@@ -13,3 +13,6 @@ col_fg="ffffff"
 border_radius=12
 border_width=4
 gap=8
+
+# img2palette
+# magick img.png -kmeans 8 -unique-colors txt:|grep -oP '#[0-9A-F]{6}'

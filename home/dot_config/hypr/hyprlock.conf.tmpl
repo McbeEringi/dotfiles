@@ -11,7 +11,7 @@ background {
 
 label {
 	text = cmd[update:1000] date "+%y-%m-%d %A"
-	color = rgba(ffffffcc)
+	color = rgba({{.col_fg}}cc)
 	font_size = 16
 	font_family = {{.hyprlock_font}}
 
@@ -21,7 +21,7 @@ label {
 }
 label {
 	text = cmd[update:1000] date "+%H:%M"
-	color = rgba(ffffffcc)
+	color = rgba({{.col_fg}}cc)
 	font_size = 64
 	font_family = monospace bold
 	font_family = {{.hyprlock_font}}
@@ -33,20 +33,20 @@ label {
 
 input-field {
 	size = 256, 64
-	outline_thickness = 4
+	outline_thickness = {{.border_width}}
 	dots_size = 0.25
 	dots_spacing = 0.5
 	dots_center = true
-	outer_color = rgba(66ccaa88)
-	inner_color = rgba(222222cc)
-	font_color = rgba(ffffffff)
+	outer_color = rgba({{.col_accent}}88)
+	inner_color = rgba({{.col_bg}}cc)
+	font_color = rgba({{.col_fg}}ff)
 	# fade_on_empty = false
-	placeholder_text = <span color="##fff8">$USER</span>
+	placeholder_text = <span color="##{{.col_fg}}88">$USER</span>
 	hide_input = false
 
-	check_color = rgba(22222288)
-	fail_color = rgba(ff4444cc)
-	fail_text = <span color="##fff8">:(</span>
+	check_color = rgba({{.col_bg}}88)
+	fail_color = rgba({{.col_warn}}cc)
+	fail_text = <span color="##{{.col_fg}}88">:(</span>
 
 	position = 0, 0
 	halign = center

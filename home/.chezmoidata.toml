@@ -1,3 +1,15 @@
 wallpaper="~/path/to/wallpaper"
 hyprlock_bg="screenshot" # to avoid hyprlock rotated screen bug, use png image with absolute path
 hyprlock_font="sans-serif bold"
+
+# color palette RRGGBB
+col_accent="66ccaa"
+col_warn="ff4444"
+col_nop="888888"
+col_bg="222222"
+col_fg="ffffff"
+
+# size
+border_radius=12
+border_width=4
+gap=8

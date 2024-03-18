@@ -30,15 +30,15 @@ input {
 }
 
 general {
-	gaps_in = 4
-	gaps_out = 8
-	border_size = 4
-	col.active_border = rgba(66ccaa88)
-	col.inactive_border = rgba(22222288)
+	gaps_in = {{div .gap 2}}
+	gaps_out = {{.gap}}
+	border_size = {{.border_width}}
+	col.active_border = rgba({{.col_accent}}88)
+	col.inactive_border = rgba({{.col_bg}}88)
 }
 
 decoration {
-	rounding = 12
+	rounding = {{.border_radius}}
 	inactive_opacity = .9
 	drop_shadow = false
 }
@@ -94,7 +94,7 @@ windowrulev2 = nomaximizerequest, class:.* # You'll probably like this.
 windowrulev2 = opacity 0.9 override 0.8 override,class:^($terminal|$fileManager|$menu)$
 windowrulev2 = float,title:^(float)$
 windowrulev2 = float,class:polkit
-windowrulev2 = bordercolor rgba(88888888),xwayland:1
+windowrulev2 = bordercolor rgba({{.col_nop}}88),xwayland:1
 
 layerrule = blur,waybar
 layerrule = blur,notifications

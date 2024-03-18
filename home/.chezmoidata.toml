@@ -1,2 +1,3 @@
 wallpaper="~/path/to/wallpaper"
-hyprlock="" # to avoid hyprlock rotated screen bug, use png image with absolute path
+hyprlock_bg="screenshot" # to avoid hyprlock rotated screen bug, use png image with absolute path
+hyprlock_font="monospace bold"

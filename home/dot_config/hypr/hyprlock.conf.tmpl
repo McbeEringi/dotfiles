@@ -4,11 +4,7 @@ general {
 }
 
 background {
-{{if .hyprlock}} # screen rotation bug
-	path = {{.hyprlock}}
-{{else}}
-	path = screenshot
-{{end}}
+	path = {{.hyprlock_bg}}
 	blur_size = 8
 	blur_passes = 1
 }
@@ -17,7 +13,7 @@ label {
 	text = cmd[update:1000] date "+%y-%m-%d %A"
 	color = rgba(ffffffcc)
 	font_size = 16
-	font_family = monospace bold
+	font_family = {{.hyprlock_font}}
 
 	position = 0, -96
 	halign = center
@@ -28,6 +24,7 @@ label {
 	color = rgba(ffffffcc)
 	font_size = 64
 	font_family = monospace bold
+	font_family = {{.hyprlock_font}}
 
 	position = 0, -128
 	halign = center

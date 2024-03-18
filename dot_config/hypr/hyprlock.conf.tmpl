@@ -4,7 +4,11 @@ general {
 }
 
 background {
-	path = screenshot # screen rotation bug
+{{if .rotate}} # screen rotation bug
+	path = {{.wallpaper}}
+{{else}}
+	path = screenshot
+{{end}}
 	blur_size = 8
 	blur_passes = 1
 }

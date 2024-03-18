@@ -1,0 +1,14 @@
+{
+	"editor.fontFamily": "monospace",
+	"editor.renderWhitespace": "all",
+	"editor.fontSize": 12,
+	"editor.tabSize": 2,
+	"editor.insertSpaces": false,
+	"editor.formatOnPaste": false,
+	"editor.hover.enabled": false,
+	"workbench.startupEditor": "none",
+	"workbench.colorTheme": "Atom One Dark",
+	"git.autofetch": true,
+	"git.openRepositoryInParentFolders": "always",
+	"git.confirmSync": false,
+}

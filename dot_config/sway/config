@@ -1,15 +1,21 @@
-output DSI-1 {
-	transform 90
+output * {
 	scale 1
 }
+output DSI-1 { # CHUWI MiniBook X N100
+	transform 90
+}
+
 exec fcitx5 -d & mako & /usr/lib/xfce-polkit/xfce-polkit
 exec hyprpaper & waybar -c ~/.config/waybar/sway.jsonc & wlsunset -l 35.7 -L 139.7
 exec wl-paste --watch cliphist store
 exec swayidle -w & idlehack
 seat seat0 xcursor_theme Bibata-Modern-Ice 24
+
 set $terminal foot
 set $fileManager thunar
 set $menu wofi
+
+
 
 input * {
 	xkb_layout jp
@@ -21,36 +27,43 @@ input type:touchpad {
 }
 bindgesture swipe:3:right workspace prev
 bindgesture swipe:3:left workspace next
-input 1046:9110:Goodix_Capacitive_TouchScreen map_to_output DSI-1
+input 1046:9110:Goodix_Capacitive_TouchScreen map_to_output DSI-1 # CHUWI MiniBook X N100
+
 gaps inner 8
-default_border pixel 4
-default_floating_border pixel 4
+default_border pixel 4 
+default_floating_border pixel 4 
 
 default_orientation vertical
-for_window [app_id=".*"] splitt
+for_window [app_id=".*"] splitt 
 
 client.focused #00000000 #66ccaa88 #00000000 #66ccaa88
 client.focused_inactive #00000000 #22222288 #00000000 #22222288
 client.unfocused #00000000 #22222288 #00000000 #22222288
 client.urgent #00000000 #ff444488 #00000000 #ff444488
 corner_radius 12
+
 for_window [title="float"] floating enable
 for_window [title=".*"] opacity .9
 blur enable
 
+
 set $mainMod Mod4
 bindsym $mainMod+Shift+c reload
+
 # default
+
 bindsym $mainMod+Q exec $terminal
 bindsym $mainMod+C kill
 bindsym $mainMod+M exec $(echo -e "\nswaymsg exit\nsystemctl poweroff\nsystemctl reboot\nsystemctl suspend\nsystemctl hibernate"|$menu -d -k /dev/null -p "power..." -r "echo %s|awk '{print \$NF}'|tr -d '\n'") # exit
 bindsym $mainMod+E exec $fileManager
 bindsym $mainMod+F floating toggle
 bindsym $mainMod+R exec $menu
+
 bindsym $mainMod+Left focus left
 bindsym $mainMod+Right focus right
 bindsym $mainMod+Up focus up
 bindsym $mainMod+Down focus down
+
 bindsym $mainMod+1 workspace number 1
 bindsym $mainMod+2 workspace number 2
 bindsym $mainMod+3 workspace number 3
@@ -62,6 +75,7 @@ bindsym $mainMod+8 workspace number 8
 bindsym $mainMod+9 workspace number 9
 bindsym $mainMod+0 workspace number 10
 bindsym $mainMod+S scratchpad show
+
 bindsym $mainMod+Shift+1 move container to workspace number 1
 bindsym $mainMod+Shift+2 move container to workspace number 2
 bindsym $mainMod+Shift+3 move container to workspace number 3
@@ -73,7 +87,9 @@ bindsym $mainMod+Shift+8 move container to workspace number 8
 bindsym $mainMod+Shift+9 move container to workspace number 9
 bindsym $mainMod+Shift+0 move container to workspace number 10
 bindsym $mainMod+Shift+S move scratchpad
+
 floating_modifier $mainMod normal
+
 # default end
 set $v_tgt @DEFAULT_AUDIO_SINK@
 set $v_notify && notify-send -u low -t 1000 -h string:x-canonical-private-synchronous:anything V "$(wpctl get-volume $v_tgt|awk '{print $2*100 "% " $3}')"
@@ -86,11 +102,12 @@ bindsym XF86MonBrightnessUp exec brightnessctl --exponent=2 s +5%
 bindsym Shift+XF86MonBrightnessUp exec brightnessctl --exponent=2 s +1%
 bindsym Shift+XF86MonBrightnessDown exec brightnessctl --exponent=2 s 1%-
 bindsym XF86MonBrightnessDown exec brightnessctl --exponent=2 s 5%-
-bindsym XF86AudioNext exec playerctl next
-bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next 
+bindsym XF86AudioPlay exec playerctl play-pause 
 bindsym XF86AudioPrev exec playerctl previous
 bindsym print exec grimblast copy
 bindsym SHIFT+print exec grimblast copy area
+
 bindsym $mainMod+V exec cliphist list | $menu -d -p "clipboard..." | cliphist decode | wl-copy
 bindsym $mainMod+Space exec $terminal -T float node
 bindsym $mainMod+L exec swaylock --fade-in .2

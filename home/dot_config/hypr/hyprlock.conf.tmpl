@@ -4,8 +4,8 @@ general {
 }
 
 background {
-{{if .rotate}} # screen rotation bug
-	path = {{.wallpaper}}
+{{if .hyprlock}} # screen rotation bug
+	path = {{.hyprlock}}
 {{else}}
 	path = screenshot
 {{end}}

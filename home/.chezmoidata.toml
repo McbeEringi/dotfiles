@@ -1,2 +1,2 @@
-wallpaper="/path/to/wallpaper"
-rotate=false
+wallpaper="~/path/to/wallpaper"
+hyprlock="" # to avoid hyprlock rotated screen bug, use png image with absolute path

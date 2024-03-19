@@ -79,17 +79,12 @@ xwayland {
 	force_zero_scaling = true
 }
 
-device:goodix-capacitive-touchscreen-1 { # CHUWI MiniBook X N100
-	transform = 3
-	output = DSI-1
-}
-
 # Example windowrule v1
 # windowrule = float, ^(kitty)$
 # Example windowrule v2
 # windowrulev2 = float,class:^(kitty)$,title:^(kitty)$
 # See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
-windowrulev2 = nomaximizerequest, class:.* # You'll probably like this.
+windowrulev2 = suppressevent maximize, class:.* # You'll probably like this.
 
 windowrulev2 = opacity 0.9 override 0.8 override,class:^($terminal|$fileManager|$menu)$
 windowrulev2 = float,title:^(float)$

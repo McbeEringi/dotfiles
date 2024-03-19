@@ -1,7 +1,8 @@
 output * {
 	scale 1
 }
-output DSI-1 { # CHUWI MiniBook X N100
+output DSI-1 {
+	# CHUWI MiniBook X N100
 	transform 90
 }
 
@@ -27,7 +28,8 @@ input type:touchpad {
 }
 bindgesture swipe:3:right workspace prev
 bindgesture swipe:3:left workspace next
-input 1046:9110:Goodix_Capacitive_TouchScreen map_to_output DSI-1 # CHUWI MiniBook X N100
+# CHUWI MiniBook X N100
+input 1046:9110:Goodix_Capacitive_TouchScreen map_to_output DSI-1
 
 gaps inner {{.gap}}
 default_border pixel {{.border_width}}

@@ -1,5 +1,4 @@
 wallpaper="~/path/to/wallpaper"
-hyprlock_bg="screenshot" # use png image with absolute path
 hyprlock_font="sans-serif bold"
 
 # color palette RRGGBB

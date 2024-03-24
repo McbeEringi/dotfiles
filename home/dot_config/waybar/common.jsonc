@@ -1,6 +1,5 @@
 {
 	"layer":"top","position":"top",
-	"height":32,"margin-top":{{.gap}},"margin-left":{{.gap}},"margin-right":{{.gap}},
 
 	"modules-center":["clock"],
 	"modules-right":["mpris","tray","network","wireplumber","backlight","cpu","memory","battery"],

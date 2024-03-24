@@ -98,6 +98,7 @@ windowrulev2 = float,class:polkit
 windowrulev2 = bordercolor rgba({{.col_nop}}88),xwayland:1
 
 layerrule = blur,waybar
+layerrule = ignorezero,waybar
 layerrule = blur,notifications
 layerrule = ignorezero,notifications
 
@@ -113,7 +114,7 @@ bind = $mainMod, E, exec, $fileManager
 bind = $mainMod, F, togglefloating, # V
 bind = $mainMod, R, exec, $menu
 bind = $mainMod, P, pseudo,
-# bind = $mainMod, J, togglesplit,
+bind = $mainMod, J, togglesplit,
 
 bind = $mainMod, left, movefocus, l
 bind = $mainMod, right, movefocus, r

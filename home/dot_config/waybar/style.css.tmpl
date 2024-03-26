@@ -2,7 +2,6 @@
 https://docs.gtk.org/gtk3/css-properties.html
 */
 @define-color k0 #{{.col_bg}};
-@define-color k1 alpha(@k0,.8);
 @define-color k2 alpha(@k0,.5);
 @define-color k3 alpha(@k0,.2);
 
@@ -17,9 +16,7 @@ https://docs.gtk.org/gtk3/css-properties.html
 	box-shadow:none;text-shadow:none;-gtk-icon-shadow:none;
 }
 
-#waybar>box,tooltip,menu{margin:{{.gap}}px;margin-bottom:0;border:{{.border_width}}px solid;border-radius:{{add .border_radius .border_width}}px;}
-#waybar>box,menu{background-color:@k2;border-color:@k3;}
-tooltip,menu{background-color:@k1;border-color:@k2;}
+#waybar>box,tooltip,menu{margin:{{.gap}}px;margin-bottom:0;border:{{.border_width}}px solid;border-radius:{{add .border_radius .border_width}}px;background-color:@k2;border-color:@k3;}
 tooltip>*{margin:{{mul .border_width 2}}px;}menu{padding:{{.border_width}}px;}
 #waybar.battery-low>box{background-color:@u;}
 

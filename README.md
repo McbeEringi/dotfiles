@@ -1,6 +1,6 @@
 # dotfiles
 
-Hyprland foot hyprpaper waybar wofi tuigreet wlsunset mpv
+Hyprland foot hyprpaper waybar wofi tuigreet wlsunset mpv grimblast wl-mirror
 
 hyprlock hypridle
 

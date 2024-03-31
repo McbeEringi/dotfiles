@@ -79,6 +79,7 @@ xwayland {
 windowrulev2 = suppressevent maximize, class:.*
 
 windowrulev2 = opacity 0.9 override 0.8 override,class:^($terminal|$fileManager|$menu)$
+windowrulev2 = opaque,class:wl_mirror
 windowrulev2 = stayfocused,class:^$menu$
 windowrulev2 = float,title:^(float)$
 windowrulev2 = float,class:polkit
@@ -156,3 +157,4 @@ bindl  = SHIFT, print, exec, grimblast copy area
 bind   = $mainMod, V, exec, cliphist list | $menu -d -p "clipboard..." | cliphist decode | wl-copy
 bind   = $mainMod, SPACE, exec, $terminal -T float node
 bind   = $mainMod, L, exec, hyprlock --immediate #swaylock --fade-in .2
+bind   = , F11, fullscreen

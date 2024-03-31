@@ -57,7 +57,6 @@ animations {
 }
 
 dwindle {
-	pseudotile = true
 	preserve_split = true
 }
 
@@ -95,12 +94,12 @@ layerrule = ignorezero,notifications
 $mainMod = SUPER
 bind = $mainMod, Q, exec, $terminal
 bind = $mainMod, C, killactive, 
-bind = $mainMod, M, exec, $(echo -e "wl-mirror $(hyprctl activeworkspace|head -1|grep -Po '\w+\-\d')\nhyprctl dispatch exit\nsystemctl poweroff\nsystemctl reboot\nsystemctl suspend\nsystemctl hibernate"|$menu -d -k /dev/null -p "power..." -r "echo %s|awk '{print \$NF}'|tr -d '\n'") # exit
+bind = $mainMod, M, exec, $(echo -e "\nhyprctl dispatch exit\nsystemctl poweroff\nsystemctl reboot\nsystemctl suspend\nsystemctl hibernate"|$menu -d -k /dev/null -p "power..." -r "echo %s|awk '{print \$NF}'|tr -d '\n'") # exit
 bind = $mainMod, N, exec, hyprctl activeworkspace > ~/log.txt
 bind = $mainMod, E, exec, $fileManager
 bind = $mainMod, F, togglefloating, # V
 bind = $mainMod, R, exec, $menu
-bind = $mainMod, P, pseudo,
+bind = $mainMod, P, exec, wl-mirror -F $(hyprctl -j monitors|jq -r '.[].name'|$menu -d -k /dev/null -p "mirror...") # pseudo
 bind = $mainMod, J, togglesplit,
 
 bind = $mainMod, left, movefocus, l

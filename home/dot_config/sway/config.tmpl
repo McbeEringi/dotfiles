@@ -102,7 +102,7 @@ bindsym XF86MonBrightnessDown exec brightnessctl --exponent=2 s 5%-
 bindsym XF86AudioNext exec playerctl next 
 bindsym XF86AudioPlay exec playerctl play-pause 
 bindsym XF86AudioPrev exec playerctl previous
-bindsym print exec grimblast copy
+bindsym print exec grimblast copy output
 bindsym SHIFT+print exec grimblast copy area
 
 bindsym $mainMod+V exec cliphist list | $menu -d -p "clipboard..." | cliphist decode | wl-copy

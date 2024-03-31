@@ -56,7 +56,7 @@ bindsym $mainMod+Shift+c reload
 
 bindsym $mainMod+Q exec $terminal
 bindsym $mainMod+C kill
-bindsym $mainMod+M exec $(echo -e "\nswaymsg exit\nsystemctl poweroff\nsystemctl reboot\nsystemctl suspend\nsystemctl hibernate"|$menu -d -k /dev/null -p "power..." -r "echo %s|awk '{print \$NF}'|tr -d '\n'") # exit
+bindsym $mainMod+M exec $(echo -e "wl-mirror $(swaymsg -t get_workspaces|jq -r '.[]|select(.focused==true).output')\nswaymsg exit\nsystemctl poweroff\nsystemctl reboot\nsystemctl suspend\nsystemctl hibernate"|$menu -d -k /dev/null -p "power..." -r "echo %s|awk '{print \$NF}'|tr -d '\n'") # exit
 bindsym $mainMod+E exec $fileManager
 bindsym $mainMod+F floating toggle
 bindsym $mainMod+R exec $menu

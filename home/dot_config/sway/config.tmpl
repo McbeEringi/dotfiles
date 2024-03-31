@@ -16,8 +16,6 @@ set $terminal foot
 set $fileManager thunar
 set $menu wofi
 
-
-
 input * {
 	xkb_layout jp
 }
@@ -48,18 +46,16 @@ for_window [title="float"] floating enable
 for_window [title=".*"] opacity .9
 blur enable
 
-
 set $mainMod Mod4
 bindsym $mainMod+Shift+c reload
 
-# default
-
 bindsym $mainMod+Q exec $terminal
 bindsym $mainMod+C kill
-bindsym $mainMod+M exec $(echo -e "wl-mirror $(swaymsg -t get_workspaces|jq -r '.[]|select(.focused==true).output')\nswaymsg exit\nsystemctl poweroff\nsystemctl reboot\nsystemctl suspend\nsystemctl hibernate"|$menu -d -k /dev/null -p "power..." -r "echo %s|awk '{print \$NF}'|tr -d '\n'") # exit
+bindsym $mainMod+M exec $(echo -e "\nswaymsg exit\nsystemctl poweroff\nsystemctl reboot\nsystemctl suspend\nsystemctl hibernate"|$menu -d -k /dev/null -p "power..." -r "echo %s|awk '{print \$NF}'|tr -d '\n'") # exit
 bindsym $mainMod+E exec $fileManager
 bindsym $mainMod+F floating toggle
 bindsym $mainMod+R exec $menu
+bindsym $mainMod+P exec wl-mirror -F $(swaymsg -t get_workspaces|jq -r '.[].output'|$menu -d -k /dev/null -p "mirror...")
 
 bindsym $mainMod+Left focus left
 bindsym $mainMod+Right focus right
@@ -92,7 +88,6 @@ bindsym $mainMod+Shift+S move scratchpad
 
 floating_modifier $mainMod normal
 
-# default end
 set $v_tgt @DEFAULT_AUDIO_SINK@
 set $v_notify && notify-send -u low -t 1000 -h string:x-canonical-private-synchronous:anything V "$(wpctl get-volume $v_tgt|awk '{print $2*100 "% " $3}')"
 bindsym XF86AudioMute exec wpctl set-mute $v_tgt toggle $v_notify
@@ -113,3 +108,4 @@ bindsym SHIFT+print exec grimblast copy area
 bindsym $mainMod+V exec cliphist list | $menu -d -p "clipboard..." | cliphist decode | wl-copy
 bindsym $mainMod+Space exec $terminal -T float node
 bindsym $mainMod+L exec swaylock --fade-in .2
+bindsym F11 fullscreen toggle

@@ -5,6 +5,7 @@
 	"modules-right":["mpris","tray","network","wireplumber","backlight","cpu","memory","battery"],
 
 	"wlr/taskbar":{
+		"all-outputs":true,
 		"icon-theme":"Papirus",
 		"on-click":"activate"
 	},

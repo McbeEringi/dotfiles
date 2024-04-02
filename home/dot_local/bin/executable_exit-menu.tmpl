@@ -4,4 +4,4 @@ if [ $XDG_CURRENT_DESKTOP == "Hyprland" ]; then
 else
 	x="swaylock --fade-in .2 ;: lock\nswaymsg exit ;: logout"
 fi
-eval $(echo -e "$x\nsystemctl poweroff ;: power\nreboot\nsystemctl suspend\nsystemctl hibernate"|{{.menu}} -d -k /dev/null -p "exit..." -r "echo '%s'|awk 'NF{printf \"img:{{.chezmoi.homeDir}}/.local/share/octicons/%%s.svg:text:%%s\",\$NF,\$NF}'")
+eval $(echo -e "$x\nsystemctl poweroff ;: power\nreboot\nsystemctl suspend\nsystemctl hibernate"|{{.menu}} -d -k /dev/null -p "exit..." -r "echo '%s'|awk 'NF{printf \"img:$HOME/.local/share/octicons/%%s.svg:text:%%s\",\$NF,\$NF}'")

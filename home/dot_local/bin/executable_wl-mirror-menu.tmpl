@@ -4,4 +4,4 @@ if [ $XDG_CURRENT_DESKTOP == "Hyprland" ]; then
 else
 	x=$(swaymsg -t get_outputs)
 fi
-wl-mirror -F $(echo -e $x|jq -r '.[].name'|{{.menu}} -d -k /dev/null -p "mirror..." -r "echo img:{{.chezmoi.homeDir}}/.local/share/octicons/monitor.svg:text:%s")
+wl-mirror -F $(echo -e $x|jq -r '.[].name'|{{.menu}} -d -k /dev/null -p "mirror..." -r "echo img:$HOME/.local/share/octicons/monitor.svg:text:%s")

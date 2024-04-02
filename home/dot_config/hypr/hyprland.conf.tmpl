@@ -16,7 +16,7 @@ env = QT_QPA_PLATFORMTHEME,qt5ct # change to qt6ct if you have that
 env = PATH,$PATH:$HOME/.local/bin
 # env = GTK_IM_MODULE,fcitx
 # env = QT_IM_MODULE,fcitx
-# env = XMODIFIERS,@im=fcitx
+env = XMODIFIERS,@im=fcitx
 
 input {
 	kb_layout = jp
@@ -86,7 +86,7 @@ windowrulev2 = stayfocused,class:polkit
 windowrulev2 = bordercolor rgba({{.col_nop}}88),xwayland:1
 
 layerrule = blur,waybar
-# layerrule = blurpopups,waybar #	decoration:blur:popups = true
+layerrule = blurpopups,waybar
 layerrule = ignorezero,waybar
 layerrule = blur,notifications
 layerrule = ignorezero,notifications

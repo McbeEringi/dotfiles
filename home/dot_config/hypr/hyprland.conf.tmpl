@@ -6,17 +6,12 @@ exec-once = hyprpaper & hypridle & waybar & wlsunset -l 35.7 -L 139.7
 exec-once = wl-paste --watch cliphist store
 # exec-once = hyprctl setcursor Bibata-Modern-Ice 24
 
-$terminal = foot
+$terminal = {{.terminal}}
 $fileManager = thunar
-$menu = wofi
+$menu = {{.menu}}
 
 env = XCURSOR_THEME,Bibata-Modern-Ice
 env = XCURSOR_SIZE,24
-env = QT_QPA_PLATFORMTHEME,qt5ct # change to qt6ct if you have that
-env = PATH,$PATH:$HOME/.local/bin
-# env = GTK_IM_MODULE,fcitx
-# env = QT_IM_MODULE,fcitx
-env = XMODIFIERS,@im=fcitx
 
 input {
 	kb_layout = jp
@@ -94,12 +89,12 @@ layerrule = ignorezero,notifications
 $mainMod = SUPER
 bind = $mainMod, Q, exec, $terminal
 bind = $mainMod, C, killactive, 
-bind = $mainMod, M, exec, $(echo -e "\nhyprctl dispatch exit\nsystemctl poweroff\nsystemctl reboot\nsystemctl suspend\nsystemctl hibernate"|$menu -d -k /dev/null -p "power..." -r "echo %s|awk '{print \$NF}'|tr -d '\n'") # exit
+bind = $mainMod, M, exec, exit-menu # exit
 bind = $mainMod, N, exec, hyprctl activeworkspace > ~/log.txt
 bind = $mainMod, E, exec, $fileManager
 bind = $mainMod, F, togglefloating, # V
 bind = $mainMod, R, exec, $menu
-bind = $mainMod, P, exec, wl-mirror -F $(hyprctl -j monitors|jq -r '.[].name'|$menu -d -k /dev/null -p "mirror...") # pseudo
+bind = $mainMod, P, exec, wl-mirror-menu # pseudo
 bind = $mainMod, J, togglesplit,
 
 bind = $mainMod, left, movefocus, l
@@ -154,7 +149,6 @@ bindl  = , XF86AudioPrev, exec, playerctl previous
 bindl  = , print, exec, grimblast copy output
 bindl  = SHIFT, print, exec, grimblast copy area
 
-bind   = $mainMod, V, exec, cliphist list | $menu -d -p "clipboard..." | cliphist decode | wl-copy
+bind   = $mainMod, V, exec, cliphist-menu
 bind   = $mainMod, SPACE, exec, $terminal -T float node
-bind   = $mainMod, L, exec, hyprlock --immediate #swaylock --fade-in .2
 bind   = , F11, fullscreen

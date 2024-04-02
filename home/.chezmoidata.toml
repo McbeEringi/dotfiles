@@ -1,6 +1,9 @@
 wallpaper="~/path/to/wallpaper"
 hyprlock_font="sans-serif bold"
 
+terminal="foot"
+menu="wofi" # to use other apps, make sure that the settings are equivalent to the settings for wofi
+
 # color palette RRGGBB
 col_accent="66ccaa"
 col_warn="ff4444"

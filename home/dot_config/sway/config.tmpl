@@ -1,7 +1,8 @@
 set $terminal {{.terminal}}
-set $fileManager thunar
+set $fileManager {{.fileManager}}
 set $menu {{.menu}}
-set $mainMod Mod4
+set $Super Mod4
+set $mainMod ${{camelcase (lower .mainMod)}}
 
 seat seat0 xcursor_theme Bibata-Modern-Ice 24
 

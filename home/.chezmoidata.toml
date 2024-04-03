@@ -2,7 +2,9 @@ wallpaper="~/path/to/wallpaper"
 hyprlock_font="sans-serif bold"
 
 terminal="foot"
+fileManager="thunar"
 menu="wofi" # to use other apps, make sure that the settings are equivalent to the settings for wofi
+mainMod="SUPER"
 
 # color palette RRGGBB
 col_accent="66ccaa"

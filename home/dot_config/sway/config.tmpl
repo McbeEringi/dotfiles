@@ -1,3 +1,17 @@
+set $terminal {{.terminal}}
+set $fileManager thunar
+set $menu {{.menu}}
+set $mainMod Mod4
+
+seat seat0 xcursor_theme Bibata-Modern-Ice 24
+
+exec fcitx5 -d & mako & /usr/lib/xfce-polkit/xfce-polkit
+exec hyprpaper & waybar -c ~/.config/waybar/sway.jsonc & wlsunset -l 35.7 -L 139.7
+exec wl-paste --watch cliphist store
+exec swayidle -w & idlehack
+
+
+# IO
 output * {
 	scale 1
 }
@@ -5,19 +19,6 @@ output DSI-1 {
 	# CHUWI MiniBook X N100
 	transform 90
 }
-
-exec fcitx5 -d & mako & /usr/lib/xfce-polkit/xfce-polkit
-exec hyprpaper & waybar -c ~/.config/waybar/sway.jsonc & wlsunset -l 35.7 -L 139.7
-exec wl-paste --watch cliphist store
-exec swayidle -w & idlehack
-seat seat0 xcursor_theme Bibata-Modern-Ice 24
-
-set $terminal {{.terminal}}
-set $fileManager thunar
-set $menu {{.menu}}
-
-exec ~/.config/sway/env.sh
-
 input * {
 	xkb_layout jp
 }
@@ -31,40 +32,56 @@ bindgesture swipe:3:left workspace next
 # CHUWI MiniBook X N100
 input 1046:9110:Goodix_Capacitive_TouchScreen map_to_output DSI-1
 
+# style
 gaps inner {{.gap}}
 default_border pixel {{.border_width}}
 default_floating_border pixel {{.border_width}}
-
-default_orientation vertical
-for_window [app_id=".*"] splitt
-
 client.focused #00000000 #{{.col_accent}}88 #00000000 #{{.col_accent}}88
 client.focused_inactive #00000000 #{{.col_bg}}88 #00000000 #{{.col_bg}}88
 client.unfocused #00000000 #{{.col_bg}}88 #00000000 #{{.col_bg}}88
-client.urgent #00000000 #{{.col_warn}}88 #00000000 #{{.col_warn}}88
 corner_radius {{.border_radius}}
+blur enable
+default_orientation vertical
+for_window [app_id=".*"] splitt
 
-for_window [title="^float$"] floating enable
+# misc
+focus_on_window_activation focus
+
+# window
+# window.color
+client.urgent #00000000 #{{.col_warn}}88 #00000000 #{{.col_warn}}88
+# window.opacity
 for_window [title=".*"] opacity .9
 for_window [app_id="^at\.yrlf\.wl_mirror$"] opacity 1
-blur enable
+# window.float
+for_window [title="^float$"] floating enable
 
-set $mainMod Mod4
+
+# apps
 bindsym $mainMod+Shift+c reload
-
-bindsym $mainMod+Q exec $terminal
 bindsym $mainMod+C kill
-bindsym $mainMod+M exec exit-menu
+bindsym $mainMod+Q exec $terminal
+bindsym $mainMod+Space exec $terminal -T float node
 bindsym $mainMod+E exec $fileManager
-bindsym $mainMod+F floating toggle
 bindsym $mainMod+R exec $menu
+bindsym $mainMod+M exec exit-menu
+bindsym $mainMod+V exec cliphist-menu
 bindsym $mainMod+P exec wl-mirror-menu
 
+# window
+# window.move
 bindsym $mainMod+Left focus left
 bindsym $mainMod+Right focus right
 bindsym $mainMod+Up focus up
 bindsym $mainMod+Down focus down
+# window.mod
+bindsym $mainMod+F floating toggle
+bindsym F11 fullscreen toggle
+# window.mod.mouse
+floating_modifier $mainMod normal
 
+# workspace
+# workspace.move
 bindsym $mainMod+1 workspace number 1
 bindsym $mainMod+2 workspace number 2
 bindsym $mainMod+3 workspace number 3
@@ -76,7 +93,7 @@ bindsym $mainMod+8 workspace number 8
 bindsym $mainMod+9 workspace number 9
 bindsym $mainMod+0 workspace number 10
 bindsym $mainMod+S scratchpad show
-
+# workspace.mod
 bindsym $mainMod+Shift+1 move container to workspace number 1
 bindsym $mainMod+Shift+2 move container to workspace number 2
 bindsym $mainMod+Shift+3 move container to workspace number 3
@@ -89,8 +106,7 @@ bindsym $mainMod+Shift+9 move container to workspace number 9
 bindsym $mainMod+Shift+0 move container to workspace number 10
 bindsym $mainMod+Shift+S move scratchpad
 
-floating_modifier $mainMod normal
-
+# media
 set $v_tgt @DEFAULT_AUDIO_SINK@
 set $v_notify && notify-send -u low -t 1000 -h string:x-canonical-private-synchronous:anything V "$(wpctl get-volume $v_tgt|awk '{print $2*100 "% " $3}')"
 bindsym XF86AudioMute exec wpctl set-mute $v_tgt toggle $v_notify
@@ -107,7 +123,3 @@ bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioPrev exec playerctl previous
 bindsym print exec grimblast copy output
 bindsym SHIFT+print exec grimblast copy area
-
-bindsym $mainMod+V exec cliphist-menu
-bindsym $mainMod+Space exec $terminal -T float node
-bindsym F11 fullscreen toggle

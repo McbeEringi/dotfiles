@@ -75,7 +75,7 @@ windowrulev2 = suppressevent maximize, class:.*
 windowrulev2 = opacity 0.9 override 0.8 override,class:^$terminal|^($fileManager|$menu)$
 windowrulev2 = opaque,class:wl_mirror
 windowrulev2 = stayfocused,class:^$menu$
-windowrulev2 = float,title:^(float)$
+windowrulev2 = float,title:^float$
 windowrulev2 = float,class:polkit
 windowrulev2 = stayfocused,class:polkit
 windowrulev2 = bordercolor rgba({{.col_nop}}88),xwayland:1
@@ -150,5 +150,5 @@ bindl  = , print, exec, grimblast copy output
 bindl  = SHIFT, print, exec, grimblast copy area
 
 bind   = $mainMod, V, exec, cliphist-menu
-bind   = $mainMod, SPACE, exec, $terminal -T float node
+bind   = $mainMod, SPACE, exec, [float] $terminal node
 bind   = , F11, fullscreen

@@ -44,7 +44,7 @@ client.unfocused #00000000 #{{.col_bg}}88 #00000000 #{{.col_bg}}88
 client.urgent #00000000 #{{.col_warn}}88 #00000000 #{{.col_warn}}88
 corner_radius {{.border_radius}}
 
-for_window [title="float"] floating enable
+for_window [title="^float$"] floating enable
 for_window [title=".*"] opacity .9
 blur enable
 

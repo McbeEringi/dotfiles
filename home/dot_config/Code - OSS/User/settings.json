@@ -11,4 +11,5 @@
 	"git.autofetch": true,
 	"git.openRepositoryInParentFolders": "always",
 	"git.confirmSync": false,
+	"explorer.confirmDragAndDrop": false,
 }

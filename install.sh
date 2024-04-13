@@ -31,7 +31,7 @@ HYPRLAND_PKGS="
  hyprland mako pipewire pipewire-pulse xdg-desktop-portal-hyprland xfce-polkit qt5-wayland qt6-wayland
  waybar hyprpaper wofi cliphist grimblast wlsunset wl-mirror brightnessctl
  hyprlock hypridle hyprpicker wev
- greetd-tuigreet-bin
+ greetd greetd-tuigreet-bin
  thunar gvfs thunar-volman thunar-media-tags-plugin tumbler ffmpegthumbnailer zip
  foot
  gnome-keyring

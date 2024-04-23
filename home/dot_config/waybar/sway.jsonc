@@ -1,5 +1,10 @@
 [{
 	"include":["~/.config/waybar/common.jsonc"],
-	"modules-left":["sway/workspaces","sway/window"],
+	"modules-left":["sway/workspaces","group/apps"],
+	"group/apps":{
+		"orientation":"inherit",
+		"modules":["sway/window","wlr/taskbar"],
+		"drawer":{"transition-left-to-right":false}
+	},
 	"sway/window":{"format":"{app_id}"}
 }]

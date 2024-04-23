@@ -31,6 +31,16 @@ label {
 	valign = top
 }
 
+image {
+	path = ~/.face
+	size = 128
+	border_size = {{.border_width}}
+	border_color = rgba({{.col_accent}}88)
+
+	position = 0, 64
+	halign = center
+	valign = center
+}
 input-field {
 	size = 256, 64
 	outline_thickness = {{.border_width}}
@@ -48,7 +58,7 @@ input-field {
 	fail_color = rgba({{.col_warn}}cc)
 	fail_text = <span color="##{{.col_fg}}88">:(</span>
 
-	position = 0, 0
+	position = 0, -64
 	halign = center
 	valign = center
 }

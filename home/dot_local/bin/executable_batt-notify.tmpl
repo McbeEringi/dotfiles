@@ -1,0 +1,11 @@
+#!/bin/bash
+POW=/sys/class/power_supply
+while true;do
+	for BAT in $(ls $POW|grep BAT);do
+		CAP=$(cat $POW/$BAT/capacity)
+		STA=$(cat $POW/$BAT/status)
+		echo $BAT $CAP $STA
+		(( $CAP <= 15 )) && [[ $STA != Charging ]] && notify-send -u critical -t 65000 -e -h string:x-canonical-private-synchronous:$BAT B $CAP%
+	done
+	sleep 60
+done

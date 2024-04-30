@@ -7,7 +7,7 @@ env = XCURSOR_THEME,Bibata-Modern-Ice
 env = XCURSOR_SIZE,24
 
 exec-once = fcitx5 -d & mako & /usr/lib/xfce-polkit/xfce-polkit
-exec-once = hyprpaper & hypridle & waybar & wlsunset -l 35.7 -L 139.7
+exec-once = hyprpaper & hypridle & waybar & wlsunset -l 35.7 -L 139.7 & batt-notify
 exec-once = wl-paste --watch cliphist store
 
 # IO
@@ -147,7 +147,7 @@ bind = $mainMod, mouse_up, workspace, e-1
 
 # media
 $v_tgt = @DEFAULT_AUDIO_SINK@
-$v_notify = && notify-send -u low -t 1000 -h string:x-canonical-private-synchronous:anything V "$(wpctl get-volume $v_tgt|awk '{print $2*100 "% " $3}')"
+$v_notify = && notify-send -u low -t 1000 -e -h string:x-canonical-private-synchronous:v_notify V "$(wpctl get-volume $v_tgt|awk '{print $2*100 "% " $3}')"
 bindl  = , XF86AudioMute, exec, wpctl set-mute $v_tgt toggle $v_notify
 bindle = , XF86AudioRaiseVolume, exec, wpctl set-volume -l 1 $v_tgt 5%+ $v_notify
 bindle = SHIFT, XF86AudioRaiseVolume, exec, wpctl set-volume -l 1 $v_tgt 1%+ $v_notify

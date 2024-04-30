@@ -7,7 +7,7 @@ set $mainMod ${{camelcase (lower .mainMod)}}
 seat seat0 xcursor_theme Bibata-Modern-Ice 24
 
 exec fcitx5 -d & mako & /usr/lib/xfce-polkit/xfce-polkit
-exec hyprpaper & waybar -c ~/.config/waybar/sway.jsonc & wlsunset -l 35.7 -L 139.7
+exec hyprpaper & waybar -c ~/.config/waybar/sway.jsonc & wlsunset -l 35.7 -L 139.7 & batt-notify
 exec wl-paste --watch cliphist store
 exec swayidle -w & idlehack
 
@@ -109,7 +109,7 @@ bindsym $mainMod+Shift+S move scratchpad
 
 # media
 set $v_tgt @DEFAULT_AUDIO_SINK@
-set $v_notify && notify-send -u low -t 1000 -h string:x-canonical-private-synchronous:anything V "$(wpctl get-volume $v_tgt|awk '{print $2*100 "% " $3}')"
+set $v_notify && notify-send -u low -t 1000 -e -h string:x-canonical-private-synchronous:v_notify V "$(wpctl get-volume $v_tgt|awk '{print $2*100 "% " $3}')"
 bindsym XF86AudioMute exec wpctl set-mute $v_tgt toggle $v_notify
 bindsym XF86AudioRaiseVolume exec wpctl set-volume -l 1 $v_tgt 5%+ $v_notify
 bindsym Shift+XF86AudioRaiseVolume exec wpctl set-volume -l 1 $v_tgt 1%+ $v_notify

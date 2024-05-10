@@ -16,19 +16,20 @@ https://docs.gtk.org/gtk3/css-properties.html
 	box-shadow:none;text-shadow:none;-gtk-icon-shadow:none;
 }
 
-#waybar>box,tooltip,menu{margin:{{.gap}}px;margin-bottom:0;border:{{.border_width}}px solid;border-radius:{{add .border_radius .border_width}}px;background-color:@k2;border-color:@k3;}
+#waybar>box>box,tooltip,menu{margin:{{.gap}}px;margin-bottom:0;border:{{.border_width}}px solid;border-radius:{{add .border_radius .border_width}}px;background-color:@k2;border-color:@k3;}
 tooltip>*{margin:{{mul .border_width 2}}px;}menu{padding:{{.border_width}}px;}
-#waybar.battery-low>box{background-color:@u;}
+/*#waybar.battery-low>box{background-color:@u;}*/
 
-.module,button,menuitem,separator,#tray>*{border-radius:{{sub .border_radius 2}}px;}
+.module,button,menuitem,separator,#tray>*,#apps{border-radius:{{sub .border_radius 2}}px;}
 .module,menuitem{margin:2px;}radio{margin:8px;}
 menuitem{padding:2px;}separator{padding:1px;}
-button,#tray image{padding:0 8px;}.module>label,label.module{padding:0 4px;}
+button,#tray image{padding:0 6px;}.module>label,label.module{padding:0 4px;}
 :hover,separator,radio{background-color:@w3;}
 button.active,button.focused,radio:checked{background-color:@a;}
 #tray>.needs-attention{background-color:@u;}
 
 #battery.high.charging,#battery.high.full{background-color:@a;}
+#battery.low{background-color:@u;}
 .muted,.paused,.stopped{opacity:.5;}
-#taskbar,#tray{background-color:@w3;}
-#workspaces{background-color:@k3;}
+#tray{background-color:@w3;}
+#taskbar,#workspaces{background-color:@k3;}

@@ -1,0 +1,26 @@
+@define-color k0 #{{.col_bg}};
+@define-color k2 alpha(@k0,.5);
+@define-color k3 alpha(@k0,.2);
+
+@define-color w0 #{{.col_fg}};
+@define-color w3 alpha(@w0,.2);
+@define-color a alpha(#{{.col_accent}},.5);
+@define-color u alpha(#{{.col_warn}},.5);
+
+
+
+*{
+	font-family:monospace,sans-serif;font-size:16px;color:@w0;transition:.2s;
+	margin:0;outline:none;border:none;padding:0;background:none;
+	box-shadow:none;text-shadow:none;-gtk-icon-shadow:none;
+}
+
+.bar,tooltip,menu{margin:{{.gap}}px;margin-bottom:0;border:{{.border_width}}px solid;border-radius:{{add .border_radius .border_width}}px;background-color:@k2;border-color:@k3;}
+tooltip>*{margin:{{mul .border_width 2}}px;}menu{padding:{{.border_width}}px;}
+
+
+button,menuitem,separator{border-radius:{{sub .border_radius 2}}px;}
+menuitem{margin:2px;}radio{margin:8px;}button{margin:6px 0;}
+menuitem{padding:2px;}separator{padding:1px;}button{padding:0 6px;}
+:hover,separator,radio{background-color:@w3;}
+button.active,button.focused,radio:checked{background-color:@a;}

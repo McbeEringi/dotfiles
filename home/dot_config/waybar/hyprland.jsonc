@@ -6,5 +6,5 @@
 		"modules":["hyprland/window","wlr/taskbar"],
 		"drawer":{"transition-left-to-right":false}
 	},
-	"hyprland/window":{"format":"{class}","rewrite":{"":";"}}
+	"hyprland/window":{"format":"{class}"}
 }]

@@ -9,7 +9,7 @@ seat seat0 xcursor_theme Bibata-Modern-Ice 24
 exec fcitx5 -d & mako & /usr/lib/xfce-polkit/xfce-polkit
 exec hyprpaper & waybar -c ~/.config/waybar/sway.jsonc & wlsunset -l 35.7 -L 139.7 & batt-notify
 exec wl-paste --watch cliphist store
-exec swayidle -w & idlehack
+exec swayidle -w & idlehack & autotiling-rs
 
 
 # IO
@@ -42,8 +42,8 @@ client.focused_inactive #00000000 #{{.col_bg}}88 #00000000 #{{.col_bg}}88
 client.unfocused #00000000 #{{.col_bg}}88 #00000000 #{{.col_bg}}88
 corner_radius {{.border_radius}}
 blur enable
-default_orientation vertical
-for_window [app_id=".*"] splitt
+# default_orientation vertical
+# for_window [app_id=".*"] splitt
 
 # misc
 focus_on_window_activation focus

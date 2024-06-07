@@ -1,0 +1,4 @@
+packadd! onedark.vim
+colorscheme onedark
+syntax on
+

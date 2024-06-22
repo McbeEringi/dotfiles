@@ -1,13 +1,17 @@
 #!/bin/bash
-[ $ROOT_PASS ] && [ $USER_NAME ] && [ $USER_PASS ] || (echo Please specify \$ROOT_PASS \$USER_NAME \$USER_PASS >&2; exit 1)
+[ $ROOT_PASS ] || ROOT_PASS='password'
+[ $USER_NAME ] || USER_NAME='user'
+[ $USER_PASS ] || USER_PASS=$ROOT_PASS
 [ $TIMEZONE ] || TIMEZONE='Asia/Tokyo'
 [ $LOCALE_GEN ] || LOCALE_GEN='en_US.UTF-8|ja_JP.UTF-8'
 [ $LOCALE_USE ] || LOCALE_USE='ja_JP.UTF-8'
+[ $KEYMAP ] || KEYMAP='jp106'
 
 CPU_VENDOR=$(grep 'model name' /proc/cpuinfo|grep -Pio -m1 'intel|amd'|awk '{print tolower($0)}')
 GPU_VENDOR=$(lspci|grep -Pio -m1 'intel|amd|nvidia'|awk '{print tolower($0)}')
 echo CPU_VENDOR: $CPU_VENDOR
 echo GPU_VENDOR: $GPU_VENDOR
+
 
 PKGS='
 #  hyprland mako pipewire pipewire-pulse pipewire-jack xdg-desktop-portal-hyprland xfce-polkit qt5-wayland qt6-wayland
@@ -29,11 +33,11 @@ pacman -Sy --noconfirm brightnessctl
 brightnessctl s 10%
 pacstrap -K /mnt base linux-zen linux-zen-headers linux-firmware $CPU_VENDOR-ucode $(
 	[ $GPU_VENDOR == 'intel' ] && echo 'intel-media-driver intel-gpu-tools' ||
-	[ $GPU_VENDOR == 'amd' ] && echo 'libva-mesa-driver' ||
-	[ $GPU_VENDOR == 'nvidia' ] && echo 'nvidia-dkms' ||
-	echo '[ERR] Unknown GPU_VENDOR'>&2
+	[ $GPU_VENDOR == 'amd' ] && echo 'libva-mesa-driver'
 ) efibootmgr sudo nano git man-db base-devel iwd bluez bluez-utils
 genfstab -U /mnt |tee /mnt/etc/fstab
+ROOT_UUID=$(grep -oP 'UUID=\S+(?=\s+\/\s)' /mnt/etc/fstab)
+SWAP_UUID=$(grep -oP 'UUID=\S+(?=.+?swap)' /mnt/etc/fstab)
 cp /etc/systemd/network/* /mnt/etc/systemd/network
 
 cat <<EOF | arch-chroot /mnt
@@ -42,8 +46,8 @@ ln -sf /usr/share/zoneinfo/$TIMEZONE /etc/localtime
 hwclock --systohc
 sed -i -E 's/#($LOCALE_GEN)/\1/g' /etc/locale.gen
 locale-gen
-echo LANG=$LOCALE_USE >> /etc/locale.conf
-echo KEYMAP=$(localectl|grep -oP 'VC Keymap: \K.*')
+echo LANG=$LOCALE_USE|tee /etc/locale.conf # localectl set-locale $LOCALE_USE
+echo KEYMAP=$KEYMAP|tee /etc/vconsole.conf # localectl set-keymap $KEYMAP
 
 
 echo $ROOT_PASS|passwd -s root
@@ -66,13 +70,13 @@ title Arch Linux w/ ZEN Kernel
 linux /vmlinuz-linux-zen
 initrd /$CPU_VENDOR-ucode.img
 initrd /initramfs-linux-zen.img
-options root=$(grep -oP 'UUID=\S+(?=\s+\/\s)' /mnt/etc/fstab) rw
+options root=$ROOT_UUID rw
 options quiet splash
-options resume=$(grep -oP 'UUID=\S+(?=.+?swap)' /mnt/etc/fstab)
+$([[ $SWAP_UUID ]] || echo '# ')options resume=$SWAP_UUID
 # options video=DSI-1:panel_orientation=right_side_up
 _EOF
 
-sed -i -E 's/^(HOOKS=\(base)( udev.+?filesystems)( fsck\))/\1 plymouth\2 resume\3/' /etc/mkinitcpio.conf
+sed -i -E 's/^(HOOKS=\(base)( udev.+?filesystems)( fsck\))/\1 plymouth\2$([[ $SWAP_UUID ]] && echo ' resume')\3/' /etc/mkinitcpio.conf
 pacman -S --noconfirm plymouth
 
 

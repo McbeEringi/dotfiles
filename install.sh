@@ -1,4 +1,10 @@
 #!/bin/bash
+[[ $(mount|grep /mnt) ]] || { echo /mnt not detected. exiting...; exit; }
+
+read -p "Are you sure you want to continue? [yes] " ans
+[[ $ans != 'yes' ]] && exit
+
+
 [ $ROOT_PASS ] || ROOT_PASS='password'
 [ $USER_NAME ] || USER_NAME='user'
 [ $USER_PASS ] || USER_PASS=$ROOT_PASS

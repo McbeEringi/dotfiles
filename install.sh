@@ -1,8 +1,8 @@
 #!/bin/bash
-
-TIMEZONE='Asia/Tokyo'
-LOCALE_GEN='en_US.UTF-8|ja_JP.UTF-8'
-LOCALE_USE='ja_JP.UTF-8'
+[ $ROOT_PASS ] && [ $USER_NAME ] && [ $USER_PASS ] || (echo Please specify \$ROOT_PASS \$USER_NAME \$USER_PASS >&2; exit 1)
+[ $TIMEZONE ] || TIMEZONE='Asia/Tokyo'
+[ $LOCALE_GEN ] || LOCALE_GEN='en_US.UTF-8|ja_JP.UTF-8'
+[ $LOCALE_USE ] || LOCALE_USE='ja_JP.UTF-8'
 
 CPU_VENDOR=$(grep 'model name' /proc/cpuinfo|grep -Pio -m1 'intel|amd'|awk '{print tolower($0)}')
 GPU_VENDOR=$(lspci|grep -Pio -m1 'intel|amd|nvidia'|awk '{print tolower($0)}')
@@ -10,7 +10,7 @@ echo CPU_VENDOR: $CPU_VENDOR
 echo GPU_VENDOR: $GPU_VENDOR
 
 PKGS='
- hyprland mako pipewire pipewire-pulse xdg-desktop-portal-hyprland xfce-polkit qt5-wayland qt6-wayland
+ hyprland mako pipewire pipewire-pulse pipewire-jack xdg-desktop-portal-hyprland xfce-polkit qt5-wayland qt6-wayland
  waybar hyprpaper wofi cliphist grimblast wlsunset wl-mirror brightnessctl
  hyprlock hypridle hyprpicker wev
  greetd greetd-tuigreet-bin
@@ -24,8 +24,6 @@ PKGS='
  btop smartmontools lsplug powertop ufw
  arch-install-scripts dosfstools exfatprogs chezmoi
 '
-
-
 
 pacman -Sy --noconfirm brightnessctl
 brightnessctl s 10%
@@ -83,9 +81,9 @@ ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 systemctl enable systemd-networkd systemd-resolved iwd systemd-timesyncd bluetooth
 
 
-
-
-
+# (
+# su
+# )
 
 # git clone --depth=1 https://aur.archlinux.org/yay-bin
 # cd yay-bin
@@ -93,7 +91,7 @@ systemctl enable systemd-networkd systemd-resolved iwd systemd-timesyncd bluetoo
 # cd -
 # rm -rf yay-bin
 
-# yay -S $PKGS
+# yay -S --noconfirm --removemake $PKGS
 
 # chezmoi init mcbeeringi
 # chezmoi cd

@@ -1,8 +1,8 @@
 #!/bin/bash
 [[ $(mount|grep /mnt) ]] || { echo /mnt not detected. exiting...; exit; }
+[[ $(swapon --show) ]] || { read -p "No swap detected. Continue? [yes] " ans;[[ $ans != 'yes' ]] && exit; }
 
-read -p "Are you sure you want to continue? [yes] " ans
-[[ $ans != 'yes' ]] && exit
+read -p "Are you sure you want to continue? [yes] " ans;[[ $ans != 'yes' ]] && exit
 
 
 [ $ROOT_PASS ] || ROOT_PASS='password'

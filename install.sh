@@ -14,9 +14,7 @@ read -p "Are you sure you want to continue? [yes] " ans;[[ $ans != 'yes' ]] && e
 [ $KEYMAP ] || KEYMAP='jp106'
 
 CPU_VENDOR=$(grep 'model name' /proc/cpuinfo|grep -Pio -m1 'intel|amd'|awk '{print tolower($0)}')
-GPU_VENDOR=$(lspci|grep -Pio -m1 'intel|amd|nvidia'|awk '{print tolower($0)}')
-echo CPU_VENDOR: $CPU_VENDOR
-echo GPU_VENDOR: $GPU_VENDOR
+GPU_VENDOR=$(lspci|grep -Pio -m1 'intel|amd'|awk '{print tolower($0)}') # nvidia
 
 
 PKGS='
@@ -89,6 +87,9 @@ pacman -S --noconfirm plymouth
 sed -i -E 's/#(Color|VerbosePkgLists|ParallelDownloads)/\1/g' /etc/pacman.conf
 ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 systemctl enable systemd-networkd systemd-resolved iwd systemd-timesyncd bluetooth
+
+
+cd /home/$USER_NAME
 
 
 # (

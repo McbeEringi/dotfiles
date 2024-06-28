@@ -79,4 +79,4 @@ sed -i -E 's/# (Defaults env_keep \+= "HOME"|%wheel ALL=\(ALL:ALL\) ALL)/\1/g' /
 systemctl enable systemd-networkd systemd-resolved iwd systemd-timesyncd bluetooth
 EOF
 
-read -p "Press Enter to reboot..." ans
+read -p "Press Enter to reboot..." ans;reboot

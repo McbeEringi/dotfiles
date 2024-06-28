@@ -1,4 +1,5 @@
 #!/bin/bash
+trap 'echo exitting...;exit' INT
 [[ $(mount|grep /mnt) ]] || { echo /mnt not detected. exiting...; exit; }
 [[ $(swapon --show) ]] || { read -p "No swap detected. Continue? [yes] " ans;[[ $ans != 'yes' ]] && exit; }
 

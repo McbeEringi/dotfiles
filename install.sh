@@ -2,7 +2,7 @@
 trap 'echo exitting...;exit' INT
 [[ $(mount|grep /mnt) ]] || { echo /mnt not detected. exiting...; exit; }
 [[ $(swapon --show) ]] || { read -p "No swap detected. Continue? [yes] " ans;[[ $ans != 'yes' ]] && exit; }
-
+echo
 [ $ROOT_PASS ] || ROOT_PASS='password';echo ROOT_PASS	$ROOT_PASS
 [ $USER_NAME ] || USER_NAME='user';echo USER_NAME	$USER_NAME
 [ $USER_PASS ] || USER_PASS=$ROOT_PASS;echo USER_PASS	$USER_PASS
@@ -10,12 +10,10 @@ trap 'echo exitting...;exit' INT
 [ $LOCALE_GEN ] || LOCALE_GEN='en_US.UTF-8|ja_JP.UTF-8';echo LOCALE_GEN	$LOCALE_GEN
 [ $LOCALE_USE ] || LOCALE_USE='ja_JP.UTF-8';echo LOCALE_USE	$LOCALE_USE
 [ $KEYMAP ] || KEYMAP='jp106';echo KEYMAP	$KEYMAP
-
+[ $CPU_VENDOR ] || CPU_VENDOR=$(grep 'model name' /proc/cpuinfo|grep -Pio -m1 'intel|amd'|awk '{print tolower($0)}');echo CPU_VENDOR	$CPU_VENDOR
+[ $GPU_VENDOR ] || GPU_VENDOR=$(lspci|grep -Pio -m1 'intel|amd'|awk '{print tolower($0)}');echo GPU_VENDOR	$GPU_VENDOR # nvidia
+echo
 read -p "Are you sure you want to continue? [yes] " ans;[[ $ans != 'yes' ]] && exit
-
-[ $CPU_VENDOR ] || CPU_VENDOR=$(grep 'model name' /proc/cpuinfo|grep -Pio -m1 'intel|amd'|awk '{print tolower($0)}')
-[ $GPU_VENDOR ] || GPU_VENDOR=$(lspci|grep -Pio -m1 'intel|amd'|awk '{print tolower($0)}') # nvidia
-
 
 [ $PKGS ] || PKGS='
 	hyprland mako pipewire pipewire-pulse pipewire-jack xdg-desktop-portal-hyprland xfce-polkit qt5-wayland qt6-wayland \
@@ -33,7 +31,7 @@ read -p "Are you sure you want to continue? [yes] " ans;[[ $ans != 'yes' ]] && e
 	arch-install-scripts dosfstools exfatprogs chezmoi \
 	firefox code gimp mpv
 '
-PACMAN_CONF_MODIFY="sed -i -E 's/#(Color|VerbosePkgLists|ParallelDownloads)/\1/g' /etc/pacman.conf"
+PACMAN_CONF_MODIFY="sed -i -E 's/^#(Color|VerbosePkgLists|ParallelDownloads)/\1/g' /etc/pacman.conf"
 
 timedatectl
 eval $PACMAN_CONF_MODIFY
@@ -60,8 +58,11 @@ locale-gen
 echo LANG=$LOCALE_USE|tee /etc/locale.conf # localectl set-locale $LOCALE_USE
 echo KEYMAP=$KEYMAP|tee /etc/vconsole.conf # localectl set-keymap $KEYMAP
 $PACMAN_CONF_MODIFY
+sed -i -E 's/^(COMPRESSZST=\(zstd -c -T0).*?( -\))/\1\2/' /etc/makepkg.conf
+sed -i -E 's/^#(MAKEFLAGS=.*)/\1/' /etc/makepkg.conf
 ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
-systemctl enable systemd-networkd systemd-resolved iwd systemd-timesyncd bluetooth
+sed -i -E 's/^(HOOKS=\(base)( udev.+?filesystems)( fsck\))/\1 plymouth\2$([[ $SWAP_UUID ]] && echo ' resume')\3/' /etc/mkinitcpio.conf
+pacman -S --noconfirm plymouth
 
 
 bootctl install
@@ -84,9 +85,6 @@ $([[ $SWAP_UUID ]] || echo '# ')options resume=$SWAP_UUID
 # options video=DSI-1:panel_orientation=right_side_up
 _EOF
 
-sed -i -E 's/^(HOOKS=\(base)( udev.+?filesystems)( fsck\))/\1 plymouth\2$([[ $SWAP_UUID ]] && echo ' resume')\3/' /etc/mkinitcpio.conf
-pacman -S --noconfirm plymouth
-
 
 echo $ROOT_PASS|passwd -s root
 useradd -m -g wheel $USER_NAME
@@ -94,12 +92,11 @@ echo $USER_PASS|passwd -s $USER_NAME
 sed -i -E 's/# (Defaults env_keep \+= "HOME"|%wheel ALL=\(ALL:ALL\) ALL)/\1/g' /etc/sudoers
 
 
-cd /home/$USER_NAME
-su $USER_NAME <<_EOF
+su - $USER_NAME <<_EOF
 
 git clone --depth=1 https://aur.archlinux.org/yay-bin
 cd yay-bin
-makepkg -si
+makepkg -si --noconfirm
 cd -
 rm -rf yay-bin
 
@@ -107,12 +104,16 @@ yay -S --noconfirm --removemake $PKGS
 
 chezmoi init mcbeeringi
 chezmoi cd
-echo $USER_PASS | sudo -S cp usr/* /usr
-echo $USER_PASS | sudo -S cp etc/* /etc
-cd -
 
 chezmoi apply
 _EOF
+
+cd /home/$USER_NAME/.local/share/chezmoi
+cp usr/* /usr
+cp etc/* /etc
+cd -
+
+systemctl enable systemd-networkd systemd-resolved iwd systemd-timesyncd bluetooth
 EOF
 
 read -p "Press Enter to reboot..." ans

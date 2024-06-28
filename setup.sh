@@ -4,7 +4,7 @@ trap 'echo;echo exitting...;exit' INT
 [ $PKGS ] || PKGS='
 	hyprland mako pipewire pipewire-pulse pipewire-jack xdg-desktop-portal-hyprland xfce-polkit qt5-wayland qt6-wayland
 	waybar hyprpaper wofi cliphist grimblast wlsunset wl-mirror brightnessctl
-	hyprlock hypridle hyprpicker wev evtest\
+	hyprlock hypridle hyprpicker wev evtest
 	greetd greetd-tuigreet-bin
 	thunar gvfs thunar-volman thunar-media-tags-plugin tumbler ffmpegthumbnailer zip unzip p7zip
 	foot

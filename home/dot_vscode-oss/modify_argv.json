@@ -1,2 +1,2 @@
-#!/bin/bash
-sed -E 's/\/\/.*//'|jq '.+={"password-store":"gnome-libsecret"}'
+{{- /* chezmoi:modify-template */ -}}
+{{ fromJson .chezmoi.stdin | setValueAtPath "password-store" "gnome-libsecret" | toPrettyJson }}

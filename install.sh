@@ -2,13 +2,13 @@
 [[ $(mount|grep /mnt) ]] || { echo /mnt not detected. exiting...; exit; }
 [[ $(swapon --show) ]] || { read -p "No swap detected. Continue? [yes] " ans;[[ $ans != 'yes' ]] && exit; }
 
-[ $ROOT_PASS ] || ROOT_PASS='password';echo ROOT_PASS $ROOT_PASS
-[ $USER_NAME ] || USER_NAME='user';echo USER_NAME $USER_NAME
-[ $USER_PASS ] || USER_PASS=$ROOT_PASS;echo USER_PASS $USER_PASS
-[ $TIMEZONE ] || TIMEZONE='Asia/Tokyo';echo TIMEZONE $TIMEZONE
-[ $LOCALE_GEN ] || LOCALE_GEN='en_US.UTF-8|ja_JP.UTF-8';echo LOCALE_GEN $LOCALE_GEN
-[ $LOCALE_USE ] || LOCALE_USE='ja_JP.UTF-8';echo LOCALE_USE $LOCALE_USE
-[ $KEYMAP ] || KEYMAP='jp106';echo KEYMAP $KEYMAP
+[ $ROOT_PASS ] || ROOT_PASS='password';echo ROOT_PASS	$ROOT_PASS
+[ $USER_NAME ] || USER_NAME='user';echo USER_NAME	$USER_NAME
+[ $USER_PASS ] || USER_PASS=$ROOT_PASS;echo USER_PASS	$USER_PASS
+[ $TIMEZONE ] || TIMEZONE='Asia/Tokyo';echo TIMEZONE	$TIMEZONE
+[ $LOCALE_GEN ] || LOCALE_GEN='en_US.UTF-8|ja_JP.UTF-8';echo LOCALE_GEN	$LOCALE_GEN
+[ $LOCALE_USE ] || LOCALE_USE='ja_JP.UTF-8';echo LOCALE_USE	$LOCALE_USE
+[ $KEYMAP ] || KEYMAP='jp106';echo KEYMAP	$KEYMAP
 
 read -p "Are you sure you want to continue? [yes] " ans;[[ $ans != 'yes' ]] && exit
 
@@ -17,19 +17,20 @@ read -p "Are you sure you want to continue? [yes] " ans;[[ $ans != 'yes' ]] && e
 
 
 [ $PKGS ] || PKGS='
-#  hyprland mako pipewire pipewire-pulse pipewire-jack xdg-desktop-portal-hyprland xfce-polkit qt5-wayland qt6-wayland
-#  waybar hyprpaper wofi cliphist grimblast wlsunset wl-mirror brightnessctl
-#  hyprlock hypridle hyprpicker wev
-#  greetd greetd-tuigreet-bin
-#  thunar gvfs thunar-volman thunar-media-tags-plugin tumbler ffmpegthumbnailer zip
-#  foot
-#  gnome-keyring
-#  iwgtk pavucontrol nwg-look-bin qt5ct qt6ct
-#  gnome-themes-extra papirus-icon-theme bibata-cursor-theme-bin
-#  noto-fonts noto-fonts-cjk noto-fonts-emoji otf-monaspace
-#  fcitx5-im fcitx5-mozc
-#  btop smartmontools lsplug powertop ufw
-#  arch-install-scripts dosfstools exfatprogs chezmoi
+	hyprland mako pipewire pipewire-pulse pipewire-jack xdg-desktop-portal-hyprland xfce-polkit qt5-wayland qt6-wayland \
+	waybar hyprpaper wofi cliphist grimblast wlsunset wl-mirror brightnessctl \
+	hyprlock hypridle hyprpicker wev \
+	greetd greetd-tuigreet-bin \
+	thunar gvfs thunar-volman thunar-media-tags-plugin tumbler ffmpegthumbnailer zip \
+	foot \
+	gnome-keyring \
+	iwgtk pavucontrol nwg-look-bin qt5ct qt6ct \
+	gnome-themes-extra papirus-icon-theme bibata-cursor-theme-bin \
+	noto-fonts noto-fonts-cjk noto-fonts-emoji otf-monaspace \
+	fcitx5-im fcitx5-mozc \ 
+	btop smartmontools lsplug powertop \
+	arch-install-scripts dosfstools exfatprogs chezmoi \
+	firefox code gimp mpv
 '
 PACMAN_CONF_MODIFY="sed -i -E 's/#(Color|VerbosePkgLists|ParallelDownloads)/\1/g' /etc/pacman.conf"
 
@@ -57,12 +58,9 @@ sed -i -E 's/#($LOCALE_GEN)/\1/g' /etc/locale.gen
 locale-gen
 echo LANG=$LOCALE_USE|tee /etc/locale.conf # localectl set-locale $LOCALE_USE
 echo KEYMAP=$KEYMAP|tee /etc/vconsole.conf # localectl set-keymap $KEYMAP
-
-
-echo $ROOT_PASS|passwd -s root
-useradd -m -g wheel $USER_NAME
-echo $USER_PASS|passwd -s $USER_NAME
-sed -i -E 's/# (Defaults env_keep \+= "HOME"|%wheel ALL=\(ALL:ALL\) ALL)/\1/g' /etc/sudoers
+$PACMAN_CONF_MODIFY
+ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
+systemctl enable systemd-networkd systemd-resolved iwd systemd-timesyncd bluetooth
 
 
 bootctl install
@@ -89,28 +87,31 @@ sed -i -E 's/^(HOOKS=\(base)( udev.+?filesystems)( fsck\))/\1 plymouth\2$([[ $SW
 pacman -S --noconfirm plymouth
 
 
-$PACMAN_CONF_MODIFY
-ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
-systemctl enable systemd-networkd systemd-resolved iwd systemd-timesyncd bluetooth
+echo $ROOT_PASS|passwd -s root
+useradd -m -g wheel $USER_NAME
+echo $USER_PASS|passwd -s $USER_NAME
+sed -i -E 's/# (Defaults env_keep \+= "HOME"|%wheel ALL=\(ALL:ALL\) ALL)/\1/g' /etc/sudoers
 
 
 cd /home/$USER_NAME
+su $USER_NAME <<_EOF
 
+git clone --depth=1 https://aur.archlinux.org/yay-bin
+cd yay-bin
+makepkg -si
+cd -
+rm -rf yay-bin
 
-# (
-# su
-# )
+yay -S --noconfirm --removemake $PKGS
 
-# git clone --depth=1 https://aur.archlinux.org/yay-bin
-# cd yay-bin
-# makepkg -si
-# cd -
-# rm -rf yay-bin
+chezmoi init mcbeeringi
+chezmoi cd
+echo $USER_PASS | sudo -S cp usr/* /usr
+echo $USER_PASS | sudo -S cp etc/* /etc
+cd -
 
-# yay -S --noconfirm --removemake $PKGS
-
-# chezmoi init mcbeeringi
-# chezmoi cd
-
-# chezmoi apply
+chezmoi apply
+_EOF
 EOF
+
+read -p "Press Enter to reboot..." ans

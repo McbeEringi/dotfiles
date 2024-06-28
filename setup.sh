@@ -17,7 +17,7 @@ trap 'echo;echo exitting...;exit' INT
 	arch-install-scripts dosfstools exfatprogs ntfs-3g chezmoi npm
 	swayfx swayidle swaylock-effects idlehack autotiling-rs
 	firefox code gimp mpv discord_arch_electron
-	cava cowsay nyancat figlet cmatrix neofetch pipes.sh sl
+	cowsay nyancat figlet cmatrix neofetch pipes.sh sl
 '
 which yay || {
 	echo Installing yay...

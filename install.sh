@@ -13,11 +13,11 @@ read -p "Are you sure you want to continue? [yes] " ans;[[ $ans != 'yes' ]] && e
 [ $LOCALE_USE ] || LOCALE_USE='ja_JP.UTF-8'
 [ $KEYMAP ] || KEYMAP='jp106'
 
-CPU_VENDOR=$(grep 'model name' /proc/cpuinfo|grep -Pio -m1 'intel|amd'|awk '{print tolower($0)}')
-GPU_VENDOR=$(lspci|grep -Pio -m1 'intel|amd'|awk '{print tolower($0)}') # nvidia
+[ $CPU_VENDOR ] || CPU_VENDOR=$(grep 'model name' /proc/cpuinfo|grep -Pio -m1 'intel|amd'|awk '{print tolower($0)}')
+[ $GPU_VENDOR ] || GPU_VENDOR=$(lspci|grep -Pio -m1 'intel|amd'|awk '{print tolower($0)}') # nvidia
 
 
-PKGS='
+[ $PKGS ] || PKGS='
 #  hyprland mako pipewire pipewire-pulse pipewire-jack xdg-desktop-portal-hyprland xfce-polkit qt5-wayland qt6-wayland
 #  waybar hyprpaper wofi cliphist grimblast wlsunset wl-mirror brightnessctl
 #  hyprlock hypridle hyprpicker wev
@@ -35,10 +35,13 @@ PKGS='
 
 pacman -Sy --noconfirm brightnessctl
 brightnessctl s 10%
-pacstrap -K /mnt base linux-zen linux-zen-headers linux-firmware $CPU_VENDOR-ucode $(
-	[ $GPU_VENDOR == 'intel' ] && echo 'intel-media-driver intel-gpu-tools' ||
-	[ $GPU_VENDOR == 'amd' ] && echo 'libva-mesa-driver'
-) efibootmgr sudo nano git man-db base-devel iwd bluez bluez-utils
+pacstrap -K /mnt base linux-zen linux-zen-headers linux-firmware $(
+	[ $CPU_VENDOR == 'intel' ] && echo 'intel-ucode ' ||
+	[ $CPU_VENDOR == 'amd' ] && echo 'amd-ucode '
+)$(
+	[ $GPU_VENDOR == 'intel' ] && echo 'intel-media-driver intel-gpu-tools ' ||
+	[ $GPU_VENDOR == 'amd' ] && echo 'libva-mesa-driver '
+)efibootmgr sudo nano git man-db base-devel iwd bluez bluez-utils
 genfstab -U /mnt |tee /mnt/etc/fstab
 ROOT_UUID=$(grep -oP 'UUID=\S+(?=\s+\/\s)' /mnt/etc/fstab)
 SWAP_UUID=$(grep -oP 'UUID=\S+(?=.+?swap)' /mnt/etc/fstab)
@@ -72,7 +75,7 @@ _EOF
 cat <<_EOF |tee /boot/loader/entries/arch-zen.conf
 title Arch Linux w/ ZEN Kernel
 linux /vmlinuz-linux-zen
-initrd /$CPU_VENDOR-ucode.img
+$([[ $CPU_VENDOR ]] && echo initrd /$CPU_VENDOR-ucode.img)
 initrd /initramfs-linux-zen.img
 options root=$ROOT_UUID rw
 options quiet splash

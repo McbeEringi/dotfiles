@@ -1,5 +1,5 @@
 #!/bin/bash
-trap 'echo exitting...;exit' INT
+trap 'echo;echo exitting...;exit' INT
 
 [ $PKGS ] || PKGS='
 	hyprland mako pipewire pipewire-pulse pipewire-jack xdg-desktop-portal-hyprland xfce-polkit qt5-wayland qt6-wayland \

@@ -32,7 +32,9 @@ read -p "Are you sure you want to continue? [yes] " ans;[[ $ans != 'yes' ]] && e
 #  btop smartmontools lsplug powertop ufw
 #  arch-install-scripts dosfstools exfatprogs chezmoi
 '
+PACMAN_CONF_MODIFY="sed -i -E 's/#(Color|VerbosePkgLists|ParallelDownloads)/\1/g' /etc/pacman.conf"
 
+$PACMAN_CONF_MODIFY
 pacman -Sy --noconfirm brightnessctl
 brightnessctl s 10%
 pacstrap -K /mnt base linux-zen linux-zen-headers linux-firmware $(
@@ -87,7 +89,7 @@ sed -i -E 's/^(HOOKS=\(base)( udev.+?filesystems)( fsck\))/\1 plymouth\2$([[ $SW
 pacman -S --noconfirm plymouth
 
 
-sed -i -E 's/#(Color|VerbosePkgLists|ParallelDownloads)/\1/g' /etc/pacman.conf
+$PACMAN_CONF_MODIFY
 ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 systemctl enable systemd-networkd systemd-resolved iwd systemd-timesyncd bluetooth
 

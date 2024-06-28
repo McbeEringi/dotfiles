@@ -1,7 +1,7 @@
 #!/bin/bash
 trap 'echo exitting...;exit' INT
-[[ $(mount|grep /mnt) ]] || { echo /mnt not detected. exiting...; exit; }
-[[ $(swapon --show) ]] || { read -p "No swap detected. Continue? [yes] " ans;[[ $ans != 'yes' ]] && exit; }
+mount|grep /mnt || { echo /mnt not detected. exiting...; exit; }
+swapon --show || { read -p "No swap detected. Continue? [yes] " ans;[[ $ans != 'yes' ]] && exit; }
 echo
 [ $ROOT_PASS ] || ROOT_PASS='password';echo ROOT_PASS	$ROOT_PASS
 [ $USER_NAME ] || USER_NAME='user';echo USER_NAME	$USER_NAME
@@ -15,22 +15,6 @@ echo
 echo
 read -p "Are you sure you want to continue? [yes] " ans;[[ $ans != 'yes' ]] && exit
 
-[ $PKGS ] || PKGS='
-	hyprland mako pipewire pipewire-pulse pipewire-jack xdg-desktop-portal-hyprland xfce-polkit qt5-wayland qt6-wayland \
-	waybar hyprpaper wofi cliphist grimblast wlsunset wl-mirror brightnessctl \
-	hyprlock hypridle hyprpicker wev \
-	greetd greetd-tuigreet-bin \
-	thunar gvfs thunar-volman thunar-media-tags-plugin tumbler ffmpegthumbnailer zip \
-	foot \
-	gnome-keyring \
-	iwgtk pavucontrol nwg-look-bin qt5ct qt6ct \
-	gnome-themes-extra papirus-icon-theme bibata-cursor-theme-bin \
-	noto-fonts noto-fonts-cjk noto-fonts-emoji otf-monaspace \
-	fcitx5-im fcitx5-mozc \ 
-	btop smartmontools lsplug powertop \
-	arch-install-scripts dosfstools exfatprogs chezmoi \
-	firefox code gimp mpv
-'
 PACMAN_CONF_MODIFY="sed -i -E 's/^#(Color|VerbosePkgLists|ParallelDownloads)/\1/g' /etc/pacman.conf"
 
 timedatectl
@@ -91,27 +75,6 @@ useradd -m -g wheel $USER_NAME
 echo $USER_PASS|passwd -s $USER_NAME
 sed -i -E 's/# (Defaults env_keep \+= "HOME"|%wheel ALL=\(ALL:ALL\) ALL)/\1/g' /etc/sudoers
 
-
-su - $USER_NAME <<_EOF
-
-git clone --depth=1 https://aur.archlinux.org/yay-bin
-cd yay-bin
-makepkg -si --noconfirm
-cd -
-rm -rf yay-bin
-
-yay -S --noconfirm --removemake $PKGS
-
-chezmoi init mcbeeringi
-chezmoi cd
-
-chezmoi apply
-_EOF
-
-cd /home/$USER_NAME/.local/share/chezmoi
-cp usr/* /usr
-cp etc/* /etc
-cd -
 
 systemctl enable systemd-networkd systemd-resolved iwd systemd-timesyncd bluetooth
 EOF

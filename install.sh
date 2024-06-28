@@ -2,16 +2,15 @@
 [[ $(mount|grep /mnt) ]] || { echo /mnt not detected. exiting...; exit; }
 [[ $(swapon --show) ]] || { read -p "No swap detected. Continue? [yes] " ans;[[ $ans != 'yes' ]] && exit; }
 
+[ $ROOT_PASS ] || ROOT_PASS='password';echo ROOT_PASS $ROOT_PASS
+[ $USER_NAME ] || USER_NAME='user';echo USER_NAME $USER_NAME
+[ $USER_PASS ] || USER_PASS=$ROOT_PASS;echo USER_PASS $USER_PASS
+[ $TIMEZONE ] || TIMEZONE='Asia/Tokyo';echo TIMEZONE $TIMEZONE
+[ $LOCALE_GEN ] || LOCALE_GEN='en_US.UTF-8|ja_JP.UTF-8';echo LOCALE_GEN $LOCALE_GEN
+[ $LOCALE_USE ] || LOCALE_USE='ja_JP.UTF-8';echo LOCALE_USE $LOCALE_USE
+[ $KEYMAP ] || KEYMAP='jp106';echo KEYMAP $KEYMAP
+
 read -p "Are you sure you want to continue? [yes] " ans;[[ $ans != 'yes' ]] && exit
-
-
-[ $ROOT_PASS ] || ROOT_PASS='password'
-[ $USER_NAME ] || USER_NAME='user'
-[ $USER_PASS ] || USER_PASS=$ROOT_PASS
-[ $TIMEZONE ] || TIMEZONE='Asia/Tokyo'
-[ $LOCALE_GEN ] || LOCALE_GEN='en_US.UTF-8|ja_JP.UTF-8'
-[ $LOCALE_USE ] || LOCALE_USE='ja_JP.UTF-8'
-[ $KEYMAP ] || KEYMAP='jp106'
 
 [ $CPU_VENDOR ] || CPU_VENDOR=$(grep 'model name' /proc/cpuinfo|grep -Pio -m1 'intel|amd'|awk '{print tolower($0)}')
 [ $GPU_VENDOR ] || GPU_VENDOR=$(lspci|grep -Pio -m1 'intel|amd'|awk '{print tolower($0)}') # nvidia

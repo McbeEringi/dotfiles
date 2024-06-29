@@ -35,4 +35,5 @@ chezmoi status || {
 	chezmoi cd
 	sudo cp -r usr etc /
 	chezmoi apply
+	sudo systemctl enable greetd
 }

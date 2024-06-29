@@ -1,12 +1,16 @@
 # dotfiles
 
 - dotfiles : ArchLinux + Hyprland & swayfx setup
+	- home : chezmoi configs
+	- etc usr : non chezmoi configs
 - install.sh : ArchLinux install script
 - setup.sh : recommended packages setup script
 
 ## Usage
 
 ### dotfiles
+
+#### home
 
 ```sh
 # install chezmoi & init
@@ -15,10 +19,13 @@ chezmoi init mcbeeringi
 
 # apply
 chezmoi apply
+```
 
-# Optional : for non user directories
-# chezmoi cd
-# sudo cp -r usr etc / 
+### etc usr
+
+```sh
+chezmoi cd
+sudo cp -r usr etc / 
 ```
 
 ### install.sh

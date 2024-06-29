@@ -22,11 +22,11 @@ eval $PACMAN_CONF_MODIFY
 pacman -Sy --noconfirm brightnessctl
 brightnessctl s 10%
 pacstrap -K /mnt base linux-zen linux-zen-headers linux-firmware $(
-	[ $CPU_VENDOR == 'intel' ] && echo 'intel-ucode ' ||
-	[ $CPU_VENDOR == 'amd' ] && echo 'amd-ucode '
+	([ $CPU_VENDOR == 'intel' ] && echo 'intel-ucode ') ||
+	([ $CPU_VENDOR == 'amd' ] && echo 'amd-ucode ')
 )$(
-	[ $GPU_VENDOR == 'intel' ] && echo 'intel-media-driver intel-gpu-tools ' ||
-	[ $GPU_VENDOR == 'amd' ] && echo 'libva-mesa-driver '
+	([ $GPU_VENDOR == 'intel' ] && echo 'intel-media-driver intel-gpu-tools ') ||
+	([ $GPU_VENDOR == 'amd' ] && echo 'libva-mesa-driver ')
 )efibootmgr sudo nano git man-db base-devel iwd bluez bluez-utils
 genfstab -U /mnt |tee /mnt/etc/fstab
 ROOT_UUID=$(grep -oP 'UUID=\S+(?=\s+\/\s)' /mnt/etc/fstab)

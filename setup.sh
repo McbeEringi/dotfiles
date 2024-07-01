@@ -32,7 +32,7 @@ which yay || {
 }
 
 chezmoi status || chezmoi init mcbeeringi
-chezmoi cd
+cd $(chezmoi data|jq -r .chezmoi.workingTree)
 sudo cp -r usr etc /
 chezmoi apply
 sudo systemctl enable greetd

@@ -18,6 +18,7 @@ trap 'echo;echo exitting...;exit' INT
 	swayfx swayidle swaylock-effects idlehack autotiling-rs
 	firefox code gimp mpv discord_arch_electron
 	cowsay nyancat figlet cmatrix neofetch pipes.sh sl
+	zsh zsh-autosuggestions zsh-completions zsh-syntax-highlighting
 '
 which yay || {
 	echo Installing yay...
@@ -37,3 +38,5 @@ chezmoi status || {
 	chezmoi apply
 	sudo systemctl enable greetd
 }
+
+chsh -s /bin/zsh

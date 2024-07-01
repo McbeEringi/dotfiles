@@ -4,7 +4,7 @@
 
 - dotfiles : ArchLinux + Hyprland & swayfx setup
 	- home : chezmoi configs
-	- etc usr : non chezmoi configs
+	- root : non chezmoi configs
 - install.sh : ArchLinux install script
 - setup.sh : recommended packages setup script
 
@@ -23,7 +23,7 @@ chezmoi init mcbeeringi
 chezmoi apply
 ```
 
-### etc usr
+### root
 
 ```sh
 chezmoi cd

@@ -1,5 +1,7 @@
 # dotfiles
 
+[GitHub](https://github.com/mcbeeringi/dotfiles)
+
 - dotfiles : ArchLinux + Hyprland & swayfx setup
 	- home : chezmoi configs
 	- etc usr : non chezmoi configs
@@ -30,6 +32,8 @@ sudo cp -r usr etc /
 
 ### install.sh
 
+[source](install.sh)
+
 boot from the install media
 
 ```sh
@@ -48,10 +52,13 @@ mount /dev/~ /mnt
 mount --mkdir /dev/~ /mnt/boot
 
 # run install.sh
+# see source for more options
 ROOT_PASS=password USER_NAME=user bash <(curl -s https://mcbeeringi.github.io/dotfiles/install.sh)
 ```
 
 ### setup.sh
+
+[source](setup.sh)
 
 login to sudo user
 

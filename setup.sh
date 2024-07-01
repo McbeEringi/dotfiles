@@ -32,8 +32,7 @@ which yay || {
 }
 
 chezmoi status || chezmoi init mcbeeringi
-cd $(chezmoi data|jq -r .chezmoi.workingTree)
-sudo cp -r usr etc /
+sudo cp -r $(chezmoi data|jq -r .chezmoi.workingTree)/root/* /
 chezmoi apply
 sudo systemctl enable greetd
 chsh -s /bin/zsh

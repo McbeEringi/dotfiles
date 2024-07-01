@@ -27,7 +27,7 @@ chezmoi apply
 
 ```sh
 chezmoi cd
-sudo cp -r usr etc / 
+sudo cp -r root/* / 
 ```
 
 ### install.sh

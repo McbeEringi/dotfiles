@@ -16,13 +16,15 @@
 
 	<script src="https://mcbeeringi.github.io/src/style.js" async></script>
 	<link rel="stylesheet" href="https://mcbeeringi.github.io/src/style.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prism-theme-one-dark/prism-onedark.min.css">
 </head>
 <body>
 	<p>loading...<br><progress></progress></p>
 	<script type="module">
 		import * as marked from'https://cdn.jsdelivr.net/npm/marked/src/marked.min.js';
+		import prism from 'https://esm.run/prismjs';
 		const e=document.querySelector('p'),url=(location.search.slice(1)||'README')+'.md';
-		marked.setOptions({baseUrl:url});
+		marked.setOptions({baseUrl:url,highlight:(code,lang)=>prism.languages[lang]?prism.highlight(code,prism.languages[lang],lang):code});
 		(async w=>{
 			w=await fetch(url);
 			if(!w.ok)throw`${w.status} - ${w.statusText}`;

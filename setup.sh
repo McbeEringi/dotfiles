@@ -1,6 +1,6 @@
 #!/bin/bash
 trap 'echo;echo exitting...;exit' INT
-
+LANG=C
 [ $PKGS ] || PKGS='
 	hyprland mako pipewire pipewire-pulse pipewire-jack xdg-desktop-portal-hyprland xfce-polkit qt5-wayland qt6-wayland
 	waybar hyprpaper wofi cliphist grimblast wlsunset wl-mirror brightnessctl
@@ -16,10 +16,11 @@ trap 'echo;echo exitting...;exit' INT
 	btop smartmontools lsplug powertop
 	arch-install-scripts dosfstools exfatprogs ntfs-3g chezmoi npm
 	swayfx swayidle swaylock-effects idlehack autotiling-rs
-	firefox code gimp mpv discord_arch_electron
+	firefox code gimp mpv imv discord_arch_electron
 	cowsay nyancat figlet cmatrix neofetch pipes.sh sl
 	zsh zsh-autosuggestions zsh-completions zsh-syntax-highlighting
 '
+
 which yay || {
 	echo Installing yay...
 	git clone --depth=1 https://aur.archlinux.org/yay-bin
@@ -27,16 +28,12 @@ which yay || {
 	makepkg -si --noconfirm
 	cd -
 	rm -rf yay-bin
+	yay -Syu --noconfirm --removemake $PKGS
 }
 
-yay -Syu --noconfirm --removemake $PKGS
-
-chezmoi status || {
-	chezmoi init mcbeeringi
-	chezmoi cd
-	sudo cp -r usr etc /
-	chezmoi apply
-	sudo systemctl enable greetd
-}
-
+chezmoi status || chezmoi init mcbeeringi
+chezmoi cd
+sudo cp -r usr etc /
+chezmoi apply
+sudo systemctl enable greetd
 chsh -s /bin/zsh

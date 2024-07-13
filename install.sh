@@ -33,9 +33,10 @@ genfstab -U /mnt |tee /mnt/etc/fstab
 ROOT_UUID=$(grep -oP 'UUID=\S+(?=\s+\/\s)' /mnt/etc/fstab)
 SWAP_UUID=$(grep -oP 'UUID=\S+(?=.+?swap)' /mnt/etc/fstab)
 
+LOCALE_GEN_MODIFY="sed -i -E 's/#($LOCALE_GEN)/\1/g' /etc/locale.gen"
+RESOLV_CONF_LN="ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf"
 MAKEPKG_CONF_MODIFY="sed -i -E -e's/^(COMPRESSZST=\(zstd -c -T0).*?( -\))/\1\2/' -e's/^#(MAKEFLAGS=.*)/\1/' /etc/makepkg.conf"
 MKINITCPIO_CONF_MODIFY="sed -i -E 's/^(HOOKS=\(base)( udev.+?filesystems)( fsck\))/\1 plymouth\2$([[ $SWAP_UUID ]] && echo ' resume')\3/' /etc/mkinitcpio.conf"
-LOCALE_GEN_MODIFY="sed -i -E 's/#($LOCALE_GEN)/\1/g' /etc/locale.gen"
 SUDOERS_MODIFY="sed -i -E 's/# (Defaults env_keep \+= "HOME"|%wheel ALL=\(ALL:ALL\) ALL)/\1/g' /etc/sudoers"
 
 BOOTCTL_LOADER_CONF="cat <<_EOF |tee /boot/loader/loader.conf
@@ -67,8 +68,8 @@ locale-gen
 echo LANG=$LOCALE_USE|tee /etc/locale.conf # localectl set-locale $LOCALE_USE
 echo KEYMAP=$KEYMAP|tee /etc/vconsole.conf # localectl set-keymap $KEYMAP
 $PACMAN_CONF_MODIFY
+$RESOLV_CONF_LN
 $MAKEPKG_CONF_MODIFY
-ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 $MKINITCPIO_CONF_MODIFY
 pacman -S --noconfirm plymouth
 

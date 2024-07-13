@@ -15,9 +15,9 @@
 	box-shadow:none;text-shadow:none;-gtk-icon-shadow:none;
 }
 
-.bar,tooltip,menu{margin:{{.gap}}px;margin-bottom:0;border:{{.border_width}}px solid;border-radius:{{add .border_radius .border_width}}px;background-color:@k2;border-color:@k3;}
+.bar,tooltip,menu{border:{{.border_width}}px solid;border-radius:{{add .border_radius .border_width}}px;background-color:@k2;border-color:@k3;}
 tooltip>*{margin:{{mul .border_width 2}}px;}menu{padding:{{.border_width}}px;}
-
+.bar>box{padding:0 {{mul .border_width 2}}px;}
 
 button,menuitem,separator{border-radius:{{sub .border_radius 2}}px;}
 menuitem{margin:2px;}radio{margin:8px;}button{margin:6px 0;}

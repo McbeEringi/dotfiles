@@ -1,12 +1,6 @@
 #!/bin/bash
-if [ $XDG_CURRENT_DESKTOP == "Hyprland" ]; then
-	x="hyprlock --immediate ;: lock\nhyprctl dispatch exit ;: logout"
-else
-	x="swaylock --fade-in .2 ;: lock\nswaymsg exit ;: logout"
-fi
-
+LOCK_EXIT=$([ $XDG_CURRENT_DESKTOP == "Hyprland" ]&&echo "hyprlock --immediate ;: lock\nhyprctl dispatch exit ;: logout"||echo "swaylock --fade-in .2 ;: lock\nswaymsg exit ;: logout")
 RESUME=$(cat /proc/cmdline|grep -oP 'resume=\K\S+')
 SWAP=$([[ $RESUME ]]&&swapon --show=SIZE --noheadings --bytes $RESUME)
 RAM=$(free -b|grep -oP 'Mem:\s+\K\d+')
-
-eval $(echo -e "$x\nsystemctl poweroff ;: power\nreboot\nsystemctl suspend$([[ $RAM<$SWAP ]]&&echo '\nsystemctl hibernate')"|{{.menu}} -d -k /dev/null -p "exit..." -r "echo '%s'|awk 'NF{printf \"img:$HOME/.local/share/octicons/%%s.svg:text:%%s\",\$NF,\$NF}'")
+eval $(echo -e "$LOCK_EXIT\nsystemctl poweroff ;: power\nreboot\nsystemctl suspend$([[ $RAM<$SWAP ]]&&echo '\nsystemctl hibernate')"|{{.menu}} -d -k /dev/null -p "exit..." -r "echo '%s'|awk 'NF{printf \"img:$HOME/.local/share/octicons/%%s.svg:text:%%s\",\$NF,\$NF}'")

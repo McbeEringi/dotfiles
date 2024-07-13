@@ -1,7 +1,2 @@
 #!/bin/bash
-if [ $XDG_CURRENT_DESKTOP == "Hyprland" ]; then
-	x=$(hyprctl -j monitors)
-else
-	x=$(swaymsg -t get_outputs)
-fi
-wl-mirror -F $(echo -e $x|jq -r '.[].name'|{{.menu}} -d -k /dev/null -p "mirror..." -r "printf img:$HOME/.local/share/octicons/monitor.svg:text:%s")
+wl-mirror -F $(echo -e $([ $XDG_CURRENT_DESKTOP == "Hyprland" ]&&hyprctl -j monitors||swaymsg -t get_outputs)|jq -r '.[].name'|{{.menu}} -d -k /dev/null -p "mirror..." -r "printf img:$HOME/.local/share/octicons/monitor.svg:text:%s")

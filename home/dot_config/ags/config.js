@@ -5,7 +5,7 @@ const
 dot=x=>'\u2800⡀⣀⣄⣤⣦⣶⣷⣿'[x*9|0],
 s=Object.assign(await'hyprland,notifications,mpris,audio,battery,systemtray'.split(',').reduce(async(a,x,_)=>(_=await Service.import(x),a=await a,a[x]=_,a),{}),{brightness}),
 watch=(x,f)=>Utils.watch(f(x),x,_=>f(x)),
-v_top=Variable({},{poll:[2000,'top -1b -n1 -w512 -Eg', w=>(w={
+v_top=Variable({},{poll:[2000,'top -1b -n1 -w512 -Eg', w=>({
 	cpu:(a=>({p:a.reduce((a,x)=>a+x.p,0)/a.length,a}))([...w.matchAll(/%Cpu(\d+).+?([\.\d]+)/g)].map(x=>({i:+x[1],p:+x[2]/100}))),
 	...['Mem','Swap'].reduce((a,i)=>(a[i.toLowerCase()]=(x=>({unit:x[1],t:+x[2],u:+x[3],p:x[3]/x[2]}))(w.match(new RegExp(`(\\S+?)\\s+${i}\\s*:\\s+([\\.\\d]+)\\stotal.+?free.+?([\\.\\d]+)\\sused`))),a),{})
 })]}),
@@ -68,8 +68,8 @@ Brightness=_=>Widget.Button({
 	setup:x=>x.on('scroll-event',(_,e)=>s.brightness.screen_value+=e.get_scroll_deltas()[2])
 }),
 TOP=_=>Widget.Box({class_names:['top'],spacing:cfg.border_width,children:[
-	Widget.Button({on_primary_click:_=>Utils.execAsync(cfg.terminal+' btop'),child:Widget.LevelBar({inverted:true,vertical:true,value:v_top.bind().as(x=>x.cpu.p),tooltip_text:v_top.bind().as(x=>` CPU: ${(x.cpu.p*100).toFixed(1)}%\n\n`+x.cpu.a.map(y=>`CPU${y.i}: ${(y.p*100).toFixed(1)}%`).join('\n'))})}),
-	Widget.Button({on_primary_click:_=>Utils.execAsync(cfg.terminal+' btop'),child:Widget.LevelBar({inverted:true,vertical:true,value:v_top.bind().as(x=>x.mem.p),tooltip_text:v_top.bind().as(x=>`  RAM: ${(x.mem.p*100).toFixed(1)}%\n\n used: ${x.mem.u} ${x.mem.unit}\ntotal: ${x.mem.t} ${x.mem.unit}`)})})
+	Widget.Button({on_primary_click:_=>Utils.execAsync(cfg.terminal+' btop'),child:Widget.LevelBar({inverted:true,vertical:true,value:v_top.bind().as(x=>x.cpu?x.cpu.p:0),tooltip_text:v_top.bind().as(x=>x.cpu?` CPU: ${(x.cpu.p*100).toFixed(1)}%\n\n`+x.cpu.a.map(y=>`CPU${y.i}: ${(y.p*100).toFixed(1)}%`).join('\n'):'')})}),
+	Widget.Button({on_primary_click:_=>Utils.execAsync(cfg.terminal+' btop'),child:Widget.LevelBar({inverted:true,vertical:true,value:v_top.bind().as(x=>x.mem?x.mem.p:0),tooltip_text:v_top.bind().as(x=>x.mem?`  RAM: ${(x.mem.p*100).toFixed(1)}%\n\n used: ${x.mem.u} ${x.mem.unit}\ntotal: ${x.mem.t} ${x.mem.unit}`:'')})})
 ]}),
 Battery=_=>Widget.Button({
 	class_names:['battery'],

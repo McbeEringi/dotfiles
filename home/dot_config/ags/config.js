@@ -3,22 +3,30 @@ const
 dot=x=>'\u2800⡀⣀⣄⣤⣦⣶⣷⣿'[x*9|0],
 s=Object.assign(await'hyprland,notifications,mpris,audio,battery,systemtray'.split(',').reduce(async(a,x,_)=>(_=await Service.import(x),a=await a,a[x]=_,a),{}),{brightness}),
 watch=(x,f)=>Utils.watch(f(x),x,_=>f(x)),
+v_top=Variable({},{poll:[2000,'top -1b -n1 -w512 -Eg', w=>(w={
+	cpu:(a=>({p:a.reduce((a,x)=>a+x.p,0)/a.length,a}))([...w.matchAll(/%Cpu(\d+).+?([\.\d]+)/g)].map(x=>({i:+x[1],p:+x[2]/100}))),
+	...['Mem','Swap'].reduce((a,i)=>(a[i.toLowerCase()]=(x=>({unit:x[1],t:+x[2],u:+x[3],p:x[3]/x[2]}))(w.match(new RegExp(`(\\S+?)\\s+${i}\\s*:\\s+([\\.\\d]+)\\stotal.+?free.+?([\\.\\d]+)\\sused`))),a),{})
+},console.log(w),w)]}),
+
 
 Workspaces=_=>Widget.Box({
 	class_names:['workspaces'],
 	children:s.hyprland.bind('workspaces').as(
-		ws=>ws.sort((a,b)=>a.id-b.id).map(x=>Widget.Button({
-			on_clicked:_=>s.hyprland.messageAsync('dispatch '+(0<x.id?`workspace ${x.name}`:`togglespecialworkspace ${x.name.slice(8)}`)),
-			child:Widget.Label(x.name.split(':').pop()),
-			class_name:s.hyprland.active.workspace.bind('id').as(y=>y==x.id?'focused':'')
-		}))
+		ws=>[0,1].flatMap(i=>ws.filter(x=>(0<x.id)^i).sort((a,b)=>a.id-b.id).map(x=>Widget.Button({
+			on_clicked:_=>s.hyprland.messageAsync('dispatch '+[`workspace ${x.name}`,`togglespecialworkspace ${x.name.slice(8)}`][i]),
+			child:Widget.Label([x.name,x.name.split(':').pop()[0]][i]),
+			class_names:[
+				_=>_.active.workspace.bind('id'),
+				_=>_.active.client.bind('address').as(y=>(y=_.getClient(y),y&&y.workspace.id))
+			][i](s.hyprland).as(y=>y==x.id||!x.windows?['focused']:[])
+		})))
 	)
 }),
 ClientTitle=_=>Widget.Label({class_names:['client-title'],label:s.hyprland.active.client.bind('class')}),
 Clock=_=>Widget.Label({class_names:['clock'],label:Variable('',{poll:[1000,'date "+%y-%m-%d %H:%M"']}).bind()}),
 Media=_=>Widget.Box({
 	class_names:['media'],
-	children:s.mpris.bind('players').as(w=>w.map(x=>Widget.Button({
+	children:s.mpris.bind('players').as(w=>w.map(x=>x.name!='playerctld'&&Widget.Button({
 		child:Widget.Box({children:[
 			Widget.Icon({visible:x.bind('cover_path'),icon:x.cover_path}),
 			Widget.Label({visible:x.bind('cover_path').as(x=>!x),label:x.track_title.slice(0,2)})
@@ -53,11 +61,12 @@ Volume=_=>Widget.Button({
 Brightness=_=>Widget.Button({
 	class_names:['brightness'],
 	child:Widget.Icon({icon:watch(s.brightness,x=>`display-brightness-${['off','low','medium'][x.screen_value*4|0]||'high'}-symbolic`)}),
-	tooltip_text:s.brightness.bind('screen-value').as(x=>Math.round(x*100)+'%'),
+	tooltip_text:s.brightness.bind('screen_value').as(x=>Math.round(x*100)+'%'),
 	setup:x=>x.on('scroll-event',(_,e)=>s.brightness.screen_value+=e.get_scroll_deltas()[2])
 }),
-// CPU=_=>_,
-// RAM=_=>_,
+CPU=_=>Widget.LevelBar({inverted:true,vertical:true,value:v_top.bind().as(x=>x.cpu.p),tooltip_text:v_top.bind().as(x=>`CPU\ntotal: ${(x.cpu.p*100).toFixed(1)}%`)}),
+//Widget.Icon({icon:v_cpu.bind().as(x=>`indicator-cpufreq${['','-25','-50','-75'][x*5|0]??'-100'}`)}),
+RAM=_=>Widget.LevelBar({inverted:true,vertical:true,value:v_top.bind().as(x=>x.mem.p),tooltip_text:v_top.bind().as(x=>`  RAM: ${(x.mem.p*100).toFixed(1)}%\n\n used: ${x.mem.u} ${x.mem.unit}\ntotal: ${x.mem.t} ${x.mem.unit}`)}),
 Battery=_=>Widget.Button({
 	class_names:['battery'],
 	visible:s.battery.bind('available'),
@@ -86,8 +95,8 @@ Bar=(monitor=0)=>Widget.Window({
 			// Network(),
 			Volume(),
 			Brightness(),
-			//CPU(),
-			//RAM(),
+			CPU(),
+			RAM(),
 			Battery()
 		]})
 	})

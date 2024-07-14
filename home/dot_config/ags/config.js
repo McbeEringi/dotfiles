@@ -6,7 +6,7 @@ watch=(x,f)=>Utils.watch(f(x),x,_=>f(x)),
 v_top=Variable({},{poll:[2000,'top -1b -n1 -w512 -Eg', w=>(w={
 	cpu:(a=>({p:a.reduce((a,x)=>a+x.p,0)/a.length,a}))([...w.matchAll(/%Cpu(\d+).+?([\.\d]+)/g)].map(x=>({i:+x[1],p:+x[2]/100}))),
 	...['Mem','Swap'].reduce((a,i)=>(a[i.toLowerCase()]=(x=>({unit:x[1],t:+x[2],u:+x[3],p:x[3]/x[2]}))(w.match(new RegExp(`(\\S+?)\\s+${i}\\s*:\\s+([\\.\\d]+)\\stotal.+?free.+?([\\.\\d]+)\\sused`))),a),{})
-},console.log(w),w)]}),
+})]}),
 
 
 Workspaces=_=>Widget.Box({
@@ -28,14 +28,14 @@ Media=_=>Widget.Box({
 	class_names:['media'],
 	children:s.mpris.bind('players').as(w=>w.map(x=>x.name!='playerctld'&&Widget.Button({
 		child:Widget.Box({children:[
-			Widget.Icon({visible:x.bind('cover_path'),icon:x.cover_path}),
-			Widget.Label({visible:x.bind('cover_path').as(x=>!x),label:x.track_title.slice(0,2)})
+			Widget.Icon({visible:x.bind('cover_path'),icon:x.bind('cover_path')}),
+			Widget.Label({visible:x.bind('cover_path').as(x=>!x),label:x.bind('track_title').as(x=>x.slice(0,2))})
 		]}),
 		tooltip_markup:watch(x,x=>'track-title,track-album,track-artists,name'.split(',').flatMap(i=>x[i]||[]).join('\n')),
 		on_primary_click:_=>x.playPause(),
 		on_secondary_click:_=>x.next(),
 		on_middle_click:_=>x.previous()
-	})))
+	}),console.log(w)))
 }),
 SysTray=_=>Widget.Box({
 	class_names:['sys-tray'],
@@ -54,7 +54,7 @@ Volume=_=>Widget.Button({
 	class_names:['volume'],
 	child:Widget.Icon({icon:watch(s.audio.speaker,x=>`audio-volume-${['muted','low','medium','high'][!x.is_muted*Math.ceil(x.volume*3)]||'overamplified'}-symbolic`)}),
 	tooltip_text:watch([s.audio.speaker,s.audio.microphone],x=>x.map((y,i)=>`${['Spk','Mic'][i]} ${Math.round(y.volume*100)}% ${y.is_muted?'[MUTED]':''}`).join('\n')),//s.audio.speaker.bind('volume').as(x=>Math.round(x*100)+'%'),
-	on_primary_click:_=>Utils.exec('pavucontrol'),
+	on_primary_click:_=>Utils.execAsync('pavucontrol'),
 	on_secondary_click:_=>Utils.exec('wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle'),
 	setup:x=>x.on('scroll-event',(_,e)=>s.audio.speaker.volume+=e.get_scroll_deltas()[2]*.1)
 }),
@@ -64,8 +64,7 @@ Brightness=_=>Widget.Button({
 	tooltip_text:s.brightness.bind('screen_value').as(x=>Math.round(x*100)+'%'),
 	setup:x=>x.on('scroll-event',(_,e)=>s.brightness.screen_value+=e.get_scroll_deltas()[2])
 }),
-CPU=_=>Widget.LevelBar({inverted:true,vertical:true,value:v_top.bind().as(x=>x.cpu.p),tooltip_text:v_top.bind().as(x=>`CPU\ntotal: ${(x.cpu.p*100).toFixed(1)}%`)}),
-//Widget.Icon({icon:v_cpu.bind().as(x=>`indicator-cpufreq${['','-25','-50','-75'][x*5|0]??'-100'}`)}),
+CPU=_=>Widget.LevelBar({inverted:true,vertical:true,value:v_top.bind().as(x=>x.cpu.p),tooltip_text:v_top.bind().as(x=>`CPU: ${(x.cpu.p*100).toFixed(1)}%\n\n`+x.cpu.a.map(y=>`CPU${y.i}: ${(y.p*100).toFixed(1)}%`).join('\n'))}),
 RAM=_=>Widget.LevelBar({inverted:true,vertical:true,value:v_top.bind().as(x=>x.mem.p),tooltip_text:v_top.bind().as(x=>`  RAM: ${(x.mem.p*100).toFixed(1)}%\n\n used: ${x.mem.u} ${x.mem.unit}\ntotal: ${x.mem.t} ${x.mem.unit}`)}),
 Battery=_=>Widget.Button({
 	class_names:['battery'],

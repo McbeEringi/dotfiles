@@ -5,9 +5,17 @@ const
 dot=x=>'\u2800⡀⣀⣄⣤⣦⣶⣷⣿'[x*9|0],
 s=Object.assign(await'hyprland,notifications,mpris,audio,battery,systemtray'.split(',').reduce(async(a,x,_)=>(_=await Service.import(x),a=await a,a[x]=_,a),{}),{brightness}),
 watch=(x,f)=>Utils.watch(f(x),x,_=>f(x)),
-v_top=Variable({},{poll:[2000,'top -1b -n1 -w512 -Eg', w=>({
+v_top=Variable({},{poll:[5000,'top -1b -n1 -w512 -Eg',w=>({
 	cpu:(a=>({p:a.reduce((a,x)=>a+x.p,0)/a.length,a}))([...w.matchAll(/%Cpu(\d+).+?([\.\d]+)/g)].map(x=>({i:+x[1],p:+x[2]/100}))),
 	...['Mem','Swap'].reduce((a,i)=>(a[i.toLowerCase()]=(x=>({unit:x[1],t:+x[2],u:+x[3],p:x[3]/x[2]}))(w.match(new RegExp(`(\\S+?)\\s+${i}\\s*:\\s+([\\.\\d]+)\\stotal.+?free.+?([\\.\\d]+)\\sused`))),a),{})
+})]}),
+v_net=Variable({},{poll:[5000,_=>({
+	route:Utils.exec('ip r').split('\n').map(x=>(x=x.split(' '),[x[0],x.slice(1).reduce((a,x,i,w)=>(i%2||(a[x]=w[++i]),a),{})])),
+	// networkd:Function('return '+Utils.exec('networkctl --json=short'))()
+	iwctl:Utils.exec('iwctl station list').split('\n').slice(4).reduce((a,x)=>(x[0]!='N'&&(
+		x=x.match(/\s(\w+)/)[1],
+		a[x]=Utils.exec(`iwctl station ${x} show`).split('\n').slice(4).reduce((a,x)=>(x=x.slice(4).trim().split(/\s{2,}/),a[x[0].replace(/\s+/,'_')]=x[1],a),{})
+	),a),{})
 })]}),
 
 
@@ -49,10 +57,14 @@ SysTray=_=>Widget.Box({
 		on_secondary_click:(_,e)=>x.openMenu(e)
 	})))
 }),
-// Network=_=>Widget.Button({
-// 	class_names:['network'],
-// 	child:Widget.Icon({icon:s.network.bind('icon-name')}),
-// }),
+Network=_=>Widget.Button({
+	class_names:['network'],
+	// child:Widget.Icon({icon:v_net.bind().as(w=>(
+	// 	1
+	// ))}),
+	// tooltip_text:v_net.bind().as(w=>w)
+	child:Widget.Label({label:v_net.bind().as(x=>(console.log(x),'hello'))})
+}),
 Volume=_=>Widget.Button({
 	class_names:['volume'],
 	child:Widget.Icon({icon:watch(s.audio.speaker,x=>`audio-volume-${['muted','low','medium','high'][!x.is_muted*Math.ceil(x.volume*3)]||'overamplified'}-symbolic`)}),
@@ -96,7 +108,7 @@ Bar=(monitor=0)=>Widget.Window({
 		end_widget:Widget.Box({hpack:'end',spacing:cfg.border_width,children:[
 			Media(),
 			SysTray(),
-			// Network(),
+			//Network(),
 			Volume(),
 			Brightness(),
 			TOP(),

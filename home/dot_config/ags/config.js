@@ -38,7 +38,7 @@ Media=_=>Widget.Box({
 		on_primary_click:_=>x.playPause(),
 		on_secondary_click:_=>x.next(),
 		on_middle_click:_=>x.previous()
-	}),console.log(w)))
+	})))
 }),
 SysTray=_=>Widget.Box({
 	class_names:['sys-tray'],

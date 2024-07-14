@@ -1,4 +1,6 @@
 import {brightness} from './brightness.js';
+import {cfg} from './chezmoi_cfg.js';
+
 const
 dot=x=>'\u2800⡀⣀⣄⣤⣦⣶⣷⣿'[x*9|0],
 s=Object.assign(await'hyprland,notifications,mpris,audio,battery,systemtray'.split(',').reduce(async(a,x,_)=>(_=await Service.import(x),a=await a,a[x]=_,a),{}),{brightness}),
@@ -27,7 +29,8 @@ Clock=_=>Widget.Label({class_names:['clock'],label:Variable('',{poll:[1000,'date
 Media=_=>Widget.Box({
 	class_names:['media'],
 	children:s.mpris.bind('players').as(w=>w.map(x=>x.name!='playerctld'&&Widget.Button({
-		child:Widget.Box({children:[
+		class_names:x.bind('play_back_status').as(x=>[x.toLowerCase()]),
+		child:Widget.Box({hpack:'center',children:[
 			Widget.Icon({visible:x.bind('cover_path'),icon:x.bind('cover_path')}),
 			Widget.Label({visible:x.bind('cover_path').as(x=>!x),label:x.bind('track_title').as(x=>x.slice(0,2))})
 		]}),
@@ -64,8 +67,10 @@ Brightness=_=>Widget.Button({
 	tooltip_text:s.brightness.bind('screen_value').as(x=>Math.round(x*100)+'%'),
 	setup:x=>x.on('scroll-event',(_,e)=>s.brightness.screen_value+=e.get_scroll_deltas()[2])
 }),
-CPU=_=>Widget.LevelBar({inverted:true,vertical:true,value:v_top.bind().as(x=>x.cpu.p),tooltip_text:v_top.bind().as(x=>`CPU: ${(x.cpu.p*100).toFixed(1)}%\n\n`+x.cpu.a.map(y=>`CPU${y.i}: ${(y.p*100).toFixed(1)}%`).join('\n'))}),
-RAM=_=>Widget.LevelBar({inverted:true,vertical:true,value:v_top.bind().as(x=>x.mem.p),tooltip_text:v_top.bind().as(x=>`  RAM: ${(x.mem.p*100).toFixed(1)}%\n\n used: ${x.mem.u} ${x.mem.unit}\ntotal: ${x.mem.t} ${x.mem.unit}`)}),
+TOP=_=>Widget.Box({class_names:['top'],spacing:cfg.border_width,children:[
+	Widget.Button({on_primary_click:_=>Utils.execAsync(cfg.terminal+' btop'),child:Widget.LevelBar({inverted:true,vertical:true,value:v_top.bind().as(x=>x.cpu.p),tooltip_text:v_top.bind().as(x=>` CPU: ${(x.cpu.p*100).toFixed(1)}%\n\n`+x.cpu.a.map(y=>`CPU${y.i}: ${(y.p*100).toFixed(1)}%`).join('\n'))})}),
+	Widget.Button({on_primary_click:_=>Utils.execAsync(cfg.terminal+' btop'),child:Widget.LevelBar({inverted:true,vertical:true,value:v_top.bind().as(x=>x.mem.p),tooltip_text:v_top.bind().as(x=>`  RAM: ${(x.mem.p*100).toFixed(1)}%\n\n used: ${x.mem.u} ${x.mem.unit}\ntotal: ${x.mem.t} ${x.mem.unit}`)})})
+]}),
 Battery=_=>Widget.Button({
 	class_names:['battery'],
 	visible:s.battery.bind('available'),
@@ -78,24 +83,23 @@ Bar=(monitor=0)=>Widget.Window({
 	class_names:['bar'],
 	monitor,
 	anchor:['top','left','right'],
-	margins:[8,8,0,8],
+	margins:[cfg.gap,cfg.gap,0,cfg.gap],
 	exclusivity:'exclusive',
 	child:Widget.CenterBox({
-		start_widget:Widget.Box({spacing:8,children:[
+		start_widget:Widget.Box({spacing:cfg.border_width,children:[
 			Workspaces(),
 			ClientTitle()
 		]}),
-		center_widget:Widget.Box({spacing:8,children:[
+		center_widget:Widget.Box({spacing:cfg.border_width,children:[
 			Clock()
 		]}),
-		end_widget:Widget.Box({hpack:'end',spacing:8,children:[
+		end_widget:Widget.Box({hpack:'end',spacing:cfg.border_width,children:[
 			Media(),
 			SysTray(),
 			// Network(),
 			Volume(),
 			Brightness(),
-			CPU(),
-			RAM(),
+			TOP(),
 			Battery()
 		]})
 	})

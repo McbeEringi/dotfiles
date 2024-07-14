@@ -18,9 +18,9 @@
 tooltip>*{margin:{{mul .border_width 2}}px;}menu{padding:{{.border_width}}px;}
 .bar>box{padding:{{mulf .border_width 1.5}}px;}
 
-button,menuitem,separator{border-radius:{{sub .border_radius 2}}px;}
+button,menuitem,separator{border-radius:{{mulf .border_width .5|sub .border_radius}}px;}
 menuitem{margin:2px;}radio{margin:8px;}
-menuitem{padding:2px;}separator{padding:1px;}button{min-width:28px;}
+menuitem{padding:2px;}separator{padding:1px;}button{min-width:{{mul .border_radius 2}}px;min-height:{{mul .border_radius 2}}px;}
 :hover,separator,radio{background-color:@w3;}
 button.active,button.focused,radio:checked{background-color:@a;}
-levelbar trough{padding:{{.border_width}}px;background-color:@k3;min-width:{{mul .border_width 2}}px;}levelbar .filled{background-color:@a;}
+levelbar trough{padding:{{.border_width}}px;min-width:{{mul .border_width 2}}px;}levelbar .filled{background-color:@a;}levelbar .empty{background-color:@k3;}

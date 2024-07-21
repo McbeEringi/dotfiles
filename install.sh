@@ -79,7 +79,7 @@ $BOOTCTL_LOADER_CONF
 $BOOTCTL_ENTRIES_ARCH_ZEN_CONF
 
 echo $ROOT_PASS|passwd -s root
-useradd -m -g wheel $USER_NAME
+useradd -m -g wheel -G input,uucp $USER_NAME
 echo $USER_PASS|passwd -s $USER_NAME
 $SUDOERS_MODIFY
 

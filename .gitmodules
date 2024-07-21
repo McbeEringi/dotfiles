@@ -1,6 +1,0 @@
-[submodule "home/dot_vim/pack/common/opt/onedark.vim"]
-	path = home/dot_vim/pack/common/opt/onedark.vim
-	url = https://github.com/joshdick/onedark.vim
-[submodule "home/dot_vim/pack/common/opt/lightline.vim"]
-	path = home/dot_vim/pack/common/opt/lightline.vim
-	url = https://github.com/itchyny/lightline.vim

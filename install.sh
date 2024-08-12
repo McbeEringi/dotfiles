@@ -27,7 +27,7 @@ pacstrap -K /mnt base linux-zen linux-zen-headers linux-firmware $(
 )$(
 	([ $GPU_VENDOR == 'intel' ] && echo 'intel-media-driver intel-gpu-tools ') ||
 	([ $GPU_VENDOR == 'amd' ] && echo 'libva-mesa-driver ')
-)efibootmgr edk2-shell sudo nano git openssh man-db base-devel iwd bluez bluez-utils
+)efibootmgr edk2-shell sudo nano git openssh man-db base-devel iwd bluez bluez-utils sof-firmware
 cp /etc/systemd/network/* /mnt/etc/systemd/network
 genfstab -U /mnt |tee /mnt/etc/fstab
 ROOT_UUID=$(grep -oP 'UUID=\S+(?=\s+\/\s)' /mnt/etc/fstab)

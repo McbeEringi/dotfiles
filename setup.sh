@@ -9,7 +9,7 @@ LANG=C
 	thunar gvfs thunar-volman thunar-media-tags-plugin tumbler ffmpegthumbnailer zip unzip p7zip
 	foot
 	gnome-keyring
-	iwgtk pavucontrol nwg-look-bin qt5ct qt6ct wdisplays
+	iwgtk pavucontrol nwg-look qt5ct qt6ct wdisplays
 	gnome-themes-extra papirus-icon-theme bibata-cursor-theme-bin
 	noto-fonts noto-fonts-cjk noto-fonts-emoji otf-monaspace
 	fcitx5-im fcitx5-mozc 
@@ -28,8 +28,8 @@ which yay || {
 	makepkg -si --noconfirm
 	cd -
 	rm -rf yay-bin
-	yay -Syu --noconfirm --removemake $PKGS
 }
+yay -Syu --noconfirm --removemake $PKGS
 
 chezmoi status || chezmoi init mcbeeringi
 sudo cp -r $(chezmoi data|jq -r .chezmoi.workingTree)/root/* /

@@ -85,4 +85,4 @@ umount /etc/resolv.conf;ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv
 $SYSTEMCTL_EN
 EOF
 
-read -p "Press Enter to reboot..." ans;reboot
+read -p "Press Enter to reboot..." ans;systemctl reboot

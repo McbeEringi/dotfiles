@@ -67,4 +67,3 @@ login to sudo user
 # run setup.sh
 bash <(curl -s https://mcbeeringi.github.io/dotfiles/install.sh)
 ```
-

@@ -34,7 +34,6 @@ ROOT_UUID=$(grep -oP 'UUID=\S+(?=\s+\/\s)' /mnt/etc/fstab)
 SWAP_UUID=$(grep -oP 'UUID=\S+(?=.+?swap)' /mnt/etc/fstab)
 
 LOCALE_GEN_MODIFY="sed -i -E 's/#($LOCALE_GEN)/\1/g' /etc/locale.gen"
-RESOLV_CONF_LN="ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf"
 MAKEPKG_CONF_MODIFY="sed -i -E -e's/^(COMPRESSZST=\(zstd -c -T0).*?( -\))/\1\2/' -e's/^#(MAKEFLAGS=.*)/\1/' /etc/makepkg.conf"
 MKINITCPIO_CONF_MODIFY="sed -i -E 's/^(HOOKS=\(base)( udev.+?filesystems)( fsck\))/\1 plymouth\2$([[ $SWAP_UUID ]] && echo ' resume')\3/' /etc/mkinitcpio.conf"
 SUDOERS_MODIFY="sed -i -E 's/# (Defaults env_keep \+= "HOME"|%wheel ALL=\(ALL:ALL\) ALL)/\1/g' /etc/sudoers"
@@ -68,7 +67,6 @@ locale-gen
 echo LANG=$LOCALE_USE|tee /etc/locale.conf # localectl set-locale $LOCALE_USE
 echo KEYMAP=$KEYMAP|tee /etc/vconsole.conf # localectl set-keymap $KEYMAP
 $PACMAN_CONF_MODIFY
-$RESOLV_CONF_LN
 $MAKEPKG_CONF_MODIFY
 $MKINITCPIO_CONF_MODIFY
 pacman -S --noconfirm plymouth
@@ -83,6 +81,7 @@ useradd -m -g wheel -G input,uucp $USER_NAME
 echo $USER_PASS|passwd -s $USER_NAME
 $SUDOERS_MODIFY
 
+umount /etc/resolv.conf;ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf # RESOLV_CONF_LN
 $SYSTEMCTL_EN
 EOF
 

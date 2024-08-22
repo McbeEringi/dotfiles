@@ -7,6 +7,8 @@
 	- root : non chezmoi configs
 - install.sh : ArchLinux install script
 - setup.sh : recommended packages setup script
+- kde.sh : KDE setup script
+- part.sh : partition setup script ***EXPERIMENTAL*** ***DO NOT USE***
 
 ## Usage
 
@@ -51,6 +53,9 @@ swapon /dev~
 mount /dev/~ /mnt
 mount --mkdir /dev/~ /mnt/boot
 
+# connect to the internet
+iwctl
+
 # run install.sh
 # see source for more options
 ROOT_PASS=password USER_NAME=user bash <(curl -s https://mcbeeringi.github.io/dotfiles/install.sh)
@@ -66,4 +71,36 @@ login to sudo user
 
 # run setup.sh
 bash <(curl -s https://mcbeeringi.github.io/dotfiles/install.sh)
+```
+
+### kde.sh
+[source](kde.sh)
+
+login to sudo user
+
+```sh
+
+# run kde.sh
+bash <(curl -s https://mcbeeringi.github.io/dotfiles/kde.sh)
+```
+
+### part.sh
+***EXPERIMENTAL***
+***DO NOT USE***
+[source](part.sh)
+
+boot from the install media
+
+```sh
+loadkeys jp106
+
+# create partition, format mount
+BLK=/dev/nvme0n1 bash <(curl -s https://mcbeeringi.github.io/dotfiles/part.sh)
+
+# connect to the internet
+iwctl
+
+# run install.sh
+# see source for more options
+ROOT_PASS=password USER_NAME=user bash <(curl -s https://mcbeeringi.github.io/dotfiles/install.sh)
 ```

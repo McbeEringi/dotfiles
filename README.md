@@ -40,6 +40,7 @@ boot from the install media
 
 ```sh
 loadkeys jp106
+iwctl
 
 # create partition, format mount
 lsblk
@@ -53,8 +54,6 @@ swapon /dev~
 mount /dev/~ /mnt
 mount --mkdir /dev/~ /mnt/boot
 
-# connect to the internet
-iwctl
 
 # run install.sh
 # see source for more options
@@ -93,14 +92,11 @@ boot from the install media
 
 ```sh
 loadkeys jp106
+iwctl
 
 # create partition, format mount
 BLK=/dev/nvme0n1 bash <(curl -s https://mcbeeringi.github.io/dotfiles/part.sh)
 
-# connect to the internet
-iwctl
-
 # run install.sh
-# see source for more options
 ROOT_PASS=password USER_NAME=user bash <(curl -s https://mcbeeringi.github.io/dotfiles/install.sh)
 ```

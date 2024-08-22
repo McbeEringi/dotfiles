@@ -5,6 +5,7 @@ EFI=$(uuidgen)
 SWAP=$(uuidgen)
 ROOT=$(uuidgen)
 
+sfdisk -d $BLK||$(echo label:gpt|sfdisk $BLK)
 cat <<EOF | sfdisk -a $BLK
 label: gpt
 sector-size: 512
@@ -13,7 +14,7 @@ size=550MiB, type=U, uuid=$EFI
 size=${SWAP_SIZE}MiB, type=S, uuid=$SWAP
 type=L, uuid=$ROOT
 EOF
-sfdisk -r
+sfdisk -r $BLK
 
 mkfs.fat -F32 /dev/disk/by-uuid/$EFI
 mkswap /dev/disk/by-uuid/$SWAP

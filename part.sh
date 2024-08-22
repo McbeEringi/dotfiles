@@ -16,10 +16,10 @@ type=L, uuid=$ROOT
 EOF
 sfdisk -r $BLK
 
-mkfs.fat -F32 /dev/disk/by-uuid/$EFI
-mkswap /dev/disk/by-uuid/$SWAP
-mkfs.ext4 /dev/disk/by-uuid/$ROOT
+mkfs.fat -F32 /dev/disk/by-partuuid/$EFI
+mkswap /dev/disk/by-partuuid/$SWAP
+mkfs.ext4 /dev/disk/by-partuuid/$ROOT
 
-mount /dev/disk/by-uuid/$ROOT /mnt
-mount --mkdir /dev/disk/by-uuid/$EFI /mnt/boot
-swapon /dev/disk/by-uuid/$SWAP
+mount /dev/disk/by-partuuid/$ROOT /mnt
+mount --mkdir /dev/disk/by-partuuid/$EFI /mnt/boot
+swapon /dev/disk/by-partuuid/$SWAP

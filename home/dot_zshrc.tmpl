@@ -9,11 +9,9 @@ alias hexedit='hexedit --color'
 HISTFILE=~/.zsh_history
 SAVEHIST=1000
 HISTSIZE=1000
+setopt hist_ignore_all_dups
 setopt hist_save_no_dups
-# setopt hist_ignore_all_dups
 setopt share_history
-setopt incappendhistory
-setopt extended_history
 
 PS1=" %F{#{{.col_accent}}}%.%f %# "
 # PS1="[%n@%m %c]%# "

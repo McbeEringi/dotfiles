@@ -69,7 +69,7 @@ login to sudo user
 ```sh
 
 # run setup.sh
-bash <(curl -s https://mcbeeringi.github.io/dotfiles/install.sh)
+bash <(curl -s https://mcbeeringi.github.io/dotfiles/setup.sh)
 ```
 
 ### kde.sh

@@ -3,6 +3,7 @@ trap 'echo;echo exitting...;exit' INT
 mount|grep /mnt || { echo /mnt not detected. exiting...; exit; }
 [[ $(swapon --show) ]] || { read -p "No swap detected. Continue? [yes] " ans;[[ $ans != 'yes' ]] && exit; }
 echo
+[ $HOSTNAME ] || echo HOSTNAME	$HOSTNAME
 [ $ROOT_PASS ] || ROOT_PASS='password';echo ROOT_PASS	$ROOT_PASS
 [ $USER_NAME ] || USER_NAME='user';echo USER_NAME	$USER_NAME
 [ $USER_PASS ] || USER_PASS=$ROOT_PASS;echo USER_PASS	$USER_PASS
@@ -29,6 +30,7 @@ pacstrap -K /mnt base linux-zen linux-zen-headers linux-firmware $(
 	([ $GPU_VENDOR == 'amd' ] && echo 'libva-mesa-driver ')
 )efibootmgr edk2-shell sudo nano git openssh man-db base-devel iwd bluez bluez-utils sof-firmware
 cp /etc/systemd/network/* /mnt/etc/systemd/network
+mkdir /mnt/var/lib/iwd;cp -r /var/lib/iwd/* /mnt/var/lib/iwd
 genfstab -U /mnt |tee /mnt/etc/fstab
 ROOT_UUID=$(grep -oP 'UUID=\S+(?=\s+\/\s)' /mnt/etc/fstab)
 SWAP_UUID=$(grep -oP 'UUID=\S+(?=.+?swap)' /mnt/etc/fstab)
@@ -66,6 +68,7 @@ $LOCALE_GEN_MODIFY
 locale-gen
 echo LANG=$LOCALE_USE|tee /etc/locale.conf # localectl set-locale $LOCALE_USE
 echo KEYMAP=$KEYMAP|tee /etc/vconsole.conf # localectl set-keymap $KEYMAP
+$([[ $HOSTNAME ]] || echo '# ')echo $HOSTNAME|tee /etc/hostname
 $PACMAN_CONF_MODIFY
 $MAKEPKG_CONF_MODIFY
 $MKINITCPIO_CONF_MODIFY

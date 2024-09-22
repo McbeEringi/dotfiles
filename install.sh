@@ -3,7 +3,6 @@ trap 'echo;echo exitting...;exit' INT
 mount|grep /mnt || { echo /mnt not detected. exiting...; exit; }
 [[ $(swapon --show) ]] || { read -p "No swap detected. Continue? [yes] " ans;[[ $ans != 'yes' ]] && exit; }
 echo
-[ $HOSTNAME ] || echo HOSTNAME	$HOSTNAME
 [ $ROOT_PASS ] || ROOT_PASS='password';echo ROOT_PASS	$ROOT_PASS
 [ $USER_NAME ] || USER_NAME='user';echo USER_NAME	$USER_NAME
 [ $USER_PASS ] || USER_PASS=$ROOT_PASS;echo USER_PASS	$USER_PASS
@@ -13,6 +12,8 @@ echo
 [ $KEYMAP ] || KEYMAP='jp106';echo KEYMAP	$KEYMAP
 [ $CPU_VENDOR ] || CPU_VENDOR=$(grep 'model name' /proc/cpuinfo|grep -Pio -m1 'intel|amd'|awk '{print tolower($0)}');echo CPU_VENDOR	$CPU_VENDOR
 [ $GPU_VENDOR ] || GPU_VENDOR=$(lspci|grep -Pio -m1 'intel|amd'|awk '{print tolower($0)}');echo GPU_VENDOR	$GPU_VENDOR # nvidia
+[ $HOSTNAME ] && echo HOSTNAME	$HOSTNAME || echo HOSTNAME_UNSET
+[ $WINDOWS_BLKNUM ] && echo WINDOWS_BLKNUM	$WINDOWS_BLKNUM || echo WINDOWS_BLKNUM_UNSET
 echo
 read -p "Are you sure you want to continue? [yes] " ans;[[ $ans != 'yes' ]] && exit
 
@@ -58,6 +59,15 @@ $([[ $SWAP_UUID ]] || echo '# ')options resume=$SWAP_UUID
 # options video=DSI-1:panel_orientation=right_side_up
 _EOF
 "
+BOOTCTL_ENTRIES_WINDOWS_CONF="cat <<_EOF |tee /boot/loader/entries/windows.conf
+title Windows
+efi /shellx64.efi
+options -nointerrupt -noconsolein -noconsoleout windows.nsh
+_EOF
+"
+BOOTCTL_WINDOWS="$BOOTCTL_ENTRIES_WINDOWS_CONF
+echo BLK${WINDOWS_BLKNUM}:EFI\Microsoft\Boot\Bootmgfw.efi|tee /boot/windows.nsh
+"
 
 SYSTEMCTL_EN="systemctl enable systemd-networkd systemd-resolved iwd systemd-timesyncd bluetooth"
 
@@ -78,6 +88,7 @@ cp /usr/share/edk2-shell/x64/Shell_Full.efi /boot/shellx64.efi
 bootctl install
 $BOOTCTL_LOADER_CONF
 $BOOTCTL_ENTRIES_ARCH_ZEN_CONF
+$([[ $WINDOWS_BLKNUM ]] && echo $BOOTCTL_WINDOWS)
 
 echo $ROOT_PASS|passwd -s root
 useradd -m -g wheel -G input,uucp $USER_NAME

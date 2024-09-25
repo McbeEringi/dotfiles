@@ -65,9 +65,6 @@ efi /shellx64.efi
 options -nointerrupt -noconsolein -noconsoleout windows.nsh
 _EOF
 "
-BOOTCTL_WINDOWS="$BOOTCTL_ENTRIES_WINDOWS_CONF
-echo BLK${WINDOWS_BLKNUM}:EFI\Microsoft\Boot\Bootmgfw.efi|tee /boot/windows.nsh
-"
 
 SYSTEMCTL_EN="systemctl enable systemd-networkd systemd-resolved iwd systemd-timesyncd bluetooth"
 
@@ -88,7 +85,10 @@ cp /usr/share/edk2-shell/x64/Shell_Full.efi /boot/shellx64.efi
 bootctl install
 $BOOTCTL_LOADER_CONF
 $BOOTCTL_ENTRIES_ARCH_ZEN_CONF
-$([[ $WINDOWS_BLKNUM ]] && echo $BOOTCTL_WINDOWS)
+$([[ $WINDOWS_BLKNUM ]] && (
+	$BOOTCTL_ENTRIES_WINDOWS_CONF
+	echo BLK${WINDOWS_BLKNUM}:EFI\Microsoft\Boot\Bootmgfw.efi|tee /boot/windows.nsh
+))
 
 echo $ROOT_PASS|passwd -s root
 useradd -m -g wheel -G input,uucp $USER_NAME

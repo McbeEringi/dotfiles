@@ -65,7 +65,6 @@ efi /shellx64.efi
 options -nointerrupt -noconsolein -noconsoleout windows.nsh
 _EOF
 "
-BOOTCTL_ENTRIES_WINDOWS_CONF
 
 SYSTEMCTL_EN="systemctl enable systemd-networkd systemd-resolved iwd systemd-timesyncd bluetooth"
 

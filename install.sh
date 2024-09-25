@@ -12,7 +12,7 @@ echo
 [ $KEYMAP ] || KEYMAP='jp106';echo KEYMAP	$KEYMAP
 [ $CPU_VENDOR ] || CPU_VENDOR=$(grep 'model name' /proc/cpuinfo|grep -Pio -m1 'intel|amd'|awk '{print tolower($0)}');echo CPU_VENDOR	$CPU_VENDOR
 [ $GPU_VENDOR ] || GPU_VENDOR=$(lspci|grep -Pio -m1 'intel|amd'|awk '{print tolower($0)}');echo GPU_VENDOR	$GPU_VENDOR # nvidia
-[ $HOSTNAME ] && echo HOSTNAME	$HOSTNAME || echo HOSTNAME_UNSET
+[ $HOST_NAME ] && echo HOST_NAME	$HOST_NAME || echo HOST_NAME_UNSET
 [ $WINDOWS_BLKNUM ] && echo WINDOWS_BLKNUM	$WINDOWS_BLKNUM || echo WINDOWS_BLKNUM_UNSET
 echo
 read -p "Are you sure you want to continue? [yes] " ans;[[ $ans != 'yes' ]] && exit
@@ -78,7 +78,7 @@ $LOCALE_GEN_MODIFY
 locale-gen
 echo LANG=$LOCALE_USE|tee /etc/locale.conf # localectl set-locale $LOCALE_USE
 echo KEYMAP=$KEYMAP|tee /etc/vconsole.conf # localectl set-keymap $KEYMAP
-$([[ $HOSTNAME ]] || echo '# ')echo $HOSTNAME|tee /etc/hostname
+$([[ $HOST_NAME ]] || echo '# ')echo $HOST_NAME|tee /etc/hostname
 $PACMAN_CONF_MODIFY
 $MAKEPKG_CONF_MODIFY
 $MKINITCPIO_CONF_MODIFY

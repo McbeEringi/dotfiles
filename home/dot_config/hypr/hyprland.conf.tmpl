@@ -53,6 +53,7 @@ animations {
 	animation = specialWorkspace,1,5,default,slidefade 20%
 }
 dwindle {
+	pseudotile = true
 	preserve_split = true
 }
 
@@ -79,6 +80,7 @@ windowrulev2 = stayfocused,class:polkit
 # window.float
 windowrulev2 = float,title:^float$
 windowrulev2 = float,class:^mpv$
+windowrulev2 = pseudo,class:^mpv$
 windowrulev2 = float,class:polkit
 # window.misc
 windowrulev2 = suppressevent maximize, class:.*
@@ -113,6 +115,7 @@ bind = $mainMod, down, movefocus, d
 bind = $mainMod, J, togglesplit
 bind = $mainMod, K, swapnext
 bind = $mainMod, F, togglefloating,
+bind = $mainMod SHIFT, F, pseudo
 bind = , F11, fullscreen
 # window.mod.mouse
 bindm = $mainMod, mouse:272, movewindow

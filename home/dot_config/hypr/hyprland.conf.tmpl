@@ -68,29 +68,34 @@ xwayland {
 	force_zero_scaling = true
 }
 
-# window
-# window.color
+# rule
+# rule.window
+# rule.window.color
 windowrulev2 = bordercolor rgba({{.col_nop}}88),xwayland:1
-# window.opacity
+# rule.window.opacity
 windowrulev2 = opacity 0.9 override 0.8 override,class:^$terminal|^($fileManager|$menu)$
 windowrulev2 = opaque,class:^at\.yrlf\.wl_mirror$
-# window.focus
+# rule.window.focus
 windowrulev2 = stayfocused,class:^$menu$
 windowrulev2 = stayfocused,class:polkit
-# window.float
+# rule.window.float
 windowrulev2 = float,title:^float$
+# rule.window.polkit
+windowrulev2 = float,class:polkit
+# rule.window.mpv
 windowrulev2 = float,class:^mpv$
 windowrulev2 = pseudo,class:^mpv$
-windowrulev2 = float,class:polkit
-# window.misc
+windowrulev2 = workspace special:magic,class:^mpv$
+windowrulev2 = tile,class:^mpv$
+# rule.window.misc
 windowrulev2 = suppressevent maximize, class:.*
 
-# layer
-# layer.waybar
+# rule.layer
+# rule.layer.waybar
 layerrule = blur,.*bar.*
 layerrule = blurpopups,.*bar.*
 layerrule = ignorezero,.*bar.*
-# layer.notifications
+# rule.layer.notifications
 layerrule = blur,notifications
 layerrule = ignorezero,notifications
 

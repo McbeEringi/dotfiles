@@ -40,10 +40,12 @@ default_floating_border pixel {{.border_width}}
 client.focused #00000000 #{{.col_accent}}88 #00000000 #{{.col_accent}}88
 client.focused_inactive #00000000 #{{.col_bg}}88 #00000000 #{{.col_bg}}88
 client.unfocused #00000000 #{{.col_bg}}88 #00000000 #{{.col_bg}}88
-corner_radius {{.border_radius}}
-blur enable
 # default_orientation vertical
 # for_window [app_id=".*"] splitt
+# style.swayfx
+# corner_radius {{.border_radius}}
+# blur enable
+
 
 # misc
 focus_on_window_activation focus

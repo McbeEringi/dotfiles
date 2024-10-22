@@ -75,6 +75,7 @@ login to sudo user
 ```sh
 
 # run setup.sh
+# can call from history
 bash <(curl -s https://mcbeeringi.dev/dotfiles/setup.sh)
 ```
 
@@ -89,6 +90,7 @@ login to sudo user
 ```sh
 
 # run kde.sh
+# can call from history
 bash <(curl -s https://mcbeeringi.dev/dotfiles/kde.sh)
 ```
 

@@ -66,6 +66,11 @@ options -nointerrupt -noconsolein -noconsoleout windows.nsh
 _EOF
 "
 BOOT_WINDOWS_NSH="echo BLK${WINDOWS_BLKNUM}:EFI\Microsoft\Boot\Bootmgfw.efi|tee /boot/windows.nsh"
+BASH_HIST="cat <<_EOF |tee /home/$USER_NAME/.bash_history
+bash <(curl -s https://mcbeeringi.dev/dotfiles/kde.sh)
+bash <(curl -s https://mcbeeringi.dev/dotfiles/setup.sh)
+_EOF
+"
 
 SYSTEMCTL_EN="systemctl enable systemd-networkd systemd-resolved iwd systemd-timesyncd bluetooth"
 
@@ -92,6 +97,7 @@ echo $ROOT_PASS|passwd -s root
 useradd -m -g wheel -G input,uucp $USER_NAME
 echo $USER_PASS|passwd -s $USER_NAME
 $SUDOERS_MODIFY
+$BASH_HIST
 
 umount /etc/resolv.conf;ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf # RESOLV_CONF_LN
 $SYSTEMCTL_EN

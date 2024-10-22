@@ -1,14 +1,14 @@
 # dotfiles
 
-[GitHub](https://github.com/mcbeeringi/dotfiles)
+[GitLab](https://gitlab.com/mcbeeringi/dotfiles)
 
 - dotfiles : ArchLinux + Hyprland & swayfx setup
 	- home : chezmoi configs
 	- root : non chezmoi configs
 - install.sh : ArchLinux install script
-- setup.sh : recommended packages setup script
-- kde.sh : KDE setup script
-- part.sh : partition setup script ***EXPERIMENTAL*** ***DO NOT USE***
+- setup.sh : Hypeland with recommended packages setup script
+- kde.sh : KDE Plasma setup script
+- part.sh : partition setup script ***EXPERIMENTAL*** ***USE AT YOUR OWN RISK***
 
 ## Usage
 
@@ -34,6 +34,8 @@ sudo cp -r root/* /
 
 ### install.sh
 
+Install ArchLinux
+
 [source](install.sh)
 
 boot from the install media
@@ -57,10 +59,14 @@ mount --mkdir /dev/~ /mnt/boot
 
 # run install.sh
 # see source for more options
-ROOT_PASS=password USER_NAME=user bash <(curl -s https://mcbeeringi.github.io/dotfiles/install.sh)
+ROOT_PASS=password USER_NAME=user bash <(curl -s https://mcbeeringi.dev/dotfiles/install.sh)
 ```
 
+then [`setup.sh`](#setupsh) or [`kde.sh`](#kdesh)
+
 ### setup.sh
+
+Setup Hyprland DE with recommended packages
 
 [source](setup.sh)
 
@@ -69,10 +75,13 @@ login to sudo user
 ```sh
 
 # run setup.sh
-bash <(curl -s https://mcbeeringi.github.io/dotfiles/setup.sh)
+bash <(curl -s https://mcbeeringi.dev/dotfiles/setup.sh)
 ```
 
 ### kde.sh
+
+Setup KDE Plasma DE
+
 [source](kde.sh)
 
 login to sudo user
@@ -80,12 +89,14 @@ login to sudo user
 ```sh
 
 # run kde.sh
-bash <(curl -s https://mcbeeringi.github.io/dotfiles/kde.sh)
+bash <(curl -s https://mcbeeringi.dev/dotfiles/kde.sh)
 ```
 
 ### part.sh
 ***EXPERIMENTAL***
-***DO NOT USE***
+
+***USE AT YOUR OWN RISK***
+
 [source](part.sh)
 
 boot from the install media
@@ -95,8 +106,8 @@ loadkeys jp106
 iwctl
 
 # create partition, format mount
-BLK=/dev/nvme0n1 bash <(curl -s https://mcbeeringi.github.io/dotfiles/part.sh)
+BLK=/dev/nvme0n1 bash <(curl -s https://mcbeeringi.dev/dotfiles/part.sh)
 
 # run install.sh
-ROOT_PASS=password USER_NAME=user bash <(curl -s https://mcbeeringi.github.io/dotfiles/install.sh)
+ROOT_PASS=password USER_NAME=user bash <(curl -s https://mcbeeringi.dev/dotfiles/install.sh)
 ```

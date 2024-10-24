@@ -20,6 +20,7 @@ LANG=C
 	cowsay nyancat figlet cmatrix neofetch pipes.sh sl
 	zsh zsh-autosuggestions zsh-completions zsh-syntax-highlighting
 '
+# river kanshi
 
 which yay || {
 	echo Installing yay...

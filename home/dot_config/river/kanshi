@@ -1,0 +1,3 @@
+profile {
+	output DSI-1 enable transform 270
+}

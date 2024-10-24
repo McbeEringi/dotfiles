@@ -1,0 +1,14 @@
+[{
+	"name":"river",
+	"include":["~/.config/waybar/common.jsonc"],
+	"modules-left":["river/tags","group/apps"],
+	"group/apps":{
+		"orientation":"inherit",
+		"modules":["river/window","wlr/taskbar"],
+		"drawer":{"transition-left-to-right":false}
+	},
+	"river/tags":{
+		"num-tags":9,
+		"tag-labels":[1,2,3,4,5,6,7,8,"s"]
+	}
+}]

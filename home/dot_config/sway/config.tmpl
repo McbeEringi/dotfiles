@@ -40,6 +40,7 @@ default_floating_border pixel {{.border_width}}
 client.focused #00000000 #{{.col_accent}}88 #00000000 #{{.col_accent}}88
 client.focused_inactive #00000000 #{{.col_bg}}88 #00000000 #{{.col_bg}}88
 client.unfocused #00000000 #{{.col_bg}}88 #00000000 #{{.col_bg}}88
+client.urgent #00000000 #{{.col_warn}}88 #00000000 #{{.col_warn}}88
 # default_orientation vertical
 # for_window [app_id=".*"] splitt
 # style.swayfx
@@ -50,13 +51,12 @@ client.unfocused #00000000 #{{.col_bg}}88 #00000000 #{{.col_bg}}88
 # misc
 focus_on_window_activation focus
 
-# window
-# window.color
-client.urgent #00000000 #{{.col_warn}}88 #00000000 #{{.col_warn}}88
-# window.opacity
+# rule
+# rule.window
+# rule.window.opacity
 for_window [title=".*"] opacity .9
 for_window [app_id="^at\.yrlf\.wl_mirror$"] opacity 1
-# window.float
+# rule.window.float
 for_window [title="^float$"] floating enable
 
 
@@ -113,17 +113,17 @@ bindsym $mainMod+Shift+S move scratchpad
 # media
 set $v_tgt @DEFAULT_AUDIO_SINK@
 set $v_notify && notify-send -u low -t 1000 -e -h string:x-canonical-private-synchronous:v_notify V "$(wpctl get-volume $v_tgt|awk '{print $2*100 "% " $3}')"
-bindsym XF86AudioMute exec wpctl set-mute $v_tgt toggle $v_notify
-bindsym XF86AudioRaiseVolume exec wpctl set-volume -l 1 $v_tgt 5%+ $v_notify
-bindsym Shift+XF86AudioRaiseVolume exec wpctl set-volume -l 1 $v_tgt 1%+ $v_notify
-bindsym Shift+XF86AudioLowerVolume exec wpctl set-volume $v_tgt 1%- $v_notify
-bindsym XF86AudioLowerVolume exec wpctl set-volume $v_tgt 5%- $v_notify
-bindsym XF86MonBrightnessUp exec brightnessctl --exponent=2 s +5%
-bindsym Shift+XF86MonBrightnessUp exec brightnessctl --exponent=2 s +1%
-bindsym Shift+XF86MonBrightnessDown exec brightnessctl --exponent=2 s 1%-
-bindsym XF86MonBrightnessDown exec brightnessctl --exponent=2 s 5%-
-bindsym XF86AudioNext exec playerctl next 
-bindsym XF86AudioPlay exec playerctl play-pause 
-bindsym XF86AudioPrev exec playerctl previous
-bindsym print exec grimblast copy output
-bindsym SHIFT+print exec grimblast copy area
+bindsym --locked XF86AudioMute exec wpctl set-mute $v_tgt toggle $v_notify
+bindsym --locked XF86AudioRaiseVolume exec wpctl set-volume -l 1 $v_tgt 5%+ $v_notify
+bindsym --locked Shift+XF86AudioRaiseVolume exec wpctl set-volume -l 1 $v_tgt 1%+ $v_notify
+bindsym --locked Shift+XF86AudioLowerVolume exec wpctl set-volume $v_tgt 1%- $v_notify
+bindsym --locked XF86AudioLowerVolume exec wpctl set-volume $v_tgt 5%- $v_notify
+bindsym --locked XF86MonBrightnessUp exec brightnessctl --exponent=2 s +5%
+bindsym --locked Shift+XF86MonBrightnessUp exec brightnessctl --exponent=2 s +1%
+bindsym --locked Shift+XF86MonBrightnessDown exec brightnessctl --exponent=2 s 1%-
+bindsym --locked XF86MonBrightnessDown exec brightnessctl --exponent=2 s 5%-
+bindsym --locked XF86AudioNext exec playerctl next 
+bindsym --locked XF86AudioPlay exec playerctl play-pause 
+bindsym --locked XF86AudioPrev exec playerctl previous
+bindsym --locked print exec grimblast copy output
+bindsym --locked SHIFT+print exec grimblast copy area

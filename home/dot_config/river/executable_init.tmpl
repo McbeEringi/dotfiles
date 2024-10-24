@@ -1,0 +1,109 @@
+#!/bin/sh
+
+# This is the example configuration file for river.
+#
+# If you wish to edit this, you will probably want to copy it to
+# $XDG_CONFIG_HOME/river/init or $HOME/.config/river/init first.
+#
+# See the river(1), riverctl(1), and rivertile(1) man pages for complete
+# documentation.
+
+# Note: the "Super" modifier is also known as Logo, GUI, Windows, Mod4, etc.
+
+terminal={{.terminal}}
+fileManager={{.fileManager}}
+menu={{.menu}}
+mainMod={{camelcase (lower .mainMod)}}
+
+riverctl xcursor-theme Bibata-Modern-Ice 24
+
+riverctl spawn "fcitx5 -d & mako & /usr/lib/xfce-polkit/xfce-polkit"
+riverctl spawn "hyprpaper & hypridle & waybar -c ~/.config/waybar/river.jsonc & wlsunset -l 35.7 -L 139.7 & batt-notify"
+riverctl spawn "wl-paste --watch cliphist store"
+riverctl spawn "kanshi -c ~/.config/river/kanshi & rivertile -view-padding {{.gap}} -outer-padding {{.gap}} -main-ratio .5"
+riverctl default-layout rivertile
+
+
+# IO
+riverctl keyboard-layout jp
+riverctl focus-follows-cursor normal
+riverctl input pointer-2321-21128-XXXX0000:05_0911:5288_Touchpad tap enabled
+riverctl input pointer-2321-21128-XXXX0000:05_0911:5288_Touchpad drag enabled
+riverctl input pointer-2321-21128-XXXX0000:05_0911:5288_Touchpad natural-scroll enabled
+
+# style
+riverctl border-width {{.border_width}}
+riverctl border-color-focused 0x{{.col_accent}}88
+riverctl border-color-unfocused 0x{{.col_bg}}88
+riverctl border-color-urgent 0x{{.col_warn}}88
+
+# rule
+# rule.window
+# rule.window.float
+riverctl rule-add -title="^float$" float
+
+# apps
+riverctl map normal $mainMod C close
+riverctl map normal $mainMod Q spawn $terminal
+riverctl map normal $mainMod Space spawn $terminal node
+riverctl map normal $mainMod E spawn $fileManager
+riverctl map normal $mainMod R spawn $menu
+riverctl map normal $mainMod M exit
+riverctl map normal $mainMod V spawn cliphist-menu
+riverctl map normal $mainMod P spawn wl-mirror-menu
+riverctl map normal $mainMod+Shift C spawn hyprpicker -a
+
+# window
+# window.move
+riverctl map normal $mainMod Left focus-view left
+riverctl map normal $mainMod Right focus-view right
+riverctl map normal $mainMod Up focus-view up
+riverctl map normal $mainMod Down focus-view down
+# window.mod
+riverctl map normal $mainMod K swap next
+riverctl map normal $mainMod F toggle-float
+riverctl map normal None F11 toggle-fullscreen
+# window.mod.mouse
+riverctl map-pointer normal Super BTN_LEFT move-view
+riverctl map-pointer normal Super BTN_RIGHT resize-view
+
+# workspace
+for i in $(seq 1 8); do
+    tag=$(echo $i|awk '{printf("%d",lshift(1,$0-1))}') 
+    # workspace.move
+    riverctl map normal Super $i set-focused-tags $tag
+    # riverctl map normal Super+Control $i toggle-focused-tags $tag
+    # workspace.mod
+    riverctl map normal Super+Shift $i set-view-tags $tag
+    # riverctl map normal Super+Shift+Control $i toggle-view-tags $tag
+done
+    riverctl map normal Super S toggle-focused-tags $((0x100))
+    riverctl map normal Super+Shift S set-view-tags $((0x100))
+    riverctl spawn-tagmask $((0xff))
+
+
+v_tgt="@DEFAULT_AUDIO_SINK@"
+v_notify="&& notify-send -u low -t 1000 -e -h string:x-canonical-private-synchronous:v_notify V \"$(wpctl get-volume $v_tgt|awk '{print $2*100 "% " $3}')\""
+for mode in normal locked
+do
+    # Control pulse audio volume with pamixer (https://github.com/cdemoulins/pamixer)
+    riverctl map $mode None  XF86AudioMute        spawn 'wpctl set-mute $v_tgt toggle $v_notify'
+    riverctl map $mode None  XF86AudioRaiseVolume spawn 'wpctl set-volume -l 1 $v_tgt 5%+ $v_notify'
+    riverctl map $mode Shift XF86AudioRaiseVolume spawn 'wpctl set-volume -l 1 $v_tgt 1%+ $v_notify'
+    riverctl map $mode Shift XF86AudioLowerVolume spawn 'wpctl set-volume $v_tgt 1%- $v_notify'
+    riverctl map $mode None  XF86AudioLowerVolume spawn 'wpctl set-volume $v_tgt 5%- $v_notify'
+
+    # Control screen backlight brightness with brightnessctl (https://github.com/Hummer12007/brightnessctl)
+    riverctl map $mode None  XF86MonBrightnessUp   spawn 'brightnessctl  --exponent=2 s +5%'
+    riverctl map $mode Shift XF86MonBrightnessUp   spawn 'brightnessctl  --exponent=2 s +1%'
+    riverctl map $mode Shift XF86MonBrightnessDown spawn 'brightnessctl  --exponent=2 s 1%-'
+    riverctl map $mode None  XF86MonBrightnessDown spawn 'brightnessctl  --exponent=2 s 5%-'
+
+    # Control MPRIS aware media players with playerctl (https://github.com/altdesktop/playerctl)
+    riverctl map $mode None XF86AudioNext  spawn 'playerctl next'
+    riverctl map $mode None XF86AudioPlay  spawn 'playerctl play-pause'
+    riverctl map $mode None XF86AudioPrev  spawn 'playerctl previous'
+
+    riverctl map $mode None print spawn 'grimblast copy output'
+    riverctl map $mode None SHIFT+print spawn 'grimblast copy area'
+done

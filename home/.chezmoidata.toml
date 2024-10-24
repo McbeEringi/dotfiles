@@ -6,6 +6,8 @@ fileManager="thunar"
 menu="wofi" # to use other apps, make sure that the settings are equivalent to the settings for wofi
 mainMod="SUPER"
 
+kb_layout="jp"
+
 # color palette RRGGBB
 col_accent="66ccaa"
 col_warn="ff4444"

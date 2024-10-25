@@ -2,13 +2,15 @@
 
 [GitLab](https://gitlab.com/mcbeeringi/dotfiles)
 
-- dotfiles : ArchLinux + Hyprland & swayfx setup
+- dotfiles : ArchLinux + Hyprland & sway setup
 	- home : chezmoi configs
 	- root : non chezmoi configs
 - install.sh : ArchLinux install script
 - setup.sh : Hypeland with recommended packages setup script
 - kde.sh : KDE Plasma setup script
 - part.sh : partition setup script ***EXPERIMENTAL*** ***USE AT YOUR OWN RISK***
+
+also includes niri & river(kanshi for monitor mng) configs
 
 ## Usage
 

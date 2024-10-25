@@ -2,7 +2,7 @@ spawn-at-startup "fcitx5" "-d"
 spawn-at-startup "mako"
 spawn-at-startup "hyprpaper"
 spawn-at-startup "hypridle"
-spawn-at-startup "waybar" "-c" "{{.homeDir}}/.config/waybar/niri.jsonc"
+spawn-at-startup "waybar" "-c" "{{.chezmoi.homeDir}}/.config/waybar/niri.jsonc"
 spawn-at-startup "wlsunset" "-l" "35.7" "-L" "139.7"
 spawn-at-startup "batt-notify"
 spawn-at-startup "wl-paste" "--watch" "cliphist" "store"
@@ -51,7 +51,7 @@ layout {
 	}
 	border {
 		width {{.border_width}}
-		active-color "#{{.col_accl}}88"
+		active-color "#{{.col_accent}}88"
 		inactive-color "#{{.col_nop}}88"
 	}
 }

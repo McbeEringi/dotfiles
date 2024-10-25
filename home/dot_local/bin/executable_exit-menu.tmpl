@@ -1,5 +1,15 @@
 #!/bin/bash
-LOCK_EXIT=$([ $XDG_CURRENT_DESKTOP == "Hyprland" ]&&echo "hyprlock --immediate ;: lock\nhyprctl dispatch exit ;: logout"||echo "swaylock --fade-in .2 ;: lock\nswaymsg exit ;: logout")
+WM=$(wm-name)
+LOCK="hyprlock --immediate ;: lock"
+LOCK_EXIT=$(
+	case $WM in
+  "Hyprland") echo "$LOCK\nhyprctl dispatch exit ;: logout";;
+  "niri") echo "$LOCK\nniri msg action quit ;: exit logout";;
+  "river") echo "$LOCK\nriverctl exit ;: logout";;
+  "sway") echo "swaylock --fade-in .2 ;: lock\nswaymsg exit ;: logout";;
+  *) echo "$LOCK\npkill $WM ;: logout";;
+esac
+)
 RESUME=$(cat /proc/cmdline|grep -oP 'resume=\K\S+')
 SWAP=$([[ $RESUME ]]&&swapon --show=SIZE --noheadings --bytes $RESUME)
 RAM=$(free -b|grep -oP 'Mem:\s+\K\d+')

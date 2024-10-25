@@ -1,0 +1,3 @@
+#!/bin/bash
+pid=$(fuser "${XDG_RUNTIME_DIR}/${WAYLAND_DISPLAY:-wayland-0}" 2> echo)
+[ $pid ]&&ps -q $pid o comm=||echo sway

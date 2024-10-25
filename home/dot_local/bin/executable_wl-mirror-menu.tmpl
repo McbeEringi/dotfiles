@@ -1,2 +1,3 @@
 #!/bin/bash
-wl-mirror -F $(echo -e $([ $XDG_CURRENT_DESKTOP == "Hyprland" ]&&hyprctl -j monitors||swaymsg -t get_outputs)|jq -r '.[].name'|{{.menu}} -d -k /dev/null -p "mirror..." -r "printf img:$HOME/.local/share/octicons/monitor.svg:text:%s")
+d=$(for x in /sys/class/drm/*/status;do [[ $(cat $x) == "connected" ]]&&echo $(echo $x|grep -oP 'drm/[^-/]+-\K[^/]+');done )
+wl-mirror -F $(echo -e $d|{{.menu}} -d -k /dev/null -p "mirror..." -r "printf img:$HOME/.local/share/octicons/monitor.svg:text:%s")

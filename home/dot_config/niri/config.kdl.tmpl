@@ -1,0 +1,161 @@
+spawn-at-startup "fcitx5" "-d"
+spawn-at-startup "mako"
+spawn-at-startup "hyprpaper"
+spawn-at-startup "hypridle"
+spawn-at-startup "waybar" "-c" "{{.homeDir}}/.config/waybar/niri.jsonc"
+spawn-at-startup "wlsunset" "-l" "35.7" "-L" "139.7"
+spawn-at-startup "batt-notify"
+spawn-at-startup "wl-paste" "--watch" "cliphist" "store"
+
+input {
+	keyboard {
+		xkb {
+			layout "{{.kb_layout}}"
+		}
+	}
+	touchpad {
+		tap
+		natural-scroll
+		accel-profile "flat"
+	}
+	warp-mouse-to-focus
+	focus-follows-mouse
+}
+
+output "DSI-1" {
+	scale 1
+	transform "270"
+}
+
+layout {
+	gaps {{.gap}}
+	center-focused-column "on-overflow"
+	always-center-single-column
+
+	default-column-width { proportion 0.5; }
+	preset-column-widths {
+		proportion 0.33333
+		proportion 0.5
+		proportion 0.66667
+		proportion 1.0
+	}
+	preset-window-heights {
+		proportion 0.33333
+		proportion 0.5
+		proportion 0.66667
+		proportion 1.0
+	}
+
+	focus-ring {
+		off
+	}
+	border {
+		width {{.border_width}}
+		active-color "#{{.col_accl}}88"
+		inactive-color "#{{.col_nop}}88"
+	}
+}
+
+prefer-no-csd
+screenshot-path null
+
+window-rule {
+	geometry-corner-radius {{.border_radius}}
+	clip-to-geometry true
+}
+
+window-rule {
+	match is-focused=true app-id=r#"^{{.terminal}}|^({{.fileManager}}|wofi)$"#
+	match is-focused=false
+	opacity 0.9
+}
+window-rule {
+	match is-focused=false app-id=r#"^{{.terminal}}|^({{.fileManager}}|wofi)$"#
+	opacity 0.8
+}
+
+cursor {
+	xcursor-theme "Bibata-Modern-Ice"
+	xcursor-size 24
+}
+
+binds {
+	Mod+Shift+Slash { show-hotkey-overlay; }
+
+	Mod+C { close-window; }
+	Mod+Q { spawn "{{.terminal}}"; }
+	Mod+Space { spawn "{{.terminal}}" "node"; }
+	Mod+E { spawn "{{.fileManager}}"; }
+	Mod+R { spawn "wofi"; }
+	Mod+M { spawn "exit-menu"; }
+	Mod+V { spawn "cliphist-menu"; }
+	Mod+P { spawn "wl-mirror-menu"; }
+	Mod+Shift+C { spawn "hyprpicker -a"; }
+
+
+
+	Mod+Left  { focus-column-left; }
+	Mod+Down  { focus-window-or-workspace-down; }
+	Mod+Up    { focus-window-or-workspace-up; }
+	Mod+Right { focus-column-right; }
+	Mod+Home  { focus-column-first; }
+	Mod+End   { focus-column-last; }
+
+	Mod+Ctrl+Left  { move-column-left; }
+	Mod+Ctrl+Down  { move-window-down-or-to-workspace-down; }
+	Mod+Ctrl+Up    { move-window-up-or-to-workspace-up; }
+	Mod+Ctrl+Right { move-column-right; }
+	Mod+Ctrl+Home  { move-column-to-first; }
+	Mod+Ctrl+End   { move-column-to-last; }
+
+	Mod+Shift+Left  { focus-monitor-left; }
+	Mod+Shift+Down  { focus-monitor-down; }
+	Mod+Shift+Up    { focus-monitor-up; }
+	Mod+Shift+Right { focus-monitor-right; }
+
+	Mod+Shift+Ctrl+Left  { move-column-to-monitor-left; }
+	Mod+Shift+Ctrl+Down  { move-column-to-monitor-down; }
+	Mod+Shift+Ctrl+Up    { move-column-to-monitor-up; }
+	Mod+Shift+Ctrl+Right { move-column-to-monitor-right; }
+
+	Mod+WheelScrollDown      cooldown-ms=150 { focus-workspace-down; }
+	Mod+WheelScrollUp        cooldown-ms=150 { focus-workspace-up; }
+
+	Mod+1 { focus-workspace 1; }
+	Mod+2 { focus-workspace 2; }
+	Mod+3 { focus-workspace 3; }
+	Mod+4 { focus-workspace 4; }
+	Mod+5 { focus-workspace 5; }
+	Mod+6 { focus-workspace 6; }
+	Mod+7 { focus-workspace 7; }
+	Mod+8 { focus-workspace 8; }
+	Mod+9 { focus-workspace 9; }
+	Mod+Shift+1 { move-column-to-workspace 1; }
+	Mod+Shift+2 { move-column-to-workspace 2; }
+	Mod+Shift+3 { move-column-to-workspace 3; }
+	Mod+Shift+4 { move-column-to-workspace 4; }
+	Mod+Shift+5 { move-column-to-workspace 5; }
+	Mod+Shift+6 { move-column-to-workspace 6; }
+	Mod+Shift+7 { move-column-to-workspace 7; }
+	Mod+Shift+8 { move-column-to-workspace 8; }
+	Mod+Shift+9 { move-column-to-workspace 9; }
+
+	Mod+BracketLeft  { consume-or-expel-window-left; }
+	Mod+BracketRight { consume-or-expel-window-right; }
+
+	Mod+F { maximize-column; }
+	F11 { fullscreen-window; }
+
+
+
+	XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
+	XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
+	XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
+	XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
+	XF86MonBrightnessUp   allow-when-locked=true { spawn "brightnessctl" "--exponent=2" "s" "+5%"; }
+	XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--exponent=2" "s" "5%-"; }
+
+	Shift+Print { screenshot; }
+	Print { screenshot-screen; }
+	Ctrl+Print { screenshot-window; }
+}

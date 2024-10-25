@@ -21,6 +21,7 @@ LANG=C
 	zsh zsh-autosuggestions zsh-completions zsh-syntax-highlighting
 '
 # river kanshi
+# niri
 
 which yay || {
 	echo Installing yay...

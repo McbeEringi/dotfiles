@@ -1,3 +1,2 @@
 #!/bin/bash
-d=$(for x in /sys/class/drm/*/status;do [[ $(cat $x) == "connected" ]]&&echo $(echo $x|grep -oP 'drm/[^-/]+-\K[^/]+');done )
-wl-mirror -F $(echo -e $d|{{.menu}} -d -k /dev/null -p "mirror..." -r "printf img:$HOME/.local/share/octicons/monitor.svg:text:%s")
+wl-mirror -F $(for x in /sys/class/drm/*/status;do [[ $(cat $x) == "connected" ]]&&echo $x|grep -oP 'card\d+-\K[^/]+';done |sed 's/ /\n/'|{{.menu}} -d -k /dev/null -p "mirror..." -r "printf img:$HOME/.local/share/octicons/monitor.svg:text:%s")

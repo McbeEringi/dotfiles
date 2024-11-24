@@ -21,6 +21,7 @@ PACMAN_CONF_MODIFY="sed -i -E 's/^#(Color|VerbosePkgLists|ParallelDownloads)/\1/
 
 timedatectl
 eval $PACMAN_CONF_MODIFY
+reflector
 pacman -Sy --noconfirm archlinux-keyring
 pacman -S --noconfirm brightnessctl;brightnessctl s 10%
 pacstrap -K /mnt base linux-zen linux-zen-headers linux-firmware $(

@@ -72,6 +72,7 @@ _EOF
 "
 BOOT_WINDOWS_NSH="echo BLK${WINDOWS_BLKNUM}:EFI\Microsoft\Boot\Bootmgfw.efi|tee /boot/windows.nsh"
 ETC_CMDLINE_D="\
+mkdir /etc/cmdline.d
 echo 'root=$ROOT_UUID rw' |tee /etc/cmdline.d/10-root.conf
 echo 'quiet splsh' |tee /etc/cmdline.d/20-misc.conf
 $([[ $SWAP_UUID ]] || echo '# ')echo 'resume=$SWAP_UUID' |tee /etc/cmdline.d/30-resume.conf

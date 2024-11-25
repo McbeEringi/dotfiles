@@ -87,7 +87,7 @@ uki_zen_options=\"--splash /sys/firmware/acpi/bgrt/image\"
 # uki_zen_options=\"--splash /etc/splash.bmp\" 
 _EOF
 "
-EFIBOOTMGR_UKI_ZEN="efibootmgr -d $BOOT_PKNAME -p $BOOT_PARTN -c -L arch-zen -l '\EFI\Linux\arch-zen.efi'"
+EFIBOOTMGR_UKI_ZEN="efibootmgr -d /dev/$BOOT_PKNAME -p $BOOT_PARTN -c -L arch-zen -l '\EFI\Linux\arch-zen.efi'"
 BASH_HIST="cat <<_EOF |tee /home/$USER_NAME/.bash_history
 bash <(curl -s https://mcbeeringi.dev/dotfiles/kde.sh)
 bash <(curl -s https://mcbeeringi.dev/dotfiles/setup.sh)

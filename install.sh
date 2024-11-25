@@ -35,6 +35,9 @@ pacstrap -K /mnt base linux-zen linux-zen-headers linux-firmware $(
 cp /etc/systemd/network/* /mnt/etc/systemd/network
 mkdir /mnt/var/lib/iwd;cp -r /var/lib/iwd/* /mnt/var/lib/iwd
 genfstab -U /mnt |tee /mnt/etc/fstab
+BOOT_UUID=$(grep -oP 'UUID=\K\S+(?=\s+\/boot\s)' /mnt/etc/fstab)
+BOOT_PKNAME=$(lsblk -nro UUID,PKNAME|grep -oP "$BOOT_UUID\s\K.+")
+BOOT_PARTN=$(lsblk -nro UUID,PARTN| grep -oP "$BOOT_UUID\s\K.+")
 ROOT_UUID=$(grep -oP 'UUID=\S+(?=\s+\/\s)' /mnt/etc/fstab)
 SWAP_UUID=$(grep -oP 'UUID=\S+(?=.+?swap)' /mnt/etc/fstab)
 
@@ -68,6 +71,23 @@ options -nointerrupt -noconsolein -noconsoleout windows.nsh
 _EOF
 "
 BOOT_WINDOWS_NSH="echo BLK${WINDOWS_BLKNUM}:EFI\Microsoft\Boot\Bootmgfw.efi|tee /boot/windows.nsh"
+ETC_CMDLINE_D="\
+echo 'root=$ROOT_UUID rw' |tee /etc/cmdline.d/10-root.conf
+echo 'quiet splsh' |tee /etc/cmdline.d/20-misc.conf
+$([[ $SWAP_UUID ]] || echo '# ')echo 'resume=$SWAP_UUID' |tee /etc/cmdline.d/30-resume.conf
+"
+MKINITCPIO_UKI_PRESET_ZEN="cat <<_EOF |tee /etc/mkinitcpio.d/uki.preset
+# mkinitcpio preset file for uki
+
+PRESETS=('uki_zen')
+
+uki_zen_uki=\"/boot/EFI/Linux/arch-zen.efi\"
+uki_zen_kver=\"/boot/vmlinuz-linux-zen\"
+uki_zen_options=\"--splash /sys/firmware/acpi/bgrt/image\"
+# uki_zen_options=\"--splash /etc/splash.bmp\" 
+_EOF
+"
+EFIBOOTMGR_UKI_ZEN="efibootmgr -d $BOOT_PKNAME -p $BOOT_PARTN -c -L arch-zen -l '\EFI\Linux\arch-zen.efi'"
 BASH_HIST="cat <<_EOF |tee /home/$USER_NAME/.bash_history
 bash <(curl -s https://mcbeeringi.dev/dotfiles/kde.sh)
 bash <(curl -s https://mcbeeringi.dev/dotfiles/setup.sh)
@@ -87,13 +107,17 @@ $([[ $HOST_NAME ]] || echo '# ')echo $HOST_NAME|tee /etc/hostname
 $PACMAN_CONF_MODIFY
 $MAKEPKG_CONF_MODIFY
 $MKINITCPIO_CONF_MODIFY
-pacman -S --noconfirm plymouth
 
 cp /usr/share/edk2-shell/x64/Shell_Full.efi /boot/shellx64.efi
 bootctl install
 $BOOTCTL_LOADER_CONF
 $BOOTCTL_ENTRIES_ARCH_ZEN_CONF
 $([[ $WINDOWS_BLKNUM ]] && echo "${BOOTCTL_ENTRIES_WINDOWS_CONF}${BOOT_WINDOWS_NSH}")
+
+$ETC_CMDLINE_D
+$MKINITCPIO_UKI_PRESET_ZEN
+pacman -S --noconfirm plymouth
+$EFIBOOTMGR_UKI_ZEN
 
 echo $ROOT_PASS|passwd -s root
 useradd -m -g wheel -G input,uucp $USER_NAME

@@ -22,7 +22,7 @@ PACMAN_CONF_MODIFY="sed -i -E 's/^#(Color|VerbosePkgLists|ParallelDownloads)/\1/
 
 timedatectl
 eval $PACMAN_CONF_MODIFY
-systemctl stop reflector.service;reflector --save /etc/pacman.d/mirrorlist -p https -c "$MIRROR_COUNTRY" -l 5 --sort rate
+systemctl stop reflector.service;echo "==> Rating mirrors...";reflector --save /etc/pacman.d/mirrorlist -p https -c "$MIRROR_COUNTRY" -l 5 --sort rate
 pacman -Sy --noconfirm archlinux-keyring
 pacman -S --noconfirm brightnessctl;brightnessctl s 10%
 pacstrap -K /mnt base linux-zen linux-zen-headers linux-firmware $(

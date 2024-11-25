@@ -22,7 +22,7 @@ PACMAN_CONF_MODIFY="sed -i -E 's/^#(Color|VerbosePkgLists|ParallelDownloads)/\1/
 
 timedatectl
 eval $PACMAN_CONF_MODIFY
-reflector --save /etc/pacman.d/mirrorlist -p https -c "$MIRROR_COUNTRY" -l 5
+systemctl stop reflector.service;reflector --save /etc/pacman.d/mirrorlist -p https -c "$MIRROR_COUNTRY" -l 5
 pacman -Sy --noconfirm archlinux-keyring
 pacman -S --noconfirm brightnessctl;brightnessctl s 10%
 pacstrap -K /mnt base linux-zen linux-zen-headers linux-firmware $(
@@ -74,7 +74,7 @@ BOOT_WINDOWS_NSH="echo BLK${WINDOWS_BLKNUM}:EFI\Microsoft\Boot\Bootmgfw.efi|tee 
 ETC_CMDLINE_D="\
 mkdir /etc/cmdline.d
 echo 'root=$ROOT_UUID rw' |tee /etc/cmdline.d/10-root.conf
-echo 'quiet splsh' |tee /etc/cmdline.d/20-misc.conf
+echo 'quiet splash' |tee /etc/cmdline.d/20-misc.conf
 $([[ $SWAP_UUID ]] || echo '# ')echo 'resume=$SWAP_UUID' |tee /etc/cmdline.d/30-resume.conf
 "
 MKINITCPIO_UKI_PRESET_ZEN="cat <<_EOF |tee /etc/mkinitcpio.d/uki.preset

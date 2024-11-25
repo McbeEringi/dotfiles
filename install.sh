@@ -56,7 +56,7 @@ _EOF
 BOOTCTL_ENTRIES_ARCH_ZEN_CONF="cat <<_EOF |tee /boot/loader/entries/arch-zen.conf
 title Arch Linux w/ ZEN Kernel
 linux /vmlinuz-linux-zen
-$([[ $CPU_VENDOR ]] || echo '# ')initrd /$CPU_VENDOR-ucode.img
+$([[ $CPU_VENDOR ]] || echo '# ')# initrd /$CPU_VENDOR-ucode.img
 initrd /initramfs-linux-zen.img
 options root=$ROOT_UUID rw
 options quiet splash

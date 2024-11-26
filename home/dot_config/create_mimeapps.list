@@ -7,6 +7,7 @@ image/png=imv.desktop
 application/xml=code-oss.desktop
 application/json=code-oss.desktop
 application/x-zerosize=code-oss.desktop
+video/webm=mpv.desktop
 
 [Added Associations]
 inode/directory=mpv.desktop;
@@ -18,3 +19,4 @@ image/png=imv.desktop;
 application/xml=code-oss.desktop;
 application/json=code-oss.desktop;
 application/x-zerosize=code-oss.desktop;
+video/webm=mpv.desktop;

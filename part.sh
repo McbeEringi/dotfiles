@@ -21,7 +21,7 @@ ls /dev/disk/by-partuuid
 
 mkfs.fat -F32 /dev/disk/by-partuuid/$EFI
 mkswap /dev/disk/by-partuuid/$SWAP
-mkfs.ext4 /dev/disk/by-partuuid/$ROOT
+mkfs.btrfs /dev/disk/by-partuuid/$ROOT
 
 mount /dev/disk/by-partuuid/$ROOT /mnt
 mount --mkdir /dev/disk/by-partuuid/$EFI /mnt/boot

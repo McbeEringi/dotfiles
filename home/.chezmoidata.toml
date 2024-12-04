@@ -1,5 +1,6 @@
 wallpaper="~/path/to/wallpaper"
 hyprlock_font="sans-serif bold"
+zsh_plugins_dir="/usr/share/zsh/plugins"
 
 terminal="foot"
 fileManager="thunar"

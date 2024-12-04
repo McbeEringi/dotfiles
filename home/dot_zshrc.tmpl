@@ -16,7 +16,7 @@ setopt share_history
 PS1=" %F{#{{.col_accent}}}%.%f %# "
 # PS1="[%n@%m %c]%# "
 
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source {{.zsh_plugins_dir}}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source {{.zsh_plugins_dir}}/zsh-autosuggestions/zsh-autosuggestions.zsh
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)

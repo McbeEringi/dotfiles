@@ -70,7 +70,7 @@ efi /shellx64.efi
 options -nointerrupt -noconsolein -noconsoleout windows.nsh
 _EOF
 "
-BOOT_WINDOWS_NSH="echo BLK${WINDOWS_BLKNUM}:EFI\\Microsoft\\Boot\\Bootmgfw.efi|tee /boot/windows.nsh"
+BOOT_WINDOWS_NSH="echo BLK${WINDOWS_BLKNUM}:EFI\\\\Microsoft\\\\Boot\\\\Bootmgfw.efi|tee /boot/windows.nsh"
 ETC_CMDLINE_D="\
 mkdir /etc/cmdline.d
 echo 'root=$ROOT_UUID rw' |tee /etc/cmdline.d/10-root.conf

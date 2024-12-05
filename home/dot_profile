@@ -1,3 +1,4 @@
+tty|grep '^/dev/tty[0-9]*$'&&export LANG=C
 # greetd loads these envs for wm
 export QT_QPA_PLATFORMTHEME=qt5ct
 export PATH=$PATH:$HOME/.local/bin

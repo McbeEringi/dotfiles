@@ -19,6 +19,7 @@ LANG=C
 	firefox code gimp mpv mpv-mpris imv discord_arch_electron imagemagick
 	cowsay nyancat figlet cmatrix neofetch pipes.sh sl
 	zsh zsh-autosuggestions zsh-completions zsh-syntax-highlighting
+	cups
 '
 # river kanshi
 # niri
@@ -36,5 +37,5 @@ yay -Syu --noconfirm --removemake $PKGS
 chezmoi status || chezmoi init mcbeeringi
 sudo cp -r $(chezmoi data|jq -r .chezmoi.workingTree)/root/* /
 chezmoi apply
-sudo systemctl enable greetd
+sudo systemctl enable greetd cups
 chsh -s /bin/zsh

@@ -22,15 +22,15 @@ vim.g.mapleader=' '
 -- bind.no_highlight
 vim.keymap.set({'n','i'},'<esc>','<cmd>noh<cr><esc>',{})
 -- bind.window
-vim.keymap.set({'n'},'<C-h>','<C-w>h')
-vim.keymap.set({'n'},'<C-j>','<C-w>j')
-vim.keymap.set({'n'},'<C-k>','<C-w>k')
-vim.keymap.set({'n'},'<C-l>','<C-w>l')
-vim.keymap.set({'n'},'<C-left>','<C-w>h')
-vim.keymap.set({'n'},'<C-down>','<C-w>j')
-vim.keymap.set({'n'},'<C-up>','<C-w>k')
-vim.keymap.set({'n'},'<C-right>','<C-w>l')
-vim.keymap.set({'n'},'<C-c>','<C-w>c')
+vim.keymap.set({'n'},'<c-h>','<c-w>h')
+vim.keymap.set({'n'},'<c-j>','<c-w>j')
+vim.keymap.set({'n'},'<c-k>','<c-w>k')
+vim.keymap.set({'n'},'<c-l>','<c-w>l')
+vim.keymap.set({'n'},'<c-left>','<c-w>h')
+vim.keymap.set({'n'},'<c-down>','<c-w>j')
+vim.keymap.set({'n'},'<c-up>','<c-w>k')
+vim.keymap.set({'n'},'<c-right>','<c-w>l')
+vim.keymap.set({'n'},'<c-c>','<c-w>c')
 -- bind.buffer
 vim.api.nvim_set_keymap('n','[b','<cmd>bprev<cr>',{desc='Previous buffer'})
 vim.api.nvim_set_keymap('n',']b','<cmd>bnext<cr>',{desc='Next buffer'})
@@ -57,9 +57,11 @@ require('lazy').setup({
 				indent={enable=true}
 			}
 		},
-		{'nvim-telescope/telescope.nvim'},
+		{'nvim-telescope/telescope.nvim',keys={
+			{'<c-p>','<cmd>Telescope find_files<cr>',desc='Telescope find_files'}
+		}},
 		{'nvim-tree/nvim-tree.lua',keys={
-			{'<leader>f','<cmd>NvimTreeToggle<cr>',mode='n'}
+			{'<leader>f','<cmd>NvimTreeToggle<cr>',desc='NvimTreeToggle'}
 		},opts={}},
 		{'numToStr/Comment.nvim'},
 		-- colorscheme

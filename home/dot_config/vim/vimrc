@@ -1,0 +1,31 @@
+" disp
+" disp.invisibles
+set list
+set listchars=tab:>\ ,multispace:*.,eol:$
+
+" disp.misc
+set number
+set nowrap
+
+" edit
+" edit.indent
+set noexpandtab softtabstop=-1 shiftwidth=0 tabstop=2
+
+" search
+" search.misc
+set ignorecase
+
+" keymap
+" keymap.misc
+set whichwrap+=<,>,[,]
+set mouse=a
+
+" packages
+" packages.colorscheme
+syntax on
+packadd! onedark.vim
+colorscheme onedark
+" packages.statusline
+packadd! lightline.vim
+set laststatus=2 noshowmode
+let g:lightline={'colorscheme':'onedark'}

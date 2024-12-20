@@ -17,6 +17,8 @@ vim.opt.tabstop=2
 vim.opt.ignorecase=true
 
 -- bind
+-- bind.cursor
+vim.opt.whichwrap:append({['<']=true,['>']=true,['[']=true,[']']=true})
 -- bind.leader
 vim.g.mapleader=' '
 -- bind.no_highlight
@@ -64,6 +66,7 @@ require('lazy').setup({
 			{'<leader>f','<cmd>NvimTreeToggle<cr>',desc='NvimTreeToggle'}
 		},opts={}},
 		{'numToStr/Comment.nvim'},
+		{'machakann/vim-sandwich'},
 		-- colorscheme
 		{'navarasu/onedark.nvim',opts=function()require('onedark').load()end},
 		-- UI

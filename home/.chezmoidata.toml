@@ -4,7 +4,7 @@ zsh_plugins_dir="/usr/share/zsh/plugins"
 
 terminal="foot"
 fileManager="thunar"
-code_editor="nvim"# code-oss
+code_editor="nvim"# vim code-oss
 menu="wofi" # to use other apps, make sure that the settings are equivalent to the settings for wofi
 mainMod="SUPER"
 

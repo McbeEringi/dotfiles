@@ -60,9 +60,23 @@ dwindle {
 	pseudotile = true
 	preserve_split = true
 }
+group {
+	col.border_active = rgba({{.col_accent}}88)
+	col.border_inactive = rgba({{.col_bg}}88)
+	col.border_locked_active = rgba({{.col_accent}}44)
+	col.border_locked_inactive = rgba({{.col_bg}}44)
+	groupbar {
+		stacked = true
+		col.active = rgba({{.col_accent}}88)
+		col.inactive = rgba({{.col_bg}}88)
+		col.locked_active = rgba({{.col_accent}}44)
+		col.locked_inactive = rgba({{.col_bg}}44)
+	}
+}
 
 # misc
 misc {
+	font_family = monospace
 	force_default_wallpaper = 0
 	mouse_move_enables_dpms = true
 	key_press_enables_dpms = true

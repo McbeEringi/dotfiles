@@ -16,7 +16,7 @@ LANG=C
 	btop smartmontools lsplug powertop
 	arch-install-scripts dosfstools btrfs-progs exfatprogs ntfs-3g cdrtools chezmoi npm
 	sway swayidle swaylock-effects idlehack autotiling-rs
-	firefox code gimp mpv mpv-mpris imv discord_arch_electron imagemagick
+	firefox neovim gimp mpv mpv-mpris imv discord_arch_electron imagemagick
 	cowsay nyancat figlet cmatrix neofetch pipes.sh sl
 	zsh zsh-autosuggestions zsh-completions zsh-syntax-highlighting
 	cups

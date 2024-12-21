@@ -172,9 +172,10 @@ bind = $mainMod, mouse_down, workspace, e+1
 bind = $mainMod, mouse_up, workspace, e-1
 
 # media
-$v_tgt = @DEFAULT_AUDIO_SINK@
+$v_tgt = @DEFAULT_SINK@
 $v_notify = && notify-send -u low -t 1000 -e -h string:x-canonical-private-synchronous:v_notify V "$(wpctl get-volume $v_tgt|awk '{print $2*100 "% " $3}')"
 bindl  = , XF86AudioMute, exec, wpctl set-mute $v_tgt toggle $v_notify
+bindl  = , XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_SOURCE@ toggle
 bindle = , XF86AudioRaiseVolume, exec, wpctl set-volume -l 1 $v_tgt 5%+ $v_notify
 bindle = SHIFT, XF86AudioRaiseVolume, exec, wpctl set-volume -l 1 $v_tgt 1%+ $v_notify
 bindle = SHIFT, XF86AudioLowerVolume, exec, wpctl set-volume $v_tgt 1%- $v_notify

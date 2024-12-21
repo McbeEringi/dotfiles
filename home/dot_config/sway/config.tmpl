@@ -111,9 +111,10 @@ bindsym $mainMod+Shift+0 move container to workspace number 10
 bindsym $mainMod+Shift+S move scratchpad
 
 # media
-set $v_tgt @DEFAULT_AUDIO_SINK@
+set $v_tgt @DEFAULT_SINK@
 set $v_notify && notify-send -u low -t 1000 -e -h string:x-canonical-private-synchronous:v_notify V "$(wpctl get-volume $v_tgt|awk '{print $2*100 "% " $3}')"
 bindsym --locked XF86AudioMute exec wpctl set-mute $v_tgt toggle $v_notify
+bindsym --locked XF86AudioMicMute exec wpctl set-mute @DEFAULT_SOURCE@ toggle
 bindsym --locked XF86AudioRaiseVolume exec wpctl set-volume -l 1 $v_tgt 5%+ $v_notify
 bindsym --locked Shift+XF86AudioRaiseVolume exec wpctl set-volume -l 1 $v_tgt 1%+ $v_notify
 bindsym --locked Shift+XF86AudioLowerVolume exec wpctl set-volume $v_tgt 1%- $v_notify

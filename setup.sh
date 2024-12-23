@@ -9,7 +9,7 @@ LANG=C
 	thunar gvfs thunar-volman thunar-media-tags-plugin tumbler ffmpegthumbnailer zip unzip p7zip
 	foot
 	gnome-keyring
-	iwgtk pavucontrol qt5ct qt6ct wdisplays
+	iwgtk pavucontrol qt5ct qt6ct kvantum-qt5 kvantum wdisplays
 	gnome-themes-extra papirus-icon-theme bibata-cursor-theme-bin
 	noto-fonts noto-fonts-cjk noto-fonts-emoji otf-monaspace
 	fcitx5-im fcitx5-mozc 

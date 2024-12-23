@@ -5,7 +5,7 @@ PKGS=(
 	https://github.com/itchyny/lightline.vim
 	https://github.com/machakann/vim-sandwich
 )
-CHK_SEC=$((60*60))
+CHK_SEC=$((60*60*24))
 
 
 echo === vim_pkgmgr.sh ===

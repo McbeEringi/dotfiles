@@ -30,7 +30,7 @@ pacstrap -K /mnt base linux-zen linux-zen-headers linux-firmware $(
 	([ $CPU_VENDOR == 'amd' ] && echo 'amd-ucode ')
 )$(
 	([ $GPU_VENDOR == 'intel' ] && echo 'intel-media-driver intel-gpu-tools ') ||
-	([ $GPU_VENDOR == 'amd' ] && echo 'libva-mesa-driver ')
+	([ $GPU_VENDOR == 'amd' ] && echo 'mesa ')
 )efibootmgr edk2-shell sudo nano git openssh man-db base-devel iwd bluez bluez-utils sof-firmware reflector
 cp /etc/systemd/network/* /mnt/etc/systemd/network
 mkdir /mnt/var/lib/iwd;cp -r /var/lib/iwd/* /mnt/var/lib/iwd

@@ -83,12 +83,13 @@ done
     riverctl spawn-tagmask $((0xff))
 
 
-v_tgt="@DEFAULT_AUDIO_SINK@"
+v_tgt="@DEFAULT_SINK@"
 v_notify="&& notify-send -u low -t 1000 -e -h string:x-canonical-private-synchronous:v_notify V \"\$(wpctl get-volume $v_tgt|awk '{print \$2*100 \"% \" \$3}')\""
 for mode in normal locked
 do
     # Control pulse audio volume with pamixer (https://github.com/cdemoulins/pamixer)
     riverctl map $mode None  XF86AudioMute        spawn "wpctl set-mute $v_tgt toggle $v_notify"
+    riverctl map $mode None  XF86AudioMicMute        spawn "wpctl set-mute @DEFAULT_SOURCE@ toggle"
     riverctl map $mode None  XF86AudioRaiseVolume spawn "wpctl set-volume -l 1 $v_tgt 5%+ $v_notify"
     riverctl map $mode Shift XF86AudioRaiseVolume spawn "wpctl set-volume -l 1 $v_tgt 1%+ $v_notify"
     riverctl map $mode Shift XF86AudioLowerVolume spawn "wpctl set-volume $v_tgt 1%- $v_notify"

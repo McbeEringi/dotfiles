@@ -12,7 +12,7 @@ echo
 [ $KEYMAP ] || KEYMAP='jp106';echo KEYMAP	$KEYMAP
 [ $MIRROR_COUNTRY ] || MIRROR_COUNTRY='Japan';echo MIRROR_COUNTRY	$MIRROR_COUNTRY
 [ $CPU_VENDOR ] || CPU_VENDOR=$(grep 'model name' /proc/cpuinfo|grep -Pio -m1 'intel|amd'|awk '{print tolower($0)}');echo CPU_VENDOR	$CPU_VENDOR
-[ $GPU_VENDOR ] || GPU_VENDOR=$(lspci|grep -Pio -m1 'intel|amd'|awk '{print tolower($0)}');echo GPU_VENDOR	$GPU_VENDOR # nvidia
+[ $GPU_VENDOR ] || GPU_VENDOR=$(lspci|grep -Pio -m1 'vga.*\K(intel|amd)'|awk '{print tolower($0)}');echo GPU_VENDOR	$GPU_VENDOR # nvidia
 [ $HOST_NAME ] && echo HOST_NAME	$HOST_NAME || echo HOST_NAME_UNSET
 [ $WINDOWS_BLKNUM ] && echo WINDOWS_BLKNUM	$WINDOWS_BLKNUM || echo WINDOWS_BLKNUM_UNSET
 echo

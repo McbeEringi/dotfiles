@@ -87,6 +87,6 @@ require('lazy').setup({
 			runtime='💻',require='🌙',source='📄',start='🚀',task='📌',lazy='💤',
 		},
 	},
-	checker={enabled=true},
+	-- checker={enabled=true},
 })
 

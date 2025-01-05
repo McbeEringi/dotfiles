@@ -77,7 +77,12 @@ echo 'root=$ROOT_UUID rw' |tee /etc/cmdline.d/10-root.conf
 echo 'quiet splash' |tee /etc/cmdline.d/20-misc.conf
 $([[ $SWAP_UUID ]] || echo '# ')echo 'resume=$SWAP_UUID' |tee /etc/cmdline.d/30-resume.conf
 "
-MKINITCPIO_UKI_PRESET_ZEN="curl -sL http://mcbeeringi.dev/dotfiles/root/etc/mkinitcpio.d/uki.preset -o /etc/mkinitcpio.d/uki.preset"
+MKINITCPIO_UKI_PRESET_ZEN="
+curl -sL http://mcbeeringi.dev/dotfiles/root/etc/mkinitcpio.d/uki.preset -o /etc/mkinitcpio.d/uki.preset
+mkdir -p /etc/pacman.d/hooks
+curl -sL http://mcbeeringi.dev/dotfiles/root/etc/pacman.d/hooks/uki.hook -o /etc/pacman.d/hooks/uki.hook
+curl -sL http://mcbeeringi.dev/dotfiles/root/etc/osrel-zen-uki -o /etc/osrel-zen-uki
+"
 EFIBOOTMGR_UKI_ZEN="efibootmgr -d /dev/$BOOT_PKNAME -p $BOOT_PARTN -c -L arch-zen -l '\EFI\Linux\arch-zen.efi'"
 BASH_HIST="cat <<_EOF |tee /home/$USER_NAME/.bash_history
 bash <(curl -sL https://mcbeeringi.dev/dotfiles/kde.sh)

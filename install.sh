@@ -77,21 +77,11 @@ echo 'root=$ROOT_UUID rw' |tee /etc/cmdline.d/10-root.conf
 echo 'quiet splash' |tee /etc/cmdline.d/20-misc.conf
 $([[ $SWAP_UUID ]] || echo '# ')echo 'resume=$SWAP_UUID' |tee /etc/cmdline.d/30-resume.conf
 "
-MKINITCPIO_UKI_PRESET_ZEN="cat <<_EOF |tee /etc/mkinitcpio.d/uki.preset
-# mkinitcpio preset file for uki
-
-PRESETS=('uki_zen')
-
-uki_zen_uki=\"/boot/EFI/Linux/arch-zen.efi\"
-uki_zen_kver=\"/boot/vmlinuz-linux-zen\"
-uki_zen_options=\"--splash /sys/firmware/acpi/bgrt/image\"
-# uki_zen_options=\"--splash /etc/splash.bmp\" 
-_EOF
-"
+MKINITCPIO_UKI_PRESET_ZEN="curl -sL http://mcbeeringi.dev/dotfiles/root/etc/mkinitcpio.d/uki.preset -o /etc/mkinitcpio.d/uki.preset"
 EFIBOOTMGR_UKI_ZEN="efibootmgr -d /dev/$BOOT_PKNAME -p $BOOT_PARTN -c -L arch-zen -l '\EFI\Linux\arch-zen.efi'"
 BASH_HIST="cat <<_EOF |tee /home/$USER_NAME/.bash_history
-bash <(curl -s https://mcbeeringi.dev/dotfiles/kde.sh)
-bash <(curl -s https://mcbeeringi.dev/dotfiles/setup.sh)
+bash <(curl -sL https://mcbeeringi.dev/dotfiles/kde.sh)
+bash <(curl -sL https://mcbeeringi.dev/dotfiles/setup.sh)
 _EOF
 "
 

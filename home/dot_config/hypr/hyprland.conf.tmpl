@@ -96,11 +96,11 @@ windowrulev2 = opacity 0.9 override 0.8 override,class:^$terminal|^($fileManager
 windowrulev2 = opaque,class:^at\.yrlf\.wl_mirror$
 # rule.window.focus
 windowrulev2 = stayfocused,class:^$menu$
-windowrulev2 = stayfocused,class:polkit
+windowrulev2 = stayfocused,class:.*polkit.*
 # rule.window.float
 windowrulev2 = float,title:^float$
 # rule.window.polkit
-windowrulev2 = float,class:polkit
+windowrulev2 = float,class:.*polkit.*
 # rule.window.mpv
 windowrulev2 = pseudo,class:^mpv$
 windowrulev2 = workspace special:magic,class:^mpv$

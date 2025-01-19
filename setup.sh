@@ -6,7 +6,7 @@ LANG=C
 	waybar hyprpaper wofi cliphist grimblast wlsunset wl-mirror brightnessctl
 	hyprlock hypridle hyprpicker wev evtest
 	greetd greetd-tuigreet-bin
-	thunar gvfs thunar-volman thunar-media-tags-plugin tumbler ffmpegthumbnailer zip unzip 7zip
+	thunar gvfs thunar-volman thunar-media-tags-plugin tumbler ffmpegthumbnailer zip unzip 7zip git-delta
 	foot
 	gnome-keyring
 	iwgtk pavucontrol qt5ct qt6ct kvantum-qt5 kvantum wdisplays

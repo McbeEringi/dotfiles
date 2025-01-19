@@ -23,7 +23,6 @@ label {
 	text = cmd[update:1000] date "+%H:%M"
 	color = rgba({{.col_fg}}cc)
 	font_size = 64
-	font_family = monospace bold
 	font_family = {{.hyprlock_font}}
 
 	position = 0, -128
@@ -50,6 +49,7 @@ input-field {
 	outer_color = rgba({{.col_accent}}88)
 	inner_color = rgba({{.col_bg}}cc)
 	font_color = rgba({{.col_fg}}ff)
+	font_family = monospace
 	# fade_on_empty = false
 	placeholder_text = <span color="##{{.col_fg}}88">$USER</span>
 	hide_input = false

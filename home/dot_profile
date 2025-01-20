@@ -2,5 +2,6 @@
 export QT_QPA_PLATFORMTHEME=qt5ct
 export PATH=$PATH:$HOME/.local/bin
 export XMODIFIERS=@im=fcitx
+export LESS=-R
 # export GSK_RENDERER=ngl # GTK4.16.1 bug workaround
 # tty|grep '^/dev/tty[0-9]*$'&&export LANG=C

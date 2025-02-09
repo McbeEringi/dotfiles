@@ -31,7 +31,7 @@ pacstrap -K /mnt base linux-zen linux-zen-headers linux-firmware $(
 )$(
 	([ $GPU_VENDOR == 'intel' ] && echo 'intel-media-driver intel-gpu-tools ') ||
 	([ $GPU_VENDOR == 'amd' ] && echo 'mesa ')
-)efibootmgr edk2-shell sudo nano git openssh man-db base-devel iwd bluez bluez-utils sof-firmware reflector
+)efibootmgr edk2-shell sudo nano git openssh man-db base-devel iwd bluez bluez-utils sof-firmware reflector keyd
 cp /etc/systemd/network/* /mnt/etc/systemd/network
 mkdir /mnt/var/lib/iwd;cp -r /var/lib/iwd/* /mnt/var/lib/iwd
 genfstab -U /mnt |tee /mnt/etc/fstab
@@ -89,7 +89,7 @@ bash <(curl -sL https://mcbeeringi.dev/dotfiles/setup.sh)
 _EOF
 "
 
-SYSTEMCTL_EN="systemctl enable systemd-networkd systemd-resolved iwd systemd-timesyncd bluetooth"
+SYSTEMCTL_EN="systemctl enable systemd-networkd systemd-resolved iwd systemd-timesyncd bluetooth keyd"
 
 cat <<EOF | arch-chroot /mnt
 ln -sf /usr/share/zoneinfo/$TIMEZONE /etc/localtime

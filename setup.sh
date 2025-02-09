@@ -11,7 +11,7 @@ LANG=C
 	gnome-keyring
 	iwgtk pavucontrol qt5ct qt6ct kvantum-qt5 kvantum wdisplays
 	gnome-themes-extra papirus-icon-theme bibata-cursor-theme-bin
-	noto-fonts noto-fonts-cjk noto-fonts-emoji otf-monaspace
+	noto-fonts noto-fonts-cjk noto-fonts-emoji otf-monaspace ttf-nerd-fonts-symbols
 	fcitx5-im fcitx5-mozc 
 	btop smartmontools lsplug powertop
 	arch-install-scripts dosfstools btrfs-progs exfatprogs ntfs-3g cdrtools chezmoi npm

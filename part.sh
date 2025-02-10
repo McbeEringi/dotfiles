@@ -2,7 +2,7 @@
 [ $BLK ] || BLK='/dev/sda'
 SWAP_SIZE=$(free -m|grep -oP 'Mem:\s+\K\d+'|awk '{printf "%.0f",$1*1.5}')
 EFI=$(uuidgen)
-[ $SWAP ] && SWAP=$(uuidgen)
+(( $SWAP )) && SWAP=$(uuidgen)
 ROOT=$(uuidgen)
 
 sfdisk -d $BLK||$(echo label:gpt|sfdisk $BLK)

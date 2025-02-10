@@ -5,10 +5,10 @@
 - dotfiles : ArchLinux + Hyprland & sway setup
 	- home : chezmoi configs
 	- root : non chezmoi configs
+- part.sh : partition setup script
 - install.sh : ArchLinux install script
 - setup.sh : Hypeland with recommended packages setup script
 - kde.sh : KDE Plasma setup script
-- part.sh : partition setup script ***EXPERIMENTAL*** ***USE AT YOUR OWN RISK***
 
 also includes niri & river(kanshi for monitor mng) configs
 
@@ -27,11 +27,28 @@ chezmoi init mcbeeringi
 chezmoi apply
 ```
 
-### root
+#### root
 
 ```sh
 chezmoi cd
 sudo cp -r root/* / 
+```
+
+### part.sh
+
+[source](part.sh)
+
+boot from the install media
+
+```sh
+loadkeys jp106
+iwctl
+
+# create partition including swap, format mount
+BLK=/dev/nvme0n1 SWAP=1 bash <(curl -s https://mcbeeringi.dev/dotfiles/part.sh)
+
+# run install.sh
+ROOT_PASS=password USER_NAME=user bash <(curl -s https://mcbeeringi.dev/dotfiles/install.sh)
 ```
 
 ### install.sh
@@ -96,22 +113,3 @@ login to sudo user
 bash <(curl -s https://mcbeeringi.dev/dotfiles/kde.sh)
 ```
 
-### part.sh
-***EXPERIMENTAL***
-
-***USE AT YOUR OWN RISK***
-
-[source](part.sh)
-
-boot from the install media
-
-```sh
-loadkeys jp106
-iwctl
-
-# create partition, format mount
-BLK=/dev/nvme0n1 bash <(curl -s https://mcbeeringi.dev/dotfiles/part.sh)
-
-# run install.sh
-ROOT_PASS=password USER_NAME=user bash <(curl -s https://mcbeeringi.dev/dotfiles/install.sh)
-```

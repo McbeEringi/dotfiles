@@ -4,7 +4,7 @@ LOCK="hyprlock --immediate ;: lock"
 LOCK_EXIT=$(
 	case $WM in
   "Hyprland") echo "$LOCK\nhyprctl dispatch exit ;: logout";;
-  "niri") echo "$LOCK\nniri msg action quit ;: exit logout";;
+  "niri") echo "$LOCK\nniri msg action quit -s ;: exit logout";;
   "river") echo "$LOCK\nriverctl exit ;: logout";;
   "sway") echo "swaylock --fade-in .2 ;: lock\nswaymsg exit ;: logout";;
   *) echo "$LOCK\npkill $WM ;: logout";;

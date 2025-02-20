@@ -27,9 +27,10 @@ riverctl default-layout rivertile
 # IO
 riverctl keyboard-layout {{.kb_layout}}
 riverctl focus-follows-cursor normal
-riverctl input pointer-2321-21128-XXXX0000:05_0911:5288_Touchpad tap enabled
-riverctl input pointer-2321-21128-XXXX0000:05_0911:5288_Touchpad drag enabled
-riverctl input pointer-2321-21128-XXXX0000:05_0911:5288_Touchpad natural-scroll enabled
+TOUCHPAD=$(riverctl list-inputs|grep -i touchpad)
+riverctl input $TOUCHPAD tap enabled
+riverctl input $TOUCHPAD drag enabled
+riverctl input $TOUCHPAD natural-scroll enabled
 
 # style
 riverctl border-width {{.border_width}}

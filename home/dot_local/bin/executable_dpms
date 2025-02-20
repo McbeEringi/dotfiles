@@ -1,0 +1,8 @@
+#!/bin/bash
+WM=$(wm-name)
+
+case $WM in
+	"Hyprland") hyprctl dispatch dpms off;;
+	"niri") niri msg action power-off-monitors;;
+	*) brightnessctl s 0;;
+esac

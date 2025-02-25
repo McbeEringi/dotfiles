@@ -1,0 +1,7 @@
+#!/bin/bash
+WIN=($(efibootmgr|grep -oP 'Boot\K[\dABCDEF]{4}(?=\* Windows)'))
+# NEXT=$(efibootmgr|grep -oP 'Next: \K[\dABCDEF]{4}')
+# printf 'Current BootNext: '
+# [ $NEXT ]&&(echo $WIN|grep -qw $NEXT&&echo Windows||echo $NEXT)||echo default
+
+sudo efibootmgr -n ${WIN[1]}&&reboot

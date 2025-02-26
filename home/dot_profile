@@ -4,5 +4,6 @@ export PATH=$PATH:$HOME/.local/bin
 export NODE_PATH=$(npm root -g)
 export XMODIFIERS=@im=fcitx
 export LESS=-R
+export TERM=xterm
 # export GSK_RENDERER=ngl # GTK4.16.1 bug workaround
 # tty|grep '^/dev/tty[0-9]*$'&&export LANG=C

@@ -68,7 +68,7 @@ group {
 	col.border_locked_active = rgba({{.col_accent}}44)
 	col.border_locked_inactive = rgba({{.col_bg}}44)
 	groupbar {
-		stacked = true
+		# stacked = true
 		col.active = rgba({{.col_accent}}88)
 		col.inactive = rgba({{.col_bg}}88)
 		col.locked_active = rgba({{.col_accent}}44)
@@ -146,6 +146,7 @@ bind = $mainMod, J, togglesplit
 bind = $mainMod, K, swapnext
 bind = $mainMod, F, togglefloating,
 bind = $mainMod SHIFT, F, pseudo
+bind = $mainMod, G, togglegroup,
 bind = , F11, fullscreen
 # window.mod.mouse
 bindm = $mainMod, mouse:272, movewindow

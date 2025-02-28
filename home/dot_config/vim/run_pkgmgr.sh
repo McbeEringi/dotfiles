@@ -1,5 +1,6 @@
 #!/bin/bash
 
+which vim 2>/dev/null && {
 PKGS=(
 	https://github.com/joshdick/onedark.vim
 	https://github.com/itchyny/lightline.vim
@@ -32,5 +33,4 @@ for((i=0;i<${#PKGS[@]};i++))do(
 			||printf "$w...? Can't clone!\n"
 	fi
 )done
-
-
+}||echo vim_pkgmng.sh skipped.

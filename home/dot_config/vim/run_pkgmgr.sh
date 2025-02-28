@@ -33,4 +33,4 @@ for((i=0;i<${#PKGS[@]};i++))do(
 			||printf "$w...? Can't clone!\n"
 	fi
 )done
-}||echo vim_pkgmng.sh skipped.
+}||true

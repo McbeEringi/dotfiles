@@ -9,6 +9,7 @@ env = XCURSOR_SIZE,24
 exec-once = fcitx5 -d & mako & /usr/lib/xfce-polkit/xfce-polkit
 exec-once = hyprpaper & hypridle & waybar & wlsunset -l 35.7 -L 139.7 & batt-notify
 exec-once = wl-paste --watch cliphist store
+exec-once = hyprpm reload -n
 
 # IO
 monitor = ,preferred,auto,1
@@ -85,6 +86,12 @@ misc {
 }
 xwayland {
 	force_zero_scaling = true
+}
+plugin{
+	overview {
+		# showSpecialWorkspace = true
+		reverseSwipe = true
+	}
 }
 
 # rule

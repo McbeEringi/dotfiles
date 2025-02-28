@@ -1,0 +1,14 @@
+#!/bin/bash
+tempfile="$(mktemp)"
+trap 'rm -rf "${tempfile}"' EXIT
+cat > "${tempfile}"
+
+[[ $(grep -oP '^\(default-grid' "${tempfile}") ]]||cat << EOF >> "${tempfile}"
+(default-grid
+		(fgcolor (color-rgba 1 0 1 1))
+		(bgcolor (color-rgba 1 1 1 1))
+		(xspacing 8)
+		(yspacing 8))
+EOF
+
+cat "${tempfile}"

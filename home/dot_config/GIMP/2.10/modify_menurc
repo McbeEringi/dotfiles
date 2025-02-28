@@ -1,0 +1,10 @@
+#!/bin/bash
+tempfile="$(mktemp)"
+trap 'rm -rf "${tempfile}"' EXIT
+cat > "${tempfile}"
+
+[[ $(grep -oP '^\(gtk_accel_path "<Actions>/view/view-show-grid"' "${tempfile}") ]]||cat << EOF >> "${tempfile}"
+(gtk_accel_path "<Actions>/view/view-show-grid" "<Primary><Shift>g")
+EOF
+
+cat "${tempfile}"

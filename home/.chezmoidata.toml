@@ -9,6 +9,12 @@ code_editor="nvim"# vim code-oss
 menu="wofi" # to use other apps, make sure that the settings are equivalent to the settings for wofi
 mainMod="SUPER"
 
+vim_pkgs=[
+	"https://github.com/joshdick/onedark.vim",
+	"https://github.com/itchyny/lightline.vim",
+	"https://github.com/machakann/vim-sandwich"
+]
+
 kb_layout="jp"
 
 # color palette RRGGBB

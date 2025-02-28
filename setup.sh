@@ -43,3 +43,5 @@ yay -S cmake meson cpio
 hyprpm update
 hyprpm add https://github.com/KZDKM/Hyprspace
 hyprpm enable Hyprspace
+hyprpm update
+hyprpm reload -n

@@ -39,3 +39,6 @@ sudo cp -r $(chezmoi data|jq -r .chezmoi.workingTree)/root/* /
 chezmoi apply
 sudo systemctl enable greetd cups
 chsh -s /bin/zsh
+hyprpm update
+hyprpm add https://github.com/KZDKM/Hyprspace
+hyprpm enable Hyprspace

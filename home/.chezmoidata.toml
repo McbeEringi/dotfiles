@@ -7,6 +7,7 @@ terminal="foot"
 fileManager="thunar"
 code_editor="nvim"# vim code-oss
 menu="wofi" # to use other apps, make sure that the settings are equivalent to the settings for wofi
+wlan="iwgtk"
 mainMod="SUPER"
 
 vim_pkgs=[

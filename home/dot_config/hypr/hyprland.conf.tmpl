@@ -1,6 +1,7 @@
 $terminal = {{.terminal}}
 $fileManager = {{.fileManager}}
 $menu = {{.menu}}
+$wlan = {{.wlan}}
 $mainMod = {{.mainMod}}
 
 env = XCURSOR_THEME,Bibata-Modern-Ice
@@ -130,6 +131,7 @@ bind = $mainMod, Q, exec, $terminal
 bind = $mainMod, SPACE, exec, [float] $terminal node
 bind = $mainMod, E, exec, $fileManager
 bind = $mainMod, R, exec, $menu
+bind = $mainMod, W, exec, $wlan
 bind = $mainMod, M, exec, exit-menu
 bind = $mainMod, V, exec, cliphist-menu
 bind = $mainMod, P, exec, wl-mirror-menu
@@ -147,10 +149,10 @@ bind = $mainMod SHIFT, left, swapwindow, l
 bind = $mainMod SHIFT, right,swapwindow, r
 bind = $mainMod SHIFT, up, swapwindow, u
 bind = $mainMod SHIFT, down, movewindow, d
-bind = $mainMod CTRL, left, movewindow, l
-bind = $mainMod CTRL, right,movewindow, r
-bind = $mainMod CTRL, up, movewindow, u
-bind = $mainMod CTRL, down, movewindow, d
+bind = $mainMod ALT, left, movewindow, l
+bind = $mainMod ALT, right,movewindow, r
+bind = $mainMod ALT, up, movewindow, u
+bind = $mainMod ALT, down, movewindow, d
 # window.mod
 bind = $mainMod, J, togglesplit
 bind = $mainMod, K, swapsplit
@@ -175,6 +177,8 @@ bind = $mainMod, 7, workspace, 7
 bind = $mainMod, 8, workspace, 8
 bind = $mainMod, 9, workspace, 9
 bind = $mainMod, 0, workspace, 10
+bind = $mainMod CTRL, right, workspace, +1
+bind = $mainMod CTRL, left, workspace, -1
 bind = $mainMod, S, togglespecialworkspace, magic
 # workspace.mod
 bind = $mainMod SHIFT, 1, movetoworkspace, 1
@@ -187,6 +191,8 @@ bind = $mainMod SHIFT, 7, movetoworkspace, 7
 bind = $mainMod SHIFT, 8, movetoworkspace, 8
 bind = $mainMod SHIFT, 9, movetoworkspace, 9
 bind = $mainMod SHIFT, 0, movetoworkspace, 10
+bind = $mainMod SHIFT CTRL, right, movetoworkspace, +1
+bind = $mainMod SHIFT CTRL, left, movetoworkspace, -1
 bind = $mainMod SHIFT, S, movetoworkspace, special:magic
 # workspace.mod.mouse
 bind = $mainMod, mouse_down, workspace, e+1

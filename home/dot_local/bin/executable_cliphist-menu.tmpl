@@ -1,2 +1,2 @@
 #!/bin/bash
-cliphist list | {{.menu}} -W960 -H960 -d -k /dev/null -p "clipboard..." -r "~/go/bin/cliphist-wofi-img %s" | cliphist decode | wl-copy
+cliphist list | {{.menu}} -W960 -H960 -d -k /dev/null -p "clipboard..." -r "cliphist-menu-preview '%s'" | cliphist decode | wl-copy

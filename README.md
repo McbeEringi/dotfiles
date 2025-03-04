@@ -1,14 +1,14 @@
 # dotfiles
 
-- dotfiles : ArchLinux + Hyprland & sway setup
-	- home : chezmoi configs
+- [dotfiles](#dotfiles-1) : [ArchLinux](https://archlinux.org) + [Hyprland](https://hyprland.org) & [sway](https://swaywm.org) setup
+	- home : [chezmoi](https://chezmoi.io) configs
 	- root : non chezmoi configs
-- part.sh : partition setup script
-- install.sh : ArchLinux install script
-- setup.sh : Hypeland with recommended packages setup script
-- kde.sh : KDE Plasma setup script
+- [part.sh](#partsh) : partition setup script
+- [install.sh](#installsh) : ArchLinux install script
+- [setup.sh](#setupsh) : dotfile setup script with recommended packages
+- [kde.sh](#kdesh) : [KDE Plasma](https://kde.org/plasma-desktop/) setup script
 
-also includes niri & river(kanshi for monitor mng) configs
+also includes [niri](https://github.com/YaLTeR/niri) & [river](https://codeberg.org/river/river)([kanshi](https://gitlab.freedesktop.org/emersion/kanshi) for monitor mng) configs
 
 
 ## dotfiles

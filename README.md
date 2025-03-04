@@ -37,6 +37,8 @@ Create, format and mount partitions from empty space.
 
 [source](part.sh)
 
+root partition will be formatted with btrfs.
+
 For usage, refer to [`install.sh`](#installsh) section.
 
 ### args

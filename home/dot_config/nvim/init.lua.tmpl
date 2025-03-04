@@ -37,6 +37,20 @@ vim.keymap.set({'n'},'<c-c>','<c-w>c')
 vim.api.nvim_set_keymap('n','[b','<cmd>bprev<cr>',{desc='Previous buffer'})
 vim.api.nvim_set_keymap('n',']b','<cmd>bnext<cr>',{desc='Next buffer'})
 
+-- https://blog.atusy.net/2023/01/11/neovim-filetype-matching-with-chezmoi/
+vim.filetype.add({pattern={
+	['{{.chezmoi.sourceDir}}/.*']=function(path,buf)
+		if path:match('/dot_')then return vim.filetype.match({
+			filename=path:gsub('/dot_','/.'),
+			buf=buf,
+		})end
+		if path:match('.tmpl$')then return vim.filetype.match({
+			filename=path:gsub('.tmpl$',''),
+			buf=buf,
+		})end
+	end
+}})
+
 -- lazy.nvim
 require('lazy_setup')
 require('lazy').setup({

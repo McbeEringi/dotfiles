@@ -1,7 +1,5 @@
 # dotfiles
 
-[GitLab](https://gitlab.com/mcbeeringi/dotfiles)
-
 - dotfiles : ArchLinux + Hyprland & sway setup
 	- home : chezmoi configs
 	- root : non chezmoi configs

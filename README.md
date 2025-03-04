@@ -10,11 +10,10 @@
 
 also includes niri & river(kanshi for monitor mng) configs
 
-## Usage
 
-### dotfiles
+## dotfiles
 
-#### home
+### home
 
 ```sh
 # install chezmoi & init
@@ -25,14 +24,14 @@ chezmoi init mcbeeringi
 chezmoi apply
 ```
 
-#### root
+### root
 
 ```sh
 chezmoi cd
 sudo cp -r root/* / 
 ```
 
-### part.sh
+## part.sh
 
 Create, format and mount partitions from empty space.
 
@@ -40,7 +39,7 @@ Create, format and mount partitions from empty space.
 
 For usage, refer to [`install.sh`](#installsh) section.
 
-#### args
+### args
 - BLK: block device path
   default is `/dev/sda`.
   ex:`BLK=/dev/nvme0n1`
@@ -49,7 +48,7 @@ For usage, refer to [`install.sh`](#installsh) section.
   default is unset. 
   ex: `SWAP=1`
 
-### install.sh
+## install.sh
 
 Install ArchLinux and basic packages.
 
@@ -84,7 +83,7 @@ BLK=/dev/nvme0n1 bash <(curl -s https://mcbeeringi.dev/dotfiles/part.sh)
 ROOT_PASS=password USER_NAME=user bash <(curl -s https://mcbeeringi.dev/dotfiles/install.sh)
 ```
 
-#### args
+### args
 - ROOT_PASS: password for root
   default is `password`
 - USER_NAME: username for new user
@@ -118,9 +117,7 @@ ROOT_PASS=password USER_NAME=user bash <(curl -s https://mcbeeringi.dev/dotfiles
 Run [`setup.sh`](#setupsh) or [`kde.sh`](#kdesh) after reboot.
 Can be called from history.
 
-###
-
-### setup.sh
+## setup.sh
 
 Setup Hyprland & sway with recommended packages.
 
@@ -130,7 +127,7 @@ Setup Hyprland & sway with recommended packages.
 bash <(curl -s https://mcbeeringi.dev/dotfiles/setup.sh)
 ```
 
-### kde.sh
+## kde.sh
 
 Setup KDE Plasma DE with neccesaries.
 

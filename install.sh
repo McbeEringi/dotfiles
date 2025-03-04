@@ -1,7 +1,7 @@
 #!/bin/bash
 trap 'echo;echo exitting...;exit' INT
-mount|grep /mnt || { echo /mnt not detected. exiting...; exit; }
-[[ $(swapon --show) ]] || { read -p "No swap detected. Continue? [yes] " ans;[[ $ans != 'yes' ]] && exit; }
+mount|grep /mnt >/dev/null || { echo /mnt not detected. exiting...; exit; }
+[[ $(swapon --show) ]] || echo swap not found! # { read -p "No swap detected. Continue? [yes] " ans;[[ $ans != 'yes' ]] && exit; }
 echo
 [ $ROOT_PASS ] || ROOT_PASS='password';echo ROOT_PASS	$ROOT_PASS
 [ $USER_NAME ] || USER_NAME='user';echo USER_NAME	$USER_NAME

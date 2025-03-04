@@ -39,6 +39,7 @@ vim.api.nvim_set_keymap('n',']b','<cmd>bnext<cr>',{desc='Next buffer'})
 
 -- https://blog.atusy.net/2023/01/11/neovim-filetype-matching-with-chezmoi/
 vim.filetype.add({pattern={
+	['.*/hypr/.*%.conf']='hyprlang',
 	['{{.chezmoi.sourceDir}}/.*']={
 		function(path,buf)
 			if path:match('/dot_')then return vim.filetype.match({
@@ -69,7 +70,7 @@ require('lazy').setup({
 					'html','css','javascript',
 					'arduino','c','cpp','make',
 					'glsl','hlsl',
-					'python'
+					'python','hyprlang'
 				},
 				sync_install=false,
 				highlight={enable=true},

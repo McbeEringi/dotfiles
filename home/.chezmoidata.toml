@@ -17,6 +17,7 @@ vim_pkgs=[
 ]
 
 kb_layout="jp"
+ime="hazkey" # mozc
 
 # color palette RRGGBB
 col_accent="66ccaa"

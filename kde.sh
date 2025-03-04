@@ -6,7 +6,7 @@ LANG=C
 	qt6-multimedia-ffmpeg pipewire-jack
 	noto-fonts noto-fonts-emoji noto-fonts-cjk
 	dolphin konsole firefox
-	fcitx5-im fcitx5-mozc 
+	fcitx5-im fcitx5-mozc fcitx5-hazkey-bin
 '
 
 which yay || {

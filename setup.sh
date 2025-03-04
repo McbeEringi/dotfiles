@@ -12,7 +12,7 @@ LANG=C
 	iwgtk pavucontrol qt5ct qt6ct kvantum-qt5 kvantum wdisplays
 	gnome-themes-extra papirus-icon-theme bibata-cursor-theme-bin
 	noto-fonts noto-fonts-cjk noto-fonts-emoji otf-monaspace ttf-nerd-fonts-symbols-common
-	fcitx5-im fcitx5-mozc 
+	fcitx5-im fcitx5-mozc fcitx5-hazkey-bin
 	btop smartmontools lsplug powertop
 	arch-install-scripts dosfstools btrfs-progs exfatprogs ntfs-3g cdrtools chezmoi npm
 	sway swayidle swaylock-effects idlehack autotiling-rs
@@ -34,14 +34,20 @@ which yay || {
 }
 yay -Syu --noconfirm --removemake $PKGS
 
-chezmoi status || chezmoi init mcbeeringi
-sudo cp -r $(chezmoi data|jq -r .chezmoi.workingTree)/root/* /
+chezmoi status && {
+	sudo cp -rn $(chezmoi data|jq -r .chezmoi.workingTree)/root/* /
+} || {
+	chezmoi init mcbeeringi
+	sudo cp -r $(chezmoi data|jq -r .chezmoi.workingTree)/root/* /
+}
 chezmoi apply
 sudo systemctl enable greetd cups
-chsh -s /bin/zsh
-yay -S cmake meson cpio
-hyprpm update
-hyprpm add https://github.com/KZDKM/Hyprspace
-hyprpm enable Hyprspace
+[[ $(cat /etc/passwd|grep -oP "^$USER:.*:\K.*") != "/bin/zsh" ]]&&chsh -s /bin/zsh
+[ $(hyprpm list|grep Hyprspace) ]||{
+	yay -S cmake meson cpio
+	hyprpm update
+	hyprpm add https://github.com/KZDKM/Hyprspace
+	hyprpm enable Hyprspace
+}
 hyprpm update
 hyprpm reload -n

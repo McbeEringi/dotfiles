@@ -36,24 +36,24 @@ sudo cp -r root/* /
 
 ### part.sh
 
+Create, format and mount partitions from empty space.
+
 [source](part.sh)
 
-boot from the install media
+For usage, refer to [`install.sh`](#installsh) section.
 
-```sh
-loadkeys jp106
-iwctl
-
-# create partition including swap, format mount
-BLK=/dev/nvme0n1 SWAP=1 bash <(curl -s https://mcbeeringi.dev/dotfiles/part.sh)
-
-# run install.sh
-ROOT_PASS=password USER_NAME=user bash <(curl -s https://mcbeeringi.dev/dotfiles/install.sh)
-```
+#### args
+- BLK: block device path
+  default is `/dev/sda`.
+  ex:`BLK=/dev/nvme0n1`
+- SWAP: swap creation flag
+  set any value (including empty) to activate.
+  default is unset. 
+  ex: `SWAP=1`
 
 ### install.sh
 
-Install ArchLinux
+Install ArchLinux and basic packages.
 
 [source](install.sh)
 
@@ -63,53 +63,82 @@ boot from the install media
 loadkeys jp106
 iwctl
 
-# create partition, format mount
-lsblk
-cfdisk
+# part.sh : create partition, format mount
+BLK=/dev/nvme0n1 bash <(curl -s https://mcbeeringi.dev/dotfiles/part.sh)
+# set SWAP to any value (including enpty) to make swap
+# BLK=/dev/nvme0n1 SWAP=1 bash <(curl -s https://mcbeeringi.dev/dotfiles/part.sh)
 
-mkfs.fat -F32 /dev/~
-mkfs.ext4 /dev/~
-mkswap /dev/~
+# or do manually
+#
+# lsblk
+# cfdisk
+#
+# mkfs.fat -F32 /dev/~
+# mkfs.ext4 /dev/~
+# mkswap /dev/~
+#
+# swapon /dev~
+# mount /dev/~ /mnt
+# mount --mkdir /dev/~ /mnt/boot
 
-swapon /dev~
-mount /dev/~ /mnt
-mount --mkdir /dev/~ /mnt/boot
 
-
-# run install.sh
-# see source for more options
+# install.sh : install archlinux
 ROOT_PASS=password USER_NAME=user bash <(curl -s https://mcbeeringi.dev/dotfiles/install.sh)
 ```
 
-then [`setup.sh`](#setupsh) or [`kde.sh`](#kdesh)
+#### args
+- ROOT_PASS: password for root
+  default is `password`
+- USER_NAME: username for new user
+  default is `user`
+- USER_PASS: password for new user
+  default is $ROOT_PASS
+- TIMEZONE: timezone
+  default is `Asia/tokyo`
+- LOCALE_GEN: locales to generate
+  pipe separated no whitespace list.
+  default is `en_US.UTF-8|ja_JP.UTF-8`
+- LOCALE_USE: locale to use
+  default is `ja_JP.UTF-8`
+- KEYMAP: keymap for virtual console
+  auto detected from localectl
+- MIRROR_COUNTRY: country name to filter package server
+  default is `Japan`
+- CPU_VENDOR: for ucode determination
+  `intel` or `amd`
+  auto detected from /proc/cpuinfo
+- GPU_VENDOR: for gpu related packages determination
+  `intel` or `amd`
+  auto detected from lspci
+- HOST_NAME: hostname
+  default is unset
+- WINDOWS_BLKNUM: block device number (partition number) of windows EFI partition
+  add boot entry for windows to systemd-boot.
+  if you already installed windows, set this to `1`.
+  default is unset
+
+Run [`setup.sh`](#setupsh) or [`kde.sh`](#kdesh) after reboot.
+Can be called from history.
+
+###
 
 ### setup.sh
 
-Setup Hyprland DE with recommended packages
+Setup Hyprland & sway with recommended packages.
 
 [source](setup.sh)
 
-login to sudo user
-
 ```sh
-
-# run setup.sh
-# can call from history
 bash <(curl -s https://mcbeeringi.dev/dotfiles/setup.sh)
 ```
 
 ### kde.sh
 
-Setup KDE Plasma DE
+Setup KDE Plasma DE with neccesaries.
 
 [source](kde.sh)
 
-login to sudo user
-
 ```sh
-
-# run kde.sh
-# can call from history
 bash <(curl -s https://mcbeeringi.dev/dotfiles/kde.sh)
 ```
 

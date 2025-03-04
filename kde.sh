@@ -19,6 +19,8 @@ which yay || {
 }
 yay -Syu --noconfirm --removemake $PKGS
 
-sudo systemctl disable --now iwd systemd-resolved systemd-networkd
-sudo rm /etc/resolv.conf
+[[ $(systemctl status systemd-networkd|grep 'Active: active') ]]&&{
+	sudo systemctl disable --now iwd systemd-resolved systemd-networkd
+	sudo rm /etc/resolv.conf
+}
 sudo systemctl enable --now NetworkManager sddm

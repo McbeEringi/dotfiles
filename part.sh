@@ -15,7 +15,7 @@ $([[ $SWAP ]] || echo '# ')size=${SWAP_SIZE}MiB, type=S, uuid=$SWAP
 type=L, uuid=$ROOT
 EOF
 sfdisk -r $BLK
-ls /dev/disk/by-partuuid
+# ls /dev/disk/by-partuuid
 sleep 1
 ls /dev/disk/by-partuuid
 

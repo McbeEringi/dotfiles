@@ -8,8 +8,13 @@
 - [setup.sh](#setupsh) : dotfile setup script with recommended packages
 - [kde.sh](#kdesh) : [KDE Plasma](https://kde.org/plasma-desktop/) setup script
 
-also includes [niri](https://github.com/YaLTeR/niri) & [river](https://codeberg.org/river/river)([kanshi](https://gitlab.freedesktop.org/emersion/kanshi) for monitor mng) configs
+also includes donfigs for additional WM
 
+- [niri](https://github.com/YaLTeR/niri)
+- [river](https://codeberg.org/river/river)
+    - [kanshi](https://gitlab.freedesktop.org/emersion/kanshi) for monitor mng
+- [labwc](https://labwc.github.io/)
+    - kanshi for mon mng
 
 ## dotfiles
 

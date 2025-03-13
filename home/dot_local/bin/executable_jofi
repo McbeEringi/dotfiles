@@ -1,6 +1,8 @@
 #!/bin/gjs -m
+//#!/usr/bin/env -S LD_PRELOAD=/usr/lib/libgtk4-layer-shell.so gjs -m
 import Gio from 'gi://Gio';
 import Gtk from 'gi://Gtk?version=4.0';
+//import LayerShell from 'gi://Gtk4LayerShell';
 
 ((
 	app=new Gtk.Application({application_id:'dev.mcbeeringi.jofi'})
@@ -13,6 +15,9 @@ import Gtk from 'gi://Gtk?version=4.0';
 				key
 			))(new Gtk.EventControllerKey)
 		)=>(
+			//LayerShell.init_for_window(win),
+			//LayerShell.set_layer(win,LayerShell.Layer.TOP),
+			//LayerShell.set_keyboard_mode(win,LayerShell.KeyboardMode.EXCLUSIVE),
 			win.set_child(((
 				box=new Gtk.Box({
 					orientation:Gtk.Orientation.VERTICAL,

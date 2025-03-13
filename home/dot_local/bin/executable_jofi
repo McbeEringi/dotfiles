@@ -1,0 +1,64 @@
+#!/bin/gjs -m
+import Gio from 'gi://Gio';
+import Gtk from 'gi://Gtk?version=4.0';
+
+((
+	app=new Gtk.Application({application_id:'dev.mcbeeringi.jofi'})
+)=>(
+	app.connect('activate',_=>(
+		((
+			win=new Gtk.ApplicationWindow({application:app,decorated:false,defaultWidth:480,defaultHeight:480}),
+			esc=_=>(key=>(
+				key.connect('key-pressed',(_,k)=>k==65307&&win.close()),
+				key
+			))(new Gtk.EventControllerKey)
+		)=>(
+			win.set_child(((
+				box=new Gtk.Box({
+					orientation:Gtk.Orientation.VERTICAL,
+					spacing:8,
+					marginTop:8,
+					marginBottom:8,
+					marginStart:8,
+					marginEnd:8,
+				}),
+				inp=new Gtk.SearchEntry({placeholder_text:'launch...'}),
+				scr=new Gtk.ScrolledWindow({vexpand:true}),
+				ul=new Gtk.ListBox,
+				run=_=>(
+					ul.remove_all(),
+					(
+						inp.text?Gio.DesktopAppInfo.search(inp.text).flatMap(x=>[...x.map(x=>Gio.DesktopAppInfo.new(x)),{get_icon:_=>_,get_display_name:_=>'-'}]):Gio.AppInfo.get_all()
+					).forEach(x=>ul.append(((
+						row=new Gtk.ListBoxRow,
+						box=new Gtk.Box
+					)=>(
+						(x=>x&&box.append(Gtk.Image.new_from_gicon(x)))(x.get_icon()),
+						box.append(new Gtk.Label({label:x.get_display_name()})),
+						row.set_child(box),
+						row
+					))()))
+				)
+			)=>(
+				inp.connect('changed',_=>run()),run(),
+				inp.add_controller(esc()),
+
+				box.append(inp),
+				box.append((_=>(
+					scr.set_child(ul),
+					scr
+				))()),
+				//box.append((btn=>(
+				//	btn.connect('clicked',_=>win.close()),
+				//	btn
+				//))(new Gtk.Button({label:'Hello, World!\nHello, LayerShell!'}))),
+
+				box
+			))()),
+			win.add_controller(esc()),
+			win.present()
+		))()
+	)),
+	app.run([])
+))();
+

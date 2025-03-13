@@ -105,7 +105,7 @@ ROOT_PASS=password USER_NAME=user bash <(curl -s https://mcbeeringi.dev/dotfiles
 - LOCALE_USE: locale to use
   default is `ja_JP.UTF-8`
 - KEYMAP: keymap for virtual console
-  auto detected from localectl
+  default is `jp106`
 - MIRROR_COUNTRY: country name to filter package server
   default is `Japan`
 - CPU_VENDOR: for ucode determination

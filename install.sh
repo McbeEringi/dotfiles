@@ -9,7 +9,7 @@ echo
 [ $TIMEZONE ] || TIMEZONE='Asia/Tokyo';echo TIMEZONE	$TIMEZONE
 [ $LOCALE_GEN ] || LOCALE_GEN='en_US.UTF-8|ja_JP.UTF-8';echo LOCALE_GEN	$LOCALE_GEN
 [ $LOCALE_USE ] || LOCALE_USE='ja_JP.UTF-8';echo LOCALE_USE	$LOCALE_USE
-[ $KEYMAP ] || KEYMAP=$(localectl|grep -oP 'VC Keymap: \K\w*');echo KEYMAP	$KEYMAP
+[ $KEYMAP ] || KEYMAP='jp106';echo KEYMAP	$KEYMAP
 [ $MIRROR_COUNTRY ] || MIRROR_COUNTRY='Japan';echo MIRROR_COUNTRY	$MIRROR_COUNTRY
 [ $CPU_VENDOR ] || CPU_VENDOR=$(grep 'model name' /proc/cpuinfo|grep -Pio -m1 'intel|amd'|awk '{print tolower($0)}');echo CPU_VENDOR	$CPU_VENDOR
 [ $GPU_VENDOR ] || GPU_VENDOR=$(lspci|grep -Pio -m1 'vga compatible.*\K(intel|amd)'|awk '{print tolower($0)}');echo GPU_VENDOR	$GPU_VENDOR # nvidia

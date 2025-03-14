@@ -34,7 +34,7 @@ import Gtk from 'gi://Gtk?version=4.0';
 					ul.remove_all(),
 					(
 						inp.text?Gio.DesktopAppInfo.search(inp.text).flatMap(x=>[...x.map(x=>Gio.DesktopAppInfo.new(x)),{get_icon:_=>_,get_display_name:_=>'-'}]):Gio.AppInfo.get_all()
-					).forEach(x=>ul.append(((
+					).forEach(x=>x.get_nodisplay()||ul.append(((
 						row=new Gtk.ListBoxRow,
 						box=new Gtk.Box
 					)=>(

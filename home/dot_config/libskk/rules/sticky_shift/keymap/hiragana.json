@@ -1,0 +1,8 @@
+{
+	"include":["default/hiragana"],
+	"define":{
+		"keymap":{
+			";":"start-preedit-no-delete"
+		}
+	}
+}

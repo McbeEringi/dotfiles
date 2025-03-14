@@ -1,0 +1,6 @@
+{
+	"include":["default"],
+	"keymap":{
+		";":"start-preedit-no-delete"
+	}
+}

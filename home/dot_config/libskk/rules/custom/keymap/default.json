@@ -4,6 +4,8 @@
 			"Escape":"abort",
 			"\b": "delete",
 			" ":"next-candidate",
+			"Down":"next-candidate",
+			"Up":"previous-candidate",
 			"\t":"complete",
 			"\n":"commit-unhandled",
 			";":"start-preedit-no-delete",

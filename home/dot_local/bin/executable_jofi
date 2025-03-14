@@ -41,6 +41,7 @@ import Gtk from 'gi://Gtk?version=4.0';
 						(x=>x&&box.append(Gtk.Image.new_from_gicon(x)))(x.get_icon()),
 						box.append(new Gtk.Label({label:x.get_display_name()})),
 						row.set_child(box),
+						row.connect('activate',_=>(x.launch([],new Gio.AppLaunchContext()),win.close())),
 						row
 					))()))
 				)

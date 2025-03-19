@@ -1,7 +1,9 @@
 #!/bin/gjs -m
 //#!/usr/bin/env -S LD_PRELOAD=/usr/lib/libgtk4-layer-shell.so gjs -m
+import GObject from 'gi://GObject';
 import Gio from 'gi://Gio';
 import Gtk from 'gi://Gtk?version=4.0';
+import Gdk from 'gi://Gdk?version=4.0';
 //import LayerShell from 'gi://Gtk4LayerShell';
 
 ((
@@ -9,47 +11,66 @@ import Gtk from 'gi://Gtk?version=4.0';
 )=>(
 	app.connect('activate',_=>(
 		((
-			win=new Gtk.ApplicationWindow({application:app,decorated:false,defaultWidth:480,defaultHeight:480}),
+			hbar=new Gtk.HeaderBar,
+			win=new Gtk.ApplicationWindow({
+				application:app,
+				title:'jofi',
+				titlebar:hbar,
+				//decorated:false,
+				defaultWidth:480,defaultHeight:480
+			}),
 			esc=_=>(key=>(
-				key.connect('key-pressed',(_,k)=>k==65307&&win.close()),
+				key.connect('key-pressed',(_,k)=>k==Gdk.KEY_Escape&&win.close()),
 				key
-			))(new Gtk.EventControllerKey)
+			))(new Gtk.EventControllerKey),
 		)=>(
 			//LayerShell.init_for_window(win),
 			//LayerShell.set_layer(win,LayerShell.Layer.TOP),
 			//LayerShell.set_keyboard_mode(win,LayerShell.KeyboardMode.EXCLUSIVE),
 			win.set_child(((
-				box=new Gtk.Box({
-					orientation:Gtk.Orientation.VERTICAL,
-					spacing:8,
-					marginTop:8,
-					marginBottom:8,
-					marginStart:8,
-					marginEnd:8,
-				}),
-				inp=new Gtk.SearchEntry({placeholder_text:'launch...'}),
+				box=new Gtk.Box({orientation:Gtk.Orientation.VERTICAL}),
+				sinp=new Gtk.SearchEntry({search_delay:0,hexpand:true}),
+				sbar=new Gtk.SearchBar,
+				sbtn=new Gtk.ToggleButton({icon_name:'system-search-symbolic'}),
 				scr=new Gtk.ScrolledWindow({vexpand:true}),
-				ul=new Gtk.ListBox,
+				ul=new Gtk.FlowBox({max_children_per_line:1,valign:Gtk.Align.START}),
+				d=[],
 				run=_=>(
 					ul.remove_all(),
-					(
-						inp.text?Gio.DesktopAppInfo.search(inp.text).flatMap(x=>[...x.map(x=>Gio.DesktopAppInfo.new(x)),{get_icon:_=>_,get_display_name:_=>'-'}]):Gio.AppInfo.get_all()
-					).forEach(x=>x.get_nodisplay()||ul.append(((
-						row=new Gtk.ListBoxRow,
+					d=(
+						sinp.text?
+							Gio.DesktopAppInfo.search(sinp.text).map(x=>x.map(x=>Gio.DesktopAppInfo.new(x))):
+							[Gio.AppInfo.get_all()]
+					).map(x=>x.filter(x=>x&&!x.get_nodisplay()&&!x.get_is_hidden()&&x.should_show())),
+					d.flat().forEach(x=>ul.append(((
+						li=new Gtk.FlowBoxChild,
 						box=new Gtk.Box
 					)=>(
-						(x=>x&&box.append(Gtk.Image.new_from_gicon(x)))(x.get_icon()),
+						(x=>(
+							x=x?Gtk.Image.new_from_gicon(x):Gtk.Image.new_from_icon_name('application-x-executable'),
+							x.icon_size=Gtk.IconSize.LARGE,
+							box.append(x)
+						))(x.get_icon()),
 						box.append(new Gtk.Label({label:x.get_display_name()})),
-						row.set_child(box),
-						row.connect('activate',_=>(x.launch([],new Gio.AppLaunchContext()),win.close())),
-						row
+						li.set_child(box),
+						li.tooltip_text=x.list_actions().map(y=>x.get_action_name(y)).join('\n'),
+						li.connect('activate',_=>(x.launch([],new Gio.AppLaunchContext()),win.close())),
+						li
 					))()))
 				)
 			)=>(
-				inp.connect('changed',_=>run()),run(),
-				inp.add_controller(esc()),
+				sinp.connect('search-changed',_=>run()),run(),
+				sinp.connect('activate',x=>(
+					(x=d.flat()[0])&&(x.launch([],new Gio.AppLaunchContext()),win.close())
+				)),
+				sinp.add_controller(esc()),
+				sbar.set_key_capture_widget(win),
+				sbar.set_child(sinp),
+				sbtn.bind_property('active',sbar,'search-mode-enabled',GObject.BindingFlags.BIDIRECTIONAL),
 
-				box.append(inp),
+				hbar.pack_start(sbtn),
+
+				box.append(sbar),
 				box.append((_=>(
 					scr.set_child(ul),
 					scr
@@ -57,8 +78,7 @@ import Gtk from 'gi://Gtk?version=4.0';
 				//box.append((btn=>(
 				//	btn.connect('clicked',_=>win.close()),
 				//	btn
-				//))(new Gtk.Button({label:'Hello, World!\nHello, LayerShell!'}))),
-
+				//))(new Gtk.Button({label:'close'}))),
 				box
 			))()),
 			win.add_controller(esc()),

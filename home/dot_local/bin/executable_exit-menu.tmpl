@@ -1,17 +1,16 @@
 #!/bin/bash
 WM=$(wm-name)
-LOCK="hyprlock --immediate ;: lock"
-LOCK_EXIT=$(
+EXIT=$(
 	case $WM in
-  "Hyprland") echo "$LOCK\nhyprctl dispatch exit ;: logout";;
-  "niri") echo "$LOCK\nniri msg action quit -s ;: exit logout";;
-  "river") echo "$LOCK\nriverctl exit ;: logout";;
-  "sway") echo "swaylock --fade-in .2 ;: lock\nswaymsg exit ;: logout";;
-  "labwc:wlroots") echo "$LOCK\nlabwc -e ;: exit ;: logout";;
-  *) echo "$LOCK\npkill $WM ;: logout";;
+  "Hyprland") echo "hyprctl dispatch exit";;
+  "niri") echo "niri msg action quit -s";;
+  "river") echo "riverctl exit";;
+  "sway") echo "swaymsg exit";;
+  "labwc:wlroots") echo "labwc -e";;
+  *) echo "pkill $WM";;
 esac
 )
 # RESUME=$(cat /proc/cmdline|grep -oP 'resume=\K\S+')
 SWAP=$(swapon --show=SIZE --noheadings --bytes) # [[ $RESUME ]]&&
 RAM=$(free -b|grep -oP 'Mem:\s+\K\d+')
-eval $(echo -e "$LOCK_EXIT\nsystemctl poweroff ;: power\nreboot\nsystemctl suspend$((($RAM<$SWAP))&&echo '\nsystemctl hibernate')"|{{.menu}} -d -k /dev/null -p "exit..." -r "echo '%s'|awk 'NF{printf \"img:$HOME/.local/share/octicons/%%s.svg:text:%%s\",\$NF,\$NF}'")
+eval $(echo -e "loginctl lock-session ;: lock\n$EXIT ;: exit logout\nsystemctl poweroff ;: power\nreboot\nsystemctl suspend$((($RAM<$SWAP))&&echo '\nsystemctl hibernate')"|{{.menu}} -d -k /dev/null -p "exit..." -r "echo '%s'|awk 'NF{printf \"img:$HOME/.local/share/octicons/%%s.svg:text:%%s\",\$NF,\$NF}'")

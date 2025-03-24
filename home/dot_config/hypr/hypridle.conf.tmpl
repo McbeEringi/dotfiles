@@ -1,5 +1,6 @@
 general {
-	before_sleep_cmd = hyprlock --immediate
+	lock_cmd = pidof hyprlock || hyprlock --immediate
+	before_sleep_cmd = loginctl lock-session
 	ignore_dbus_inhibit = false
 }
 

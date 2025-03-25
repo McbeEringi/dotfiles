@@ -1,12 +1,48 @@
 #!/bin/gjs -m
 //#!/usr/bin/env -S LD_PRELOAD=/usr/lib/libgtk4-layer-shell.so gjs -m
+//import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
 import Gio from 'gi://Gio';
 import Gtk from 'gi://Gtk?version=4.0';
 import Gdk from 'gi://Gdk?version=4.0';
 //import LayerShell from 'gi://Gtk4LayerShell';
 
-((
+//console.log(GLib.getenv('XDG_CURRENT_DESKTOP'));
+/*[...GLib.get_system_data_dirs(),GLib.get_user_data_dir()].map(x=>(
+	x.endsWith('/')||(x+='/'),
+	x+='applications'
+));*/
+
+const
+drun=({
+	default_icon:ico=Gio.Icon.new_for_string('application-x-executable')
+}={})=>Gio.AppInfo.get_all().filter(x=>x.should_show()).map(x=>(
+	x=Gio.DesktopAppInfo.new(x.get_id()),
+	{
+		icon:x.get_icon()??ico,
+		txt:x.get_display_name(),
+		exec:_=>x.launch([],new Gio.AppLaunchContext()),
+		menu:x.list_actions().map(y=>({
+			txt:x.get_action_name(y),
+			exec:_=>x.launch_action(y,new Gio.AppLaunchContext())
+		})),
+		keywords:[...new Set([
+			x.get_display_name(),
+			x.get_executable().split('/').at(-1),
+			x.get_description(),
+			...(x.get_categories()??'').split(';'),
+			...x.get_keywords()??[],
+			x.get_generic_name()
+		].filter(x=>x).map(x=>x.toLowerCase()))]
+	}
+)),
+
+
+main=({
+	title='jofi',
+	defaultWidth=480,defaultHeight=480,
+	items
+}={})=>((
 	app=new Gtk.Application({application_id:'dev.mcbeeringi.jofi'})
 )=>(
 	app.connect('activate',_=>(
@@ -14,10 +50,10 @@ import Gdk from 'gi://Gdk?version=4.0';
 			hbar=new Gtk.HeaderBar,
 			win=new Gtk.ApplicationWindow({
 				application:app,
-				title:'jofi',
+				title,
 				titlebar:hbar,
 				//decorated:false,
-				defaultWidth:480,defaultHeight:480
+				defaultWidth,defaultHeight
 			}),
 			esc=_=>(key=>(
 				key.connect('key-pressed',(_,k)=>k==Gdk.KEY_Escape&&win.close()),
@@ -37,32 +73,26 @@ import Gdk from 'gi://Gdk?version=4.0';
 				d=[],
 				run=_=>(
 					ul.remove_all(),
-					d=(
-						sinp.text?
-							Gio.DesktopAppInfo.search(sinp.text).map(x=>x.map(x=>Gio.DesktopAppInfo.new(x))):
-							[Gio.AppInfo.get_all()]
-					).map(x=>x.filter(x=>x&&!x.get_nodisplay()&&!x.get_is_hidden()&&x.should_show())),
-					d.flat().forEach(x=>ul.append(((
+					d=sinp.text?items.filter(x=>x.keywords.some(x=>x.includes(sinp.text.toLowerCase()))):items,
+					d.forEach(x=>ul.append(((
 						li=new Gtk.FlowBoxChild,
 						box=new Gtk.Box
 					)=>(
-						(x=>(
-							x=x?Gtk.Image.new_from_gicon(x):Gtk.Image.new_from_icon_name('application-x-executable'),
+						x.icon&&(x=>(
+							x=Gtk.Image.new_from_gicon(x),
 							x.icon_size=Gtk.IconSize.LARGE,
 							box.append(x)
-						))(x.get_icon()),
-						box.append(new Gtk.Label({label:x.get_display_name()})),
+						))(x.icon),
+						box.append(new Gtk.Label({label:x.txt})),
 						li.set_child(box),
-						li.tooltip_text=x.list_actions().map(y=>x.get_action_name(y)).join('\n'),
-						li.connect('activate',_=>(x.launch([],new Gio.AppLaunchContext()),win.close())),
+						li.tooltip_text=x.menu.map(x=>x.txt).join('\n'),
+						li.connect('activate',_=>(x.exec(),win.close())),
 						li
 					))()))
 				)
 			)=>(
 				sinp.connect('search-changed',_=>run()),run(),
-				sinp.connect('activate',x=>(
-					(x=d.flat()[0])&&(x.launch([],new Gio.AppLaunchContext()),win.close())
-				)),
+				sinp.connect('activate',x=>(x=d[0])&&(x.exec(),win.close())),
 				sinp.add_controller(esc()),
 				sbar.set_key_capture_widget(win),
 				sbar.set_child(sinp),
@@ -75,10 +105,6 @@ import Gdk from 'gi://Gdk?version=4.0';
 					scr.set_child(ul),
 					scr
 				))()),
-				//box.append((btn=>(
-				//	btn.connect('clicked',_=>win.close()),
-				//	btn
-				//))(new Gtk.Button({label:'close'}))),
 				box
 			))()),
 			win.add_controller(esc()),
@@ -88,3 +114,6 @@ import Gdk from 'gi://Gdk?version=4.0';
 	app.run([])
 ))();
 
+
+console.log(drun());
+main({title:'launch...',items:drun()});

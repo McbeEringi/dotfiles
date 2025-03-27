@@ -36,25 +36,41 @@ drun=({
 		].filter(x=>x).map(x=>x.toLowerCase()))]
 	}
 )),
+bench=(n=10000)=>(
+	n=[...Array(n)].map(_=>(_=Math.random()+'',{txt:_,keywords:[_]})),
+	console.log('rand done'),
+	n
+),
 
 
 main=({
 	title='jofi',
 	defaultWidth=480,defaultHeight=480,
-	items
+	items=_=>[]
 }={})=>((
-	app=new Gtk.Application({application_id:'dev.mcbeeringi.jofi'})
+	app=new Gtk.Application({application_id:'dev.mcbeeringi.jofi',flags:Gio.ApplicationFlags.NON_UNIQUE})
 )=>(
 	app.connect('activate',_=>(
 		((
+			box=new Gtk.Box({orientation:Gtk.Orientation.VERTICAL}),
 			hbar=new Gtk.HeaderBar,
 			win=new Gtk.ApplicationWindow({
-				application:app,
+						application:app,child:box,
 				title,
 				titlebar:hbar,
 				//decorated:false,
 				defaultWidth,defaultHeight
 			}),
+			sinp=new Gtk.SearchEntry({search_delay:100,hexpand:true}),
+			sbtn=new Gtk.ToggleButton({icon_name:'system-search-symbolic'}),
+			sbar=new Gtk.SearchBar({key_capture_widget:win,child:sinp}),
+			ul=new Gtk.FlowBox({
+				max_children_per_line:1,
+				homogeneous:true,
+				selection_mode:Gtk.SelectionMode.SINGLE,
+				valign:Gtk.Align.START,
+			}),
+			scr=new Gtk.ScrolledWindow({vexpand:true,child:ul}),
 			esc=_=>(key=>(
 				key.connect('key-pressed',(_,k)=>k==Gdk.KEY_Escape&&win.close()),
 				key
@@ -63,57 +79,56 @@ main=({
 			//LayerShell.init_for_window(win),
 			//LayerShell.set_layer(win,LayerShell.Layer.TOP),
 			//LayerShell.set_keyboard_mode(win,LayerShell.KeyboardMode.EXCLUSIVE),
-			win.set_child(((
-				box=new Gtk.Box({orientation:Gtk.Orientation.VERTICAL}),
-				sinp=new Gtk.SearchEntry({search_delay:0,hexpand:true}),
-				sbar=new Gtk.SearchBar,
-				sbtn=new Gtk.ToggleButton({icon_name:'system-search-symbolic'}),
-				scr=new Gtk.ScrolledWindow({vexpand:true}),
-				ul=new Gtk.FlowBox({max_children_per_line:1,valign:Gtk.Align.START}),
-				d=[],
-				run=_=>(
-					ul.remove_all(),
-					d=sinp.text?items.filter(x=>x.keywords.some(x=>x.includes(sinp.text.toLowerCase()))):items,
-					d.forEach(x=>ul.append(((
-						li=new Gtk.FlowBoxChild,
-						box=new Gtk.Box
-					)=>(
-						x.icon&&(x=>(
-							x=Gtk.Image.new_from_gicon(x),
-							x.icon_size=Gtk.IconSize.LARGE,
-							box.append(x)
-						))(x.icon),
-						box.append(new Gtk.Label({label:x.txt})),
-						li.set_child(box),
-						li.tooltip_text=x.menu.map(x=>x.txt).join('\n'),
-						li.connect('activate',_=>(x.exec(),win.close())),
-						li
-					))()))
-				)
+			ul.set_filter_func((w,s=sinp.text.toLowerCase())=>(
+				w.b=w.x.keywords.some(x=>x.includes(s)),
+				w.p=w.b?
+					+16*w.x.txt.toLowerCase().startsWith(s)
+					+2*w.x.keywords.some(x=>x.startsWith(s))
+					-Math.abs(s.length-w.x.txt.length)
+					:-65536,
+				w.child.get_last_child().set_label('+'+w.p),
+				w.b
+			)),
+			ul.set_sort_func((a,b)=>Math.sign(b.p-a.p)),
+			sinp.connect('search-changed',_=>(
+				ul.invalidate_filter(),
+				ul.invalidate_sort(),
+				ul.select_child(ul.get_child_at_index(0))
+			)),
+			items.forEach(x=>ul.append(((
+				box=new Gtk.Box,
+				li=new Gtk.FlowBoxChild({child:box})
 			)=>(
-				sinp.connect('search-changed',_=>run()),run(),
-				sinp.connect('activate',x=>(x=d[0])&&(x.exec(),win.close())),
-				sinp.add_controller(esc()),
-				sbar.set_key_capture_widget(win),
-				sbar.set_child(sinp),
-				sbtn.bind_property('active',sbar,'search-mode-enabled',GObject.BindingFlags.BIDIRECTIONAL),
+				x.icon&&(x=>(
+					x=Gtk.Image.new_from_gicon(x),
+					x.icon_size=Gtk.IconSize.LARGE,
+					box.append(x)
+				))(x.icon),
+				box.append(new Gtk.Label({label:x.txt})),
+				box.append(new Gtk.Label),
+				x.menu&&(li.tooltip_text=x.menu.map(x=>x.txt).join('\n')),
+				li.x=x,
+				li.connect('activate',_=>(x.exec(),win.close())),
+				li
+			))())),
+			sinp.connect('activate',w=>(w=ul.get_selected_children()[0])&&(w.x.exec(),win.close())),
+			sinp.add_controller(esc()),
+			sbtn.bind_property('active',sbar,'search-mode-enabled',GObject.BindingFlags.BIDIRECTIONAL),
 
-				hbar.pack_start(sbtn),
+			hbar.pack_start(sbtn),
 
-				box.append(sbar),
-				box.append((_=>(
-					scr.set_child(ul),
-					scr
-				))()),
-				box
-			))()),
+			box.append(sbar),
+			box.append(scr),
+
 			win.add_controller(esc()),
-			win.present()
+			win.present(),
+			0
 		))()
 	)),
 	app.run([])
 ))();
 
 
-console.log(drun());
+//console.log(drun());
+//main({title:'launch...',items:drun});
 main({title:'launch...',items:drun()});

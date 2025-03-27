@@ -70,10 +70,19 @@ group {
 	col.border_locked_inactive = rgba({{.col_bg}}44)
 	groupbar {
 		# stacked = true
+		gradients=true
+		font_size = {{.border_radius}}
+		height = {{mul .border_radius 2}}
+		indicator_height=0
+		gradient_rounding={{.border_radius}}
+		gradient_round_only_edges=false
+		text_color = rgba({{.col_fg}}ff)
 		col.active = rgba({{.col_accent}}88)
 		col.inactive = rgba({{.col_bg}}88)
 		col.locked_active = rgba({{.col_accent}}44)
 		col.locked_inactive = rgba({{.col_bg}}44)
+		gaps_in = {{div .gap 2}}
+		gaps_out = {{div .gap 2}}
 	}
 }
 
@@ -161,6 +170,10 @@ bind = $mainMod, F, togglefloating,
 bind = $mainMod SHIFT, F, pseudo
 bind = $mainMod, G, togglegroup,
 bind = $mainMod SHIFT, G, moveoutofgroup,
+bind = $mainMod, Home, changegroupactive, b
+bind = $mainMod, End, changegroupactive, f
+bind = $mainMod SHIFT, Home, movegroupwindow, b
+bind = $mainMod SHIFT, End, movegroupwindow, f
 bind = , F11, fullscreen
 # window.mod.mouse
 bindm = $mainMod, mouse:272, movewindow

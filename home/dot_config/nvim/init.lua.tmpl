@@ -11,6 +11,7 @@ vim.opt.wrap=false
 vim.opt.softtabstop=-1 -- ==shiftwidth
 vim.opt.shiftwidth=0 -- ==tabstop
 vim.opt.tabstop=2
+vim.g.rust_recommended_style=false
 
 -- search
 -- search.misc
@@ -70,7 +71,7 @@ require('lazy').setup({
 					'html','css','javascript',
 					'arduino','c','cpp','make',
 					'glsl','hlsl',
-					'python','hyprlang'
+					'python','hyprlang','rust'
 				},
 				sync_install=false,
 				highlight={enable=true},

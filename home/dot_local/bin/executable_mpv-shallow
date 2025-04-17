@@ -6,4 +6,3 @@ while IFS= read -r -d '' x; do
 done < <(find "$@" -mindepth 1 -maxdepth 1 -type f -print0|LC_ALL=C.UTF-8 sort -z)
 echo "${w[@]}"
 mpv --force-window "${w[@]}"
-

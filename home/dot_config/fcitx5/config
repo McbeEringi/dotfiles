@@ -4,5 +4,5 @@ AltTriggerKeys=
 0=Henkan
 [Hotkey/DeactivateKeys]
 0=Muhenkan
-[Behavior]
-ShareInputState=All
+# [Behavior]
+# ShareInputState=All

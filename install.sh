@@ -25,7 +25,7 @@ eval $PACMAN_CONF_MODIFY
 systemctl stop reflector.service;echo "==> Rating mirrors...";reflector --save /etc/pacman.d/mirrorlist -p https -c "$MIRROR_COUNTRY" -l 5 --sort rate
 pacman -Sy --noconfirm archlinux-keyring
 pacman -S --noconfirm brightnessctl;brightnessctl s 10%
-pacstrap -K /mnt base linux-zen linux-zen-headers linux-firmware dosfstools btrfs-prgs $(
+pacstrap -K /mnt base linux-zen linux-zen-headers linux-firmware dosfstools btrfs-progs $(
 	([ $CPU_VENDOR == 'intel' ] && echo 'intel-ucode ') ||
 	([ $CPU_VENDOR == 'amd' ] && echo 'amd-ucode ')
 )$(

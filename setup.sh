@@ -14,7 +14,7 @@ LANG=C
 	noto-fonts noto-fonts-cjk noto-fonts-emoji otf-monaspace ttf-nerd-fonts-symbols-common
 	fcitx5 fcitx5-gtk fcitx-qt fcitx5-skk
 	btop smartmontools lsplug powertop
-	arch-install-scripts dosfstools btrfs-progs exfatprogs ntfs-3g cdrtools chezmoi npm
+	arch-install-scripts exfatprogs ntfs-3g cdrtools chezmoi npm
 	sway swayidle swaylock-effects idlehack autotiling-rs
 	firefox neovim gimp satty mpv mpv-mpris imv discord_arch_electron imagemagick
 	cowsay nyancat figlet cmatrix neofetch pipes.sh sl

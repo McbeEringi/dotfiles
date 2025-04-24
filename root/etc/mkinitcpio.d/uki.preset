@@ -1,0 +1,8 @@
+# mkinitcpio preset file for uki
+
+PRESETS=('uki_zen')
+
+uki_zen_uki="/boot/EFI/Linux/arch-zen.efi"
+uki_zen_kver="/boot/vmlinuz-linux-zen"
+uki_zen_options="--splash /sys/firmware/acpi/bgrt/image --osrelease /etc/osrel-zen-uki"
+#uki_zen_options="--splash /etc/splash.bmp --osrelease /etc/osrel-zen-uki"

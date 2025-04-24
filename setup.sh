@@ -44,7 +44,7 @@ chezmoi apply
 sudo systemctl enable greetd cups
 [[ $(cat /etc/passwd|grep -oP "^$USER:.*:\K.*") != "/bin/zsh" ]]&&chsh -s /bin/zsh
 [[ $(hyprpm list|grep Hyprspace) ]]||{
-	yay -S cmake meson cpio
+	yay -S --noconfirm cmake meson cpio
 	hyprpm update
 	hyprpm add https://github.com/KZDKM/Hyprspace
 	hyprpm enable Hyprspace

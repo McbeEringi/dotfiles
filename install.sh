@@ -26,11 +26,11 @@ systemctl stop reflector.service;echo "==> Rating mirrors...";reflector --save /
 pacman -Sy --noconfirm archlinux-keyring
 pacman -S --noconfirm brightnessctl;brightnessctl s 10%
 pacstrap -K /mnt base linux-zen linux-zen-headers linux-firmware dosfstools btrfs-progs $(
-	([ $CPU_VENDOR == 'intel' ] && echo 'intel-ucode ') ||
-	([ $CPU_VENDOR == 'amd' ] && echo 'amd-ucode ')
+	([ "$CPU_VENDOR" == 'intel' ] && echo 'intel-ucode ') ||
+	([ "$CPU_VENDOR" == 'amd' ] && echo 'amd-ucode ')
 )$(
-	([ $GPU_VENDOR == 'intel' ] && echo 'intel-media-driver intel-gpu-tools vulkan-intel ') ||
-	([ $GPU_VENDOR == 'amd' ] && echo 'mesa vulkan-radeon ')
+	([ "$GPU_VENDOR" == 'intel' ] && echo 'intel-media-driver intel-gpu-tools vulkan-intel ') ||
+	([ "$GPU_VENDOR" == 'amd' ] && echo 'mesa vulkan-radeon ')
 )efibootmgr edk2-shell sudo nano git openssh man-db base-devel iwd bluez bluez-utils sof-firmware reflector keyd
 cp /etc/systemd/network/* /mnt/etc/systemd/network
 mkdir /mnt/var/lib/iwd;cp -r /var/lib/iwd/* /mnt/var/lib/iwd

@@ -16,3 +16,7 @@ command = "tuigreet -g 'Welcome back!' -t --time-format '%y-%m-%d %H:%M' -r --re
 # on the greeter. A graphical greeter may for example require the user to be
 # in the `video` group.
 user = "greeter"
+
+# [initial_session]
+# command="Hyprland -c ~/.config/hypr/hyprland_locked.conf"
+# user="mcbeeringi"

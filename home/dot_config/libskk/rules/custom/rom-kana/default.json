@@ -1,1 +1,4 @@
-{"include":["default/default"],"define":{"rom-kana":{"?":null}}}
+{"include":["default/default"],"define":{"rom-kana":{
+	"z\\":["","¥"],
+	"?":null
+}}}

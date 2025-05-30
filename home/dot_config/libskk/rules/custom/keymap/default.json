@@ -3,6 +3,7 @@
 		"keymap":{
 			"Escape":"abort",
 			"\b": "delete",
+			"/":"abbrev",
 			" ":"next-candidate",
 			"Down":"next-candidate",
 			"Up":"previous-candidate",

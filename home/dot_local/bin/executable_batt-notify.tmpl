@@ -1,7 +1,7 @@
 #!/bin/bash
 POW=/sys/class/power_supply
 while true;do
-	for BAT in $(ls $POW|grep BAT);do
+	for BAT in $(ls $POW|grep -P 'BAT|CMB');do
 		CAP=$(cat $POW/$BAT/capacity)
 		STA=$(cat $POW/$BAT/status)
 		echo $BAT $CAP $STA

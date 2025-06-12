@@ -1,0 +1,18 @@
+#!/bin/bash
+
+if [[ $# == 1 ]];then
+	A=$(hyprctl activeworkspace -j | jq ".id")
+	B="$1"
+	MOVE=1
+elif [[ $# == 2 ]];then
+	A="$1"
+	B="$2"
+else
+	echo "Usage: $0 [A] B"
+	exit 1
+fi
+
+hypr-mv2ws "$B" "special:swaptmp"
+hypr-mv2ws "$A" "$B"
+hypr-mv2ws "special:swaptmp" "$A"
+[ $MOVE ]&&hyprctl dispatch workspace "$B"

@@ -1,0 +1,16 @@
+#!/bin/bash
+
+if [[ $# == 1 ]];then
+	SRC=$(hyprctl activeworkspace -j | jq ".name")
+	DST="$1"
+elif [[ $# == 2 ]];then
+	SRC="$1"
+	DST="$2"
+else
+	echo "Usage: $0 [SRC] DST"
+	exit 1
+fi
+
+hyprctl clients -j | jq -r ".[] | select(.workspace.name == \"$SRC\") | .address" | while read -r X; do
+	hyprctl dispatch movetoworkspacesilent "$DST,address:$X"
+done

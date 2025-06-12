@@ -1,6 +1,6 @@
 #!/bin/bash
 
-which vim 2>/dev/null && {
+which vim >/dev/null && {
 PKGS=($(echo '{{.vim_pkgs}}'|sed -E 's/\[(.*)\]/\1/'))
 CHK_SEC=$((60*60*24))
 

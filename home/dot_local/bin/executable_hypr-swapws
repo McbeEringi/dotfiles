@@ -12,7 +12,7 @@ else
 	exit 1
 fi
 
-hypr-mv2ws "$B" "special:swaptmp"
-hypr-mv2ws "$A" "$B"
-hypr-mv2ws "special:swaptmp" "$A"
+hypr-mvws2ws "$B" "special:swaptmp"
+hypr-mvws2ws "$A" "$B"
+hypr-mvws2ws "special:swaptmp" "$A"
 [ $MOVE ]&&hyprctl dispatch workspace "$B"

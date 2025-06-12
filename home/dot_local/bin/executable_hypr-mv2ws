@@ -1,16 +1,17 @@
 #!/bin/bash
 
-if [[ $# == 1 ]];then
-	SRC=$(hyprctl activeworkspace -j | jq ".name")
-	DST="$1"
-elif [[ $# == 2 ]];then
-	SRC="$1"
-	DST="$2"
-else
-	echo "Usage: $0 [SRC] DST"
+if [[ $# != 1 ]];then
+	echo "Usage: $0 SPECIAL_WORKSPACE_NAME"
 	exit 1
 fi
 
-hyprctl clients -j | jq -r ".[] | select(.workspace.name == \"$SRC\") | .address" | while read -r X; do
-	hyprctl dispatch movetoworkspacesilent "$DST,address:$X"
-done
+
+CUR=$(hyprctl activewindow -j | jq -r '.workspace.id')
+WS=$(hyprctl activeworkspace -j | jq -r '.name')
+
+# ウィンドウを移動
+if [[ "$CUR" == "$WS" ]];then
+    hyprctl dispatch movetoworkspace "$1"
+else
+    hyprctl dispatch movetoworkspace "$WS"
+fi

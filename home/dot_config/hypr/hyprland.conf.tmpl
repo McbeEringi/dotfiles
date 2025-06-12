@@ -121,7 +121,7 @@ windowrulev2 = float,title:^float$
 windowrulev2 = float,class:.*polkit.*
 # rule.window.mpv
 windowrulev2 = pseudo,class:^mpv$
-windowrulev2 = workspace special:magic,class:^mpv$
+windowrulev2 = workspace special:s,class:^mpv$
 # rule.window.misc
 windowrulev2 = suppressevent maximize, class:.*
 
@@ -193,7 +193,8 @@ bind = $mainMod, 9, workspace, 9
 bind = $mainMod, 0, workspace, 10
 bind = $mainMod CTRL, right, workspace, +1
 bind = $mainMod CTRL, left, workspace, -1
-bind = $mainMod, S, togglespecialworkspace, magic
+bind = $mainMod, S, togglespecialworkspace, s
+bind = $mainMod, D, togglespecialworkspace, d
 # workspace.mod
 bind = $mainMod SHIFT, 1, movetoworkspace, 1
 bind = $mainMod SHIFT, 2, movetoworkspace, 2
@@ -207,7 +208,9 @@ bind = $mainMod SHIFT, 9, movetoworkspace, 9
 bind = $mainMod SHIFT, 0, movetoworkspace, 10
 bind = $mainMod SHIFT CTRL, right, movetoworkspace, +1
 bind = $mainMod SHIFT CTRL, left, movetoworkspace, -1
-bind = $mainMod SHIFT, S, movetoworkspace, special:magic
+bind = $mainMod SHIFT, S, exec, hypr-mv2ws special:s
+bind = $mainMod SHIFT, D, exec, hypr-mv2ws special:d
+bind = $mainMod CTRL, F, movetoworkspace, emptymn
 # workspace.swap
 bind = $mainMod CTRL, 1, exec, hypr-swapws 1
 bind = $mainMod CTRL, 2, exec, hypr-swapws 2

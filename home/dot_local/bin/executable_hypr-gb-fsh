@@ -1,0 +1,3 @@
+#!/bin/bash
+fsh=$(hyprctl getoption decoration:screen_shader|head -n1|awk '{print $2}')
+hyprctl keyword decoration:screen_shader "$([[ $fsh != "gb.fsh" ]]&&echo 'gb.fsh')"

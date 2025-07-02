@@ -27,4 +27,4 @@ Target = mkinitcpio-git
 Description = Updating UKI...
 When = PostTransaction
 Exec = /usr/bin/mkinitcpio -p uki
-NeedsTargets
+# NeedsTargets

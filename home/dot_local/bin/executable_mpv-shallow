@@ -3,6 +3,6 @@
 w=()
 while IFS= read -r -d '' x; do
 	w+=("$x")
-done < <(find "$@" -mindepth 1 -maxdepth 1 -type f -print0|LC_ALL=C.UTF-8 sort -z)
+done < <(find "$@" -mindepth 1 -maxdepth 1 -type f -print0|sort -z -V)
 echo "${w[@]}"
 mpv --force-window "${w[@]}"

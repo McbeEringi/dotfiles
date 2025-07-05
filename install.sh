@@ -34,6 +34,7 @@ pacstrap -K /mnt base linux-zen linux-zen-headers linux-firmware dosfstools btrf
 )efibootmgr edk2-shell sudo nano git openssh man-db base-devel iwd bluez bluez-utils sof-firmware reflector keyd
 cp /etc/systemd/network/* /mnt/etc/systemd/network
 mkdir /mnt/var/lib/iwd;cp -r /var/lib/iwd/* /mnt/var/lib/iwd
+bootctl install --esp-path=/mnt
 genfstab -U /mnt |tee /mnt/etc/fstab
 BOOT_UUID=$(grep -oP 'UUID=\K\S+(?=\s+\/boot\s)' /mnt/etc/fstab)
 BOOT_PKNAME=$(lsblk -nro UUID,PKNAME|grep -oP "$BOOT_UUID\s\K.+")
@@ -104,7 +105,7 @@ $MAKEPKG_CONF_MODIFY
 $MKINITCPIO_CONF_MODIFY
 
 cp /usr/share/edk2-shell/x64/Shell_Full.efi /boot/shellx64.efi
-bootctl install
+bootctl update
 $BOOTCTL_LOADER_CONF
 $BOOTCTL_ENTRIES_ARCH_ZEN_CONF
 $([[ $WINDOWS_BLKNUM ]] && echo "${BOOTCTL_ENTRIES_WINDOWS_CONF}${BOOT_WINDOWS_NSH}")

@@ -73,6 +73,10 @@ cursor {
 	xcursor-size 24
 }
 
+hotkey-overlay {
+	skip-at-startup
+}
+
 binds {
 	Mod+Shift+Slash { show-hotkey-overlay; }
 
@@ -81,8 +85,8 @@ binds {
 	Mod+Q { spawn "{{.terminal}}"; }
 	Mod+Space { spawn "{{.terminal}}" "node"; }
 	Mod+E { spawn "{{.fileManager}}"; }
-	Mod+R { spawn "${menu}"; }
-	Mod+M { spawn "exit-menu"; }
+	Mod+R { spawn "{{.menu}}"; }
+	Mod+M { spawn "exit-menu" "niri msg action quit -s"; }
 	Mod+V { spawn "cliphist-menu"; }
 	Mod+P { spawn "wl-mirror-menu"; }
 	Mod+Shift+C { spawn "hyprpicker -a"; }

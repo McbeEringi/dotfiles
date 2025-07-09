@@ -1,7 +1,7 @@
 wallpaper="~/path/to/wallpaper"
 hyprlock_font="sans-serif bold"
 zsh_plugins_dir="/usr/share/zsh/plugins"
-sleep_cmd="systemctl suspend"
+sleep_cmd="systemctl suspend"# dpms
 
 terminal="foot"
 fileManager="thunar"

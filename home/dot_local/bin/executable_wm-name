@@ -1,4 +1,0 @@
-#!/bin/bash
-# pid=$(fuser "${XDG_RUNTIME_DIR}/${WAYLAND_DISPLAY:-wayland-0}" 2> /dev/null)
-# [ $pid ]&&ps -q $pid o comm=||echo sway
-[ $XDG_CURRENT_DESKTOP ]&&echo $XDG_CURRENT_DESKTOP || echo $XDG_SESSION_DESKTOP

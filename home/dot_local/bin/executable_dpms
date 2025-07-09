@@ -1,8 +1,9 @@
 #!/bin/bash
-WM=$(wm-name)
 
-case $WM in
-	"Hyprland") hyprctl dispatch dpms off;;
-	"niri") niri msg action power-off-monitors;;
+P=$([ $@ ]&&echo on||echo off)
+case $XDG_SESSION_DESKTOP in
+	"hyprland") hyprctl dispatch dpms $P;;
+	"sway") swaymsg "output * dpms $P";;
+	"niri") niri msg action power-${P}-monitors;;
 	*) brightnessctl s 0;;
 esac

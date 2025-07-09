@@ -1,6 +1,6 @@
 timeout 60 'brightnessctl -s --exponent=2 s 10%-' resume 'brightnessctl -r'
 timeout 300 'swaylock --fade-in 4 --grace 5'
 # timeout 600 'hyprctl dispatch dpms off'
-timeout 600 '{{.sleep_cmd}}'
+timeout 600 '{{.sleep_cmd}}' resume 'swaymsg "output * dpms on"'
 before-sleep 'loginctl lock-session'
 lock 'swaylock'

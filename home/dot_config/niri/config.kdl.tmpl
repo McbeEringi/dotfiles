@@ -16,12 +16,15 @@ input {
 	touchpad {
 		tap
 		natural-scroll
-		accel-profile "flat"
+		// accel-profile "flat"
 	}
 	warp-mouse-to-focus
 	focus-follows-mouse
 }
 
+output "eDP-1" {
+	scale 1
+}
 output "DSI-1" {
 	scale 1
 	transform "270"
@@ -33,19 +36,6 @@ layout {
 	always-center-single-column
 
 	default-column-width { proportion 0.5; }
-	preset-column-widths {
-		proportion 0.33333
-		proportion 0.5
-		proportion 0.66667
-		proportion 1.0
-	}
-	preset-window-heights {
-		proportion 0.33333
-		proportion 0.5
-		proportion 0.66667
-		proportion 1.0
-	}
-
 	focus-ring {
 		off
 	}
@@ -53,6 +43,10 @@ layout {
 		width {{.border_width}}
 		active-color "#{{.col_accent}}88"
 		inactive-color "#{{.col_nop}}88"
+	}
+	struts {
+		left 32
+		right 32
 	}
 }
 
@@ -82,45 +76,39 @@ cursor {
 binds {
 	Mod+Shift+Slash { show-hotkey-overlay; }
 
+	// apps
 	Mod+C { close-window; }
 	Mod+Q { spawn "{{.terminal}}"; }
 	Mod+Space { spawn "{{.terminal}}" "node"; }
 	Mod+E { spawn "{{.fileManager}}"; }
-	Mod+R { spawn "wofi"; }
+	Mod+R { spawn "${menu}"; }
 	Mod+M { spawn "exit-menu"; }
 	Mod+V { spawn "cliphist-menu"; }
 	Mod+P { spawn "wl-mirror-menu"; }
 	Mod+Shift+C { spawn "hyprpicker -a"; }
 
 
-
+	// window
+	// window.move
 	Mod+Left  { focus-column-left; }
-	Mod+Down  { focus-window-or-workspace-down; }
-	Mod+Up    { focus-window-or-workspace-up; }
 	Mod+Right { focus-column-right; }
-	Mod+Home  { focus-column-first; }
-	Mod+End   { focus-column-last; }
+	Mod+Up    { focus-window-or-workspace-up; }
+	Mod+Down  { focus-window-or-workspace-down; }
+	Mod+Next  { focus-tiling; }
+	Mod+Prior { focus-floating; }
+	Mod+Shift+Left  { move-column-left; }
+	Mod+Shift+Right { move-column-right; }
+	Mod+Shift+Up    { move-window-up-or-to-workspace-up; }
+	Mod+Shift+Down  { move-window-down-or-to-workspace-down; }
+	// window.mod
+	Mod+J { consume-or-expel-window-left; }
+	Mod+K { consume-or-expel-window-right; }
+	Mod+F { toggle-window-floating; }
+	Mod+Ctrl+F { maximize-column; }
+	F11 { fullscreen-window; }
 
-	Mod+Ctrl+Left  { move-column-left; }
-	Mod+Ctrl+Down  { move-window-down-or-to-workspace-down; }
-	Mod+Ctrl+Up    { move-window-up-or-to-workspace-up; }
-	Mod+Ctrl+Right { move-column-right; }
-	Mod+Ctrl+Home  { move-column-to-first; }
-	Mod+Ctrl+End   { move-column-to-last; }
-
-	Mod+Shift+Left  { focus-monitor-left; }
-	Mod+Shift+Down  { focus-monitor-down; }
-	Mod+Shift+Up    { focus-monitor-up; }
-	Mod+Shift+Right { focus-monitor-right; }
-
-	Mod+Shift+Ctrl+Left  { move-column-to-monitor-left; }
-	Mod+Shift+Ctrl+Down  { move-column-to-monitor-down; }
-	Mod+Shift+Ctrl+Up    { move-column-to-monitor-up; }
-	Mod+Shift+Ctrl+Right { move-column-to-monitor-right; }
-
-	Mod+WheelScrollDown      cooldown-ms=150 { focus-workspace-down; }
-	Mod+WheelScrollUp        cooldown-ms=150 { focus-workspace-up; }
-
+	// workspace
+	// workspace.move
 	Mod+1 { focus-workspace 1; }
 	Mod+2 { focus-workspace 2; }
 	Mod+3 { focus-workspace 3; }
@@ -130,6 +118,7 @@ binds {
 	Mod+7 { focus-workspace 7; }
 	Mod+8 { focus-workspace 8; }
 	Mod+9 { focus-workspace 9; }
+	// workspace.mod
 	Mod+Shift+1 { move-column-to-workspace 1; }
 	Mod+Shift+2 { move-column-to-workspace 2; }
 	Mod+Shift+3 { move-column-to-workspace 3; }
@@ -140,21 +129,16 @@ binds {
 	Mod+Shift+8 { move-column-to-workspace 8; }
 	Mod+Shift+9 { move-column-to-workspace 9; }
 
-	Mod+BracketLeft  { consume-or-expel-window-left; }
-	Mod+BracketRight { consume-or-expel-window-right; }
+	Mod+WheelScrollDown cooldown-ms=150 { focus-workspace-down; }
+	Mod+WheelScrollUp   cooldown-ms=150 { focus-workspace-up; }
 
-	Mod+F { maximize-column; }
-	F11 { fullscreen-window; }
-
-
-
+	// media
 	XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
 	XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
 	XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
 	XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
 	XF86MonBrightnessUp   allow-when-locked=true { spawn "brightnessctl" "--exponent=2" "s" "+5%"; }
 	XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--exponent=2" "s" "5%-"; }
-
 	Shift+Print { screenshot; }
 	Print { screenshot-screen; }
 	Ctrl+Print { screenshot-window; }

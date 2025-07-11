@@ -9,5 +9,7 @@ main(){
 	esac
 }
 
-main off
-libinput debug-events|head -n1>/dev/null&&main on
+groups|grep input&&{
+	main off
+	libinput debug-events|head -n1>/dev/null&&main on
+}||echo input group not detected

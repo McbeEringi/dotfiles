@@ -1,6 +1,6 @@
 # dotfiles
 
-- [dotfiles](#dotfiles-1) : [ArchLinux](https://archlinux.org) + [Hyprland](https://hyprland.org) & [sway](https://swaywm.org) setup
+- [dotfiles](#dotfiles-1) : [ArchLinux](https://archlinux.org) + [Hyprland](https://hyprland.org) & [sway](https://swaywm.org) & [niri](https://github.com/YaLTeR/niri) setup
 	- home : [chezmoi](https://chezmoi.io) configs
 	- root : non chezmoi configs
 - [part.sh](#partsh) : partition setup script
@@ -10,7 +10,6 @@
 
 also includes donfigs for additional WM
 
-- [niri](https://github.com/YaLTeR/niri)
 - [river](https://codeberg.org/river/river)
     - [kanshi](https://gitlab.freedesktop.org/emersion/kanshi) for monitor mng
 - [labwc](https://labwc.github.io/)

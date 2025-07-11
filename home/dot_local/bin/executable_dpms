@@ -1,9 +1,13 @@
 #!/bin/bash
 
-P=$([ $@ ]&&echo on||echo off)
-case $XDG_SESSION_DESKTOP in
-	"hyprland") hyprctl dispatch dpms $P;;
-	"sway") swaymsg "output * dpms $P";;
-	"niri") niri msg action power-${P}-monitors;;
-	*) brightnessctl s 0;;
-esac
+main(){
+	case $XDG_SESSION_DESKTOP in
+		"hyprland") hyprctl dispatch dpms $1;;
+		"sway") swaymsg "output * dpms $1";;
+		"niri") niri msg action power-${1}-monitors;;
+		# *) brightnessctl s 0;;
+	esac
+}
+
+main off
+libinput debug-events|head -n1>/dev/null&&main on

@@ -1,15 +1,15 @@
 #!/bin/bash
 
 main(){
-	case $XDG_SESSION_DESKTOP in
-		"hyprland") hyprctl dispatch dpms $1;;
-		"sway") swaymsg "output * dpms $1";;
-		"niri") niri msg action power-${1}-monitors;;
+	case $(wm-name) in
+		"HYPR") hyprctl dispatch dpms $1;;
+		"SWAY") swaymsg "output * dpms $1";;
+		"NIRI") niri msg action power-${1}-monitors;;
 		# *) brightnessctl s 0;;
 	esac
 }
 
-groups|grep input&&{
+groups|grep input>/dev/null&&{
 	main off
 	libinput debug-events|head -n1>/dev/null&&main on
 }||echo input group not detected

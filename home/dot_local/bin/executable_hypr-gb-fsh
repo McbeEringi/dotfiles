@@ -1,3 +1,4 @@
 #!/bin/bash
 fsh=$(hyprctl getoption decoration:screen_shader|head -n1|awk '{print $2}')
-hyprctl keyword decoration:screen_shader "$([[ $fsh != "gb.fsh" ]]&&echo 'gb.fsh')"
+hyprctl keyword decoration:screen_shader "$([[ $fsh != "gb.frag" ]]&&echo 'gb.frag')"
+hyprctl keyword cursor:no_hardware_cursors "$([[ $fsh != "gb.frag" ]]&&echo '1'||echo '2')"

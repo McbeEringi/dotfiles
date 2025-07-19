@@ -3,6 +3,7 @@ trap 'echo;echo exitting...;exit' INT
 LANG=C
 [ $PKGS ] || PKGS='
 	plasma
+	networkmanager
 	qt6-multimedia-ffmpeg pipewire-jack
 	noto-fonts noto-fonts-emoji noto-fonts-cjk
 	dolphin konsole firefox

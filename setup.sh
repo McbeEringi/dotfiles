@@ -5,14 +5,14 @@ LANG=C
 	hyprland mako pipewire pipewire-pulse pipewire-jack xdg-desktop-portal-hyprland xfce-polkit qt5-wayland qt6-wayland
 	waybar hyprpaper wofi cliphist grimblast wlsunset wl-mirror brightnessctl
 	hyprlock hypridle hyprpicker wev evtest
-	greetd greetd-tuigreet-bin
+	greetd greetd-tuigreet
 	thunar gvfs thunar-volman thunar-media-tags-plugin tumbler ffmpegthumbnailer zip unzip 7zip git-delta ripgrep
 	foot
 	gnome-keyring
 	iwgtk pavucontrol qt5ct qt6ct kvantum-qt5 kvantum wdisplays
 	gnome-themes-extra papirus-icon-theme bibata-cursor-theme-bin
 	noto-fonts noto-fonts-cjk noto-fonts-emoji otf-monaspace ttf-nerd-fonts-symbols-common otf-kikai-chokoku-jis
-	fcitx5 fcitx5-gtk fcitx-qt fcitx5-skk
+	fcitx5 fcitx5-gtk fcitx5-qt fcitx5-skk
 	btop smartmontools lsplug powertop
 	arch-install-scripts exfatprogs ntfs-3g cdrtools chezmoi npm
 	sway swayidle swaylock-effects idlehack autotiling-rs

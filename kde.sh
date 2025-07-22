@@ -9,7 +9,7 @@ LANG=C
 	dolphin konsole firefox neovim gimp mpv mpv-mpris imv discord_arch_electron imagemagick
 	fcitx5-im fcitx5-mozc fcitx5-skk
 	zsh zsh-autosuggestions zsh-completions zsh-syntax-highlighting
-	cups system-config-printer
+	cups system-config-printer power-profiles-daemon
 	jq npm
 '
 
@@ -31,5 +31,5 @@ chezmoi apply
 	sudo rm /etc/resolv.conf
 }
 [[ $(cat /etc/passwd|grep -oP "^$USER:.*:\K.*") != "/bin/zsh" ]]&&chsh -s /bin/zsh
-sudo systemctl enable NetworkManager sddm cups
+sudo systemctl enable NetworkManager sddm cups power-profiles-daemon
 read -p "Press Enter to reboot..." ans;reboot

@@ -6,8 +6,11 @@ LANG=C
 	networkmanager
 	qt6-multimedia-ffmpeg pipewire-jack
 	noto-fonts noto-fonts-emoji noto-fonts-cjk
-	dolphin konsole firefox
-	fcitx5-im fcitx5-mozc fcitx5-hazkey-bin
+	dolphin konsole firefox neovim gimp mpv mpv-mpris imv discord_arch_electron imagemagick
+	fcitx5-im fcitx5-mozc fcitx5-skk
+	zsh zsh-autosuggestions zsh-completions zsh-syntax-highlighting
+	cups system-config-printer
+	jq npm
 '
 
 which yay || {
@@ -20,8 +23,13 @@ which yay || {
 }
 yay -Syu --noconfirm --removemake $PKGS
 
+chezmoi status || chezmoi init mcbeeringi
+chezmoi apply
+
 [[ $(systemctl status systemd-networkd|grep 'Active: active') ]]&&{
 	sudo systemctl disable --now iwd systemd-networkd
 	sudo rm /etc/resolv.conf
 }
-sudo systemctl enable --now NetworkManager sddm
+[[ $(cat /etc/passwd|grep -oP "^$USER:.*:\K.*") != "/bin/zsh" ]]&&chsh -s /bin/zsh
+sudo systemctl enable NetworkManager sddm cups
+read -p "Press Enter to reboot..." ans;reboot

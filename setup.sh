@@ -51,3 +51,4 @@ sudo systemctl enable greetd cups
 }
 hyprpm update
 hyprpm reload -n
+read -p "Press Enter to reboot..." ans;reboot

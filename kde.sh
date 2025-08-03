@@ -9,7 +9,7 @@ LANG=C
 	dolphin konsole firefox neovim gimp mpv mpv-mpris imv discord_arch_electron imagemagick
 	fcitx5-im fcitx5-mozc fcitx5-skk
 	zsh zsh-autosuggestions zsh-completions zsh-syntax-highlighting
-	cups system-config-printer power-profiles-daemon
+	cups ghostscript system-config-printer power-profiles-daemon
 	jq npm
 '
 

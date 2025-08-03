@@ -19,7 +19,7 @@ LANG=C
 	firefox neovim gimp satty mpv mpv-mpris imv discord_arch_electron imagemagick
 	cowsay nyancat figlet cmatrix neofetch pipes.sh sl
 	zsh zsh-autosuggestions zsh-completions zsh-syntax-highlighting
-	cups
+	cups ghostscript
 '
 # river kanshi
 # niri

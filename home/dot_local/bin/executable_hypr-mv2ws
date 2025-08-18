@@ -1,17 +1,20 @@
 #!/bin/bash
 
 if [[ $# != 1 ]];then
-	echo "Usage: $0 SPECIAL_WORKSPACE_NAME"
+	echo "Usage: $0 WORKSPACE_NAME"
 	exit 1
 fi
 
-
 CUR=$(hyprctl activewindow -j | jq -r '.workspace.id')
+ARG=$(hyprctl workspaces -j|jq -r ".[]|select(.name==\"$1\").id")
 WS=$(hyprctl activeworkspace -j | jq -r '.name')
 
-# ウィンドウを移動
-if [[ "$CUR" == "$WS" ]];then
-    hyprctl dispatch movetoworkspace "$1"
+if [[ "$CUR" == "$ARG" ]];then
+	if [[ "$CUR" == "$WS" ]];then
+		echo "Nothing to do."
+	else
+		hyprctl dispatch movetoworkspace "$WS"
+	fi
 else
-    hyprctl dispatch movetoworkspace "$WS"
+	hyprctl dispatch movetoworkspace "$1"
 fi

@@ -29,9 +29,8 @@ device { # CHUWI MiniBook X N100
 	output = DSI-1
 	transform = 3
 }
-gestures {
-	workspace_swipe = true
-}
+gesture = 3,horizontal,workspace
+gesture = 4,swipe,move
 
 # style
 general {
@@ -53,12 +52,12 @@ decoration {
 }
 animations {
 	enabled = true
-	first_launch_animation = false
 	animation = global, 1, 5, default
 	animation = windowsOut, 1, 5, default, popin 80%
 	animation = layers, 1, 5, default, popin 80%
 	animation = border, 1, 10, default
 	animation = specialWorkspace,1,5,default,slidefade 20%
+	animation = monitorAdded,0
 }
 dwindle {
 	pseudotile = true

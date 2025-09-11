@@ -60,6 +60,7 @@ linux /vmlinuz-linux-zen
 initrd /initramfs-linux-zen.img
 options root=$ROOT_UUID rw
 options quiet splash
+# options i915.enable_fbc=0 i915.enable_psr=0 i915.enable_dc=0
 $([[ $SWAP_UUID ]] || echo '# ')options resume=$SWAP_UUID
 # options video=DSI-1:panel_orientation=right_side_up
 _EOF
@@ -75,7 +76,8 @@ ETC_CMDLINE_D="\
 mkdir /etc/cmdline.d
 echo 'root=$ROOT_UUID rw' |tee /etc/cmdline.d/10-root.conf
 echo 'quiet splash' |tee /etc/cmdline.d/20-misc.conf
-$([[ $SWAP_UUID ]] || echo '# ')echo 'resume=$SWAP_UUID' |tee /etc/cmdline.d/30-resume.conf
+# echo 'i915.enable_fbc=0 i915.enable_psr=0 i915.enable_dc=0' |tee /etc/cmdline.d/30-i915.conf
+$([[ $SWAP_UUID ]] || echo '# ')echo 'resume=$SWAP_UUID' |tee /etc/cmdline.d/40-resume.conf
 "
 MKINITCPIO_UKI_PRESET_ZEN="
 curl -sL http://mcbeeringi.dev/dotfiles/root/etc/mkinitcpio.d/uki.preset -o /etc/mkinitcpio.d/uki.preset

@@ -43,12 +43,12 @@ chezmoi status && {
 chezmoi apply
 sudo systemctl enable greetd cups
 [[ $(cat /etc/passwd|grep -oP "^$USER:.*:\K.*") != "/bin/zsh" ]]&&chsh -s /bin/zsh
-[[ $(hyprpm list|grep Hyprspace) ]]||{
-	yay -S --noconfirm cmake meson cpio
-	hyprpm update
-	hyprpm add https://github.com/KZDKM/Hyprspace
-	hyprpm enable Hyprspace
-}
-hyprpm update
-hyprpm reload -n
+# [[ $(hyprpm list|grep Hyprspace) ]]||{
+# 	yay -S --noconfirm cmake meson cpio
+# 	hyprpm update
+# 	hyprpm add https://github.com/KZDKM/Hyprspace
+# 	hyprpm enable Hyprspace
+# }
+# hyprpm update
+# hyprpm reload -n
 read -p "Press Enter to reboot..." ans;reboot

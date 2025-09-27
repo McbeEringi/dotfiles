@@ -23,9 +23,9 @@ PACMAN_CONF_MODIFY="sed -i -E 's/^#(Color|VerbosePkgLists|ParallelDownloads)/\1/
 timedatectl
 eval $PACMAN_CONF_MODIFY
 systemctl stop reflector.service;echo "==> Rating mirrors...";reflector --save /etc/pacman.d/mirrorlist -p https -c "$MIRROR_COUNTRY" -l 5 --sort rate
-pacman -Sy --noconfirm --disable-download-timeout archlinux-keyring
-pacman -S --noconfirm --disable-download-timeout brightnessctl;brightnessctl s 10%
-pacstrap -K --disable-download-timeout /mnt base linux-zen linux-zen-headers linux-firmware dosfstools btrfs-progs $(
+pacman -Sy --noconfirm archlinux-keyring
+pacman -S --noconfirm brightnessctl;brightnessctl s 10%
+pacstrap -K /mnt base linux-zen linux-zen-headers linux-firmware dosfstools btrfs-progs $(
 	([ "$CPU_VENDOR" == 'intel' ] && echo 'intel-ucode ') ||
 	([ "$CPU_VENDOR" == 'amd' ] && echo 'amd-ucode ')
 )$(
@@ -114,7 +114,7 @@ $([[ $WINDOWS_BLKNUM ]] && echo "${BOOTCTL_ENTRIES_WINDOWS_CONF}${BOOT_WINDOWS_N
 
 $ETC_CMDLINE_D
 $MKINITCPIO_UKI_PRESET_ZEN
-pacman -S --noconfirm --disable-download-timeout plymouth
+pacman -S --noconfirm plymouth
 $EFIBOOTMGR_UKI_ZEN
 
 echo $ROOT_PASS|passwd -s root

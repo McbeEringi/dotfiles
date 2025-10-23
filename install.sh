@@ -85,6 +85,10 @@ mkdir -p /etc/pacman.d/hooks
 curl -sL http://mcbeeringi.dev/dotfiles/root/etc/pacman.d/hooks/uki.hook -o /etc/pacman.d/hooks/uki.hook
 curl -sL http://mcbeeringi.dev/dotfiles/root/etc/osrel-zen-uki -o /etc/osrel-zen-uki
 "
+MKIITCPIO_DISABLE_ZEN_FALLBACK="
+sed -i -E "s/\s*'fallback'//" /etc/mkinitcpio.d/linux-zen.preset
+rm -f /boot/*-fallback.img
+"
 EFIBOOTMGR_UKI_ZEN="efibootmgr -d /dev/$BOOT_PKNAME -p $BOOT_PARTN -c -L arch-zen -l '\EFI\Linux\arch-zen.efi'"
 BASH_HIST="cat <<_EOF |tee /home/$USER_NAME/.bash_history
 bash <(curl -sL https://mcbeeringi.dev/dotfiles/kde.sh)
@@ -114,6 +118,7 @@ $([[ $WINDOWS_BLKNUM ]] && echo "${BOOTCTL_ENTRIES_WINDOWS_CONF}${BOOT_WINDOWS_N
 
 $ETC_CMDLINE_D
 $MKINITCPIO_UKI_PRESET_ZEN
+$MKIITCPIO_DISABLE_ZEN_FALLBACK
 pacman -S --noconfirm plymouth
 $EFIBOOTMGR_UKI_ZEN
 

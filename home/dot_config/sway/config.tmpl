@@ -30,8 +30,14 @@ input type:touchpad {
 	natural_scroll enabled
 	drag_lock disabled
 }
-bindgesture swipe:3:right workspace prev
-bindgesture swipe:3:left workspace next
+bindgesture swipe:3:right workspace prev_on_output
+bindgesture swipe:3:left workspace next_on_output
+bindgesture swipe:3:up fullscreen toggle
+bindgesture swipe:3:down fullscreen toggle
+bindgesture swipe:4:right move right
+bindgesture swipe:4:left move left
+bindgesture swipe:4:up move up
+bindgesture swipe:4:down move down
 # CHUWI MiniBook X N100
 input 1046:9110:Goodix_Capacitive_TouchScreen map_to_output DSI-1
 
@@ -53,6 +59,7 @@ client.urgent #00000000 #{{.col_warn}}88 #00000000 #{{.col_warn}}88
 # misc
 focus_on_window_activation focus
 
+
 # rule
 # rule.window
 ## rule.window.opacity
@@ -60,6 +67,7 @@ focus_on_window_activation focus
 ## for_window [app_id="^at\.yrlf\.wl_mirror$"] opacity 1
 # rule.window.float
 for_window [title="^float$"] floating enable
+for_window [app_id="^mpv-shallow$"] move scratchpad
 
 
 # apps

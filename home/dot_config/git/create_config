@@ -1,9 +1,3 @@
-#!/bin/bash
-tempfile="$(mktemp)"
-trap 'rm -rf "${tempfile}"' EXIT
-cat > "${tempfile}"
-
-[ -s ${tempfile} ]||cat << EOF
 [core]
     pager = delta
 
@@ -16,6 +10,3 @@ cat > "${tempfile}"
 
 [merge]
     conflictstyle = zdiff3
-EOF
-
-cat "${tempfile}"

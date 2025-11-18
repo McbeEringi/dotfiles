@@ -12,7 +12,7 @@ LANG=C
 	iwgtk pavucontrol qt5ct qt6ct kvantum-qt5 kvantum wdisplays
 	gnome-themes-extra papirus-icon-theme bibata-cursor-theme-bin
 	noto-fonts noto-fonts-cjk noto-fonts-emoji otf-monaspace ttf-nerd-fonts-symbols-common otf-kikai-chokoku-jis
-	fcitx5 fcitx5-gtk fcitx5-qt fcitx5-skk
+	fcitx5 fcitx5-gtk fcitx5-qt fcitx5-skk skk-emoji-jisyo
 	btop smartmontools lsplug powertop
 	arch-install-scripts exfatprogs ntfs-3g cdrtools chezmoi npm
 	sway swayidle swaylock-effects idlehack autotiling-rs

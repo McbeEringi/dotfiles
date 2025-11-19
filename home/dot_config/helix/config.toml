@@ -1,0 +1,9 @@
+theme='onedark'
+[editor]
+cursorline=true
+continue-comments=false
+auto-format=false
+[editor.cursor-shape]
+insert='bar'
+[editor.whitespace]
+render='all'

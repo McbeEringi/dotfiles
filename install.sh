@@ -14,7 +14,7 @@ echo
 [ $CPU_VENDOR ] || CPU_VENDOR=$(grep 'model name' /proc/cpuinfo|grep -Pio -m1 'intel|amd'|awk '{print tolower($0)}');echo CPU_VENDOR	$CPU_VENDOR
 [ $GPU_VENDOR ] || GPU_VENDOR=$(lspci|grep -Pio -m1 'vga compatible.*\K(intel|amd)'|awk '{print tolower($0)}');echo GPU_VENDOR	$GPU_VENDOR # nvidia
 [ $HOST_NAME ] && echo HOST_NAME	$HOST_NAME || echo HOST_NAME_UNSET
-[ $WINDOWS_BLKNUM ] && echo WINDOWS_BLKNUM	$WINDOWS_BLKNUM || echo WINDOWS_BLKNUM_UNSET
+[ $WINDOWS_FSNUM ] && echo WINDOWS_FSNUM	$WINDOWS_FSNUM || echo WINDOWS_FSNUM_UNSET
 echo
 read -p "Are you sure you want to continue? [yes] " ans;[[ $ans != 'yes' ]] && exit
 
@@ -72,7 +72,7 @@ efi /shellx64.efi
 options -nointerrupt -noconsolein -noconsoleout windows.nsh
 _EOF
 "
-BOOT_WINDOWS_NSH="echo BLK${WINDOWS_BLKNUM}:EFI\\\\Microsoft\\\\Boot\\\\Bootmgfw.efi|tee /boot/windows.nsh"
+BOOT_WINDOWS_NSH="echo FS${WINDOWS_FSNUM}:EFI\\\\Microsoft\\\\Boot\\\\Bootmgfw.efi|tee /boot/windows.nsh"
 ETC_CMDLINE_D="\
 mkdir /etc/cmdline.d
 echo 'root=$ROOT_UUID rw' |tee /etc/cmdline.d/10-root.conf
@@ -116,7 +116,7 @@ cp /usr/share/edk2-shell/x64/Shell_Full.efi /boot/shellx64.efi
 bootctl update
 $BOOTCTL_LOADER_CONF
 $BOOTCTL_ENTRIES_ARCH_ZEN_CONF
-$([[ $WINDOWS_BLKNUM ]] && echo "${BOOTCTL_ENTRIES_WINDOWS_CONF}${BOOT_WINDOWS_NSH}")
+$([[ $WINDOWS_FSNUM ]] && echo "${BOOTCTL_ENTRIES_WINDOWS_CONF}${BOOT_WINDOWS_NSH}")
 
 $ETC_CMDLINE_D
 $MKINITCPIO_UKI_PRESET_ZEN

@@ -60,6 +60,7 @@ linux /vmlinuz-linux-zen
 initrd /initramfs-linux-zen.img
 options root=$ROOT_UUID rw
 options quiet splash
+options acpi.ec_no_wakeup=1
 # options i915.enable_fbc=0 i915.enable_psr=0 i915.enable_dc=0
 $([[ $SWAP_UUID ]] || echo '# ')options resume=$SWAP_UUID
 # options video=DSI-1:panel_orientation=right_side_up
@@ -76,6 +77,7 @@ ETC_CMDLINE_D="\
 mkdir /etc/cmdline.d
 echo 'root=$ROOT_UUID rw' |tee /etc/cmdline.d/10-root.conf
 echo 'quiet splash' |tee /etc/cmdline.d/20-misc.conf
+echo 'acpi.ec_no_wakeup=1' |tee /etc/cmdline.d/30-ec_no_wakeup.conf
 # echo 'i915.enable_fbc=0 i915.enable_psr=0 i915.enable_dc=0' |tee /etc/cmdline.d/30-i915.conf
 $([[ $SWAP_UUID ]] || echo '# ')echo 'resume=$SWAP_UUID' |tee /etc/cmdline.d/40-resume.conf
 "

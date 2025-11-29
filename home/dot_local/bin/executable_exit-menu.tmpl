@@ -1,6 +1,7 @@
 #!/bin/bash
 # RESUME=$(cat /proc/cmdline|grep -oP 'resume=\K\S+')
 [[ $EXIT ]]||EXIT=${1:-'loginctl terminate-session self'}
-SWAP=$(swapon --show=SIZE --noheadings --bytes) # [[ $RESUME ]]&&
-RAM=$(free -b|grep -oP 'Mem:\s+\K\d+')
-eval $(echo -e "loginctl lock-session ;: lock\nloginctl lock-session ; sleep 1 ; dpms\n$EXIT ;: exit logout\nsystemctl poweroff ;: power\nreboot\nsystemctl suspend$((($RAM<${SWAP:-0}))&&echo '\nsystemctl hibernate')"|{{.menu}} -d -k /dev/null -p "exit..." -r "echo '%s'|awk 'NF{printf \"img:$HOME/.local/share/octicons/%%s.svg:text:%%s\",\$NF,\$NF}'")
+FREE=$(free -b)
+SWAP=$(echo $FREE|grep -oP 'Swap:\s+\d+\s+\d+\s+\K\d+') # $(swapon --show=SIZE --noheadings --bytes) # ${SWAP:-0} # [[ $RESUME ]]&&
+RAM=$(echo $FREE|grep -oP 'Mem:\s+\d+\s+\K\d+')
+eval $(echo -e "loginctl lock-session ;: lock\nloginctl lock-session ; sleep 1 ; dpms\n$EXIT ;: exit logout\nsystemctl poweroff ;: power\nreboot\nsystemctl suspend$((($RAM<$SWAP))&&echo '\nsystemctl hibernate')"|{{.menu}} -d -k /dev/null -p "exit..." -r "echo '%s'|awk 'NF{printf \"img:$HOME/.local/share/octicons/%%s.svg:text:%%s\",\$NF,\$NF}'")

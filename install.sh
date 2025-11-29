@@ -40,11 +40,10 @@ BOOT_UUID=$(grep -oP 'UUID=\K\S+(?=\s+\/boot\s)' /mnt/etc/fstab)
 BOOT_PKNAME=$(lsblk -nro UUID,PKNAME|grep -oP "$BOOT_UUID\s\K.+")
 BOOT_PARTN=$(lsblk -nro UUID,PARTN| grep -oP "$BOOT_UUID\s\K.+")
 ROOT_UUID=$(grep -oP 'UUID=\S+(?=\s+\/\s)' /mnt/etc/fstab)
-SWAP_UUID=$(grep -oP 'UUID=\S+(?=.+?swap)' /mnt/etc/fstab)
+# SWAP_UUID=$(grep -oP 'UUID=\S+(?=.+?swap)' /mnt/etc/fstab)
 
 LOCALE_GEN_MODIFY="sed -i -E 's/#($LOCALE_GEN)/\1/g' /etc/locale.gen"
 MAKEPKG_CONF_MODIFY="sed -i -E -e's/^(COMPRESSZST=\(zstd -c -T0).*?( -\))/\1\2/' -e's/^#(MAKEFLAGS=.*)/\1/' /etc/makepkg.conf"
-MKINITCPIO_CONF_MODIFY="sed -i -E 's/^(HOOKS=\(base)( udev.+?filesystems)( fsck\))/\1 plymouth\2$([[ $SWAP_UUID ]] && echo ' resume')\3/' /etc/mkinitcpio.conf"
 SUDOERS_MODIFY="sed -i -E 's/# (Defaults env_keep \+= "HOME"|%wheel ALL=\(ALL:ALL\) ALL)/\1/g' /etc/sudoers"
 
 BOOTCTL_LOADER_CONF="cat <<_EOF |tee /boot/loader/loader.conf
@@ -62,7 +61,6 @@ options root=$ROOT_UUID rw
 options quiet splash
 options acpi.ec_no_wakeup=1
 # options i915.enable_fbc=0 i915.enable_psr=0 i915.enable_dc=0
-$([[ $SWAP_UUID ]] || echo '# ')options resume=$SWAP_UUID
 # options video=DSI-1:panel_orientation=right_side_up
 _EOF
 "
@@ -79,7 +77,6 @@ echo 'root=$ROOT_UUID rw' |tee /etc/cmdline.d/10-root.conf
 echo 'quiet splash' |tee /etc/cmdline.d/20-misc.conf
 echo 'acpi.ec_no_wakeup=1' |tee /etc/cmdline.d/30-ec_no_wakeup.conf
 # echo 'i915.enable_fbc=0 i915.enable_psr=0 i915.enable_dc=0' |tee /etc/cmdline.d/30-i915.conf
-$([[ $SWAP_UUID ]] || echo '# ')echo 'resume=$SWAP_UUID' |tee /etc/cmdline.d/40-resume.conf
 "
 MKINITCPIO_UKI_PRESET_ZEN="
 curl -sL http://mcbeeringi.dev/dotfiles/root/etc/mkinitcpio.d/uki.preset -o /etc/mkinitcpio.d/uki.preset
@@ -90,6 +87,9 @@ curl -sL http://mcbeeringi.dev/dotfiles/root/etc/osrel-zen-uki -o /etc/osrel-zen
 MKIITCPIO_DISABLE_ZEN_FALLBACK="
 sed -i -E "s/\s*'fallback'//" /etc/mkinitcpio.d/linux-zen.preset
 rm -f /boot/*-fallback.img
+"
+HIBERNATION_IMAGE_SIZE="
+curl -sL http://mcbeeringi.dev/dotfiles/root/etc/tmpfiles.d/hibernation_image_size.conf -o /etc/tmpfiles.d/hibernation_image_size.conf
 "
 EFIBOOTMGR_UKI_ZEN="efibootmgr -d /dev/$BOOT_PKNAME -p $BOOT_PARTN -c -L arch-zen -l '\EFI\Linux\arch-zen.efi'"
 BASH_HIST="cat <<_EOF |tee /home/$USER_NAME/.bash_history
@@ -110,7 +110,7 @@ echo KEYMAP=$KEYMAP|tee /etc/vconsole.conf # localectl set-keymap $KEYMAP
 $([[ $HOST_NAME ]] || echo '# ')echo $HOST_NAME|tee /etc/hostname
 $PACMAN_CONF_MODIFY
 $MAKEPKG_CONF_MODIFY
-$MKINITCPIO_CONF_MODIFY
+$HIBERNATION_IMAGE_SIZE
 
 cp /usr/share/edk2-shell/x64/Shell_Full.efi /boot/shellx64.efi
 bootctl update

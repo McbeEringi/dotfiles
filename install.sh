@@ -44,6 +44,7 @@ ROOT_UUID=$(grep -oP 'UUID=\S+(?=\s+\/\s)' /mnt/etc/fstab)
 
 LOCALE_GEN_MODIFY="sed -i -E 's/#($LOCALE_GEN)/\1/g' /etc/locale.gen"
 MAKEPKG_CONF_MODIFY="sed -i -E -e's/^(COMPRESSZST=\(zstd -c -T0).*?( -\))/\1\2/' -e's/^#(MAKEFLAGS=.*)/\1/' /etc/makepkg.conf"
+MKINITCPIO_CONF_MODIFY="sed -i -E -e's/^(HOOKS=\(base)/\1 plymouth/' /etc/mkinitcpio.conf"
 SUDOERS_MODIFY="sed -i -E 's/# (Defaults env_keep \+= "HOME"|%wheel ALL=\(ALL:ALL\) ALL)/\1/g' /etc/sudoers"
 
 BOOTCTL_LOADER_CONF="cat <<_EOF |tee /boot/loader/loader.conf
@@ -59,7 +60,7 @@ linux /vmlinuz-linux-zen
 initrd /initramfs-linux-zen.img
 options root=$ROOT_UUID rw
 options quiet splash
-options acpi.ec_no_wakeup=1
+# options acpi.ec_no_wakeup=1
 # options i915.enable_fbc=0 i915.enable_psr=0 i915.enable_dc=0
 # options video=DSI-1:panel_orientation=right_side_up
 _EOF
@@ -75,7 +76,7 @@ ETC_CMDLINE_D="\
 mkdir /etc/cmdline.d
 echo 'root=$ROOT_UUID rw' |tee /etc/cmdline.d/10-root.conf
 echo 'quiet splash' |tee /etc/cmdline.d/20-misc.conf
-echo 'acpi.ec_no_wakeup=1' |tee /etc/cmdline.d/30-ec_no_wakeup.conf
+# echo 'acpi.ec_no_wakeup=1' |tee /etc/cmdline.d/30-ec_no_wakeup.conf
 # echo 'i915.enable_fbc=0 i915.enable_psr=0 i915.enable_dc=0' |tee /etc/cmdline.d/30-i915.conf
 "
 MKINITCPIO_UKI_PRESET_ZEN="
@@ -110,6 +111,7 @@ echo KEYMAP=$KEYMAP|tee /etc/vconsole.conf # localectl set-keymap $KEYMAP
 $([[ $HOST_NAME ]] || echo '# ')echo $HOST_NAME|tee /etc/hostname
 $PACMAN_CONF_MODIFY
 $MAKEPKG_CONF_MODIFY
+$MKINITCPIO_CONF_MODIFY
 $HIBERNATION_IMAGE_SIZE
 
 cp /usr/share/edk2-shell/x64/Shell_Full.efi /boot/shellx64.efi

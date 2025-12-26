@@ -149,7 +149,11 @@ bind = $mainMod, M, exec, exit-menu 'hyprctl dispatch exit'
 bind = $mainMod, V, exec, cliphist-menu
 bind = $mainMod, P, exec, wl-mirror-menu
 bind = $mainMod SHIFT, C, exec, hyprpicker -a
-bindl= $mainMod , escape, exec, hypr-gb-fsh
+
+# shaders
+bindl= $mainMod , escape, exec, hypr-shader
+bindl= $mainMod , F1, exec, hypr-shader gb.frag
+bindl= $mainMod , F2, exec, hypr-shader sunlight.frag
 
 # window
 # window.move

@@ -1,0 +1,6 @@
+#!/bin/bash
+# fsh=$(hyprctl getoption decoration:screen_shader|head -n1|awk '{print $2}')
+# hyprctl keyword decoration:screen_shader "$([[ $fsh != "$1" ]]&&echo "$1")"
+# hyprctl keyword cursor:no_hardware_cursors "$([[ $fsh != "$1" ]]&&echo '1'||echo '2')"
+hyprctl keyword decoration:screen_shader "$1"
+hyprctl keyword cursor:no_hardware_cursors "$([[ "$1" ]]&&echo '1'||echo '2')"

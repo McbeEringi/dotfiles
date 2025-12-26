@@ -9,8 +9,17 @@ out vec4 col;
 vec3 gb(vec3 col){
 	float step=4.;
 	vec3 panel_col=vec3(.6,.8,.2);
+	float[16] m=float[](
+		0.,8.,2.,10.,
+		12.,4.,14.,6.,
+		3.,11.,1.,9.,
+		15.,7.,13.,5.
+	);
 
-	float gray=clamp(dot(col,vec3(.298912,.586611,.114478)),.01,1.);
+	int grid=int(dot(floor(fract(v_texcoord*screen_size*.25)*4.),vec2(1,4)));
+	float gray=dot(col,vec3(.299,.587,.114));
+	gray=clamp(gray*2.-1.+(m[grid]+.5)*.0625,.01,1.);
+
 	return panel_col*ceil(gray*step)/step;
 }
 

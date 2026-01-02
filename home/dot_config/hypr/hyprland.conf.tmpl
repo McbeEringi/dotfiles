@@ -109,33 +109,33 @@ plugin{
 # rule
 # rule.window
 # rule.window.color
-windowrulev2 = bordercolor rgba({{.col_nop}}88),xwayland:1
+windowrule = match:xwayland true, border_color rgba({{.col_nop}}88)
 # rule.window.opacity
-windowrulev2 = opacity 0.9 override 0.8 override,class:^$terminal|^($fileManager|$menu)$
-windowrulev2 = opaque,class:^at\.yrlf\.wl_mirror$
+windowrule = match:class ^$terminal|^($fileManager|$menu)$, opacity 0.9 0.8
+windowrule = match:class ^at\.yrlf\.wl_mirror$, opaque on
 # rule.window.focus
-windowrulev2 = stayfocused,class:^$menu$
-windowrulev2 = stayfocused,class:.*polkit.*
+windowrule = match:class ^$menu$, stay_focused on
+windowrule = match:class .*polkit.*, stay_focused on
 # rule.window.float
-windowrulev2 = float,title:^float$
+windowrule = match:title ^float$, float on
 # rule.window.polkit
-windowrulev2 = float,class:.*polkit.*
+windowrule = match:class .*polkit.*, float on
 # rule.window.mpv
-windowrulev2 = pseudo,class:^mpv|mpv-shallow$
-windowrulev2 = workspace special:s,class:^mpv$
-windowrulev2 = size 256 256,class:^mpv-shallow$
-windowrulev2 = workspace special:s silent,class:^mpv-shallow$
+windowrule = match:class ^mpv|mpv-shallow$, pseudo on
+windowrule = match:class ^mpv$, workspace special:s
+windowrule = match:class ^mpv-shallow$, size 256 256
+windowrule = match:class ^mpv-shallow$, workspace special:s silent
 # rule.window.misc
-windowrulev2 = suppressevent maximize, class:.*
+windowrule = match:class .*, suppress_event maximize
 
 # rule.layer
 # rule.layer.waybar
-layerrule = blur,.*bar.*
-layerrule = blurpopups,.*bar.*
-layerrule = ignorezero,.*bar.*
+layerrule = match:namespace .*bar.*, blur on
+layerrule = match:namespace .*bar.*, blur_popups on
+layerrule = match:namespace .*bar.*, ignore_alpha 0.05
 # rule.layer.notifications
-layerrule = blur,notifications
-layerrule = ignorezero,notifications
+layerrule = match:namespace notifications, blur on
+layerrule = match:namespace notifications, ignore_alpha 0.05
 
 # apps
 bind = $mainMod, C, killactive, 

@@ -9,6 +9,6 @@ out vec4 col;
 void main(){
 	vec4 x=texture(tex,v_texcoord);
 
-	col=vec4(vec3(1)-clamp(dot(x.rgb,vec3(.299,.587,.114)),0.,1.)*x.a,x.a);
+	col=vec4((vec3(1)-clamp(dot(x.rgb,vec3(.299,.587,.114)),0.,1.))*x.a,x.a);
 }
 

@@ -26,7 +26,7 @@ void main(){
 	vec4 x=texture(tex,v_texcoord);
 	vec3 hsv=rgb2hsv(x.rgb);
 
-	col=vec4(hsv2rgb(vec3(hsv.xy*vec2(1.,.2),1.-hsv.z))*x.a,x.a);
+	col=vec4(hsv2rgb(vec3(hsv.xy*vec2(1.,.5),1.-hsv.z))*x.a,x.a);
 	// col=vec4((vec3(1)-clamp(dot(x.rgb,vec3(.299,.587,.114)),0.,1.))*x.a,x.a);
 }
 

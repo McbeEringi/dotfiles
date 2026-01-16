@@ -17,7 +17,7 @@ LANG=C
 	arch-install-scripts exfatprogs ntfs-3g cdrtools chezmoi npm
 	sway swayidle swaylock-effects idlehack autotiling-rs
 	firefox neovim gimp satty mpv mpv-mpris imv imagemagick
-	cowsay nyancat figlet cmatrix neofetch pipes.sh sl
+	cowsay nyancat figlet cmatrix fastfetch pipes.sh sl
 	zsh zsh-autosuggestions zsh-completions zsh-syntax-highlighting
 	cups ghostscript
 '

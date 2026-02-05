@@ -8,12 +8,6 @@
 - [setup.sh](#setupsh) : dotfile setup script with recommended packages
 - [kde.sh](#kdesh) : [KDE Plasma](https://kde.org/plasma-desktop/) setup script
 
-also includes donfigs for additional WM
-
-- [river](https://codeberg.org/river/river)
-    - [kanshi](https://gitlab.freedesktop.org/emersion/kanshi) for monitor mng
-- [labwc](https://labwc.github.io/)
-    - kanshi for mon mng
 
 ## dotfiles
 
@@ -115,7 +109,7 @@ ROOT_PASS=password USER_NAME=user bash <(curl -s https://mcbeeringi.dev/dotfiles
   auto detected from lspci
 - HOST_NAME: hostname
   default is unset
-- WINDOWS_BLKNUM: block device number (partition number) of windows EFI partition
+- WINDOWS_FSNUM: file system number of windows EFI partition
   add boot entry for windows to systemd-boot.
   if you already installed windows, set this to `1`.
   default is unset

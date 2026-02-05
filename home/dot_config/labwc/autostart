@@ -1,6 +1,0 @@
-{
-	fcitx5 -d & mako & /usr/lib/xfce-polkit/xfce-polkit &\
-	hyprpaper & hypridle & waybar -c ~/.config/waybar/wlroots.jsonc & wlsunset -l 35.7 -L 139.7 & batt-notify &\
-	wl-paste --watch cliphist store &\
-	kanshi
-}>/dev/null 2>&1 &

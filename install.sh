@@ -31,7 +31,7 @@ pacstrap -K /mnt base linux-zen linux-zen-headers linux-firmware dosfstools btrf
 )$(
 	([ "$GPU_VENDOR" == 'intel' ] && echo 'intel-media-driver intel-gpu-tools vulkan-intel ') ||
 	([ "$GPU_VENDOR" == 'amd' ] && echo 'mesa vulkan-radeon ')
-)efibootmgr edk2-shell sudo nano git openssh man-db base-devel iwd bluez bluez-utils sof-firmware reflector keyd kexec-tools
+)efibootmgr edk2-shell sudo nano git openssh man-db base-devel iwd bluez bluez-utils sof-firmware keyd kexec-tools
 cp /etc/systemd/network/* /mnt/etc/systemd/network
 mkdir /mnt/var/lib/iwd;cp -r /var/lib/iwd/* /mnt/var/lib/iwd
 bootctl install --esp-path=/mnt/boot
@@ -80,17 +80,54 @@ echo 'quiet splash' |tee /etc/cmdline.d/20-misc.conf
 # echo 'i915.enable_fbc=0 i915.enable_psr=0 i915.enable_dc=0' |tee /etc/cmdline.d/30-i915.conf
 "
 MKINITCPIO_UKI_PRESET_ZEN="
-curl -sL http://mcbeeringi.dev/dotfiles/root/etc/mkinitcpio.d/uki.preset -o /etc/mkinitcpio.d/uki.preset
+cat <<_EOF |tee /etc/mkinitcpio.d/uki.preset
+# mkinitcpio preset file for uki
+
+PRESETS=('uki_zen')
+
+uki_zen_uki=\"/boot/EFI/Linux/arch-zen.efi\"
+uki_zen_kver=\"/boot/vmlinuz-linux-zen\"
+uki_zen_options=\"--splash /sys/firmware/acpi/bgrt/image --osrelease /etc/osrel-zen-uki\"
+_EOF
+
 mkdir -p /etc/pacman.d/hooks
-curl -sL http://mcbeeringi.dev/dotfiles/root/etc/pacman.d/hooks/uki.hook -o /etc/pacman.d/hooks/uki.hook
-curl -sL http://mcbeeringi.dev/dotfiles/root/etc/osrel-zen-uki -o /etc/osrel-zen-uki
+cat <<_EOF |tee /etc/pacman.d/hooks/uki.hook
+[Trigger]
+Type = Path
+Operation = Install
+Operation = Upgrade
+Operation = Remove
+Target = usr/lib/initcpio/*
+Target = usr/lib/firmware/*
+Target = usr/src/*/dkms.conf
+Target = usr/lib/systemd/systemd
+Target = usr/bin/cryptsetup
+Target = usr/bin/lvm
+
+[Trigger]
+Type = Path
+Operation = Install
+Operation = Upgrade
+Target = usr/lib/modules/*/vmlinuz
+
+[Trigger]
+Type = Package
+Operation = Install
+Operation = Upgrade
+Target = mkinitcpio
+Target = mkinitcpio-git
+
+[Action]
+Description = Updating UKI...
+When = PostTransaction
+Exec = /usr/bin/mkinitcpio -p uki
+_EOF
+
+echo 'PRETTY_NAME=\"Arch Linux w/ ZEN Kernel *UKI*\"' |tee /etc/osrel-zen-uki
 "
 MKIITCPIO_DISABLE_ZEN_FALLBACK="
 sed -i -E "s/\s*'fallback'//" /etc/mkinitcpio.d/linux-zen.preset
 rm -f /boot/*-fallback.img
-"
-HIBERNATION_IMAGE_SIZE="
-curl -sL http://mcbeeringi.dev/dotfiles/root/etc/tmpfiles.d/hibernation_image_size.conf -o /etc/tmpfiles.d/hibernation_image_size.conf
 "
 EFIBOOTMGR_UKI_ZEN="efibootmgr -d /dev/$BOOT_PKNAME -p $BOOT_PARTN -c -L arch-zen -l '\EFI\Linux\arch-zen.efi'"
 BASH_HIST="cat <<_EOF |tee /home/$USER_NAME/.bash_history
@@ -112,7 +149,6 @@ $([[ $HOST_NAME ]] || echo '# ')echo $HOST_NAME|tee /etc/hostname
 $PACMAN_CONF_MODIFY
 $MAKEPKG_CONF_MODIFY
 $MKINITCPIO_CONF_MODIFY
-$HIBERNATION_IMAGE_SIZE
 
 cp /usr/share/edk2-shell/x64/Shell_Full.efi /boot/shellx64.efi
 bootctl update

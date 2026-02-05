@@ -1,2 +1,0 @@
-#!/bin/bash
-jq -s 'if .==[]then {} else .[0] end|.+{OPEN_ON_STARTUP:false,MINIMIZE_TO_TRAY:false}'

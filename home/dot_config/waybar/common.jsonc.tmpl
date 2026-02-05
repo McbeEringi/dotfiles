@@ -2,7 +2,7 @@
 	"layer":"top","position":"top",
 
 	"modules-center":["clock"],
-	"modules-right":["mpris","tray","network","wireplumber","backlight","cpu","memory","battery"],
+	"modules-right":["mpris","tray","network","wireplumber","backlight","group/resources"],
 
 	"wlr/taskbar":{
 		"all-outputs":true,
@@ -13,20 +13,37 @@
 	"clock":{
 		"format":"{:%y-%m-%d %H:%M}",
 		"locale":"C.UTF8",
-		"tooltip-format":"{calendar}"
+		"tooltip-format":"<small>{calendar}</small>",
+		"calendar":{
+			"mode":"year",
+			"mode-mon-col":4,
+			"weeks-pos":"left",
+			"format":{
+				"months":"<span alpha=\"100%\">{}</span>",
+				"days":"<span alpha=\"50%\">{}</span>",
+				"weeks":"<b>{}</b>",
+				"weekdays":"<b>{}</b>",
+				"today":"<span bgcolor=\"#f44\" alpha=\"100%\"><b>{}</b></span>"
+			}
+		}
 	},
 
+	"group/resources":{
+		"orientation":"inherit",
+		"modules":["battery","cpu","memory"],
+		"drawer":{"transition-left-to-right":false}
+	},
 	"battery":{
 		"format":"<small>B</small>{icon}",
 		"format-charging":"<small>C</small>{icon}",
 		"format-notcharging":"<small>N</small>{icon}",
 		"format-low":"{capacity}",
-		"tooltip-format":"Battery: {capacity}%\n{timeTo}","format-time":"{H}:{m}",
+		"tooltip-format":"Battery: {capacity}%\n\n{timeTo}","format-time":"{H}:{m}",
 		"states":{"high":100,"_":95,"low":15},
 		"format-icons":["\u2800","⡀","⣀","⣄","⣤","⣦","⣶","⣷","⣿"]
 	},
 	"memory":{
-		"format":"<small>M</small>{icon}","tooltip-format":"RAM: {percentage}%\n\nUsed: {used}G\nTotal: {total}G",
+		"format":"<small>M</small>{icon}","tooltip-format":"  RAM: {percentage}%\n\n Used: {used} G\nTotal: {total} G",
 		"format-icons":["\u2800","⡀","⣀","⣄","⣤","⣦","⣶","⣷","⣿"]
 	},
 	"cpu":{
@@ -34,19 +51,19 @@
 		"format-icons":["\u2800","⡀","⣀","⣄","⣤","⣦","⣶","⣷","⣿"]
 	},
 	"backlight":{
-		"format":"<small>L</small>{icon}","tooltip-format":"Luminance: {percent}%","reverse-scrolling":true,
+		"format":"<small>L</small>{icon}","tooltip-format":"{percent}%","reverse-scrolling":true,
 		"format-icons":["\u2800","⡀","⣀","⣄","⣤","⣦","⣶","⣷","⣿"]
 	},
 	"wireplumber":{
-		"format":"<small>V</small>{icon}","tooltip-format":"Volume: {volume}%","reverse-scrolling":-1,
+		"format":"<small>V</small>{icon}","tooltip-format":"{node_name}\n{volume}%","reverse-scrolling":-1,
 		"format-icons":["\u2800","⡀","⣀","⣄","⣤","⣦","⣶","⣷","⣿"],
 		"on-click":"pavucontrol"
 	},
 	"network":{
 		"format-wifi":"<small>W</small>{icon}",
 		"format-ethernet":"<small>E</small>",
-		"tooltip-format":"{ipaddr}",
-		"tooltip-format-wifi":"{essid}\n{ipaddr}",
+		"tooltip-format":"{ipaddr}/{cidr}",
+		"tooltip-format-wifi":"{essid}\n{ipaddr}/{cidr}",
 		"format-linked":"<small>?</small>",
 		"format-disconnected":"<small>NC</small>",
 		"on-click":"{{.wlan}}",
@@ -56,6 +73,7 @@
 		"format":"<small>{title}</small>",
 		"tooltip-format":"{dynamic}",
 		"dynamic-order":["title","artist","album"],
+		"dynamic-separator":"\n\n",
 		"title-len":4,
 		"ellipsis":""
 	}

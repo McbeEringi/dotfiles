@@ -1,10 +1,5 @@
 [{
 	"include":["~/.config/waybar/common.jsonc"],
-	"modules-left":["hyprland/workspaces","group/apps"],
-	"group/apps":{
-		"orientation":"inherit",
-		"modules":["hyprland/window","wlr/taskbar"],
-		"drawer":{"transition-left-to-right":false}
-	},
+	"modules-left":["hyprland/workspaces","hyprland/window"],
 	"hyprland/window":{"format":"{class}"}
 }]

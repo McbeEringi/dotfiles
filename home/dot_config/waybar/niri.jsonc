@@ -1,10 +1,5 @@
 [{
 	"include":["~/.config/waybar/common.jsonc"],
-	"modules-left":["niri/workspaces","group/apps"],
-	"group/apps":{
-		"orientation":"inherit",
-		"modules":["niri/window","wlr/taskbar"],
-		"drawer":{"transition-left-to-right":false}
-	},
+	"modules-left":["niri/workspaces","niri/window"],
 	"niri/window":{"format":"{app_id}"}
 }]

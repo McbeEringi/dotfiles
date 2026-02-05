@@ -1,6 +1,6 @@
 $terminal = {{.terminal}}
 $fileManager = {{.fileManager}}
-$menu = {{.menu}}
+$drun = {{.drun}}
 $wlan = {{.wlan}}
 $mainMod = {{.mainMod}}
 
@@ -111,10 +111,9 @@ plugin{
 # rule.window.color
 windowrule = match:xwayland true, border_color rgba({{.col_nop}}88)
 # rule.window.opacity
-windowrule = match:class ^$terminal|^($fileManager|$menu)$, opacity 0.9 0.8
+windowrule = match:class ^$terminal|^$fileManager$, opacity 0.9 0.8
 windowrule = match:class ^at\.yrlf\.wl_mirror$, opaque on
 # rule.window.focus
-windowrule = match:class ^$menu$, stay_focused on
 windowrule = match:class .*polkit.*, stay_focused on
 # rule.window.float
 windowrule = match:title ^float$, float on
@@ -142,8 +141,7 @@ bind = $mainMod, C, killactive,
 bind = $mainMod, Q, exec, $terminal
 bind = $mainMod, SPACE, exec, [float] $terminal node
 bind = $mainMod, E, exec, $fileManager
-bind = $mainMod, R, exec, $menu
-bind = $mainMod SHIFT, R, exec, [float;pin] fdbk-menu
+bind = $mainMod, R, exec, $drun
 bind = $mainMod, W, exec, $wlan
 bind = $mainMod, M, exec, exit-menu 'hyprctl dispatch exit'
 bind = $mainMod, V, exec, cliphist-menu

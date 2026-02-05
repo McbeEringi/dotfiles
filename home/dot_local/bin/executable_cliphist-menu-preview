@@ -1,8 +1,0 @@
-#!/bin/bash
-IMGSIZE='128x72'
-REX='^([0-9]+)	\[\[ binary data ([0-9]+ ([KMG]i)?B) ([a-z]+) ([0-9]+x[0-9]+) \]\]$'
-[[ $1 =~ $REX ]]&&
-	printf "img-base64-noscale:data:image/png;base64,$(
-		printf "$1"|cliphist decode|magick - -resize $IMGSIZE -background transparent -gravity center -extent $IMGSIZE png:-|base64
-		):text:${BASH_REMATCH[1]} ${BASH_REMATCH[4]} (${BASH_REMATCH[2]}, ${BASH_REMATCH[5]})"||
-	printf "$1"

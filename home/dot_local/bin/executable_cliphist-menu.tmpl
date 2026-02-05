@@ -1,2 +1,2 @@
 #!/bin/bash
-cliphist list | {{.menu}} -W960 -H960 -d -k /dev/null -p "clipboard..." -r "cliphist-menu-preview '%s'" | cliphist decode | wl-copy
+cliphist list | {{.dmenu}} --width 960 --height 960 --placeholder-text "clipboard..." | cliphist decode | wl-copy

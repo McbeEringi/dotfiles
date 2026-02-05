@@ -3,7 +3,7 @@ trap 'echo;echo exitting...;exit' INT
 LANG=C
 [ $PKGS ] || PKGS='
 	hyprland mako pipewire pipewire-pulse pipewire-jack xdg-desktop-portal-hyprland xfce-polkit qt5-wayland qt6-wayland
-	waybar hyprpaper wofi cliphist grimblast wlsunset wl-mirror brightnessctl
+	waybar hyprpaper tofi cliphist grimblast wlsunset wl-mirror brightnessctl
 	hyprlock hypridle hyprpicker wev evtest
 	greetd greetd-tuigreet
 	thunar gvfs thunar-volman thunar-media-tags-plugin tumbler ffmpegthumbnailer zip unzip 7zip git-delta ripgrep

@@ -1,6 +1,6 @@
 set $terminal {{.terminal}}
 set $fileManager {{.fileManager}}
-set $menu {{.menu}}
+set $drun {{.drun}}
 set $wlan {{.wlan}}
 set $Super Mod4
 set $mainMod ${{camelcase (lower .mainMod)}}
@@ -76,7 +76,7 @@ bindsym $mainMod+C kill
 bindsym $mainMod+Q exec $terminal
 bindsym $mainMod+Space exec $terminal -T float node
 bindsym $mainMod+E exec $fileManager
-bindsym $mainMod+R exec $menu
+bindsym $mainMod+R exec $drun
 bindsym $mainMod+W exec $wlan
 bindsym $mainMod+M exec exit-menu
 bindsym $mainMod+V exec cliphist-menu

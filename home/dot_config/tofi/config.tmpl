@@ -1,0 +1,34 @@
+font = "/usr/share/fonts/noto-cjk/NotoSansCJK-Bold.ttc"
+font-size = 12
+
+text-color = #{{.col_nop}}
+prompt-color = #{{.col_accent}}
+placeholder-color = #{{.col_fg}}88
+selection-color = #{{.col_fg}}
+input-color = #{{.col_fg}}
+selection-match-color = #{{.col_accent}}
+
+text-cursor-style = block
+text-cursor-color = #{{.col_fg}}88
+
+prompt-text = ""
+
+width = 480
+height = 480
+background-color = #{{.col_bg}}cc
+outline-width=0
+border-width = {{.border_width}}
+border-color = #{{.col_accent}}88
+corner-radius = {{add .border_radius .border_width}}
+padding-top = {{.border_radius}}
+padding-bottom = {{.border_radius}}
+padding-left = 0
+padding-right = 0
+
+hide-cursor = true
+text-cursor = true
+drun-launch = true
+
+terminal = {{.terminal}}
+
+	multi-instance = false

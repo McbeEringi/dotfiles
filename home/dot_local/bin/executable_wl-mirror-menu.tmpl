@@ -1,2 +1,2 @@
 #!/bin/bash
-wl-mirror -F $(for x in /sys/class/drm/*/status;do [[ $(cat $x) == "connected" ]]&&echo $x|grep -oP 'card\d+-\K[^/]+';done |sed 's/ /\n/'|{{.dmenu}} --placeholder-text "mirror...")
+wl-mirror -F $(for x in /sys/class/drm/*/status;do [[ $(cat $x) == "connected" ]]&&echo $x|grep -oP 'card\d+-\K[^/]+';done |sed 's/ /\n/'|{{.dmenu}} {{.dmenu_placeholder}} "mirror...")

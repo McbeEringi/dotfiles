@@ -1,0 +1,25 @@
+[main]
+font="monospace:size=8"
+placeholder="launch..."
+prompt=""
+show-actions="yes"
+terminal="foot"
+horizontal-pad={{.border_radius}}
+vertical-pad={{.border_radius}}
+inner-pad={{.gap}}
+[colors]
+background="{{.col_bg}}cc"
+text="{{.col_nop}}ff"
+message="{{.col_accent}}ff"
+prompt="{{.col_accent}}ff"
+placeholder="{{.col_nop}}ff"
+input="{{.col_fg}}ff"
+match="{{.col_accent}}ff"
+selection="{{.col_nop}}88"
+selection-text="{{.col_fg}}ff"
+selection-match="{{.col_accent}}ff"
+border="{{.col_accent}}88"
+[border]
+width={{.border_width}}
+radius={{add .border_radius .border_width}}
+selection-radius={{.border_width}}

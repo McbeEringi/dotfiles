@@ -7,8 +7,9 @@ terminal="foot"
 fileManager="thunar"
 code_editor="nvim"# vim code-oss zed
 modal_editor="nvim"# vim helix
-dmenu="tofi" # to use other apps, make sure that the settings are equivalent to the settings for tofi
-drun="tofi-drun"
+dmenu="fuzzel -d"
+dmenu_placeholder="--placeholder"
+drun="fuzzel"
 wlan="iwgtk"
 mainMod="SUPER"
 

@@ -4,7 +4,7 @@
 FREE=$(free -b)
 SWAP=$(echo $FREE|grep -oP 'Swap:\s+\d+\s+\d+\s+\K\d+') # $(swapon --show=SIZE --noheadings --bytes) # ${SWAP:-0} # [[ $RESUME ]]&&
 RAM=$(echo $FREE|grep -oP 'Mem:\s+\d+\s+\K\d+')
-eval $(cat <<_EOF |{{.dmenu}} --placeholder-text "exit..."
+eval $(cat <<_EOF |{{.dmenu}} {{.dmenu_placeholder}} "exit..."
 loginctl lock-session
 loginctl lock-session ; sleep 1 ; dpms
 : exit; $EXIT

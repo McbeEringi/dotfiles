@@ -19,7 +19,7 @@ input {
 		// accel-profile "flat"
 	}
 	warp-mouse-to-focus
-	focus-follows-mouse
+	focus-follows-mouse max-scroll-amount="33%"
 }
 
 output "eDP-1" {
@@ -43,11 +43,18 @@ layout {
 		width {{.border_width}}
 		active-color "#{{.col_accent}}88"
 		inactive-color "#{{.col_nop}}88"
+		urgent-color "#{{.col_warn}}88"
 	}
-	struts {
-		left 32
-		right 32
+	tab-indicator {
+		width {{.border_width}}
+		gap {{div (sub .gap .border_width) 2}}
+		gaps-between-tabs {{.border_width}}
+		corner-radius {{div .border_width 2}}
 	}
+	// struts {
+	// 	left 32
+	// 	right 32
+	// }
 }
 
 prefer-no-csd
@@ -67,6 +74,10 @@ window-rule {
 	match is-focused=false app-id=r#"^{{.terminal}}|^({{.fileManager}}|wofi)$"#
 	opacity 0.8
 }
+window-rule {
+	match title="^float$"
+	open-floating true
+}
 
 cursor {
 	xcursor-theme "Bibata-Modern-Ice"
@@ -77,13 +88,22 @@ hotkey-overlay {
 	skip-at-startup
 }
 
+recent-windows {
+	highlight {
+		active-color "#{{.col_nop}}"
+		urgent-color "#{{.col_warn}}"
+		padding {{.gap}}
+		corner-radius {{.border_radius}}
+	}
+}
+
 binds {
 	Mod+Shift+Slash { show-hotkey-overlay; }
 
 	// apps
 	Mod+C { close-window; }
 	Mod+Q { spawn "{{.terminal}}"; }
-	Mod+Space { spawn "{{.terminal}}" "node"; }
+	Mod+Space { spawn "{{.terminal}}" "-T float" "node"; }
 	Mod+E { spawn "{{.fileManager}}"; }
 	Mod+R { spawn "{{.drun}}"; }
 	Mod+M { spawn "exit-menu" "niri msg action quit -s"; }
@@ -100,14 +120,13 @@ binds {
 	Mod+Down  { focus-window-or-workspace-down; }
 	Mod+Next  { focus-tiling; }
 	Mod+Prior { focus-floating; }
-	Mod+Shift+Left  { move-column-left; }
-	Mod+Shift+Right { move-column-right; }
+	Mod+Shift+Left  { consume-or-expel-window-left; }
+	Mod+Shift+Right { consume-or-expel-window-right; }
 	Mod+Shift+Up    { move-window-up-or-to-workspace-up; }
 	Mod+Shift+Down  { move-window-down-or-to-workspace-down; }
 	// window.mod
-	Mod+J { consume-or-expel-window-left; }
-	Mod+K { consume-or-expel-window-right; }
 	Mod+F { toggle-window-floating; }
+	Mod+G { toggle-column-tabbed-display; }
 	Mod+Ctrl+F { maximize-column; }
 	F11 { fullscreen-window; }
 

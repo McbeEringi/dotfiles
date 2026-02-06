@@ -1,2 +1,2 @@
 #!/bin/bash
-cliphist list | {{.dmenu}} --width 960 --height 960 --placeholder-text "clipboard..." | cliphist decode | wl-copy
+cliphist list | {{.dmenu}} {{.dmenu_placeholder}} "clipboard..." | cliphist decode | wl-copy

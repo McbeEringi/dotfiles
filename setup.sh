@@ -40,7 +40,7 @@ chezmoi status && {
 	sudo cp -r $(chezmoi data|jq -r .chezmoi.workingTree)/root/* /
 }
 chezmoi apply
-sudo systemctl enable greetd cups
+sudo systemctl enable greetd cups avahi-daemon
 [[ $(cat /etc/passwd|grep -oP "^$USER:.*:\K.*") != "/bin/zsh" ]]&&chsh -s /bin/zsh
 # [[ $(hyprpm list|grep Hyprspace) ]]||{
 # 	yay -S --noconfirm cmake meson cpio

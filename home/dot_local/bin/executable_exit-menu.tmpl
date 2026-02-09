@@ -9,8 +9,8 @@ X=$(
 cat <<_EOF |{{.dmenu}} {{.dmenu_placeholder}} "exit..."
 lock
 dpms
-suspend
-$((($RAM<$SWAP))&&echo 'hibernate')
+suspend\
+$((($RAM<$SWAP))&&echo -e '\nhibernate')
 exit
 kexec
 reboot

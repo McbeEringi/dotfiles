@@ -1,10 +1,7 @@
 #!/bin/bun
 import{totp,migurl}from'@mcbeeringi/petit/totp'
 
-const
-dir=`${Bun.env.HOME}/.totp`,
-urls=`${dir}/urls`;
-
+const urls=`${Bun.env.HOME}/.totp/urls`;
 
 (async(w,x)=>(
 	Bun.stdout.write(x?
@@ -14,5 +11,4 @@ urls=`${dir}/urls`;
 ))(
 	(await Bun.file(urls).text()).split('\n').flatMap(x=>x&&migurl(x).params).reduce((a,x)=>(x&&(a[(x.issuer?`${x.issuer}: `:'')+x.name]=x),a),{}),
 	Bun.argv[2]
-)
-
+);

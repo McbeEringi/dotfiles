@@ -5,6 +5,6 @@
 
 printf ''>urls
 for x in ./img/*; do
-	ZXingReader -single -bytes "$x">>urls
+	ZXingReader -formats QRCode -single -bytes "$x">>urls
 	echo>>urls
 done

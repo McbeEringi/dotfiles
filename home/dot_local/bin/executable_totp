@@ -1,0 +1,18 @@
+#!/bin/bun
+import{totp,migurl}from'@mcbeeringi/petit/totp'
+
+const dir=`${Bun.env.HOME}/.totp`;
+
+Bun.which('ZXingReader')?(async(w,x)=>(
+	Bun.stdout.write(x?
+		await totp(w[x]||Promise.reject(`${x} not found!`)):
+		Object.keys(w).join('\n')
+	)
+))(
+	(await Array.fromAsync(
+		new Bun.Glob('*.{png,PNG,jpg,JPG,jpeg,JPEG}').scanSync({cwd:dir,absolute:true}),
+		async x=>migurl(await Bun.$`ZXingReader -single -bytes "${x}"`.text()).params
+	)).flat().reduce((a,x)=>(a[(x.issuer?`${x.issuer}: `:'')+x.name]=x,a),{}),
+	Bun.argv[2]
+):Promise.reject('ZXingReader binary required!')
+

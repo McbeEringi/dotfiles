@@ -10,7 +10,7 @@ Bun.which('ZXingReader')?(async(w,x)=>(
 	)
 ))(
 	(await Array.fromAsync(
-		new Bun.Glob('*.{png,PNG,jpg,JPG,jpeg,JPEG}').scanSync({cwd:dir,absolute:true}),
+		new Bun.Glob('*.{png,PNG,jpg,JPG,jpeg,JPEG}').scan({cwd:dir,absolute:true}),
 		async x=>migurl(await Bun.$`ZXingReader -single -bytes "${x}"`.text()).params
 	)).flat().reduce((a,x)=>(a[(x.issuer?`${x.issuer}: `:'')+x.name]=x,a),{}),
 	Bun.argv[2]

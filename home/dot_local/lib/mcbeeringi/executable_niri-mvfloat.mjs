@@ -30,11 +30,14 @@ s=(_=>(
 	1<_.length?_.find(x=>x.output==c.output):_[0]
 ))(),
 mv=(win,ws)=>Promise.all(win.map(async x=>({
-	msg:await msg({Action:{MoveWindowToWorkspace:{
+	ipc_msg:await msg({Action:{MoveWindowToWorkspace:{
 		window_id:x.id,focus:false,reference:{Id:ws.id},
 	}}}),
-	window:x
-})));
+	...x
+}))),
+focus_most_recent=win=>((
+	t=x=>(x=x.focus_timestamp,x?x.secs+x.nanos*1e-9:Infinity)
+)=>msg({Action:{FocusWindow:{id:win.sort((a,b)=>t(b)-t(a))[0].id}}}))();
 
 console.log(s?
 	s==c?
@@ -44,7 +47,8 @@ console.log(s?
 		win(s).length?
 			{// show
 				move:await mv(win(s),c),
-				focus:await msg({Action:{FocusFloating:{}}})
+				focus:await focus_most_recent(win(s))
+				// await msg({Action:{FocusFloating:{}}})
 			}:
 			{// hide
 				move:await mv(win(c),s)

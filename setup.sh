@@ -14,7 +14,7 @@ LANG=C
 	noto-fonts noto-fonts-cjk noto-fonts-emoji otf-monaspace ttf-nerd-fonts-symbols-common otf-kikai-chokoku-jis
 	fcitx5 fcitx5-gtk fcitx5-qt fcitx5-skk skk-emoji-jisyo
 	btop smartmontools lsplug powertop power-profiles-daemon libinput-tools socat
-	arch-install-scripts exfatprogs ntfs-3g cdrtools chezmoi npm
+	arch-install-scripts exfatprogs ntfs-3g cdrtools chezmoi npm bun
 	sway swayidle swaylock-effects idlehack autotiling-rs
 	firefox neovim gimp satty mpv mpv-mpris imv imagemagick
 	cowsay nyancat figlet cmatrix fastfetch pipes.sh sl

@@ -67,17 +67,27 @@ window-rule {
 }
 
 window-rule {
-	match is-focused=true app-id=r#"^{{.terminal}}|^({{.fileManager}}|wofi)$"#
+	match is-focused=true app-id=r#"^{{.terminal}}|^{{.fileManager}}$"#
 	match is-focused=false
 	opacity 0.9
 }
 window-rule {
-	match is-focused=false app-id=r#"^{{.terminal}}|^({{.fileManager}}|wofi)$"#
+	match is-focused=false app-id=r#"^{{.terminal}}|^{{.fileManager}}$"#
 	opacity 0.8
 }
 window-rule {
 	match title="^float$"
+	match app-id=".*polkit.*"
+	match app-id="^mpv|mpv-shallow$"
 	open-floating true
+}
+window-rule {
+	match app-id="^mpv-shallow$"
+	// size 256 256
+	default-column-width { fixed 320; }
+	default-window-height { fixed 320; }
+	default-floating-position x={{.gap}} y={{.gap}} relative-to="top-right"
+	open-on-workspace "s"
 }
 
 cursor {

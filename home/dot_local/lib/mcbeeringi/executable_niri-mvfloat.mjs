@@ -36,10 +36,20 @@ mv=(win,ws)=>Promise.all(win.map(async x=>({
 	window:x
 })));
 
-s?s!=c&&console.log(await(win(s).length?
-	mv(win(s),c):
-	mv(win(c),s)
-)):console.log(w.ws);
+console.log(s?
+	s==c?
+		{
+			focus:await msg({Action:{SwitchFocusBetweenFloatingAndTiling:{}}})
+		}:
+		win(s).length?
+			{// show
+				move:await mv(win(s),c),
+				focus:await msg({Action:{FocusFloating:{}}})
+			}:
+			{// hide
+				move:await mv(win(c),s)
+			}
+:w.ws);
 
 sock.kill();
 await sock.exited;

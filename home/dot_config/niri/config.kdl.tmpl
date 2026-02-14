@@ -59,6 +59,7 @@ layout {
 
 prefer-no-csd
 screenshot-path null
+workspace "s"
 
 window-rule {
 	geometry-corner-radius {{.border_radius}}
@@ -143,6 +144,7 @@ binds {
 	Mod+7 { focus-workspace 7; }
 	Mod+8 { focus-workspace 8; }
 	Mod+9 { focus-workspace 9; }
+	Mod+S { spawn "niri-mvfloat" "{\"name\":\"s\"}"; }
 	// workspace.mod
 	Mod+Shift+1 { move-column-to-workspace 1; }
 	Mod+Shift+2 { move-column-to-workspace 2; }

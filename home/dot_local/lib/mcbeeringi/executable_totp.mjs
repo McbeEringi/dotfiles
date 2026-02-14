@@ -1,4 +1,4 @@
-#!/bin/bun
+#!/bin/bun --install=force
 import{totp,migurl}from'@mcbeeringi/petit/totp'
 
 const urls=`${Bun.env.HOME}/.totp/urls`;

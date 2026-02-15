@@ -15,7 +15,7 @@ LANG=C
 	fcitx5 fcitx5-gtk fcitx5-qt fcitx5-skk skk-emoji-jisyo
 	btop smartmontools lsplug powertop power-profiles-daemon libinput-tools socat
 	arch-install-scripts exfatprogs ntfs-3g cdrtools chezmoi npm bun
-	sway swayidle swaylock-effects idlehack autotiling-rs
+	sway swayidle swaylock-effects swaybg idlehack autotiling-rs
 	firefox neovim gimp satty mpv mpv-mpris imv imagemagick
 	cowsay nyancat figlet cmatrix fastfetch pipes.sh sl
 	zsh zsh-autosuggestions zsh-completions zsh-syntax-highlighting

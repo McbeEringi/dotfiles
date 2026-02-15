@@ -1,11 +1,13 @@
 spawn-at-startup "fcitx5" "-d"
 spawn-at-startup "mako"
-spawn-at-startup "hyprpaper"
-spawn-at-startup "hypridle"
-spawn-at-startup "waybar" "-c" "{{.chezmoi.homeDir}}/.config/waybar/niri.jsonc"
-spawn-at-startup "wlsunset" "-l" "35.7" "-L" "139.7"
+spawn-sh-at-startup "swaybg -i {{.wallpaper}} -m fill -o '*'"
+spawn-at-startup "swayidle" "-w"
+spawn-at-startup "idlehack"
+spawn-sh-at-startup "waybar -c ~/.config/waybar/niri.jsonc"
+spawn-at-startup "wlsunset" "-l 35.7" "-L 139.7"
 spawn-at-startup "batt-notify"
 spawn-at-startup "wl-paste" "--watch" "cliphist" "store"
+spawn-at-startup "niri" "msg" "action" "focus-workspace-down"
 
 input {
 	keyboard {

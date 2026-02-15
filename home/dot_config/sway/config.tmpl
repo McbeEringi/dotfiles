@@ -8,7 +8,8 @@ set $mainMod ${{camelcase (lower .mainMod)}}
 seat seat0 xcursor_theme Bibata-Modern-Ice 24
 
 exec fcitx5 -d & mako & /usr/lib/xfce-polkit/xfce-polkit
-exec hyprpaper & waybar -c ~/.config/waybar/sway.jsonc & wlsunset -l 35.7 -L 139.7 & batt-notify
+exec swaybg -i {{.wallpaper}} -m fill -o '*'
+exec waybar -c ~/.config/waybar/sway.jsonc & wlsunset -l 35.7 -L 139.7 & batt-notify
 exec wl-paste --watch cliphist store
 exec swayidle -w & idlehack & autotiling-rs
 

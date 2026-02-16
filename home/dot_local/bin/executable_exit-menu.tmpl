@@ -4,6 +4,7 @@
 FREE=$(free -b)
 SWAP=$(echo $FREE|grep -oP 'Swap:\s+\d+\s+\d+\s+\K\d+') # $(swapon --show=SIZE --noheadings --bytes) # ${SWAP:-0} # [[ $RESUME ]]&&
 RAM=$(echo $FREE|grep -oP 'Mem:\s+\d+\s+\K\d+')
+WINTMP=$(mktemp)
 
 X=$({
 cat <<_EOF
@@ -16,14 +17,17 @@ kexec
 reboot
 poweroff
 _EOF
-find-windows>/dev/null&&echo 'windows'
+efibootmgr|grep -oP -m1 'Boot\K[\dABCDEF]{4}(?=\* Windows)'>$WINTMP &&echo 'windows'
 }|{{.dmenu}} {{.dmenu_placeholder}} "exit...")
+
+WIN=($(<$WINTMP))
+rm $WINTMP
 
 case $X in
 	"lock") loginctl lock-session;;
 	"dpms") loginctl lock-session;sleep .1;dpms;;
 	"exit") $EXIT;;
 	"kexec") pkexec systemctl kexec;;
-	"windows") pkexec sh -c "efibootmgr -n $(find-windows)&&reboot";;
+	"windows") pkexec sh -c "efibootmgr -n ${WIN[0]}&&reboot";;
 	*) systemctl $X
 esac

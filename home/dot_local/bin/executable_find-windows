@@ -1,2 +1,0 @@
-#!/bin/bash
-efibootmgr|grep -oP 'Boot\K[\dABCDEF]{4}(?=\* Windows)'

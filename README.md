@@ -8,6 +8,7 @@
 - [setup.sh](#setupsh) : dotfile setup script with recommended packages
 - [kde.sh](#kdesh) : [KDE Plasma](https://kde.org/plasma-desktop/) setup script
 
+[GitHub](https://github.com/mcbeeringi/dotfiles)
 
 ## dotfiles
 

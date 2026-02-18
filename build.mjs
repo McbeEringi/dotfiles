@@ -1,5 +1,7 @@
 #!/bin/bun
 
+import{codeToHtml}from'shiki';
+
 const
 w=await({
 	cf:_=>({
@@ -28,7 +30,13 @@ await Bun.write(
 	'index.html',
 	await new HTMLRewriter()
 	.on('div.md',{element:async e=>e.append(
-		Bun.markdown.html(await Bun.file(e.getAttribute('data-path')).text()),
+		await(async(w,r,a,i=0)=>(
+			a=await Promise.all([...w.matchAll(r)].map(([_,lang,x])=>codeToHtml(x,{lang,theme:'one-dark-pro'}))),
+			w.replace(r,_=>a[i++])
+		))(
+			Bun.markdown.html(await Bun.file(e.getAttribute('data-path')).text()),
+			/<pre><code class="language-(.+?)">(.+?)<\/code><\/pre>/sg
+		),
 		{html:1}
 	)})
 	.on('title',{element:e=>e.append(w.og.title)})

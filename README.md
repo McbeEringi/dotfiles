@@ -61,9 +61,9 @@ loadkeys jp106
 iwctl
 
 # part.sh : create partition, format mount
-BLK=/dev/nvme0n1 bash <(curl -s https://mcbeeringi.dev/dotfiles/part.sh)
+BLK=/dev/nvme0n1 bash <(curl -s https://dot.6ca.me/part.sh)
 # set SWAP to any value (including enpty) to make swap
-# BLK=/dev/nvme0n1 SWAP=1 bash <(curl -s https://mcbeeringi.dev/dotfiles/part.sh)
+# BLK=/dev/nvme0n1 SWAP=1 bash <(curl -s https://dot.6ca.me/part.sh)
 
 # or do manually
 #
@@ -80,7 +80,7 @@ BLK=/dev/nvme0n1 bash <(curl -s https://mcbeeringi.dev/dotfiles/part.sh)
 
 
 # install.sh : install archlinux
-ROOT_PASS=password USER_NAME=user bash <(curl -s https://mcbeeringi.dev/dotfiles/install.sh)
+ROOT_PASS=password USER_NAME=user bash <(curl -s https://dot.6ca.me/install.sh)
 ```
 
 ### args
@@ -124,7 +124,7 @@ Setup Hyprland & sway with recommended packages.
 [source](setup.sh)
 
 ```sh
-bash <(curl -s https://mcbeeringi.dev/dotfiles/setup.sh)
+bash <(curl -s https://dot.6ca.me/setup.sh)
 ```
 
 ## kde.sh
@@ -134,6 +134,6 @@ Setup KDE Plasma DE with neccesaries.
 [source](kde.sh)
 
 ```sh
-bash <(curl -s https://mcbeeringi.dev/dotfiles/kde.sh)
+bash <(curl -s https://dot.6ca.me/kde.sh)
 ```
 

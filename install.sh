@@ -131,8 +131,8 @@ rm -f /boot/*-fallback.img
 "
 EFIBOOTMGR_UKI_ZEN="efibootmgr -d /dev/$BOOT_PKNAME -p $BOOT_PARTN -c -L arch-zen -l '\EFI\Linux\arch-zen.efi'"
 BASH_HIST="cat <<_EOF |tee /home/$USER_NAME/.bash_history
-bash <(curl -sL https://mcbeeringi.dev/dotfiles/kde.sh)
-bash <(curl -sL https://mcbeeringi.dev/dotfiles/setup.sh)
+bash <(curl -sL https://dot.6ca.me/kde.sh)
+bash <(curl -sL https://dot.6ca.me/setup.sh)
 _EOF
 "
 

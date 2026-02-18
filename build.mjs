@@ -20,7 +20,7 @@ w=await({
 			url:'https://mcbeeringi.github.io/dotfiles/',
 			image:'https://mcbeeringi.github.io/img/icon.png'
 		},
-		style:['https://mcbeeringi.gihub.io/src/style.css']
+		style:['https://mcbeeringi.github.io/src/style.css']
 	})
 }[Bun.argv[2]]??(_=>Promise.reject(`Unknown dst "${Bun.argv[2]}"`)))();
 

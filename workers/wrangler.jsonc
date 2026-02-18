@@ -1,0 +1,14 @@
+{
+	"$schema":"node_modules/wrangler/config-schema.json",
+	"name":"dotfiles",
+	"compatibility_date":"2026-02-18",
+	"build":{
+		"command":"bun build.mjs",
+		"watch_dir":["src","build.mjs"]
+	},
+	"routes":[
+		{"pattern":"dot.6ca.me","custom_domain":true}
+	],
+	"assets":{"directory":"./dst"},
+	"observability":{"enabled":true}
+}

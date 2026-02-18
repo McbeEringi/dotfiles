@@ -9,6 +9,6 @@
 	"routes":[
 		{"pattern":"dot.6ca.me","custom_domain":true}
 	],
-	"assets":{"directory":"./dst"},
+	"assets":{"directory":"../"},
 	"observability":{"enabled":true}
 }

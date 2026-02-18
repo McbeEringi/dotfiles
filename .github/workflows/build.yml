@@ -29,6 +29,8 @@ jobs:
         run : bun i
       - name: Run build.mjs
         run : bun build.mjs gh
+      - name: Filtering .assetsignore
+        run : rm -rf $(bun assetsignore.mjs)
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact

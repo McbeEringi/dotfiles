@@ -3,7 +3,7 @@
 	"name":"dotfiles",
 	"compatibility_date":"2026-02-18",
 	"build":{
-		"command":"bun build.mjs",
+		"command":"bun build.mjs cf",
 		"watch_dir":["src","build.mjs"]
 	},
 	"routes":[

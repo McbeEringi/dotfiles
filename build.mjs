@@ -31,7 +31,10 @@ await Bun.write(
 	await new HTMLRewriter()
 	.on('div.md',{element:async e=>e.append(
 		await(async(w,r,a,i=0)=>(
-			a=await Promise.all([...w.matchAll(r)].map(([_,lang,x])=>codeToHtml(x,{lang,theme:'one-dark-pro'}))),
+			a=await Promise.all([...w.matchAll(r)].map(([_,lang,x])=>codeToHtml(
+				x.replace(/&(quot|amp|lt|gt);/g,(_,x)=>({quot:'"',amp:'&',lt:'<',gt:'>'}[x])),
+				{lang,theme:'one-dark-pro'}
+			))),
 			w.replace(r,_=>a[i++])
 		))(
 			Bun.markdown.html(await Bun.file(e.getAttribute('data-path')).text()),

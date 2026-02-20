@@ -60,8 +60,9 @@ await Bun.write(
 		.shiki::before{
 			content:"";display:block;
 			position:absolute;top:0;left:0;width:100%;height:100%;z-index:-1;
-			background-color:var(--bg);opacity:.8;
+			background-color:var(--bg);opacity:.8;border-radius:1ex;
 		}
+		.shiki code{display:block;overflow:auto;padding:1ex;}
 		.shiki,.shiki span{color:var(--shiki-light);}
 		@media(prefers-color-scheme:dark){
 			.shiki{--bg:var(--shiki-dark-bg);}

@@ -1,5 +1,7 @@
 #!/bin/bun
 
+import{fromAsyncCodeToHtml}from'@shikijs/markdown-it/async';
+import MarkdownItAsync from'markdown-it-async';
 import{codeToHtml}from'shiki';
 
 const
@@ -29,18 +31,18 @@ w=await({
 await Bun.write(
 	'index.html',
 	await new HTMLRewriter()
-	.on('div.md',{element:async e=>e.append(
-		await(async(w,r,a,i=0)=>(
-			a=await Promise.all([...w.matchAll(r)].map(([_,lang,x])=>codeToHtml(
-				x.replace(/&(quot|amp|lt|gt);/g,(_,x)=>({quot:'"',amp:'&',lt:'<',gt:'>'}[x])),
-				{lang,theme:'one-dark-pro'}
-			))),
-			w.replace(r,_=>a[i++])
-		))(
-			Bun.markdown.html(await Bun.file(e.getAttribute('data-path')).text()),
-			/<pre><code class="language-(.+?)">(.+?)<\/code><\/pre>/sg
-		),
-		{html:1}
+	.on('div.md',{element:async (e,md)=>(
+		md=MarkdownItAsync(),
+		md.use(fromAsyncCodeToHtml(codeToHtml,{
+			themes:{
+				light:'one-light',
+				dark:'one-dark-pro',
+			}
+		})),
+		e.append(
+			await md.renderAsync(await Bun.file(e.getAttribute('data-path')).text()),
+			{html:1}
+		)
 	)})
 	.on('title',{element:e=>e.append(w.og.title)})
 	.on('meta[name="description"]',{element:e=>e.setAttribute('content',w.og.description)})
@@ -52,6 +54,7 @@ await Bun.write(
 		w.style.map(x=>`<link rel="stylesheet" href="${x}">`).join(''),
 		{html:1}
 	)})
+	.on('head',{element:e=>e.append(`<style>@media(prefers-color-scheme: dark){.shiki,.shiki span{color:var(--shiki-dark) !important;background-color:var(--shiki-dark-bg) !important;}}</style>`,{html:1})})
 	.transform(await Bun.file('index.tmpl.html').text())
 );
 

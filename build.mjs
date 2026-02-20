@@ -37,7 +37,8 @@ await Bun.write(
 			themes:{
 				light:'one-light',
 				dark:'one-dark-pro',
-			}
+			},
+			defaultColor:false,
 		})),
 		e.append(
 			await md.renderAsync(await Bun.file(e.getAttribute('data-path')).text()),
@@ -54,7 +55,19 @@ await Bun.write(
 		w.style.map(x=>`<link rel="stylesheet" href="${x}">`).join(''),
 		{html:1}
 	)})
-	.on('head',{element:e=>e.append(`<style>@media(prefers-color-scheme: dark){.shiki,.shiki span{color:var(--shiki-dark) !important;background-color:var(--shiki-dark-bg) !important;}}</style>`,{html:1})})
+	.on('head',{element:e=>e.append(`<style>
+		.shiki{position:relative;--bg:var(--shiki-light-bg);}
+		.shiki::before{
+			content:"";display:block;
+			position:absolute;top:0;left:0;width:100%;height:100%;z-index:-1;
+			background-color:var(--bg);opacity:.8;
+		}
+		.shiki,.shiki span{color:var(--shiki-light);}
+		@media(prefers-color-scheme:dark){
+			.shiki{--bg:var(--shiki-dark-bg);}
+			.shiki,.shiki span{color:var(--shiki-dark);}
+		}
+	</style>`,{html:1})})
 	.transform(await Bun.file('index.tmpl.html').text())
 );
 

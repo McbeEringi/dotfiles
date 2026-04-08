@@ -10,7 +10,7 @@ LANG=C
 	fcitx5-im fcitx5-mozc fcitx5-skk
 	zsh zsh-autosuggestions zsh-completions zsh-syntax-highlighting
 	cups ghostscript system-config-printer power-profiles-daemon
-	jq npm
+	jq npm bun
 '
 
 which yay || {

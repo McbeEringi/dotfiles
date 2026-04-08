@@ -13,7 +13,7 @@ LANG=C
 	gnome-themes-extra papirus-icon-theme bibata-cursor-theme-bin
 	noto-fonts noto-fonts-cjk noto-fonts-emoji otf-monaspace ttf-nerd-fonts-symbols-common otf-kikai-chokoku-jis
 	fcitx5 fcitx5-gtk fcitx5-qt fcitx5-skk skk-emoji-jisyo
-	btop smartmontools lsplug powertop power-profiles-daemon libinput-tools socat
+	btop smartmontools lsplug powertop power-profiles-daemon libinput-tools socat zxing-cpp
 	arch-install-scripts exfatprogs ntfs-3g cdrtools chezmoi npm bun
 	sway swayidle swaylock-effects swaybg idlehack autotiling-rs
 	firefox neovim gimp satty mpv mpv-mpris imv imagemagick

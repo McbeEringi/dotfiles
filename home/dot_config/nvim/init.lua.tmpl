@@ -87,7 +87,6 @@ require('lazy').setup({
 		{'nvim-tree/nvim-tree.lua',keys={
 			{'<leader>f','<cmd>NvimTreeToggle<cr>',desc='NvimTreeToggle'}
 		},opts={}},
-		{'numToStr/Comment.nvim'},
 		{'machakann/vim-sandwich'},
 		-- colorscheme
 		{'navarasu/onedark.nvim',opts=function()require('onedark').load()end},
@@ -102,12 +101,6 @@ require('lazy').setup({
 		}}},
 		{'folke/which-key.nvim'},
 		-- {'echasnovski/mini.icons',opts={style='ascii'}},
-	},
-	ui={
-		icons={
-			cmd='⌘',config='🛠',event='📅',ft='📂',init='⚙',keys='🗝',plugin='🔌',
-			runtime='💻',require='🌙',source='📄',start='🚀',task='📌',lazy='💤',
-		},
 	},
 	-- checker={enabled=true},
 })

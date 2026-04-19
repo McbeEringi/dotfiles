@@ -2,7 +2,7 @@
 
 w=()
 while IFS= read -r -d '' x; do
-	file --mime-type "$x"|grep -q ": audio/"&&w+=("$x")
+	[[ $(file --mime-type "$x") == *": audio/"* ]]&&w+=("$x")
 done < <(find "$@" -mindepth 1 -maxdepth 1 -type f -print0|sort -z -V)
 echo "${w[@]}"
 mpv --force-window --wayland-app-id=mpv-shallow "${w[@]}"

@@ -31,5 +31,5 @@ chezmoi apply
 	sudo rm /etc/resolv.conf
 }
 [[ $(cat /etc/passwd|grep -oP "^$USER:.*:\K.*") != "/bin/zsh" ]]&&chsh -s /bin/zsh
-sudo systemctl enable NetworkManager sddm cups power-profiles-daemon
+sudo systemctl enable NetworkManager sddm cups power-profiles-daemon avahi-daemon
 read -p "Press Enter to reboot..." ans;reboot

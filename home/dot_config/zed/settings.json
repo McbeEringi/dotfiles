@@ -16,5 +16,9 @@
 	"show_wrap_guides": false,
 	"multi_cursor_modifier": "cmd_or_ctrl",
 	"base_keymap": "Atom",
-	"theme": "One Dark",
+	"theme": {
+		"mode": "system",
+		"light": "One Light",
+		"dark": "One Dark"
+	},
 }

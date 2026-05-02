@@ -1,0 +1,6 @@
+#!/bin/bash
+
+mkdir -p fix
+for x in "$@"; do
+	ffmpeg -i "$x" -c copy -movflags +faststart "fix/$x"
+done

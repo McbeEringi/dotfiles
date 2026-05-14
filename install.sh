@@ -31,7 +31,7 @@ pacstrap -K /mnt base linux-zen linux-zen-headers linux-firmware dosfstools btrf
 )$(
 	([ "$GPU_VENDOR" == 'intel' ] && echo 'intel-media-driver intel-gpu-tools vulkan-intel ') ||
 	([ "$GPU_VENDOR" == 'amd' ] && echo 'mesa vulkan-radeon ')
-)efibootmgr edk2-shell sudo nano git openssh man-db base-devel iwd bluez bluez-utils sof-firmware keyd kexec-tools plymouth brightnessctl
+)efibootmgr edk2-shell sudo nano git openssh man-db base-devel iwd bluez bluez-utils sof-firmware keyd kexec-tools brightnessctl
 cp /etc/systemd/network/* /mnt/etc/systemd/network
 mkdir /mnt/var/lib/iwd;cp -r /var/lib/iwd/* /mnt/var/lib/iwd
 bootctl install --esp-path=/mnt/boot
@@ -44,7 +44,7 @@ ROOT_UUID=$(grep -oP 'UUID=\S+(?=\s+\/\s)' /mnt/etc/fstab)
 
 LOCALE_GEN_MODIFY="sed -i -E 's/#($LOCALE_GEN)/\1/g' /etc/locale.gen"
 MAKEPKG_CONF_MODIFY="sed -i -E 's/^#(MAKEFLAGS=.*)/\1/' /etc/makepkg.conf"
-SUDOERS_MODIFY="sed -i -E 's/# (Defaults env_keep \+= "HOME"|%wheel ALL=\(ALL:ALL\) ALL)/\1/g' /etc/sudoers"
+SUDOERS_MODIFY="sed -i -E 's/# (%wheel ALL=\(ALL:ALL\) ALL)/\1/g' /etc/sudoers"
 
 BOOTCTL_LOADER_CONF="cat <<_EOF |tee /boot/loader/loader.conf
 default arch-zen.conf
@@ -58,7 +58,7 @@ title Arch Linux w/ ZEN Kernel
 linux /vmlinuz-linux-zen
 initrd /initramfs-linux-zen.img
 options root=$ROOT_UUID rw
-options quiet splash
+# options quiet # add 'splash' for plymouth
 # options acpi.ec_no_wakeup=1
 # options i915.enable_fbc=0 i915.enable_psr=0 i915.enable_dc=0
 # options video=DSI-1:panel_orientation=right_side_up

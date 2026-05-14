@@ -1,5 +1,5 @@
 #!/bin/bash
-[ $BLK ] || BLK='/dev/sda'
+[ $BLK ] || BLK='/dev/nvme0n1'
 SWAP_SIZE=$(free -m|grep -oP 'Mem:\s+\K\d+'|awk '{printf "%.0f",$1*1.5}')
 EFI=$(uuidgen)
 [[ $(env|grep -oP '^SWAP=') ]] && SWAP=$(uuidgen)

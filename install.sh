@@ -31,7 +31,7 @@ pacstrap -K /mnt base linux-zen linux-zen-headers linux-firmware dosfstools btrf
 )$(
 	([ "$GPU_VENDOR" == 'intel' ] && echo 'intel-media-driver intel-gpu-tools vulkan-intel ') ||
 	([ "$GPU_VENDOR" == 'amd' ] && echo 'mesa vulkan-radeon ')
-)efibootmgr edk2-shell sudo nano git openssh man-db base-devel iwd bluez bluez-utils sof-firmware keyd kexec-tools
+)efibootmgr edk2-shell sudo nano git openssh man-db base-devel iwd bluez bluez-utils sof-firmware keyd kexec-tools plymouth brightnessctl
 cp /etc/systemd/network/* /mnt/etc/systemd/network
 mkdir /mnt/var/lib/iwd;cp -r /var/lib/iwd/* /mnt/var/lib/iwd
 bootctl install --esp-path=/mnt/boot
@@ -43,8 +43,7 @@ ROOT_UUID=$(grep -oP 'UUID=\S+(?=\s+\/\s)' /mnt/etc/fstab)
 # SWAP_UUID=$(grep -oP 'UUID=\S+(?=.+?swap)' /mnt/etc/fstab)
 
 LOCALE_GEN_MODIFY="sed -i -E 's/#($LOCALE_GEN)/\1/g' /etc/locale.gen"
-MAKEPKG_CONF_MODIFY="sed -i -E -e's/^(COMPRESSZST=\(zstd -c -T0).*?( -\))/\1\2/' -e's/^#(MAKEFLAGS=.*)/\1/' /etc/makepkg.conf"
-MKINITCPIO_CONF_MODIFY="sed -i -E -e's/^(HOOKS=\(base)/\1 plymouth/' /etc/mkinitcpio.conf"
+MAKEPKG_CONF_MODIFY="sed -i -E 's/^#(MAKEFLAGS=.*)/\1/' /etc/makepkg.conf"
 SUDOERS_MODIFY="sed -i -E 's/# (Defaults env_keep \+= "HOME"|%wheel ALL=\(ALL:ALL\) ALL)/\1/g' /etc/sudoers"
 
 BOOTCTL_LOADER_CONF="cat <<_EOF |tee /boot/loader/loader.conf
@@ -148,7 +147,6 @@ echo KEYMAP=$KEYMAP|tee /etc/vconsole.conf # localectl set-keymap $KEYMAP
 $([[ $HOST_NAME ]] || echo '# ')echo $HOST_NAME|tee /etc/hostname
 $PACMAN_CONF_MODIFY
 $MAKEPKG_CONF_MODIFY
-$MKINITCPIO_CONF_MODIFY
 
 cp /usr/share/edk2-shell/x64/Shell_Full.efi /boot/shellx64.efi
 bootctl update
@@ -159,7 +157,7 @@ $([[ $WINDOWS_FSNUM ]] && echo "${BOOTCTL_ENTRIES_WINDOWS_CONF}${BOOT_WINDOWS_NS
 $ETC_CMDLINE_D
 $MKINITCPIO_UKI_PRESET_ZEN
 $MKIITCPIO_DISABLE_ZEN_FALLBACK
-pacman -S --noconfirm plymouth
+mkinitcpio -P
 $EFIBOOTMGR_UKI_ZEN
 
 echo $ROOT_PASS|passwd -s root

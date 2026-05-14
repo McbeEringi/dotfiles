@@ -54,7 +54,7 @@ editor no
 _EOF
 "
 BOOTCTL_ENTRIES_ARCH_ZEN_CONF="cat <<_EOF |tee /boot/loader/entries/arch-zen.conf
-title Arch Linux w/ ZEN Kernel *IMG*
+title Arch Linux w/ ZEN Kernel
 linux /vmlinuz-linux-zen
 initrd /initramfs-linux-zen.img
 options root=$ROOT_UUID rw
@@ -71,71 +71,14 @@ options -nointerrupt -noconsolein -noconsoleout windows.nsh
 _EOF
 "
 BOOT_WINDOWS_NSH="echo FS${WINDOWS_FSNUM}:EFI\\\\Microsoft\\\\Boot\\\\Bootmgfw.efi|tee /boot/windows.nsh"
-ETC_CMDLINE_D="\
-mkdir /etc/cmdline.d
-echo 'root=$ROOT_UUID rw' |tee /etc/cmdline.d/10-root.conf
-echo 'quiet splash' |tee /etc/cmdline.d/20-misc.conf
-# echo 'acpi.ec_no_wakeup=1' |tee /etc/cmdline.d/30-ec_no_wakeup.conf
-# echo 'i915.enable_fbc=0 i915.enable_psr=0 i915.enable_dc=0' |tee /etc/cmdline.d/30-i915.conf
-"
-MKINITCPIO_UKI_PRESET_ZEN="
-cat <<_EOF |tee /etc/mkinitcpio.d/uki.preset
-# mkinitcpio preset file for uki
 
-PRESETS=('uki_zen')
-
-uki_zen_uki=\"/boot/EFI/Linux/arch-zen.efi\"
-uki_zen_kver=\"/boot/vmlinuz-linux-zen\"
-uki_zen_options=\"--splash /sys/firmware/acpi/bgrt/image --osrelease /etc/osrel-zen-uki\"
-_EOF
-
-mkdir -p /etc/pacman.d/hooks
-cat <<_EOF |tee /etc/pacman.d/hooks/uki.hook
-[Trigger]
-Type = Path
-Operation = Install
-Operation = Upgrade
-Operation = Remove
-Target = usr/lib/initcpio/*
-Target = usr/lib/firmware/*
-Target = usr/src/*/dkms.conf
-Target = usr/lib/systemd/systemd
-Target = usr/bin/cryptsetup
-Target = usr/bin/lvm
-
-[Trigger]
-Type = Path
-Operation = Install
-Operation = Upgrade
-Target = usr/lib/modules/*/vmlinuz
-
-[Trigger]
-Type = Package
-Operation = Install
-Operation = Upgrade
-Target = mkinitcpio
-Target = mkinitcpio-git
-
-[Action]
-Description = Updating UKI...
-When = PostTransaction
-Exec = /usr/bin/mkinitcpio -p uki
-_EOF
-
-echo 'PRETTY_NAME=\"Arch Linux w/ ZEN Kernel *UKI*\"' |tee /etc/osrel-zen-uki
-"
-MKIITCPIO_DISABLE_ZEN_FALLBACK="
-sed -i -E "s/\s*'fallback'//" /etc/mkinitcpio.d/linux-zen.preset
-rm -f /boot/*-fallback.img
-"
-EFIBOOTMGR_UKI_ZEN="efibootmgr -d /dev/$BOOT_PKNAME -p $BOOT_PARTN -c -L arch-zen -l '\EFI\Linux\arch-zen.efi'"
+EFIBOOTMGR_EFISTUB_ZEN="efibootmgr -c -d /dev/$BOOT_PKNAME -p $BOOT_PARTN -L arch-zen -l /vmlinuz-linux-zen -u 'root=$ROOT_UUID rw initrd=\initramfs-linux-zen.img'"
 BASH_HIST="cat <<_EOF |tee /home/$USER_NAME/.bash_history
 bash <(curl -sL https://dot.6ca.me/kde.sh)
 bash <(curl -sL https://dot.6ca.me/setup.sh)
 _EOF
 "
 
-SYSTEMCTL_EN="systemctl enable systemd-networkd systemd-resolved iwd systemd-timesyncd bluetooth keyd"
 
 cat <<EOF | arch-chroot /mnt
 ln -sf /usr/share/zoneinfo/$TIMEZONE /etc/localtime
@@ -154,11 +97,7 @@ $BOOTCTL_LOADER_CONF
 $BOOTCTL_ENTRIES_ARCH_ZEN_CONF
 $([[ $WINDOWS_FSNUM ]] && echo "${BOOTCTL_ENTRIES_WINDOWS_CONF}${BOOT_WINDOWS_NSH}")
 
-$ETC_CMDLINE_D
-$MKINITCPIO_UKI_PRESET_ZEN
-$MKIITCPIO_DISABLE_ZEN_FALLBACK
-mkinitcpio -P
-$EFIBOOTMGR_UKI_ZEN
+$EFIBOOTMGR_EFISTUB_ZEN
 
 echo $ROOT_PASS|passwd -s root
 useradd -m -g wheel -G input,uucp $USER_NAME
@@ -167,7 +106,7 @@ $SUDOERS_MODIFY
 $BASH_HIST
 
 umount /etc/resolv.conf;ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf # RESOLV_CONF_LN
-$SYSTEMCTL_EN
+systemctl enable systemd-networkd systemd-resolved iwd systemd-timesyncd bluetooth keyd
 EOF
 
 read -p "Press Enter to reboot..." ans;reboot

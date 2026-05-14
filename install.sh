@@ -1,7 +1,7 @@
 #!/bin/bash
 trap 'echo;echo exitting...;exit' INT
-mount|grep /mnt >/dev/null || { echo /mnt not detected. exiting...; exit; }
-[[ $(swapon --show) ]] || echo swap not found! # { read -p "No swap detected. Continue? [yes] " ans;[[ $ans != 'yes' ]] && exit; }
+mount|grep /mnt >/dev/null || { echo no mount on /mnt . exiting...; exit; }
+[[ $(swapon --show) ]] && echo swap found! # || { read -p "No swap detected. Continue? [yes] " ans;[[ $ans != 'yes' ]] && exit; }
 echo
 [ $ROOT_PASS ] || ROOT_PASS='password';echo ROOT_PASS	$ROOT_PASS
 [ $USER_NAME ] || USER_NAME='user';echo USER_NAME	$USER_NAME
@@ -24,7 +24,7 @@ timedatectl
 eval $PACMAN_CONF_MODIFY
 systemctl stop reflector.service;echo "==> Rating mirrors...";reflector --save /etc/pacman.d/mirrorlist -p https -c "$MIRROR_COUNTRY" -l 5 --sort rate
 pacman -Sy --noconfirm archlinux-keyring
-pacman -S --noconfirm brightnessctl;brightnessctl s 10%
+pacman -S --noconfirm brightnessctl;brightnessctl s 20%
 pacstrap -K /mnt base linux-zen linux-zen-headers linux-firmware dosfstools btrfs-progs $(
 	([ "$CPU_VENDOR" == 'intel' ] && echo 'intel-ucode ') ||
 	([ "$CPU_VENDOR" == 'amd' ] && echo 'amd-ucode ')
@@ -54,7 +54,7 @@ editor no
 _EOF
 "
 BOOTCTL_ENTRIES_ARCH_ZEN_CONF="cat <<_EOF |tee /boot/loader/entries/arch-zen.conf
-title Arch Linux w/ ZEN Kernel
+title arch-zen
 linux /vmlinuz-linux-zen
 initrd /initramfs-linux-zen.img
 options root=$ROOT_UUID rw
@@ -96,7 +96,6 @@ bootctl update
 $BOOTCTL_LOADER_CONF
 $BOOTCTL_ENTRIES_ARCH_ZEN_CONF
 $([[ $WINDOWS_FSNUM ]] && echo "${BOOTCTL_ENTRIES_WINDOWS_CONF}${BOOT_WINDOWS_NSH}")
-
 $EFIBOOTMGR_EFISTUB_ZEN
 
 echo $ROOT_PASS|passwd -s root

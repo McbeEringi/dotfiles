@@ -2,5 +2,6 @@
 
 yay -S \
 neovim \
-hyprland foot \
-monaspace noto-fonts noto-fonts-emoji noto-fonts-cjk
+hyprland foot fuzzel \
+monaspace noto-fonts noto-fonts-emoji noto-fonts-cjk \
+pipewire-jack firefox

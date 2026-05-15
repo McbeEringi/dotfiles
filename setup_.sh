@@ -40,10 +40,20 @@ StartLimitInterval=10s
 StartLimitBurst=100
 _EOF
 
+cat <<_EOF | sudo tee /etc/bcon/config.toml
+[terminal]
+ime=true
+
+[keyboard]
+xkb_layout="jp"
+
+[mouse]
+natural_scroll=true
+_EOF
+
 # for tty1
 sudo systemctl disable getty@tty1 # $(systemctl show "*@tty1*" --state=loaded -P Id)
-sudo systemctl enable ly@tty1 # ly-kmsconvt@tty1
+sudo systemctl enable ly@tty1
 
 # for tty2~6 (autovt)
 sudo ln -s /usr/lib/systemd/system/bcon@.service /etc/systemd/system/autovt@tty2.service
-sudo ln -s /usr/lib/systemd/system/bcon@.service /etc/systemd/system/autovt@tty3.service

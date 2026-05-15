@@ -3,7 +3,7 @@ trap 'echo;echo exitting...;exit' INT
 mount|grep /mnt >/dev/null || { echo no mount on /mnt . exiting...; exit; }
 [[ $(swapon --show) ]] && echo swap found! # || { read -p "No swap detected. Continue? [yes] " ans;[[ $ans != 'yes' ]] && exit; }
 echo
-[ $ROOT_PASS ] || ROOT_PASS='password';echo ROOT_PASS	$ROOT_PASS
+[ $ROOT_PASS ] && echo ROOT_PASS	$ROOT_PASS || echo ROOT_PASS_UNSET
 [ $USER_NAME ] || USER_NAME='user';echo USER_NAME	$USER_NAME
 [ $USER_PASS ] || USER_PASS=$ROOT_PASS;echo USER_PASS	$USER_PASS
 [ $TIMEZONE ] || TIMEZONE='Asia/Tokyo';echo TIMEZONE	$TIMEZONE
@@ -98,7 +98,7 @@ $BOOTCTL_ENTRIES_ARCH_ZEN_CONF
 $([[ $WINDOWS_FSNUM ]] && echo "${BOOTCTL_ENTRIES_WINDOWS_CONF}${BOOT_WINDOWS_NSH}")
 $EFIBOOTMGR_EFISTUB_ZEN
 
-echo $ROOT_PASS|passwd -s root
+$([[ $ROOT_PASS ]] && echo "echo $ROOT_PASS|passwd -s root")
 useradd -m -g wheel -G input,uucp $USER_NAME
 echo $USER_PASS|passwd -s $USER_NAME
 $SUDOERS_MODIFY

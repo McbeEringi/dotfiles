@@ -5,7 +5,7 @@ neovim \
 ly kmscon \
 hyprland foot fuzzel waybar \
 wireplumber pavucontrol \
-monaspace noto-fonts noto-fonts-emoji noto-fonts-cjk \
+otf-monaspace noto-fonts noto-fonts-emoji noto-fonts-cjk \
 pipewire-jack firefox
 
 mkdir -p /etc/systemd/system/ly@.service.d
@@ -19,6 +19,7 @@ _EOF
 cat <<_EOF | sudo tee /etc/kmscon/kmscon.conf
 xkb-model=jp106
 xkb-layout=jp
+font-name=Monaspace Argon, Noto Sans CJK JP
 _EOF
 
 # for tty1

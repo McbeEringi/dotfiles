@@ -4,6 +4,7 @@ yay -S \
 neovim \
 ly bcon \
 hyprland foot fuzzel waybar \
+fcitx5 fcitx5-gtk fcitx5-qt fcitx5-skk skk-emoji-jisyo \
 wireplumber pavucontrol \
 otf-monaspace noto-fonts noto-fonts-emoji noto-fonts-cjk \
 pipewire-jack firefox

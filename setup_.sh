@@ -8,6 +8,29 @@ wireplumber pavucontrol \
 otf-monaspace noto-fonts noto-fonts-emoji noto-fonts-cjk \
 pipewire-jack firefox
 
+cat <<_EOF | sudo tee /etc/ly/config.ini
+edge_margin=1
+sleep_cmd=/usr/bin/systemctl suspend
+
+battery_id=$(grep -l Battery /sys/class/power_supply/*/type | head -n1 | xargs dirname | xargs basename)
+clock=%F %T
+show_tty=true
+
+bigclock=en
+border_fg=0x80000000
+text_in_center=true
+default_input=password
+xinitrc=null
+xsessions=null
+clear_password=true
+
+animation=dur_file
+dur_file_path=/etc/ly/example.dur
+dur_offset_alignment=bottomright
+dur_x_offset=-1
+dur_y_offset=-1
+_EOF
+
 mkdir -p /etc/systemd/system/ly@.service.d
 cat <<_EOF | sudo tee /etc/systemd/system/ly@.service.d/10-restart.conf
 [Service]

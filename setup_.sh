@@ -54,9 +54,6 @@ xkb_layout="jp"
 [mouse]
 natural_scroll=true
 disable_while_typing=false
-
-[paths]
-screenshot_dir = "~/Downloads"
 _EOF
 
 mkdir -p /etc/systemd/system/bcon@.service.d

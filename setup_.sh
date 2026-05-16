@@ -59,6 +59,12 @@ disable_while_typing=false
 screenshot_dir = "~/Downloads"
 _EOF
 
+mkdir -p /etc/systemd/system/bcon@.service.d
+cat <<_EOF | sudo tee /etc/systemd/system/bcon@.service.d/10-login.conf
+[Service]
+PAMName=login
+_EOF
+
 # for tty1
 sudo systemctl disable getty@tty1 # $(systemctl show "*@tty1*" --state=loaded -P Id)
 sudo systemctl enable ly@tty1

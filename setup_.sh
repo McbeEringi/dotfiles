@@ -7,7 +7,8 @@ hyprland foot fuzzel waybar \
 fcitx5 fcitx5-gtk fcitx5-qt fcitx5-skk skk-emoji-jisyo \
 wireplumber pavucontrol \
 otf-monaspace noto-fonts noto-fonts-emoji noto-fonts-cjk \
-pipewire-jack firefox
+pipewire-jack firefox \
+fastfetch
 
 cat <<_EOF | sudo tee /etc/ly/config.ini
 edge_margin=1

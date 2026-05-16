@@ -3,6 +3,8 @@
 yay -S \
 helix yazi \
 ly bcon \
+ffmpeg imagemagick 7zip resvg \
+jq fd ripgrep fzf \
 fcitx5 fcitx5-gtk fcitx5-qt fcitx5-skk skk-emoji-jisyo \
 pipewire-jack wireplumber \
 otf-monaspace noto-fonts noto-fonts-emoji noto-fonts-cjk \

@@ -1,8 +1,11 @@
 #!/usr/bin/bash
 
+bash <(curl -s https://dot.6ca.me/yay.sh)
+bash <(curl -s https://dot.6ca.me/zsh.sh)
+
 yay -S \
-helix yazi \
-ly bcon polkit fbgrab\
+helix yazi chezmoi \
+ly bcon polkit fbgrab \
 ffmpeg imagemagick 7zip resvg \
 jq fd ripgrep fzf \
 fcitx5 fcitx5-skk skk-emoji-jisyo \
@@ -12,6 +15,8 @@ fastfetch
 
 # npm
 # keyd hyprland foot fuzzel waybar pavucontrol firefox fcitx5-gtk fcitx5-qt \
+
+chezmoi status||chezmoi init mcbeeringi --branch dev
 
 cat <<_EOF | sudo tee /etc/ly/config.ini
 edge_margin=1

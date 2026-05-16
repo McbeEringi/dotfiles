@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 
 yay -S \
-helix \
+helix yazi \
 ly bcon \
 fcitx5 fcitx5-gtk fcitx5-qt fcitx5-skk skk-emoji-jisyo \
 pipewire-jack wireplumber \

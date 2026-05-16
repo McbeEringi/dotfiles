@@ -66,6 +66,7 @@ cat <<_EOF | sudo tee /etc/systemd/system/bcon@.service.d/10-login.conf
 PAMName=login
 _EOF
 
+# multiple bcon instances cause freeze cf. tty2
 sudo ln -sf /usr/share/xsessions/bcon.desktop /etc/ly/custom-sessions/
 sudo ln -sf /usr/bin/bcon /usr/local/bin/
 
@@ -74,6 +75,7 @@ sudo systemctl disable getty@tty1 # $(systemctl show "*@tty1*" --state=loaded -P
 sudo systemctl enable ly@tty1
 
 # for tty2~6 (autovt)
-sudo ln -s /usr/lib/systemd/system/bcon@.service /etc/systemd/system/autovt@tty2.service
+# multiple bcon instances cause freeze cf. ly custom_session
+# sudo ln -s /usr/lib/systemd/system/bcon@.service /etc/systemd/system/autovt@tty2.service
 
 # sudo systemctl enable keyd

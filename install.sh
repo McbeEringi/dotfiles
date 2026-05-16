@@ -105,7 +105,7 @@ $SUDOERS_MODIFY
 $BASH_HIST
 
 umount /etc/resolv.conf;ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf # RESOLV_CONF_LN
-systemctl enable systemd-networkd systemd-resolved iwd systemd-timesyncd bluetooth keyd
+systemctl enable systemd-networkd systemd-resolved iwd systemd-timesyncd bluetooth
 EOF
 
 read -p "Press Enter to reboot..." ans;reboot

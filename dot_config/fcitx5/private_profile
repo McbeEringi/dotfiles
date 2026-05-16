@@ -1,0 +1,10 @@
+[Groups/0]
+Name=main
+Default Layout=jp
+DefaultIM=skk
+
+[Groups/0/Items/0]
+Name=keyboard-jp
+
+[Groups/0/Items/1]
+Name=skk

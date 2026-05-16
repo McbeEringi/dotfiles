@@ -1,0 +1,21 @@
+theme="onedark"
+[editor]
+cursorline=true
+continue-comments=false
+auto-format=false
+bufferline="multiple"
+# rainbow-brakets=true
+
+[editor.cursor-shape]
+insert="bar"
+select="underline"
+
+[editor.whitespace]
+render="all"
+[editor.whitespace.characters]
+tab=">"
+newline="↓"
+tabpad=" "
+
+[editor.indent-guides]
+render=true

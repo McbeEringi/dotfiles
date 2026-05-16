@@ -1,0 +1,18 @@
+{
+	"define":{
+		"keymap":{
+			"Escape":"abort",
+			"\b": "delete",
+			"/":"abbrev",
+			" ":"next-candidate",
+			"Down":"next-candidate",
+			"Up":"previous-candidate",
+			"\t":"complete",
+			"\n":"commit-unhandled",
+			";":"start-preedit-no-delete",
+			"q":"set-input-mode-katakana",
+			"l":"set-input-mode-hankaku-katakana",
+			"Henkan":"set-input-mode-hiragana"
+		}
+	}
+}

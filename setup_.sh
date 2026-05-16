@@ -2,8 +2,7 @@
 
 yay -S \
 helix yazi \
-ly bcon polkit \
-npm \
+ly bcon polkit fbgrab\
 ffmpeg imagemagick 7zip resvg \
 jq fd ripgrep fzf \
 fcitx5 fcitx5-skk skk-emoji-jisyo \
@@ -11,6 +10,7 @@ pipewire-jack wireplumber \
 otf-monaspace noto-fonts noto-fonts-emoji noto-fonts-cjk \
 fastfetch
 
+# npm
 # keyd hyprland foot fuzzel waybar pavucontrol firefox fcitx5-gtk fcitx5-qt \
 
 cat <<_EOF | sudo tee /etc/ly/config.ini
@@ -34,6 +34,10 @@ dur_file_path=/etc/ly/example.dur
 dur_offset_alignment=bottomright
 dur_x_offset=-1
 dur_y_offset=-1
+
+[cmd:F8]
+name = screenshot
+cmd = fbgrab /tmp/ly-\$(date -Iseconds).png
 _EOF
 
 mkdir -p /etc/systemd/system/ly@.service.d

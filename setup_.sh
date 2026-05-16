@@ -1,14 +1,14 @@
 #!/usr/bin/bash
 
 yay -S \
-neovim keyd \
+helix \
 ly bcon \
-hyprland foot fuzzel waybar \
 fcitx5 fcitx5-gtk fcitx5-qt fcitx5-skk skk-emoji-jisyo \
-wireplumber pavucontrol \
+pipewire-jack wireplumber \
 otf-monaspace noto-fonts noto-fonts-emoji noto-fonts-cjk \
-pipewire-jack firefox \
 fastfetch
+
+# keyd hyprland foot fuzzel waybar pavucontrol firefox\
 
 cat <<_EOF | sudo tee /etc/ly/config.ini
 edge_margin=1
@@ -59,4 +59,4 @@ sudo systemctl enable ly@tty1
 # for tty2~6 (autovt)
 sudo ln -s /usr/lib/systemd/system/bcon@.service /etc/systemd/system/autovt@tty2.service
 
-sudo systemctl enable keyd
+# sudo systemctl enable keyd

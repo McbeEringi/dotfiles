@@ -3,7 +3,7 @@ trap 'echo;echo exitting...;exit' INT
 LANG=C
 [ $PKGS ] || PKGS='
 	hyprland mako pipewire pipewire-pulse pipewire-jack xdg-desktop-portal-hyprland xfce-polkit qt5-wayland qt6-wayland
-	waybar hyprpaper fuzzel cliphist grimblast wlsunset wl-mirror brightnessctl
+	waybar hyprpaper fuzzel cliphist grimblast wlsunset wl-mirror brightnessctl keyd
 	hyprlock hypridle hyprpicker wev evtest
 	greetd greetd-tuigreet
 	thunar gvfs thunar-volman thunar-media-tags-plugin tumbler ffmpegthumbnailer zip unzip 7zip git-delta ripgrep
@@ -40,7 +40,7 @@ chezmoi status && {
 	sudo cp -r $(chezmoi data|jq -r .chezmoi.workingTree)/root/* /
 }
 chezmoi apply
-sudo systemctl enable greetd cups avahi-daemon
+sudo systemctl enable greetd cups avahi-daemon keyd
 [[ $(cat /etc/passwd|grep -oP "^$USER:.*:\K.*") != "/bin/zsh" ]]&&chsh -s /bin/zsh
 # [[ $(hyprpm list|grep Hyprspace) ]]||{
 # 	yay -S --noconfirm cmake meson cpio

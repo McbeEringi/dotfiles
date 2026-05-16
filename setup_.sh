@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 
 yay -S \
-neovim \
+neovim keyd \
 ly bcon \
 hyprland foot fuzzel waybar \
 fcitx5 fcitx5-gtk fcitx5-qt fcitx5-skk skk-emoji-jisyo \
@@ -58,3 +58,5 @@ sudo systemctl enable ly@tty1
 
 # for tty2~6 (autovt)
 sudo ln -s /usr/lib/systemd/system/bcon@.service /etc/systemd/system/autovt@tty2.service
+
+sudo systemctl enable keyd

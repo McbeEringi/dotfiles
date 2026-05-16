@@ -62,6 +62,9 @@ cat <<_EOF | sudo tee /etc/systemd/system/bcon@.service.d/10-login.conf
 PAMName=login
 _EOF
 
+sudo ln -sf /usr/share/xsessions/bcon.desktop /etc/ly/custom-sessions/
+sudo ln -sf /usr/bin/bcon /usr/local/bin/
+
 # for tty1
 sudo systemctl disable getty@tty1 # $(systemctl show "*@tty1*" --state=loaded -P Id)
 sudo systemctl enable ly@tty1

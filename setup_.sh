@@ -2,15 +2,16 @@
 
 yay -S \
 helix yazi \
-ly bcon \
+ly bcon polkit \
+npm \
 ffmpeg imagemagick 7zip resvg \
 jq fd ripgrep fzf \
-fcitx5 fcitx5-gtk fcitx5-qt fcitx5-skk skk-emoji-jisyo \
+fcitx5 fcitx5-skk skk-emoji-jisyo \
 pipewire-jack wireplumber \
 otf-monaspace noto-fonts noto-fonts-emoji noto-fonts-cjk \
 fastfetch
 
-# keyd hyprland foot fuzzel waybar pavucontrol firefox\
+# keyd hyprland foot fuzzel waybar pavucontrol firefox fcitx5-gtk fcitx5-qt \
 
 cat <<_EOF | sudo tee /etc/ly/config.ini
 edge_margin=1
@@ -52,6 +53,10 @@ xkb_layout="jp"
 
 [mouse]
 natural_scroll=true
+disable_while_typing=false
+
+[paths]
+screenshot_dir = "~/Downloads"
 _EOF
 
 # for tty1

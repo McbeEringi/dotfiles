@@ -4,7 +4,7 @@ bash <(curl -s https://dot.6ca.me/yay.sh)
 bash <(curl -s https://dot.6ca.me/zsh.sh)
 
 yay -S \
-helix yazi chezmoi \
+helix yazi chezmoi btop \
 ly bcon polkit fbgrab \
 ffmpeg imagemagick 7zip resvg \
 jq fd ripgrep fzf \
@@ -45,7 +45,7 @@ name = screenshot
 cmd = fbgrab /tmp/ly-\$(date -Iseconds).png
 _EOF
 
-mkdir -p /etc/systemd/system/ly@.service.d
+sudo mkdir -p /etc/systemd/system/ly@.service.d
 cat <<_EOF | sudo tee /etc/systemd/system/ly@.service.d/10-restart.conf
 [Service]
 Restart=always
@@ -65,22 +65,22 @@ natural_scroll=true
 disable_while_typing=false
 _EOF
 
-mkdir -p /etc/systemd/system/bcon@.service.d
+sudo mkdir -p /etc/systemd/system/bcon@.service.d
 cat <<_EOF | sudo tee /etc/systemd/system/bcon@.service.d/10-login.conf
 [Service]
 PAMName=login
 _EOF
 
-# multiple bcon instances cause freeze cf. tty2
-sudo ln -sf /usr/share/xsessions/bcon.desktop /etc/ly/custom-sessions/
-sudo ln -sf /usr/bin/bcon /usr/local/bin/
+# bcon via ly failed to resume input when back from other tty ?
+# sudo ln -sf /usr/share/xsessions/bcon.desktop /etc/ly/custom-sessions/
+# sudo ln -sf /usr/bin/bcon /usr/local/bin/
 
 # for tty1
 sudo systemctl disable getty@tty1 # $(systemctl show "*@tty1*" --state=loaded -P Id)
 sudo systemctl enable ly@tty1
 
 # for tty2~6 (autovt)
-# multiple bcon instances cause freeze cf. ly custom_session
-# sudo ln -s /usr/lib/systemd/system/bcon@.service /etc/systemd/system/autovt@tty2.service
+sudo ln -s /usr/lib/systemd/system/bcon@.service /etc/systemd/system/autovt@tty2.service
+sudo ln -s /usr/lib/systemd/system/bcon@.service /etc/systemd/system/autovt@tty3.service
 
 # sudo systemctl enable keyd

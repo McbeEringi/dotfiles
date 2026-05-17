@@ -3,7 +3,7 @@
 bash <(curl -s https://dot.6ca.me/yay.sh)
 bash <(curl -s https://dot.6ca.me/zsh.sh)
 
-yay -S \
+yay -S --noconfirm \
 helix yazi chezmoi btop \
 ly bcon polkit fbgrab \
 ffmpeg imagemagick 7zip resvg \

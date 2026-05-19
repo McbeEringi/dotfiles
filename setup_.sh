@@ -27,6 +27,13 @@ f23+leftshift+leftmeta=layer(control)
 capslock=layer(control)
 _EOF
 
+cat <<_EOF | sudo tee /etc/libinput/local-overrides.quirks
+[Serial Keyboards]
+MatchUdevType=keyboard
+MatchName=keyd*keyboard
+AttrKeyboardIntegration=internal
+_EOF
+
 cat <<_EOF | sudo tee /etc/ly/config.ini
 edge_margin=1
 sleep_cmd=/usr/bin/systemctl suspend

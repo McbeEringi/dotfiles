@@ -14,7 +14,8 @@ otf-monaspace noto-fonts noto-fonts-emoji noto-fonts-cjk \
 fastfetch
 
 # npm
-# hyprland foot fuzzel waybar pavucontrol firefox fcitx5-gtk fcitx5-qt qt5-wayland qt6-wayland \
+# hyprland xdg-desktop-portal-hyprland hyprpolkitagent foot fuzzel waybar pavucontrol firefox fcitx5-gtk fcitx5-qt qt5-wayland qt6-wayland \
+# thunar gvfs
 
 chezmoi status||chezmoi init mcbeeringi --branch dev -a
 

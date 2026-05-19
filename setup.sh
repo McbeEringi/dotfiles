@@ -20,7 +20,7 @@ fastfetch
 chezmoi status||chezmoi init mcbeeringi --branch dev -a
 
 sudo cp -r root/* /
-sudo sed -iE "/BAT1/$(grep -l Battery /sys/class/power_supply/*/type | head -n1 | xargs dirname | xargs basename)/"
+sudo sed -iE "/BAT1/$(grep -l Battery /sys/class/power_supply/*/type | head -n1 | xargs dirname | xargs basename)/" /etc/ly/config.ini
 
 
 # bcon via ly failed to resume input when back from other tty ?

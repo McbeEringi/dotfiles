@@ -5,7 +5,7 @@ bash <(curl -s https://dot.6ca.me/zsh.sh)
 
 yay -S --noconfirm \
 helix yazi chezmoi btop \
-ly bcon polkit fbgrab \
+ly bcon polkit fbgrab keyd \
 ffmpeg imagemagick 7zip resvg \
 jq fd ripgrep fzf \
 fcitx5 fcitx5-skk skk-emoji-jisyo \
@@ -14,9 +14,18 @@ otf-monaspace noto-fonts noto-fonts-emoji noto-fonts-cjk \
 fastfetch
 
 # npm
-# keyd hyprland foot fuzzel waybar pavucontrol firefox fcitx5-gtk fcitx5-qt qt5-wayland qt6-wayland \
+# hyprland foot fuzzel waybar pavucontrol firefox fcitx5-gtk fcitx5-qt qt5-wayland qt6-wayland \
 
 chezmoi status||chezmoi init mcbeeringi --branch dev -a
+
+cat <<_EOF | sudo tee /etc/keyd/default.conf
+[ids]
+*
+[main]
+katakanahiragana=layer(meta)
+f23+leftshift+leftmeta=layer(control)
+capslock=layer(control)
+_EOF
 
 cat <<_EOF | sudo tee /etc/ly/config.ini
 edge_margin=1
@@ -84,4 +93,4 @@ sudo systemctl enable ly@tty1
 sudo ln -s /usr/lib/systemd/system/bcon@.service /etc/systemd/system/autovt@tty2.service
 sudo ln -s /usr/lib/systemd/system/bcon@.service /etc/systemd/system/autovt@tty3.service
 
-# sudo systemctl enable keyd
+sudo systemctl enable keyd

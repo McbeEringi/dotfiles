@@ -6,7 +6,10 @@ local terminal    = "foot"
 local fileManager = "thunar"
 local menu        = "fuzzel"
 
-hl.on("hyprland.start",function()hl.exec_cmd("fcitx5 -d")end)
+hl.on("hyprland.start",function()
+    hl.exec_cmd("fcitx5 -d")
+    hl.exec_cmd("systemctl --user start hyprpolkitagent")
+end)
 
 hl.env("XCURSOR_SIZE", "24")
 hl.env("HYPRCURSOR_SIZE", "24")

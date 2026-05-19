@@ -1,3 +1,4 @@
 which npm > /dev/null && export NODE_PATH=$(npm root -g)
+export QT_QPA_PLATFORMTHEME=qt5ct
 export PATH="$PATH:$HOME/.local/bin"
 export EDITOR=helix

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+<action>
+	<icon>utilities-terminal</icon>
+	<name>terminal</name>
+	<submenu></submenu>
+	<unique-id>open-terminal-here</unique-id>
+	<command>gnome-terminal --working-directory=%f</command>
+	<description></description>
+	<range>*</range>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<directories/>
+</action>
+<action>
+	<icon>mpv</icon>
+	<name>mpv</name>
+	<submenu></submenu>
+	<unique-id>open-with-mpv</unique-id>
+	<command>mpv-shallow %F</command>
+	<description></description>
+	<range>*</range>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<directories/>
+</action>
+</actions>
+

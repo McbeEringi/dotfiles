@@ -1,0 +1,5 @@
+[Default Applications]
+application/xml=helix.desktop
+
+[Added Associations]
+application/xml=helix.desktop;

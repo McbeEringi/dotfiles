@@ -67,8 +67,8 @@ _EOF
 
 sudo mkdir -p /etc/systemd/system/bcon@.service.d
 cat <<_EOF | sudo tee /etc/systemd/system/bcon@.service.d/10-login.conf
-[Service]
-PAMName=login
+# [Service]
+# PAMName=login
 _EOF
 
 # bcon via ly failed to resume input when back from other tty ?

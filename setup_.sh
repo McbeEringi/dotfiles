@@ -16,6 +16,7 @@ fastfetch
 # npm
 # hyprland xdg-desktop-portal-hyprland hyprpolkitagent foot fuzzel waybar pavucontrol firefox fcitx5-gtk fcitx5-qt qt5-wayland qt6-wayland \
 # thunar gvfs
+# mpv imv
 
 chezmoi status||chezmoi init mcbeeringi --branch dev -a
 

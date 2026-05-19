@@ -1,0 +1,9 @@
+[terminal]
+ime=true
+
+[keyboard]
+xkb_layout="jp"
+
+[mouse]
+natural_scroll=true
+disable_while_typing=false

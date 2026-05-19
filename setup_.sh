@@ -67,6 +67,7 @@ _EOF
 
 sudo mkdir -p /etc/systemd/system/bcon@.service.d
 cat <<_EOF | sudo tee /etc/systemd/system/bcon@.service.d/10-login.conf
+# enable this to pass pam but fcitx5 will not work.
 # [Service]
 # PAMName=login
 _EOF

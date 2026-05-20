@@ -2,7 +2,6 @@
 
 hl.monitor({output="",mode="preferred",position = "auto",scale="1"})
 
-local terminal    = "foot"
 local fileManager = "thunar"
 local menu        = "fuzzel"
 
@@ -66,35 +65,30 @@ hl.gesture({fingers=3,direction="vertical",action="fullscreen"})
 ---------------------
 
 local mainMod = "SUPER" -- Sets "Windows" key as main modifier
+local mod="SUPER+"
+local shift="SHIFT+"
 
--- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/ for more
-hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(terminal))
-local closeWindowBind = hl.bind(mainMod .. " + C", hl.dsp.window.close())
--- closeWindowBind:set_enabled(false)
-hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
-hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
-hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
-hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
-hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
-hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only
+hl.bind(mod.."Q",hl.dsp.exec_cmd("gnome-terminal"))
+hl.bind(mod.."C",hl.dsp.window.close())
+hl.bind(mod.."M",hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
+hl.bind(mod.."E",hl.dsp.exec_cmd(fileManager))
+hl.bind(mod.."F",hl.dsp.window.float({action="toggle"}))
+hl.bind(mod..shift.."F",hl.dsp.window.pseudo())
+hl.bind(mod.."R",hl.dsp.exec_cmd(menu))
+hl.bind(mod.."J",hl.dsp.layout("togglesplit"))
 
--- Move focus with mainMod + arrow keys
-hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left" }))
-hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))
-hl.bind(mainMod .. " + up",    hl.dsp.focus({ direction = "up" }))
-hl.bind(mainMod .. " + down",  hl.dsp.focus({ direction = "down" }))
+for i,x in ipairs({"left","right","up","down"}) do
+    hl.bind(mod..x,hl.dsp.focus({direction=x}))
+end
 
--- Switch workspaces with mainMod + [0-9]
--- Move active window to a workspace with mainMod + SHIFT + [0-9]
 for i = 1, 10 do
     local key = i % 10 -- 10 maps to key 0
     hl.bind(mainMod .. " + " .. key,             hl.dsp.focus({ workspace = i}))
     hl.bind(mainMod .. " + SHIFT + " .. key,     hl.dsp.window.move({ workspace = i }))
 end
 
--- Example special workspace (scratchpad)
-hl.bind(mainMod .. " + S",         hl.dsp.workspace.toggle_special("magic"))
-hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special:magic" }))
+hl.bind(mod.."S",hl.dsp.workspace.toggle_special("magic"))
+hl.bind(mod..shift.."S",hl.dsp.window.move({workspace="special:magic"}))
 
 -- Scroll through existing workspaces with mainMod + scroll
 hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))

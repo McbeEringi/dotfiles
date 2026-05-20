@@ -1,5 +1,7 @@
 [Default Applications]
 application/xml=helix.desktop
+application/json=helix.desktop
 
 [Added Associations]
 application/xml=helix.desktop;
+application/json=helix.desktop;

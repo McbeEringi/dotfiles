@@ -13,9 +13,9 @@ select="underline"
 [editor.whitespace]
 render="all"
 [editor.whitespace.characters]
-tab=">"
+tab="|"
 newline="↓"
-tabpad=" "
+tabpad=">"
 
 [editor.indent-guides]
 render=true

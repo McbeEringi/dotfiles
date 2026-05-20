@@ -8,6 +8,7 @@ local menu        = "fuzzel"
 hl.on("hyprland.start",function()
     hl.exec_cmd("fcitx5 -d")
     hl.exec_cmd("/usr/lib/xfce-polkit/xfce-polkit")
+    hl.exec_cmd("qs")
 end)
 
 hl.config({

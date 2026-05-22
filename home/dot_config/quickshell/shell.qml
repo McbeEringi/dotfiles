@@ -1,43 +1,54 @@
-import Quickshell
 import QtQuick
 import QtQuick.Layouts
+import Quickshell
+import Quickshell.Services.UPower
 
-Scope {
+Scope{
+	Variants{
+		model:Quickshell.screens
 
-	Variants {
-		model: Quickshell.screens
-
-		PanelWindow {
+		PanelWindow{
+			property real size:40
+			id:root
 			required property var modelData
 			screen:modelData
-
-			anchors {
+			anchors{
 				top:true
 				left:true
 				right:true
 			}
-
-			implicitHeight:16
-			color:"#88222222"
+			implicitHeight:size
+			color:"#88888888"
 
 			FlexboxLayout{
 				anchors.fill:parent
-				justifyContent:FlexboxLayout.JustifySpaceBetween
-				Text {
-					// anchors.centerIn: parent
-					text: Time.time
-					color: "#6ca"
-					font.family: "monospace"
+				justifyContent:FlexboxLayout.JustifySpaceBitween
+				Text{
+					text:Time.time
+					color:"#6ca"
+					font.family:"monospace"
 				}
-				Text {
-					text: Time.time
-					color: "#fff"
-					font.family: "monospace"
-				}
-				Text {
-					text: Time.time
-					color: "#dd6"
-					font.family: "monospace"
+				Progress{
+					id:pgr
+					size:root.size
+					value:UPower.displayDevice.percentage
+					text:Math.round(UPower.displayDevice.percentage*100)
+					MouseArea{
+						anchors.fill:parent
+						onClicked:{
+							anmOffset[anmOffset.running?'stop':'start']()
+						}
+					}
+					NumberAnimation{
+						id:anmOffset
+						target:pgr
+						properties:"offset"
+						duration:1000
+						from:0
+						to:1
+						loops:Animation.Infinite
+						easing{type:Easing.OutBack}
+					}
 				}
 			}
 		}

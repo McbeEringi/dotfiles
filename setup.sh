@@ -15,10 +15,12 @@ fastfetch
 
 # npm
 # hyprland xdg-desktop-portal-hyprland xfce-polkit foot fuzzel waybar pavucontrol firefox fcitx5-gtk fcitx5-qt qt5-wayland qt6-wayland \
-# thunar gvfs
+# thunar gvfs tumbler
 # git-delta
 
 # lsplug platformio-core platformio-core-udev python-pip
+
+# quickshell upower
 
 chezmoi status||chezmoi init mcbeeringi --branch dev -a
 

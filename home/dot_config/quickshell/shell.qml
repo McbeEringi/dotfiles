@@ -22,7 +22,7 @@ Scope{
 
 			FlexboxLayout{
 				anchors.fill:parent
-				justifyContent:FlexboxLayout.JustifySpaceBitween
+				justifyContent:FlexboxLayout.JustifySpaceBetween
 				Text{
 					text:Time.time
 					color:"#6ca"

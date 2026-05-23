@@ -1,7 +1,7 @@
 import QtQuick
 import QtQuick.Shapes
 
-Item{
+MouseArea{
 	property real size:40
 	property real radius:12
 	property real borderWidth:4
@@ -25,8 +25,8 @@ Item{
 	property real l:(a*4+r*2*Math.PI)/t
 
 	id:root
-	width:size
-	height:size
+	implicitWidth:size
+	implicitHeight:size
 	Rectangle{
 		anchors.fill:parent
 		color:bgColor

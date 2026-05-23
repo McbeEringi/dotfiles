@@ -10,7 +10,7 @@ MouseArea{
 	property real num:1
 	property string text:"xx"
 	property alias font:label.font
-	property color barColor:"#66ccaa"
+	property color barColor:"#6ca"
 	property real barOpacity:0.8
 	property color textColor:"#fff"
 	property color bgColor:"#99222222"
@@ -27,6 +27,7 @@ MouseArea{
 	id:root
 	implicitWidth:size
 	implicitHeight:size
+	clip:true
 	Rectangle{
 		anchors.fill:parent
 		color:bgColor
@@ -66,13 +67,14 @@ MouseArea{
 		id:label
 		anchors{
 			fill:parent
-			margins:t*2
+			margins:t*1.5
 		}
 		text:root.text
 		color:textColor
 		horizontalAlignment:Text.AlignHCenter
 		verticalAlignment:Text.AlignVCenter
 		fontSizeMode:Text.Fit
+		//elide:Text.ElideRight
 		font.pixelSize:size // enough to fit
 		font.family:"monospace"
 	}

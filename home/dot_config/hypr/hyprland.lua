@@ -14,7 +14,7 @@ end)
 hl.config({
     general={
         gaps_in=4,gaps_out=4,border_size=4,
-        col={active_border="rgba(66ccaacc)",inactive_border="rgba(aaaaaacc)"},
+        col={active_border="rgba(66ccaacc)",inactive_border="rgba(88888866)"},
         layout="dwindle"
     },
     decoration={
@@ -99,6 +99,6 @@ hl.bind("XF86AudioPrev",hl.dsp.exec_cmd("playerctl previous"),{locked=true})
 
 hl.window_rule({name="suppress-maximize-events",match={class=".*"},suppress_event="maximize"})
 hl.window_rule({name="fix-xwayland-drags",match={class="^$",title="^$",xwayland=true,float=true,fullscreen=false,pin=false,},no_focus=true})
-hl.window_rule({name="border-xwayland",match={xwayland=true},border_color="rgba(aaaaaacc)"})
+hl.window_rule({name="border-xwayland",match={xwayland=true},border_color="rgba(88888899)"})
 hl.window_rule({name="move-hyprland-run",match={class="hyprland-run"},move="20 monitor_h-120",float=true})
 hl.window_rule({name="float-xfce-polkit",match={class="xfce-polkit"},float=true})

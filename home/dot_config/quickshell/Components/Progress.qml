@@ -8,13 +8,13 @@ MouseArea{
 	property real value:0
 	property real offset:0
 	property real num:1
-	property string text:"xx"
+	property string text:''
 	property alias font:label.font
-	property color barColor:"#6ca"
+	property color barColor:'#6ca'
 	property real barOpacity:0.8
-	property color textColor:"#fff"
-	property color bgColor:"#99222222"
-	property color borderColor:"#66888888"
+	property color textColor:'#fff'
+	property color bgColor:'#99222222'
+	property color borderColor:'#66888888'
 	property real thinness:10
 	property real sharpness:3
 
@@ -40,7 +40,7 @@ MouseArea{
 		ShapePath{
 			strokeWidth:t
 			strokeColor:barColor
-			fillColor:"transparent"
+			fillColor:'transparent'
 			capStyle:ShapePath.RoundCap
 			joinStyle:ShapePath.RoundJoin
 			strokeStyle:ShapePath.DashLine
@@ -76,6 +76,6 @@ MouseArea{
 		fontSizeMode:Text.Fit
 		//elide:Text.ElideRight
 		font.pixelSize:size // enough to fit
-		font.family:"monospace"
+		font.family:'monospace'
 	}
 }

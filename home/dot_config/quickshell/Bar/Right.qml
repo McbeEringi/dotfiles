@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
+import Quickshell
 import Quickshell.Services.UPower
 import Quickshell.Services.SystemTray
 import "Components"
@@ -22,15 +23,13 @@ FlexboxLayout{
 			id:tray
 			size:root.size
 			required property var modelData
-			text:modelData.icon//modelData.title
-			value:1
-			// clip:false
 
 			Image{
 				anchors{
 					fill:parent
-					margins:4
+					margins:4*1.5
 				}
+				// visible:Quickshell.hasThemeIcon(modelData.icon)
 				source:modelData.icon
 			}
 		}

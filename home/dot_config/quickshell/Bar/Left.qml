@@ -14,14 +14,10 @@ FlexboxLayout{
 			size:root.size
 			required property var modelData
 			text:modelData.name
-			value:modelData.active
-			offset:modelData.active?-1/6:0
-			num:3
-			// barOpacity:modelData.active
+			value:1//modelData.active
+			barOpacity:modelData.active?.8:0
 			onClicked:modelData.activate()
-			Behavior on value{NumberAnimation{easing.type:Easing.OutCubic}}
-			Behavior on offset{NumberAnimation{easing.type:Easing.OutCubic}}
-			// Behavior on barOpacity{NumberAnimation{duration:200;easing.type:Easing.OutCubic}}
+			Behavior on barOpacity{NumberAnimation{duration:200;easing.type:Easing.OutCubic}}
 		}
 	}
 	Text{

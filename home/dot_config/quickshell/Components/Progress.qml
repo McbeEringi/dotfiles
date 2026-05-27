@@ -8,7 +8,7 @@ MouseArea{
 	property real value:0
 	property real offset:0
 	property real num:1
-	property string text:''
+	property string text:Math.round(value*100)
 	property alias font:label.font
 	property color barColor:'#6ca'
 	property real barOpacity:0.8

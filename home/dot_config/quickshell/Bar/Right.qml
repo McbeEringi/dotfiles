@@ -1,6 +1,7 @@
 import QtQml
 import QtQuick
 import QtQuick.Layouts
+import Qt.labs.folderlistmodel
 import Quickshell
 import Quickshell.Io
 import Quickshell.Services.UPower
@@ -63,24 +64,29 @@ FlexboxLayout{
 	}
 	Progress{
 		property real cur:0
-		property real max:Infinity
-		property string device:'intel_backlight'
-		property FileView cur_file: FileView{
-	    path:`/sys/class/backlight/${bri.device}/brightness`
-	    watchChanges:true
-	    onFileChanged:reload()
-	    onLoaded:bri.cur=+text().trim()
-	  }
-		property FileView max_file: FileView{
-	    path:`/sys/class/backlight/${bri.device}/max_brightness`
-	    watchChanges:true
-	    onFileChanged:reload()
-	    onLoaded:bri.max=+text().trim()
-	  }
+		property string args:'-e2'
+		Process{id:proc}
+		Process{
+			id:getbri
+			running:true
+			command:`brightnessctl -m ${bri.args}`.split(' ')
+			stdout:StdioCollector{
+				onStreamFinished:(a=>(
+					watcher.path||(watcher.path=`/sys/class/backlight/${a[0]}/brightness`),
+					bri.cur=(+(a[3]?.slice(0,-1)??-1))/100
+				))(this.text.split(','))
+			}
+		}
+		property FileView cur_file:
+		FileView{id:watcher;watchChanges:true;onFileChanged:getbri.running=true}
 		id:bri
 		size:root.size
-		value:cur/max
+		value:cur
 		Behavior on value{NumberAnimation{easing.type:Easing.OutCubic}}
+		onWheel:e=>(
+			e.accepted=true,
+			e.pixelDelta.y&&proc.exec({command:`brightnessctl ${bri.args} s ${Math.abs(e.pixelDelta.y)}%${0<Math.sign(e.pixelDelta.y)?'+':'-'}`.split(' ')})
+		)
 	}
 	Progress{
 		property bool chg:UPowerDeviceState.Charging==UPower.displayDevice.state
@@ -93,14 +99,13 @@ FlexboxLayout{
 		Behavior on value{NumberAnimation{easing.type:Easing.OutCubic}}
 		Behavior on barColor{ColorAnimation{easing.type:Easing.OutCubic}}
 	}
-	PopupWindow {
-    anchor.item:batt
-    
-    visible: batt.containsMouse
-    Text{
-    	text:"hello"
-    }
-  }
+	PopupWindow{
+		anchor.item:batt
+		visible:batt.containsMouse
+		Text{
+			text:"hello"
+		}
+	}
 	// Timer {
 	// 	interval: 500
 	// 	running: true

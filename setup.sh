@@ -20,7 +20,7 @@ fastfetch
 
 # lsplug platformio-core platformio-core-udev python-pip
 
-# quickshell upower
+# quickshell upower papirus-icon-theme
 
 chezmoi status||chezmoi init mcbeeringi --branch dev -a
 

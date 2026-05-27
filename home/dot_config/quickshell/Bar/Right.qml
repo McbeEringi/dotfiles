@@ -1,3 +1,4 @@
+import QtQml
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
@@ -24,6 +25,8 @@ FlexboxLayout{
 			id:tray
 			size:root.size
 			required property var modelData
+			text:''
+			bgColor:'#88ffffff'
 
 			Image{
 				anchors{
@@ -33,6 +36,13 @@ FlexboxLayout{
 				// visible:Quickshell.hasThemeIcon(modelData.icon)
 				source:modelData.icon
 			}
+			acceptedButtons:Qt.LeftButton|Qt.RightButton|Qt.MiddleButton
+			onClicked:e=>({
+				[Qt.LeftButton]:x=>x.activate(),
+				[Qt.RightButton]:(x,p)=>x.display(root,p.x,p.y),
+				[Qt.MiddleButton]:x=>x.secondaryActivate() 
+			}[e.button])(modelData,tray.mapToGlobal(e.x,e.y))
+			onWheel:e=>modelData.scroll(e.pixelDelta.y||e.pixelDelta.x,e.pixelDelta.x)
 		}
 	}
 	Progress{

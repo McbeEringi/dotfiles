@@ -8,7 +8,7 @@ local menu        = "fuzzel"
 hl.on("hyprland.start",function()
     hl.exec_cmd("fcitx5 -d")
     hl.exec_cmd("/usr/lib/xfce-polkit/xfce-polkit")
-    hl.exec_cmd("qs")
+    hl.exec_cmd("qs -d")
 end)
 
 hl.config({
@@ -52,7 +52,7 @@ hl.animation({leaf="monitorAdded",enabled=false})
 
 hl.gesture({fingers=3,direction="horizontal",action="workspace"})
 hl.gesture({fingers=3,direction="vertical",action="fullscreen"})
-
+hl.gesture({fingers=4,direction="swipe",action="move"})
 
 local mod="SUPER+"
 local shift="SHIFT+"

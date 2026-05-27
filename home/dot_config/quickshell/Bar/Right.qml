@@ -2,6 +2,7 @@ import QtQml
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
+import Quickshell.Io
 import Quickshell.Services.UPower
 import Quickshell.Services.SystemTray
 import Quickshell.Services.Pipewire
@@ -61,6 +62,27 @@ FlexboxLayout{
 		)
 	}
 	Progress{
+		property real cur:0
+		property real max:Infinity
+		property string device:'intel_backlight'
+		property FileView cur_file: FileView{
+	    path:`/sys/class/backlight/${bri.device}/brightness`
+	    watchChanges:true
+	    onFileChanged:reload()
+	    onLoaded:bri.cur=+text().trim()
+	  }
+		property FileView max_file: FileView{
+	    path:`/sys/class/backlight/${bri.device}/max_brightness`
+	    watchChanges:true
+	    onFileChanged:reload()
+	    onLoaded:bri.max=+text().trim()
+	  }
+		id:bri
+		size:root.size
+		value:cur/max
+		Behavior on value{NumberAnimation{easing.type:Easing.OutCubic}}
+	}
+	Progress{
 		property bool chg:UPowerDeviceState.Charging==UPower.displayDevice.state
 		id:batt
 		size:root.size
@@ -71,6 +93,14 @@ FlexboxLayout{
 		Behavior on value{NumberAnimation{easing.type:Easing.OutCubic}}
 		Behavior on barColor{ColorAnimation{easing.type:Easing.OutCubic}}
 	}
+	PopupWindow {
+    anchor.item:batt
+    
+    visible: batt.containsMouse
+    Text{
+    	text:"hello"
+    }
+  }
 	// Timer {
 	// 	interval: 500
 	// 	running: true

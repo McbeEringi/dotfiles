@@ -3,7 +3,6 @@ import QtQuick
 import QtQuick.Layouts
 import Qt.labs.folderlistmodel
 import Quickshell
-import Quickshell.Io
 import Quickshell.Services.UPower
 import Quickshell.Services.SystemTray
 import Quickshell.Services.Pipewire
@@ -51,6 +50,7 @@ FlexboxLayout{
 		id:vol
 		property PwNode sink:Pipewire.defaultAudioSink
 		size:root.size
+		visible:sink
 		PwObjectTracker{objects:[vol.sink]}
 		value:sink?.audio.volume??0
 		barColor:sink?.audio.muted?'#aaa':'#6ca'
@@ -63,30 +63,12 @@ FlexboxLayout{
 		)
 	}
 	Progress{
-		property real cur:0
-		property string args:'-e2'
-		Process{id:proc}
-		Process{
-			id:getbri
-			running:true
-			command:`brightnessctl -m ${bri.args}`.split(' ')
-			stdout:StdioCollector{
-				onStreamFinished:(a=>(
-					watcher.path||(watcher.path=`/sys/class/backlight/${a[0]}/brightness`),
-					bri.cur=(+(a[3]?.slice(0,-1)??-1))/100
-				))(this.text.split(','))
-			}
-		}
-		property FileView cur_file:
-		FileView{id:watcher;watchChanges:true;onFileChanged:getbri.running=true}
 		id:bri
 		size:root.size
-		value:cur
+		visible:Brightness.device
+		value:Brightness.value
 		Behavior on value{NumberAnimation{easing.type:Easing.OutCubic}}
-		onWheel:e=>(
-			e.accepted=true,
-			e.pixelDelta.y&&proc.exec({command:`brightnessctl ${bri.args} s ${Math.abs(e.pixelDelta.y)}%${0<Math.sign(e.pixelDelta.y)?'+':'-'}`.split(' ')})
-		)
+		onWheel:e=>(e.accepted=true,Brightness.set(e.pixelDelta.y))
 	}
 	Progress{
 		property bool chg:UPowerDeviceState.Charging==UPower.displayDevice.state

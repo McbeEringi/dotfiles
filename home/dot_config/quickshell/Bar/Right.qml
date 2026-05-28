@@ -3,6 +3,7 @@ import QtQuick
 import QtQuick.Layouts
 import Qt.labs.folderlistmodel
 import Quickshell
+import Quickshell.Io
 import Quickshell.Services.UPower
 import Quickshell.Services.SystemTray
 import Quickshell.Services.Pipewire
@@ -71,6 +72,18 @@ FlexboxLayout{
 		onWheel:e=>(e.accepted=true,Brightness.set(e.pixelDelta.y))
 	}
 	Progress{
+		id:ram
+		size:root.size
+		value:Ram.value
+		Behavior on value{NumberAnimation{easing.type:Easing.OutCubic}}
+	}
+	Progress{
+		id:cpu
+		size:root.size
+		value:Cpu.value
+		Behavior on value{NumberAnimation{easing.type:Easing.OutCubic}}
+	}
+	Progress{
 		property bool chg:UPowerDeviceState.Charging==UPower.displayDevice.state
 		id:batt
 		size:root.size
@@ -88,22 +101,4 @@ FlexboxLayout{
 			text:"hello"
 		}
 	}
-	// Timer {
-	// 	interval: 500
-	// 	running: true
-	// 	repeat: true
-
-	// 	onTriggered:{
-	// 		batt.barColor = '#'+Math.random().toString(16).slice(2,5)
-	// 	}
-	// }
-	// Rectangle{
-	// 	visible:batt.containsMouse
-	// 	width:size
-	// 	height:size
-	// 	anchors.bottom:batt.verticalCenter
-	// 	anchors.right:batt.horizontalCenter
-	// 	color:"#f0f"
-	// 	radius: 4
-	// }
 }

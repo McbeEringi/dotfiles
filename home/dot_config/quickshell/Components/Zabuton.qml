@@ -4,7 +4,7 @@ MouseArea{
 	property real radius:12
 	property color bgColor:'#88222222'
 	property real borderWidth:4
-	property color borderColor:'#88aaaaaa'
+	property color borderColor:'#66aaaaaa'
 	
 	Rectangle{
 		anchors.fill:parent

@@ -16,7 +16,7 @@ FlexboxLayout{
 			width:root.size
 			required property var modelData
 			text:modelData.name
-			borderColor:modelData.active?'#cc66ccaa':'#88aaaaaa'
+			borderColor:modelData.active?'#cc66ccaa':'#66aaaaaa'
 			// value:modelData.active
 			// barOpacity:modelData.active?.8:0
 			onClicked:modelData.activate()

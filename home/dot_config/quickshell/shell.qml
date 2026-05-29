@@ -2,8 +2,10 @@
 import Quickshell
 import "Bar"
 import "Idle"
+import "Wallpaper"
 
-Scope{
+ShellRoot{
 	Bar{}
 	Idle{}
+	Wallpaper{}
 }

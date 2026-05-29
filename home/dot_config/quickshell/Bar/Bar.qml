@@ -4,7 +4,6 @@ import Quickshell
 Scope{
 	Variants{
 		model:Quickshell.screens
-
 		PanelWindow{
 			property real size:28
 			id:root

@@ -9,9 +9,11 @@ FlexboxLayout{
 	alignItems:FlexboxLayout.AlignCenter
 	Repeater{
 		model:Hyprland.workspaces
-		delegate:Progress{
+		delegate:TextProgress{
 			id:ws
-			size:root.size
+			// size:root.size
+			height:root.size
+			width:root.size
 			required property var modelData
 			text:modelData.name
 			value:1//modelData.active

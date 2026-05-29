@@ -1,81 +1,49 @@
 import QtQuick
 import QtQuick.Shapes
 
-MouseArea{
-	property real size:40
-	property real radius:12
-	property real borderWidth:4
-	property real value:0
-	property real offset:0
-	property real num:1
-	property string text:Math.round(value*100)
-	property alias font:label.font
-	property color barColor:'#6ca'
-	property real barOpacity:0.8
-	property color textColor:'#fff'
-	property color bgColor:'#99222222'
-	property color borderColor:'#66888888'
-	property real thinness:10
-	property real sharpness:3
-
-	property real t:borderWidth
-	property real w:size-t
-	property real r:radius-t/2
-	property real a:w-r*2
-	property real l:(a*4+r*2*Math.PI)/t
-
+Zabuton{
 	id:root
-	implicitWidth:size
-	implicitHeight:size
-	clip:true
-	Rectangle{
-		anchors.fill:parent
-		color:bgColor
-		radius:r+t/2
-		border{width:t;color:borderColor}
-	}
+	property real value:0
+	property real offset:1
+	property real num:1
+	property color barColor:'#6ca'
+	property real barOpacity:1
+	property real barWidth:borderWidth
+	
 	Shape{
-		opacity:barOpacity
+		opacity:root.barOpacity
 		layer{enabled:true;samples:4}
 		ShapePath{
-			strokeWidth:t
-			strokeColor:barColor
+			id:p
+			property real aw:root.width-root.radius*2
+			property real ah:root.height-root.radius*2
+			property real r:root.radius-root.barWidth/2
+			property real l:(aw+ah+r*Math.PI)*2/root.barWidth
+
+			strokeWidth:root.barWidth
+			strokeColor:root.barColor
 			fillColor:'transparent'
 			capStyle:ShapePath.RoundCap
 			joinStyle:ShapePath.RoundJoin
 			strokeStyle:ShapePath.DashLine
-			dashOffset:l*(1-offset)
+			dashOffset:p.l*(1-root.offset)
 			dashPattern:[
-				l*value/num,
-				l*(1-value)/num
+				p.l*root.value/root.num,
+				p.l*(1-root.value)/root.num
 			]
 
-			startX:size/2
-			startY:t/2
-			PathLine{relativeX:a/2;relativeY:0}
-			PathArc{relativeX:r;relativeY:r;radiusX:r;radiusY:r}
-			PathLine{relativeX:0;relativeY:a;}
-			PathArc{relativeX:-r;relativeY:r;radiusX:r;radiusY:r}
-			PathLine{relativeX:-a;relativeY:0}
-			PathArc{relativeX:-r;relativeY:-r;radiusX:r;radiusY:r}
-			PathLine{relativeX:0;relativeY:-a;}
-			PathArc{relativeX:r;relativeY:-r;radiusX:r;radiusY:r}
-			PathLine{relativeX:a/2;relativeY:0}
+			startX:root.width/2
+			startY:root.barWidth/2
+			PathLine{relativeX:p.aw/2;relativeY:0}
+			PathArc{relativeX:p.r;relativeY:p.r;radiusX:p.r;radiusY:p.r}
+			PathLine{relativeX:0;relativeY:p.ah;}
+			PathArc{relativeX:-p.r;relativeY:p.r;radiusX:p.r;radiusY:p.r}
+			PathLine{relativeX:-p.aw;relativeY:0}
+			PathArc{relativeX:-p.r;relativeY:-p.r;radiusX:p.r;radiusY:p.r}
+			PathLine{relativeX:0;relativeY:-p.ah;}
+			PathArc{relativeX:p.r;relativeY:-p.r;radiusX:p.r;radiusY:p.r}
+			PathLine{relativeX:p.aw/2;relativeY:0}
 		}
 	}
-	Text{
-		id:label
-		anchors{
-			fill:parent
-			margins:t*1.5
-		}
-		text:root.text
-		color:textColor
-		horizontalAlignment:Text.AlignHCenter
-		verticalAlignment:Text.AlignVCenter
-		fontSizeMode:Text.Fit
-		//elide:Text.ElideRight
-		font.pixelSize:size // enough to fit
-		font.family:'monospace'
-	}
+	
 }

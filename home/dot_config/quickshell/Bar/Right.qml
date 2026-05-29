@@ -23,9 +23,10 @@ FlexboxLayout{
 	// }
 	Repeater{
 		model:SystemTray.items
-		delegate:Progress{
+		delegate:TextProgress{
 			id:tray
-			size:root.size
+			width:root.size
+			height:root.size
 			required property var modelData
 			text:''
 			bgColor:'#88ffffff'
@@ -47,10 +48,11 @@ FlexboxLayout{
 			onWheel:e=>modelData.scroll(e.pixelDelta.y||e.pixelDelta.x,e.pixelDelta.x)
 		}
 	}
-	Progress{
+	TextProgress{
 		id:vol
 		property PwNode sink:Pipewire.defaultAudioSink
-		size:root.size
+		width:root.size
+		height:root.size
 		visible:sink
 		PwObjectTracker{objects:[vol.sink]}
 		value:sink?.audio.volume??0
@@ -63,30 +65,34 @@ FlexboxLayout{
 			sink.audio.volume+=e.pixelDelta.y*.0005
 		)
 	}
-	Progress{
+	TextProgress{
 		id:bri
-		size:root.size
+		width:root.size
+		height:root.size
 		visible:Brightness.device
 		value:Brightness.value
 		Behavior on value{NumberAnimation{easing.type:Easing.OutCubic}}
 		onWheel:e=>(e.accepted=true,Brightness.set(e.pixelDelta.y))
 	}
-	Progress{
+	TextProgress{
 		id:ram
-		size:root.size
+		width:root.size
+		height:root.size
 		value:Ram.value
 		Behavior on value{NumberAnimation{easing.type:Easing.OutCubic}}
 	}
-	Progress{
+	TextProgress{
 		id:cpu
-		size:root.size
+		width:root.size
+		height:root.size
 		value:Cpu.value
 		Behavior on value{NumberAnimation{easing.type:Easing.OutCubic}}
 	}
-	Progress{
+	TextProgress{
 		property bool chg:UPowerDeviceState.Charging==UPower.displayDevice.state
 		id:batt
-		size:root.size
+		width:root.size
+		height:root.size
 		barColor:chg?'#e9b':'#6ca'
 		value:UPower.displayDevice.percentage
 		hoverEnabled:true

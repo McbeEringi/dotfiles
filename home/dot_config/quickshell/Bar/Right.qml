@@ -1,9 +1,7 @@
 import QtQml
 import QtQuick
 import QtQuick.Layouts
-import Qt.labs.folderlistmodel
 import Quickshell
-import Quickshell.Io
 import Quickshell.Services.UPower
 import Quickshell.Services.SystemTray
 import Quickshell.Services.Pipewire
@@ -93,7 +91,9 @@ FlexboxLayout{
 		id:batt
 		width:root.size
 		height:root.size
-		barColor:chg?'#e9b':'#6ca'
+		// barColor:chg?'#e9b':'#6ca'
+		// borderColor:chg?'#8866bbee':'#88aaaaaa'
+		textColor:chg?'#66bbee':'#fff'
 		value:UPower.displayDevice.percentage
 		hoverEnabled:true
 

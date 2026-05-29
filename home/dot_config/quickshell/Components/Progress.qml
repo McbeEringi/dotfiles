@@ -4,10 +4,10 @@ import QtQuick.Shapes
 Zabuton{
 	id:root
 	property real value:0
-	property real offset:1
+	property real offset:0
 	property real num:1
 	property color barColor:'#6ca'
-	property real barOpacity:1
+	property real barOpacity:.8
 	property real barWidth:borderWidth
 	
 	Shape{

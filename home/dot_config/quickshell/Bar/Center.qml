@@ -1,6 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
-import "Components"
+import "Singletons"
 
 FlexboxLayout{
 	Text{

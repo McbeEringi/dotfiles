@@ -8,6 +8,7 @@ import Quickshell.Services.UPower
 import Quickshell.Services.SystemTray
 import Quickshell.Services.Pipewire
 import "Components"
+import "Singletons"
 
 FlexboxLayout{
 	gap:4

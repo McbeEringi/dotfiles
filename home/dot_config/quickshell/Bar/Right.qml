@@ -23,12 +23,11 @@ FlexboxLayout{
 	// }
 	Repeater{
 		model:SystemTray.items
-		delegate:TextProgress{
+		delegate:Zabuton{
 			id:tray
 			width:root.size
 			height:root.size
 			required property var modelData
-			text:''
 			bgColor:'#88ffffff'
 
 			Image{

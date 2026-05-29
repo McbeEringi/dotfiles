@@ -9,17 +9,18 @@ FlexboxLayout{
 	alignItems:FlexboxLayout.AlignCenter
 	Repeater{
 		model:Hyprland.workspaces
-		delegate:TextProgress{
+		delegate:TextZabuton{
 			id:ws
 			// size:root.size
 			height:root.size
 			width:root.size
 			required property var modelData
 			text:modelData.name
-			value:1//modelData.active
-			barOpacity:modelData.active?.8:0
+			borderColor:modelData.active?'#cc66ccaa':'#88aaaaaa'
+			// value:modelData.active
+			// barOpacity:modelData.active?.8:0
 			onClicked:modelData.activate()
-			Behavior on barOpacity{NumberAnimation{duration:200;easing.type:Easing.OutCubic}}
+			Behavior on borderColor{ColorAnimation{duration:200;easing.type:Easing.OutCubic}}
 		}
 	}
 	Text{

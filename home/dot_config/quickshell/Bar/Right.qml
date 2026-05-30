@@ -24,8 +24,8 @@ FlexboxLayout{
 		model:SystemTray.items
 		delegate:Zabuton{
 			id:tray
-			width:root.size
-			height:width
+			height:root.size
+			width:height
 			required property var modelData
 			bgColor:'#88ffffff'
 
@@ -49,8 +49,8 @@ FlexboxLayout{
 	TextProgress{
 		id:vol
 		property PwNode sink:Pipewire.defaultAudioSink
-		width:root.size
-		height:width
+	height:root.size
+	width:height
 		visible:sink
 		PwObjectTracker{objects:[vol.sink]}
 		value:sink?.audio.volume??0
@@ -64,29 +64,29 @@ FlexboxLayout{
 	}
 	TextProgress{
 		id:bri
-		width:root.size
-		height:width
+	height:root.size
+	width:height
 		visible:Brightness.device
 		value:Brightness.value
 		onWheel:e=>(e.accepted=true,Brightness.set(e.pixelDelta.y))
 	}
 	TextProgress{
 		id:ram
-		width:root.size
-		height:width
+	height:root.size
+	width:height
 		value:Ram.value
 	}
 	TextProgress{
 		id:cpu
-		width:root.size
-		height:width
+	height:root.size
+	width:height
 		value:Cpu.value
 	}
 	TextProgress{
 		property bool chg:UPowerDeviceState.Charging==UPower.displayDevice.state
 		id:batt
-		width:root.size
-		height:width
+	height:root.size
+	width:height
 		// barColor:chg?'#e9b':'#6ca'
 		// borderColor:chg?'#8866bbee':'#88aaaaaa'
 		textColor:chg?'#66bbee':'#fff'

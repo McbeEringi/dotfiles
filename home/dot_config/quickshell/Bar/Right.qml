@@ -10,6 +10,8 @@ import "Singletons"
 
 FlexboxLayout{
 	gap:4
+	anchors.fill:parent
+	alignItems:FlexboxLayout.AlignCenter
 	justifyContent:FlexboxLayout.JustifyEnd
 	// Progress{
 	// 	id:net

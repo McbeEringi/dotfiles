@@ -1,25 +1,22 @@
 import QtQuick
 import QtQuick.Layouts
-import Quickshell.Hyprland
 import Quickshell.WindowManager
 import Quickshell.Wayland
 import "Components"
 
 FlexboxLayout{
 	gap:4
+	anchors.fill:parent
 	alignItems:FlexboxLayout.AlignCenter
 	Repeater{
-		model:WindowManager.windowsets
+		model:[...WindowManager.windowsets].sort((a,b)=>a.name.codePointAt(0)-b.name.codePointAt(0))
 		delegate:TextZabuton{
 			id:ws
 			required property var modelData
-			// size:root.size
 			height:root.size
 			width:height
-			text:modelData.name
+			text:modelData.name.replace(/^special:/,'')
 			borderColor:modelData.active?'#cc66ccaa':'#66aaaaaa'
-			// value:modelData.active
-			// barOpacity:modelData.active?.8:0
 			onClicked:modelData.active?
 				modelData.canDeactivate&&modelData.deactivate():
 				modelData.canActivate&&modelData.activate()

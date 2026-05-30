@@ -1,5 +1,6 @@
 import QtQuick
 import Quickshell
+import Quickshell.Wayland
 
 Scope{
 	Variants{
@@ -9,6 +10,7 @@ Scope{
 			id:root
 			required property var modelData
 			screen:modelData
+			WlrLayershell.namespace:'bar'
 			margins{top:4;left:4;right:4}
 			anchors{top:true;left:true;right:true}
 			implicitHeight:size

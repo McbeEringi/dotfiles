@@ -5,6 +5,8 @@ Progress{
 	property string text:Math.round(value*100)
 	property color textColor:'#fff'
 	property real margin:1.5
+	width:label.contentWidth+borderWidth*margin
+
 	Text{
 		id:label
 		anchors{

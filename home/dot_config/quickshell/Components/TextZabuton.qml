@@ -4,7 +4,9 @@ Zabuton{
 	id:root
 	property string text:''
 	property color textColor:'#fff'
-	property real margin:1.5
+	property real margin:3
+	width:label.contentWidth+borderWidth*margin
+
 	Text{
 		id:label
 		anchors{
@@ -19,5 +21,6 @@ Zabuton{
 		//elide:Text.ElideRight
 		font.pixelSize:root.height // enough to fit
 		font.family:'monospace'
+		FadeBehavior on text{}
 	}
 }

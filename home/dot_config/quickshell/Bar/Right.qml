@@ -25,7 +25,7 @@ FlexboxLayout{
 		delegate:Zabuton{
 			id:tray
 			width:root.size
-			height:root.size
+			height:width
 			required property var modelData
 			bgColor:'#88ffffff'
 
@@ -50,13 +50,12 @@ FlexboxLayout{
 		id:vol
 		property PwNode sink:Pipewire.defaultAudioSink
 		width:root.size
-		height:root.size
+		height:width
 		visible:sink
 		PwObjectTracker{objects:[vol.sink]}
 		value:sink?.audio.volume??0
 		barColor:sink?.audio.muted?'#aaa':'#6ca'
 		// text:Pipewire.defaultAudioSink?.nickname
-		Behavior on value{NumberAnimation{easing.type:Easing.OutCubic}}
 		Behavior on barColor{ColorAnimation{easing.type:Easing.OutCubic}}
 		onWheel:e=>(
 			e.accepted=true,
@@ -66,38 +65,34 @@ FlexboxLayout{
 	TextProgress{
 		id:bri
 		width:root.size
-		height:root.size
+		height:width
 		visible:Brightness.device
 		value:Brightness.value
-		Behavior on value{NumberAnimation{easing.type:Easing.OutCubic}}
 		onWheel:e=>(e.accepted=true,Brightness.set(e.pixelDelta.y))
 	}
 	TextProgress{
 		id:ram
 		width:root.size
-		height:root.size
+		height:width
 		value:Ram.value
-		Behavior on value{NumberAnimation{easing.type:Easing.OutCubic}}
 	}
 	TextProgress{
 		id:cpu
 		width:root.size
-		height:root.size
+		height:width
 		value:Cpu.value
-		Behavior on value{NumberAnimation{easing.type:Easing.OutCubic}}
 	}
 	TextProgress{
 		property bool chg:UPowerDeviceState.Charging==UPower.displayDevice.state
 		id:batt
 		width:root.size
-		height:root.size
+		height:width
 		// barColor:chg?'#e9b':'#6ca'
 		// borderColor:chg?'#8866bbee':'#88aaaaaa'
 		textColor:chg?'#66bbee':'#fff'
 		value:UPower.displayDevice.percentage
 		hoverEnabled:true
 
-		Behavior on value{NumberAnimation{easing.type:Easing.OutCubic}}
 		Behavior on barColor{ColorAnimation{easing.type:Easing.OutCubic}}
 	}
 	PopupWindow{

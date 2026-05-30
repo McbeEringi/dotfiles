@@ -9,7 +9,9 @@ Zabuton{
 	property color barColor:'#6ca'
 	property real barOpacity:.8
 	property real barWidth:borderWidth
-	
+
+	Behavior on value{NumberAnimation{easing.type:Easing.OutCubic}}
+
 	Shape{
 		opacity:root.barOpacity
 		layer{enabled:true;samples:4}

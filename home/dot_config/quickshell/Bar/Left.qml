@@ -23,12 +23,13 @@ FlexboxLayout{
 			Behavior on borderColor{ColorAnimation{duration:200;easing.type:Easing.OutCubic}}
 		}
 	}
-	Text{
+	TextZabuton{
+		height:root.size
 		// anchors.verticalCenter:parent.verticalCenter
 		text:ToplevelManager.activeToplevel?.appId??''
-		color:'#fff'
-		font.family:"monospace"
-		FadeBehavior on text{}
+		opacity:text.length?1:0
+		Behavior on width{NumberAnimation{duration:200;easing.type:Easing.OutCubic}}
+		Behavior on opacity{NumberAnimation{duration:500;easing.type:Easing.OutCubic}}
 	}
 }
 

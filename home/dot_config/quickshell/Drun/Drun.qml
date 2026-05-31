@@ -14,6 +14,7 @@ Scope{
 			implicitHeight:320
 			implicitWidth:320
 			color:'#222'
+			onClosed:_=>root.activeAsync=false
 			FlexboxLayout{
 				anchors{
 					fill:parent
@@ -72,7 +73,6 @@ Scope{
 					highlight:Rectangle{color:'#66aaaaaa';radius:12-4-root.gap}
 				}
 			}
-			onClosed:_=>root.activeAsync=false
 		}
 	}
 

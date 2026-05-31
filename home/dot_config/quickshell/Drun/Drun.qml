@@ -14,7 +14,7 @@ Scope{
 			implicitHeight:320
 			implicitWidth:320
 			color:'#222'
-			onClosed:_=>root.activeAsync=false
+			onClosed:root.activeAsync=false
 			FlexboxLayout{
 				anchors{
 					fill:parent

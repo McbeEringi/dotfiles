@@ -5,6 +5,7 @@ import "Idle"
 import "Wallpaper"
 import "Drun"
 import "Mirror"
+import "Polkit"
 
 ShellRoot{
 	Bar{}
@@ -12,4 +13,5 @@ ShellRoot{
 	Wallpaper{}
 	Drun{}
 	Mirror{}
+	Polkit{}
 }

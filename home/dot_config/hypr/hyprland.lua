@@ -8,7 +8,6 @@ local menu        = "fuzzel"
 
 hl.on("hyprland.start",function()
 	hl.exec_cmd("fcitx5 -d")
-	hl.exec_cmd("/usr/lib/xfce-polkit/xfce-polkit")
 	hl.exec_cmd("qs -d")
 end)
 
@@ -83,15 +82,15 @@ hl.gesture({fingers=4,direction="swipe",action="move"})
 
 hl.window_rule({name="border-xwayland",match={xwayland=true},border_color="rgba(aaaaaa99)"})
 hl.window_rule({name="float",match={title="float"},float=true})
-hl.window_rule({name="float-xfce-polkit",match={class="xfce-polkit"},float=true,stay_focused=true,dim_around=true})
 hl.window_rule({name="opacity",match={class=table.concat({fileManager,terminal},"|")},opacity=".9 .8 override"})
 hl.window_rule({name="mpv",match={class="mpv"},pseudo=true,workspace="special:s"})
 hl.window_rule({name="mpv-shallow",match={class="mpv-shallow"},pseudo=true,workspace="special:s silent",size={256,256}})
 hl.window_rule({name="suppress-maximize-events",match={class=".*"},suppress_event="maximize"})
 hl.window_rule({name="fix-xwayland-drags",match={class="^$",title="^$",xwayland=true,float=true,fullscreen=false,pin=false,},no_focus=true})
 hl.window_rule({name="move-hyprland-run",match={class="hyprland-run"},move="20 monitor_h-120",float=true})
-hl.window_rule({name="float-qs-drun",match={class="org.quickshell",title="drun"},float=true,opacity=".9 .8 override"})
+hl.window_rule({name="float-qs-drun",match={class="org.quickshell",title="drun"},float=true,pin=true,opacity=".9 .8 override"})
 hl.window_rule({name="float-qs-mirror",match={class="org.quickshell",title="mirror"},opacity="1 override"})
+hl.window_rule({name="float-qs-polkit",match={class="org.quickshell",title="polkit"},float=true,stay_focused=true,dim_around=true})
 
 hl.layer_rule({name="blur-bar",match={namespace="bar"},blur=true,ignore_alpha=.05})
 

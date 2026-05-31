@@ -14,9 +14,12 @@ otf-monaspace noto-fonts noto-fonts-emoji noto-fonts-cjk \
 fastfetch
 
 # npm
-# hyprland xdg-desktop-portal-hyprland xfce-polkit foot fuzzel waybar pavucontrol firefox fcitx5-gtk fcitx5-qt qt5-wayland qt6-wayland \
+# hyprland xdg-desktop-portal-hyprland foot pavucontrol firefox fcitx5-gtk fcitx5-qt qt5-wayland qt6-wayland \
 # thunar gvfs tumbler
 # git-delta
+
+# # replaced by qs
+# # xfce-polkit fuzzel waybar hypridle hyprpaper
 
 # lsplug platformio-core platformio-core-udev python-pip
 

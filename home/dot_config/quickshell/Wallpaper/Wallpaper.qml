@@ -17,6 +17,7 @@ Scope{
 			color:'transparent'
 			Image{
 				anchors.fill:parent
+				autoTransform:true
 				fillMode:Image.PreserveAspectCrop
 				source:Qt.resolvedUrl('./wp')
 			}

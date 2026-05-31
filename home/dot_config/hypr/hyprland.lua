@@ -102,8 +102,8 @@ hl.bind(mod.."C",hl.dsp.window.close())
 hl.bind(mod.."Q",hl.dsp.exec_cmd("gnome-terminal"))
 hl.bind(mod.."SPACE",hl.dsp.exec_cmd("gnome-terminal node",{float=true}))
 hl.bind(mod.."E",hl.dsp.exec_cmd(fileManager))
-hl.bind(mod.."R",hl.dsp.exec_cmd(menu))
-hl.bind(mod..shift.."R",hl.dsp.exec_cmd("qs ipc call drun exec"))
+hl.bind(mod..shift.."R",hl.dsp.exec_cmd(menu))
+hl.bind(mod.."R",hl.dsp.exec_cmd("qs ipc call drun exec"))
 hl.bind(mod.."M",hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
 
 for _,x in ipairs({"left","right","up","down"}) do

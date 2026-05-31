@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick.Layouts
 import Quickshell
 import Quickshell.Io
 
@@ -7,28 +8,40 @@ Scope{
 		id:drun
 		FloatingWindow{
 			title:'drun'
-			TextInput{
-				id:input
+			implicitHeight:256
+			implicitWidth:256
+			color:'#222'
+			FlexboxLayout{
 				anchors{
-					left:parent.left
-					right:parent.right
-					top:parent.top
+					fill:parent
+					margins:4
+					bottomMargin:0
 				}
-				focus:true
-			}
-			ListView{
-				clip:true
-				anchors{
-					left:parent.left
-					right:parent.right
-					top:input.bottom
-					bottom:parent.bottom
+				direction:FlexboxLayout.Column
+				// alignContent:FlexboxLayout.AlignStretch
+				alignItems:FlexboxLayout.AlignCenter
+				TextInput{
+					id:input
+					focus:true
+					color:'#fff'
+					onAccepted:console.log('accepted')
+					font.family:'monospace'
 				}
-				model:DesktopEntries.applications.values.filter(x=>new RegExp(input.text,'i').test(x.name))
-				delegate:Text{
-					required property var modelData
+				ListView{
+					clip:true
+					Layout.fillHeight:true
 					width:parent.width
-					text:modelData.name
+					model:DesktopEntries.applications.values.filter(x=>new RegExp(input.text,'i').test(x.name))
+					delegate:Text{
+						required property var modelData
+						width:parent.width
+						text:modelData.name
+						color:'#fff'
+						font.family:'monospace'
+					}
+					highlight:Rectangle{
+						color:'#66aaaaaa'
+					}
 				}
 			}
 			onClosed:_=>drun.activeAsync=false

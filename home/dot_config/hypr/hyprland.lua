@@ -82,14 +82,15 @@ hl.gesture({fingers=3,direction="vertical",action="fullscreen"})
 hl.gesture({fingers=4,direction="swipe",action="move"})
 
 hl.window_rule({name="border-xwayland",match={xwayland=true},border_color="rgba(aaaaaa99)"})
-hl.window_rule({name="float",match={title="^float$"},float=true})
-hl.window_rule({name="float-xfce-polkit",match={class="^xfce-polkit$"},float=true,stay_focused=true,dim_around=true})
+hl.window_rule({name="float",match={title="float"},float=true})
+hl.window_rule({name="float-xfce-polkit",match={class="xfce-polkit"},float=true,stay_focused=true,dim_around=true})
 hl.window_rule({name="opacity",match={class=table.concat({fileManager,terminal},"|")},opacity=".9 .8 override"})
-hl.window_rule({name="mpv",match={class="^mpv$"},pseudo=true,workspace="special:s"})
-hl.window_rule({name="mpv-shallow",match={class="^mpv-shallow$"},pseudo=true,workspace="special:s silent",size={256,256}})
+hl.window_rule({name="mpv",match={class="mpv"},pseudo=true,workspace="special:s"})
+hl.window_rule({name="mpv-shallow",match={class="mpv-shallow"},pseudo=true,workspace="special:s silent",size={256,256}})
 hl.window_rule({name="suppress-maximize-events",match={class=".*"},suppress_event="maximize"})
 hl.window_rule({name="fix-xwayland-drags",match={class="^$",title="^$",xwayland=true,float=true,fullscreen=false,pin=false,},no_focus=true})
 hl.window_rule({name="move-hyprland-run",match={class="hyprland-run"},move="20 monitor_h-120",float=true})
+hl.window_rule({name="float-qs-drun",match={class="org.quickshell",title="drun"},float=true})
 
 hl.layer_rule({name="blur-bar",match={namespace="bar"},blur=true,ignore_alpha=.05})
 
@@ -102,6 +103,7 @@ hl.bind(mod.."Q",hl.dsp.exec_cmd("gnome-terminal"))
 hl.bind(mod.."SPACE",hl.dsp.exec_cmd("gnome-terminal node",{float=true}))
 hl.bind(mod.."E",hl.dsp.exec_cmd(fileManager))
 hl.bind(mod.."R",hl.dsp.exec_cmd(menu))
+hl.bind(mod..shift.."R",hl.dsp.exec_cmd("qs ipc call drun exec"))
 hl.bind(mod.."M",hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
 
 for _,x in ipairs({"left","right","up","down"}) do

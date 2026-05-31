@@ -105,6 +105,7 @@ hl.bind(mod.."E",hl.dsp.exec_cmd(fileManager))
 hl.bind(mod..shift.."R",hl.dsp.exec_cmd(menu))
 hl.bind(mod.."R",hl.dsp.exec_cmd("qs ipc call drun exec"))
 hl.bind(mod.."M",hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
+hl.bind(mod.."P",hl.dsp.exec_cmd("qs ipc call mirror exec e"))
 
 for _,x in ipairs({"left","right","up","down"}) do
 	hl.bind(mod..x,hl.dsp.focus({direction=x}))

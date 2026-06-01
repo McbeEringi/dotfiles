@@ -5,6 +5,8 @@ MouseArea{
 	property color bgColor:'#99222222'
 	property real borderWidth:4
 	property color borderColor:'#66aaaaaa'
+	implicitHeight:64
+	implicitWidth:implicitHeight
 	
 	Rectangle{
 		anchors.fill:parent
@@ -12,4 +14,5 @@ MouseArea{
 		radius:root.radius
 		border{width:root.borderWidth;color:root.borderColor}
 	}
+	Behavior on implicitWidth{NumberAnimation{easing.type:Easing.OutCubic}}
 }

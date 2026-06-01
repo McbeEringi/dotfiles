@@ -13,8 +13,7 @@ FlexboxLayout{
 		delegate:TextZabuton{
 			id:ws
 			required property var modelData
-			height:root.size
-			width:height
+			implicitHeight:root.size
 			text:modelData.name.replace(/^special:/,'')
 			borderColor:modelData.active?'#cc66ccaa':'#66aaaaaa'
 			onClicked:modelData.active?
@@ -24,11 +23,11 @@ FlexboxLayout{
 		}
 	}
 	TextZabuton{
-		height:root.size
+		implicitHeight:root.size
 		// anchors.verticalCenter:parent.verticalCenter
 		text:ToplevelManager.activeToplevel?.appId??''
 		opacity:text.length?1:0
-		Behavior on width{NumberAnimation{duration:200;easing.type:Easing.OutCubic}}
+		scale:opacity*.5+.5
 		Behavior on opacity{NumberAnimation{duration:500;easing.type:Easing.OutCubic}}
 	}
 }

@@ -4,13 +4,16 @@ Progress{
 	id:root
 	property string text:Math.round(value*100)
 	property color textColor:'#fff'
-	property real margin:1.5
-	width:label.contentWidth+borderWidth*margin
+	property real margin:3
+	implicitWidth:Math.max(label.contentWidth+borderWidth*margin,height)
+
 
 	Text{
 		id:label
 		anchors{
-			fill:parent
+			top:parent.top
+			bottom:parent.bottom
+			horizontalCenter:parent.horizontalCenter
 			margins:root.barWidth*root.margin
 		}
 		text:root.text

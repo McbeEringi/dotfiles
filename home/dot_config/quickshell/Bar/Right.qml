@@ -52,7 +52,7 @@ FlexboxLayout{
 		id:vol
 		property PwNode sink:Pipewire.defaultAudioSink
 		implicitHeight:root.size
-		visible:sink
+		// visible:sink
 		PwObjectTracker{objects:[vol.sink]}
 		value:sink?.audio.volume??0
 		barColor:sink?.audio.muted?'#aaa':'#6ca'
@@ -62,11 +62,33 @@ FlexboxLayout{
 			e.accepted=true,
 			sink.audio.volume+=e.pixelDelta.y*.0005
 		)
+		hoverEnabled:true
+		PopupWindow{
+			color:'transparent'
+			anchor{
+				item:vol
+				edges:Edges.Bottom
+				gravity:Edges.Bottom
+			}
+			visible:children[0].opacity
+			Zabuton{
+				anchors.fill:parent
+				opacity:vol.containsMouse
+				Text{
+					anchors.centerIn:parent
+					horizontalAlignment:Text.AlignHCenter
+					text:vol.sink?.nickname??''
+					color:'#fff'
+					font.family:'monospace'
+				}
+				Behavior on opacity{NumberAnimation{easing.type:Easing.OutCubic}}
+			}
+		}
 	}
 	TextProgress{
 		id:bri
 		implicitHeight:root.size
-		visible:Brightness.device
+		// visible:Brightness.device
 		value:Brightness.value
 		onWheel:e=>(e.accepted=true,Brightness.set(e.pixelDelta.y))
 	}
@@ -91,12 +113,29 @@ FlexboxLayout{
 		hoverEnabled:true
 
 		Behavior on barColor{ColorAnimation{easing.type:Easing.OutCubic}}
-	}
-	PopupWindow{
-		anchor.item:batt
-		visible:batt.containsMouse
-		Text{
-			text:"hello"
+		PopupWindow{
+			color:'transparent'
+			anchor{
+				item:batt
+				edges:Edges.Bottom
+				gravity:Edges.Bottom
+			}
+			visible:children[0].opacity
+			Zabuton{
+				anchors.fill:parent
+				opacity:batt.containsMouse
+				Text{
+					anchors.centerIn:parent
+					horizontalAlignment:Text.AlignHCenter
+					text:(x=>[
+						`${x.changeRate.toFixed(1)}W`,
+						(x=>`${((x/60|0)+'').padStart(2,0)}:${(x%60+'').padStart(2,0)}`)((x.timeToEmpty||x.timeToFull)/60|0)
+					].join('\n'))(UPower.displayDevice)
+					color:'#fff'
+					font.family:'monospace'
+				}
+				Behavior on opacity{NumberAnimation{easing.type:Easing.OutCubic}}
+			}
 		}
 	}
 }

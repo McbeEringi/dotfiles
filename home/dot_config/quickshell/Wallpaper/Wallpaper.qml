@@ -19,7 +19,7 @@ Scope{
 				anchors.fill:parent
 				autoTransform:true
 				fillMode:Image.PreserveAspectCrop
-				source:Qt.resolvedUrl('./wp')
+				source:Quickshell.env('HOME')+'/.wallpaper'
 			}
 		}
 	}

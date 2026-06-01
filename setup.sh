@@ -43,4 +43,4 @@ sudo systemctl enable ly@tty1
 sudo ln -s /usr/lib/systemd/system/bcon@.service /etc/systemd/system/autovt@tty2.service
 sudo ln -s /usr/lib/systemd/system/bcon@.service /etc/systemd/system/autovt@tty3.service
 
-sudo systemctl enable keyd
+sudo systemctl enable keyd avahi-daemon

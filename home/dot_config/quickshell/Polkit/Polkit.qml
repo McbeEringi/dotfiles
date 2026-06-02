@@ -50,9 +50,9 @@ Scope{
 				ProgInput{
 					placeholderText:pka.flow?.inputPrompt??''
 					fontSize:Config.fontSize*1.5
-					value:(input.text,Math.random())
+					value:(input.text,Math.random()*.8+.1)
 					offset:(input.text,Math.random())
-					parts:(input.text,[2,4,6][Math.random()*3|0])
+					parts:(input.text,[2,3,4][Math.random()*3|0])
 					Behavior on offset{NumberAnimation{easing.type:Easing.OutCubic}}
 					input{
 						focus:true

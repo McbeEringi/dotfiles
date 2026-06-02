@@ -27,7 +27,7 @@ Scope{
 			}
 			Item{
 				anchors{top:parent.top;left:parent.left;right:parent.right;margins:4}
-				height:28
+				height:Config.statusbarHeight
 				Center{
 					anchors.centerIn:parent
 				}
@@ -43,53 +43,26 @@ Scope{
 					implicitWidth:implicitHeight
 					radius:implicitHeight/3
 					Image{
-						// implicitSize:64
 						anchors.fill:parent
 						source:Quickshell.env('HOME')+'/.face'
 					}
 				}
-				Rectangle{
-					implicitWidth:Math.max(
-						(ph.contentWidth+ph.contentHeight)*!inp.text,
-						inp.contentWidth+inp.contentHeight
-					)+12
-					implicitHeight:inp.contentHeight+12
-					color:'#99222222'
-					border{
-						color:inp.focus?'#cc66ccaa':'#66aaaaaa'
-						width:4
-					}
-					radius:12
-					Behavior on implicitWidth{NumberAnimation{easing.type:Easing.OutCubic}}
-					Behavior on border.color{ColorAnimation{easing.type:Easing.OutCubic}}
-					Item{
-						anchors.fill:parent
-						opacity:!inp.text*.5
-						Text{
-							id:ph
-							anchors.centerIn:parent
-							text:pam.messageIsError?pam.message:root.msg
-							color:'#fff'
-							font.family:'monospace'
-							FadeBehavior on text{}
-						}
-					}
-					TextInput{
-						id:inp
-						anchors.centerIn:parent
+				ProgInput{
+					placeholderText:root.msg
+					value:input.focus
+					input{
 						focus:root.focus
 						activeFocusOnPress:false
-						color:'#fff'
-						opacity:focus?1:.5
+						opacity:root.focus?1:.5
 						echoMode:TextInput.Password
 						inputMethodHints:Qt.ImhHiddenText
 						onAccepted:pam.responseRequired&&(
-							pam.respond(text),
+							pam.respond(input.text),
 							root.msg='...',
 							root.focus=false
 						)
-						Keys.onPressed:e=>e.key==Qt.Key_Escape&&(clear(),e.accepted=true)
-						Component.onCompleted:root.inp.push(inp)
+						Keys.onPressed:e=>e.key==Qt.Key_Escape&&(input.clear(),e.accepted=true)
+						Component.onCompleted:root.inp.push(input)
 						Behavior on opacity{NumberAnimation{easing.type:Easing.OutCubic}}
 					}
 				}

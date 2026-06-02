@@ -1,6 +1,10 @@
-Zabuton 1.0 Zabuton.qml
-TextZabuton 1.0 TextZabuton.qml
+ZabRect 1.0 ZabRect.qml
+ZabMouse 1.0 ZabMouse.qml
+ZabInput 1.0 ZabInput.qml
+ZabText 1.0 ZabText.qml
 Progress 1.0 Progress.qml
-TextProgress 1.0 TextProgress.qml
-FadeBehavior 1.0 FadeBehavior.qml
+ProgText 1.0 ProgText.qml
+ProgInput 1.0 ProgInput.qml
 MenuWindow 1.0 MenuWindow.qml
+FadeBehavior 1.0 FadeBehavior.qml
+singleton Config 1.0 Config.qml

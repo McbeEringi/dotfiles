@@ -24,9 +24,10 @@ FlexboxLayout{
 	// }
 	Repeater{
 		model:SystemTray.items
-		delegate:Zabuton{
+		ZabMouse{
 			id:tray
 			implicitHeight:root.size
+			implicitWidth:root.size
 	
 			required property var modelData
 			bgColor:'#88ffffff'
@@ -34,7 +35,7 @@ FlexboxLayout{
 			Image{
 				anchors{
 					fill:parent
-					margins:4*1.5
+					margins:Config.padding
 				}
 				// visible:Quickshell.hasThemeIcon(modelData.icon)
 				source:modelData.icon
@@ -48,7 +49,7 @@ FlexboxLayout{
 			onWheel:e=>modelData.scroll(e.pixelDelta.y||e.pixelDelta.x,e.pixelDelta.x)
 		}
 	}
-	TextProgress{
+	ProgText{
 		id:vol
 		property PwNode sink:Pipewire.defaultAudioSink
 		implicitHeight:root.size
@@ -62,7 +63,6 @@ FlexboxLayout{
 			e.accepted=true,
 			sink.audio.volume+=e.pixelDelta.y*.0005
 		)
-		hoverEnabled:true
 		PopupWindow{
 			color:'transparent'
 			anchor{
@@ -71,46 +71,45 @@ FlexboxLayout{
 				gravity:Edges.Bottom
 			}
 			visible:children[0].opacity
-			Zabuton{
+			ZabRect{
 				anchors.fill:parent
 				opacity:vol.containsMouse
 				Text{
 					anchors.centerIn:parent
 					horizontalAlignment:Text.AlignHCenter
 					text:vol.sink?.nickname??''
-					color:'#fff'
-					font.family:'monospace'
+					color:Config.textColor
+					font.family:Config.fontFamily
 				}
 				Behavior on opacity{NumberAnimation{easing.type:Easing.OutCubic}}
 			}
 		}
 	}
-	TextProgress{
+	ProgText{
 		id:bri
 		implicitHeight:root.size
 		// visible:Brightness.device
 		value:Brightness.value
 		onWheel:e=>(e.accepted=true,Brightness.set(e.pixelDelta.y))
 	}
-	TextProgress{
+	ProgText{
 		id:ram
 		implicitHeight:root.size
 		value:Ram.value
 	}
-	TextProgress{
+	ProgText{
 		id:cpu
 		implicitHeight:root.size
 		value:Cpu.value
 	}
-	TextProgress{
+	ProgText{
 		property bool chg:UPowerDeviceState.Charging==UPower.displayDevice.state
 		id:batt
 		implicitHeight:root.size
 		// barColor:chg?'#e9b':'#6ca'
 		// borderColor:chg?'#8866bbee':'#88aaaaaa'
-		textColor:chg?'#66bbee':'#fff'
+		textColor:chg?'#66bbee':Config.textColor
 		value:UPower.displayDevice.percentage
-		hoverEnabled:true
 
 		Behavior on barColor{ColorAnimation{easing.type:Easing.OutCubic}}
 		PopupWindow{
@@ -121,7 +120,7 @@ FlexboxLayout{
 				gravity:Edges.Bottom
 			}
 			visible:children[0].opacity
-			Zabuton{
+			ZabRect{
 				anchors.fill:parent
 				opacity:batt.containsMouse
 				Text{
@@ -131,8 +130,8 @@ FlexboxLayout{
 						`${x.changeRate.toFixed(1)}W`,
 						(x=>`${((x/60|0)+'').padStart(2,0)}:${(x%60+'').padStart(2,0)}`)((x.timeToEmpty||x.timeToFull)/60|0)
 					].join('\n'))(UPower.displayDevice)
-					color:'#fff'
-					font.family:'monospace'
+					color:Config.textColor
+					font.family:Config.fontFamily
 				}
 				Behavior on opacity{NumberAnimation{easing.type:Easing.OutCubic}}
 			}

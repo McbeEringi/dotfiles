@@ -16,7 +16,6 @@ Scope{
 				direction:FlexboxLayout.Column
 				Text{text:pka.flow.message;color:'#fff'}
 				Text{text:pka.flow.supplementaryMessage;color:'#fff'}
-				Text{text:pka.flow.isCompleted;color:'#fff'}
 				FlexboxLayout{
 					Text{text:pka.flow.inputPrompt;color:'#fff'}
 					TextInput{

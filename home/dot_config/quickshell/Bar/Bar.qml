@@ -1,12 +1,13 @@
 import QtQuick
 import Quickshell
 import Quickshell.Wayland
+import "Components"
 
 Scope{
 	Variants{
 		model:Quickshell.screens
 		PanelWindow{
-			property real size:28
+			property real size:Config.statusbarHeight
 			id:root
 			required property var modelData
 			screen:modelData

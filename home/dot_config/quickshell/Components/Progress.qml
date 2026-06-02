@@ -1,51 +1,48 @@
 import QtQuick
 import QtQuick.Shapes
 
-Zabuton{
+Shape{
 	id:root
-	property real value:0
+	property real radius:0
+	property real thickness:Config.borderWidth
+	property color color:Config.rgba(Config.barColor)
 	property real offset:0
-	property real num:1
-	property color barColor:'#6ca'
-	property real barOpacity:.8
-	property real barWidth:borderWidth
-
+	property real value:0
+	property real parts:1
+	opacity:Config.barColor.a
+	anchors.fill:parent
+	layer{enabled:true;samples:4}
 	Behavior on value{NumberAnimation{easing.type:Easing.OutCubic}}
+	ShapePath{
+		id:p
+		property real _r:Math.min(root.radius,root.width/2,root.height/2)
+		property real aw:root.width-_r*2
+		property real ah:root.height-_r*2
+		property real r:_r-root.thickness/2
+		property real l:(aw+ah+r*Math.PI)*2/root.thickness
 
-	Shape{
-		opacity:root.barOpacity
-		layer{enabled:true;samples:4}
-		ShapePath{
-			id:p
-			property real aw:root.width-root.radius*2
-			property real ah:root.height-root.radius*2
-			property real r:root.radius-root.barWidth/2
-			property real l:(aw+ah+r*Math.PI)*2/root.barWidth
+		strokeWidth:root.thickness
+		strokeColor:root.color
+		fillColor:'transparent'
+		capStyle:ShapePath.RoundCap
+		joinStyle:ShapePath.RoundJoin
+		strokeStyle:ShapePath.DashLine
+		dashOffset:p.l*(1-root.offset)
+		dashPattern:[
+			p.l*root.value/root.parts,
+			p.l*(1-root.value)/root.parts
+		]
 
-			strokeWidth:root.barWidth
-			strokeColor:root.barColor
-			fillColor:'transparent'
-			capStyle:ShapePath.RoundCap
-			joinStyle:ShapePath.RoundJoin
-			strokeStyle:ShapePath.DashLine
-			dashOffset:p.l*(1-root.offset)
-			dashPattern:[
-				p.l*root.value/root.num,
-				p.l*(1-root.value)/root.num
-			]
-
-			startX:root.width/2
-			startY:root.barWidth/2
-			PathLine{relativeX:p.aw/2;relativeY:0}
-			PathArc{relativeX:p.r;relativeY:p.r;radiusX:p.r;radiusY:p.r}
-			PathLine{relativeX:0;relativeY:p.ah;}
-			PathArc{relativeX:-p.r;relativeY:p.r;radiusX:p.r;radiusY:p.r}
-			PathLine{relativeX:-p.aw;relativeY:0}
-			PathArc{relativeX:-p.r;relativeY:-p.r;radiusX:p.r;radiusY:p.r}
-			PathLine{relativeX:0;relativeY:-p.ah;}
-			PathArc{relativeX:p.r;relativeY:-p.r;radiusX:p.r;radiusY:p.r}
-			PathLine{relativeX:p.aw/2;relativeY:0}
-		}
+		startX:root.width/2
+		startY:strokeWidth/2
+		PathLine{relativeX:p.aw/2;relativeY:0}
+		PathArc{relativeX:p.r;relativeY:p.r;radiusX:p.r;radiusY:p.r}
+		PathLine{relativeX:0;relativeY:p.ah;}
+		PathArc{relativeX:-p.r;relativeY:p.r;radiusX:p.r;radiusY:p.r}
+		PathLine{relativeX:-p.aw;relativeY:0}
+		PathArc{relativeX:-p.r;relativeY:-p.r;radiusX:p.r;radiusY:p.r}
+		PathLine{relativeX:0;relativeY:-p.ah;}
+		PathArc{relativeX:p.r;relativeY:-p.r;radiusX:p.r;radiusY:p.r}
+		PathLine{relativeX:p.aw/2;relativeY:0}
 	}
-	
 }

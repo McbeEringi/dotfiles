@@ -3,33 +3,63 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Services.Polkit
+import "Components"
 
 Scope{
 	LazyLoader{
 		activeAsync:pka.isActive
 		FloatingWindow{
 			title:'polkit'
-			implicitWidth:320
+			implicitWidth:480
+			implicitHeight:wrap.implicitHeight+4*2
 			color:'#222'
 			onClosed:pka.flow.cancelAuthenticationRequest()
 			FlexboxLayout{
+				id:wrap
+				anchors{
+					fill:parent
+					margins:4
+				}
+				gap:4
+				alignItems:FlexboxLayout.AlignCenter
+				justifyContent:FlexboxLayout.JustifyCenter
 				direction:FlexboxLayout.Column
-				Text{text:pka.flow.message;color:'#fff'}
-				Text{text:pka.flow.supplementaryMessage;color:'#fff'}
-				FlexboxLayout{
-					Text{text:pka.flow.inputPrompt;color:'#fff'}
-					TextInput{
+				Text{
+					Layout.fillWidth:true
+					text:pka.flow?.message??''
+					color:Config.textColor
+					wrapMode:Text.Wrap
+					horizontalAlignment:Text.AlignHCenter
+					font{
+						family:Config.fontFamily
+						pointSize:Config.fontSize
+					}
+				}
+				Text{
+					Layout.fillWidth:true
+					visible:pka.flow?.supplementaryMessage.trim()??false
+					text:pka.flow?.supplementaryMessage??''
+					color:Config.textColor
+					wrapMode:Text.Wrap
+					horizontalAlignment:Text.AlignHCenter
+					font{
+						family:Config.fontFamily
+						pointSize:Config.fontSize
+					}
+				}
+				ProgInput{
+					placeholderText:pka.flow?.inputPrompt??''
+					fontSize:Config.fontSize*1.5
+					value:(input.text,Math.random())
+					offset:(input.text,Math.random())
+					parts:(input.text,[2,4,6][Math.random()*3|0])
+					Behavior on offset{NumberAnimation{easing.type:Easing.OutCubic}}
+					input{
 						focus:true
-						color:'#fff'
-						echoMode:hov.containsMouse||pka.flow.responseVisible?TextInput.Normal:TextInput.Password
+						echoMode:TextInput[pka.flow?.responseVisible?'Normal':'Password']
 						inputMethodHints:Qt.ImhHiddenText
-						onAccepted:pka.flow.submit(text)
-						Keys.onPressed:e=>e.key==Qt.Key_Escape&&(text='',e.accepted=true)
-						MouseArea{
-							anchors.fill:parent
-							id:hov
-							hoverEnabled:true
-						}
+						onAccepted:pka.flow.submit(input.text)
+						Keys.onPressed:e=>e.key==Qt.Key_Escape&&(input.text='',e.accepted=true)
 					}
 				}
 			}

@@ -2,8 +2,7 @@ import QtQuick
 
 ZabText{
 	id:root
-	property color barColor:Config.rgba(Config.barColor)
-	property real barOpacity:Config.barColor.a
+	property color barColor:Config.barColor
 	property real offset:0
 	property real value:0
 	property real parts:1

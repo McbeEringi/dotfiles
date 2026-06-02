@@ -5,11 +5,11 @@ Shape{
 	id:root
 	property real radius:0
 	property real thickness:Config.borderWidth
-	property color color:Config.rgba(Config.barColor)
+	property color color:Config.barColor
 	property real offset:0
 	property real value:0
 	property real parts:1
-	opacity:Config.barColor.a
+	opacity:color.a
 	anchors.fill:parent
 	layer{enabled:true;samples:4}
 	Behavior on value{NumberAnimation{easing.type:Easing.OutCubic}}
@@ -22,7 +22,7 @@ Shape{
 		property real l:(aw+ah+r*Math.PI)*2/root.thickness
 
 		strokeWidth:root.thickness
-		strokeColor:root.color
+		strokeColor:Config.rgba(root.color)
 		fillColor:'transparent'
 		capStyle:ShapePath.RoundCap
 		joinStyle:ShapePath.RoundJoin

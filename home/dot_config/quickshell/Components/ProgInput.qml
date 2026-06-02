@@ -3,7 +3,6 @@ import QtQuick
 ZabInput{
 	id:root
 	property color barColor:Config.barColor
-	property color barOpacity:Config.barOpacity
 	property real offset:0
 	property real value:0
 	property real parts:1

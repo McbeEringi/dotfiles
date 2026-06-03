@@ -1,0 +1,2 @@
+module qs.modules.menu
+MenuWindow 1.0 MenuWindow.qml

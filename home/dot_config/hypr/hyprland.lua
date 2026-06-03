@@ -88,7 +88,7 @@ hl.window_rule({name="mpv-shallow",match={class="mpv-shallow"},pseudo=true,works
 hl.window_rule({name="suppress-maximize-events",match={class=".*"},suppress_event="maximize"})
 hl.window_rule({name="fix-xwayland-drags",match={class="^$",title="^$",xwayland=true,float=true,fullscreen=false,pin=false,},no_focus=true})
 hl.window_rule({name="move-hyprland-run",match={class="hyprland-run"},move="20 monitor_h-120",float=true})
-hl.window_rule({name="float-qs-drun",match={class="org.quickshell",title="drun"},float=true,pin=true,opacity=".9 .8 override"})
+hl.window_rule({name="float-qs-menu",match={class="org.quickshell",title="menu-.*"},float=true,pin=true,opacity=".9 .8 override"})
 hl.window_rule({name="float-qs-mirror",match={class="org.quickshell",title="mirror"},opacity="1 override"})
 hl.window_rule({name="float-qs-polkit",match={class="org.quickshell",title="polkit"},float=true,stay_focused=true,dim_around=true})
 
@@ -104,7 +104,8 @@ hl.bind(mod.."SPACE",hl.dsp.exec_cmd("gnome-terminal node",{float=true}))
 hl.bind(mod.."E",hl.dsp.exec_cmd(fileManager))
 hl.bind(mod..shift.."R",hl.dsp.exec_cmd(menu))
 hl.bind(mod.."R",hl.dsp.exec_cmd("qs ipc call drun exec"))
-hl.bind(mod.."M",hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
+-- hl.bind(mod.."M",hl.dsp.exec_cmd("hyprctl dispatch 'hl.dsp.exit()'"))
+hl.bind(mod.."M",hl.dsp.exec_cmd("qs ipc call exit exec"))
 hl.bind(mod.."P",hl.dsp.exec_cmd("qs ipc call mirror exec e"))
 
 for _,x in ipairs({"left","right","up","down"}) do

@@ -3,7 +3,8 @@ import Quickshell
 import qs.modules.bar
 import qs.modules.idle
 import qs.modules.wallpaper
-import qs.modules.drun
+import qs.modules.menu.drun
+import qs.modules.menu.exit
 import qs.modules.mirror
 import qs.modules.polkit
 import qs.modules.lock
@@ -13,6 +14,7 @@ ShellRoot{
 	Idle{}
 	Wallpaper{}
 	Drun{}
+	Exit{}
 	Mirror{}
 	Polkit{}
 	Lock{}

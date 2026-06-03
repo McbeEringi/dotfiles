@@ -17,6 +17,7 @@ fastfetch
 # hyprland xdg-desktop-portal-hyprland foot pavucontrol firefox fcitx5-gtk fcitx5-qt qt5-wayland qt6-wayland \
 # thunar gvfs tumbler
 # git-delta
+# grimblast wl-clipboard
 
 # # replaced by qs
 # # xfce-polkit fuzzel waybar hypridle hyprpaper

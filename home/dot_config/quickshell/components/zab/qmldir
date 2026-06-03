@@ -1,0 +1,5 @@
+module qs.components.zab
+ZabRect 1.0 ZabRect.qml
+ZabMouse 1.0 ZabMouse.qml
+ZabInput 1.0 ZabInput.qml
+ZabText 1.0 ZabText.qml

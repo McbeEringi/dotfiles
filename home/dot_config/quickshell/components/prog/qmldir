@@ -1,0 +1,4 @@
+module qs.components.prog
+Progress 1.0 Progress.qml
+ProgText 1.0 ProgText.qml
+ProgInput 1.0 ProgInput.qml

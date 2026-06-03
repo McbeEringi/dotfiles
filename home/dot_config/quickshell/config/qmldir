@@ -1,0 +1,3 @@
+module qs.config
+singleton BarConf 1.0 BarConf.qml
+singleton ZabConf 1.0 ZabConf.qml

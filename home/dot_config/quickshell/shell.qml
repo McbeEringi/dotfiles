@@ -1,12 +1,12 @@
 //@ pragma UseQApplication
 import Quickshell
-import "Bar"
-import "Idle"
-import "Wallpaper"
-import "Drun"
-import "Mirror"
-import "Polkit"
-import "Lock"
+import qs.modules.bar
+import qs.modules.idle
+import qs.modules.wallpaper
+import qs.modules.drun
+import qs.modules.mirror
+import qs.modules.polkit
+import qs.modules.lock
 
 ShellRoot{
 	Bar{}

@@ -1,0 +1,4 @@
+module qs.components
+MenuWindow 1.0 MenuWindow.qml
+FadeBehavior 1.0 FadeBehavior.qml
+WallpaperImage 1.0 WallpaperImage.qml

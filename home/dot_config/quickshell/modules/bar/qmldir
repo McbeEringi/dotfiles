@@ -1,0 +1,5 @@
+module qs.modules.bar
+Bar 1.0 Bar.qml
+Left 1.0 Left.qml
+Center 1.0 Center.qml
+Right 1.0 Right.qml

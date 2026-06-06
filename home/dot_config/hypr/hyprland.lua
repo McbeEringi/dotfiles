@@ -92,7 +92,7 @@ hl.window_rule({name="float-qs-menu",match={class="org.quickshell",title="menu-.
 hl.window_rule({name="float-qs-mirror",match={class="org.quickshell",title="mirror"},opacity="1 override"})
 hl.window_rule({name="float-qs-polkit",match={class="org.quickshell",title="polkit"},float=true,stay_focused=true,dim_around=true})
 
-hl.layer_rule({name="blur-bar",match={namespace="bar"},blur=true,ignore_alpha=.05})
+hl.layer_rule({name="blur-bar",match={namespace="bar"},blur=true,blur_popups=true,ignore_alpha=.05})
 
 local mod="SUPER+"
 local shift="SHIFT+"

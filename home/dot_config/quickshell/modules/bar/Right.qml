@@ -5,6 +5,7 @@ import Quickshell
 import Quickshell.Services.UPower
 import Quickshell.Services.SystemTray
 import Quickshell.Services.Pipewire
+import Quickshell.Services.Mpris
 import qs.config
 import qs.components
 import qs.components.zab
@@ -25,6 +26,28 @@ FlexboxLayout{
 
 	// 	Behavior on value{NumberAnimation{easing.type:Easing.OutCubic}}
 	// }
+	Repeater{
+		model:Mpris.players
+		ProgText{
+			required property var modelData
+			property bool enProg:modelData.lengthSupported&&modelData.positionSupported
+			implicitHeight:root.size
+			onClicked:modelData.togglePlaying()
+			value:enProg?
+				modelData.position/modelData.length:
+				0
+			text:modelData.trackTitle
+			barColor:modelData.isPlaying?ZabConf.barColor:'#ccaaaaaa'
+			Behavior on barColor{ColorAnimation{easing.type:Easing.OutCubic}}
+			
+			Timer{
+				running:enProg&&modelData.isPlaying
+				interval:Math.max(modelData.length*2,50)// per 0.2 %
+				repeat:true
+				onTriggered:modelData.positionChanged()
+			}
+		}
+	}
 	Repeater{
 		model:SystemTray.items
 		ZabMouse{
@@ -59,7 +82,7 @@ FlexboxLayout{
 		// visible:sink
 		PwObjectTracker{objects:[vol.sink]}
 		value:sink?.audio.volume??0
-		barColor:sink?.audio.muted?'#aaa':'#6ca'
+		barColor:sink?.audio.muted?'#ccaaaaaa':ZabConf.barColor
 		// text:Pipewire.defaultAudioSink?.nickname
 		Behavior on barColor{ColorAnimation{easing.type:Easing.OutCubic}}
 		onWheel:e=>(

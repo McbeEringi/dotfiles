@@ -18,6 +18,7 @@ fastfetch
 # thunar gvfs tumbler ffmpegthumbnailer thunar-media-tags-plugin
 # git-delta
 # grimblast wl-clipboard
+# mpv mpv-mpris
 
 # # replaced by qs
 # # xfce-polkit fuzzel waybar hypridle hyprpaper

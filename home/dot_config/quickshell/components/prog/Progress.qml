@@ -30,10 +30,10 @@ Shape{
 		joinStyle:ShapePath.RoundJoin
 		strokeStyle:ShapePath.DashLine
 		dashOffset:p.l*(1-root.offset)
-		dashPattern:[
+		dashPattern:(root.value,[
 			p.l*root.value/root.parts,
 			p.l*(1-root.value)/root.parts
-		]
+		])
 
 		startX:root.width/2
 		startY:strokeWidth/2

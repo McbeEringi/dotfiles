@@ -6,6 +6,7 @@ import Quickshell.Services.UPower
 import Quickshell.Services.SystemTray
 import Quickshell.Services.Pipewire
 import qs.config
+import qs.components
 import qs.components.zab
 import qs.components.prog
 import qs.singletons
@@ -65,26 +66,9 @@ FlexboxLayout{
 			e.accepted=true,
 			sink.audio.volume+=e.pixelDelta.y*.0005
 		)
-		PopupWindow{
-			color:'transparent'
-			anchor{
-				item:vol
-				edges:Edges.Bottom
-				gravity:Edges.Bottom
-			}
-			visible:children[0].opacity
-			ZabRect{
-				anchors.fill:parent
-				opacity:vol.containsMouse
-				Text{
-					anchors.centerIn:parent
-					horizontalAlignment:Text.AlignHCenter
-					text:vol.sink?.nickname??''
-					color:ZabConf.textColor
-					font.family:ZabConf.fontFamily
-				}
-				Behavior on opacity{NumberAnimation{easing.type:Easing.OutCubic}}
-			}
+		ZabPop{
+			parent:vol
+			text:vol.sink?.nickname??''
 		}
 	}
 	ProgText{
@@ -114,29 +98,12 @@ FlexboxLayout{
 		value:UPower.displayDevice.percentage
 
 		Behavior on barColor{ColorAnimation{easing.type:Easing.OutCubic}}
-		PopupWindow{
-			color:'transparent'
-			anchor{
-				item:batt
-				edges:Edges.Bottom
-				gravity:Edges.Bottom
-			}
-			visible:children[0].opacity
-			ZabRect{
-				anchors.fill:parent
-				opacity:batt.containsMouse
-				Text{
-					anchors.centerIn:parent
-					horizontalAlignment:Text.AlignHCenter
-					text:(x=>[
-						`${x.changeRate.toFixed(1)}W`,
-						(x=>`${((x/60|0)+'').padStart(2,0)}:${(x%60+'').padStart(2,0)}`)((x.timeToEmpty||x.timeToFull)/60|0)
-					].join('\n'))(UPower.displayDevice)
-					color:ZabConf.textColor
-					font.family:ZabConf.fontFamily
-				}
-				Behavior on opacity{NumberAnimation{easing.type:Easing.OutCubic}}
-			}
+		ZabPop{
+			parent:batt
+			text:(x=>[
+				`${x.changeRate.toFixed(1)}W`,
+				(x=>`${((x/60|0)+'').padStart(2,0)}:${(x%60+'').padStart(2,0)}`)((x.timeToEmpty||x.timeToFull)/60|0)
+			].join('\n'))(UPower.displayDevice)
 		}
 	}
 }

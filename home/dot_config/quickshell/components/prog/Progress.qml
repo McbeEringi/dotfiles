@@ -8,13 +8,17 @@ Shape{
 	property real radius:0
 	property real thickness:ZabConf.borderWidth
 	property color color:ZabConf.barColor
+	property color colorDisabled:ZabConf.barColorDisabled
+	property bool disabled:false
 	property real offset:0
 	property real value:0
 	property real parts:1
-	opacity:color.a
+	readonly property alias length:p.l
+	opacity:disabled?colorDisabled.a:color.a
 	anchors.fill:parent
 	layer{enabled:true;samples:4}
 	Behavior on value{NumberAnimation{easing.type:Easing.OutCubic}}
+	Behavior on opacity{NumberAnimation{easing.type:Easing.OutCubic}}
 	ShapePath{
 		id:p
 		property real _r:Math.min(root.radius,root.width/2,root.height/2)
@@ -24,7 +28,7 @@ Shape{
 		property real l:(aw+ah+r*Math.PI)*2/root.thickness
 
 		strokeWidth:root.thickness
-		strokeColor:Qt.rgba(root.color.r,root.color.g,root.color.b,1)
+		strokeColor:root.disabled?Qt.rgba(root.colorDisabled.r,root.colorDisabled.g,root.colorDisabled.b,1):Qt.rgba(root.color.r,root.color.g,root.color.b,1)
 		fillColor:'transparent'
 		capStyle:ShapePath.RoundCap
 		joinStyle:ShapePath.RoundJoin
@@ -34,6 +38,7 @@ Shape{
 			p.l*root.value/root.parts,
 			p.l*(1-root.value)/root.parts
 		])
+		Behavior on strokeColor{ColorAnimation{easing.type:Easing.OutCubic}}
 
 		startX:root.width/2
 		startY:strokeWidth/2

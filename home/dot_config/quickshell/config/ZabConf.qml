@@ -15,6 +15,7 @@ Singleton{
 	property real cursorBlink:1.2
 	property real padding:borderWidth*1.5
 	property color barColor:'#cc66ccaa'
+	property color barColorDisabled:'#ccaaaaaa'
 	property string fontFamily:'monospace'
 	property real fontSize:12
 

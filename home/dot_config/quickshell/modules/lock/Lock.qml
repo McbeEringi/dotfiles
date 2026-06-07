@@ -9,6 +9,7 @@ import Quickshell.Services.Pam
 import qs.config
 import qs.singletons
 import qs.components
+import qs.components.widgets
 import qs.components.prog
 import qs.modules.bar
 
@@ -30,6 +31,7 @@ Scope{
 				}
 			}
 			FlexboxLayout{
+				id:center
 				anchors.centerIn:parent
 				direction:FlexboxLayout.Column
 				alignItems:FlexboxLayout.AlignCenter
@@ -45,6 +47,7 @@ Scope{
 					}
 				}
 				ProgInput{
+					id:inp
 					placeholderText:root.msg
 					value:input.focus
 					input{
@@ -62,6 +65,19 @@ Scope{
 						Component.onCompleted:root.inp.push(input)
 						Behavior on opacity{NumberAnimation{easing.type:Easing.OutCubic}}
 					}
+				}
+			}
+			FlexboxLayout{
+				direction:FlexboxLayout.Column
+				alignItems:FlexboxLayout.AlignCenter
+				gap:center.gap
+				anchors{
+					top:center.bottom
+					horizontalCenter:center.horizontalCenter
+					margins:center.gap
+				}
+				WidMpris{
+					implicitHeight:inp.implicitHeight
 				}
 			}
 		}

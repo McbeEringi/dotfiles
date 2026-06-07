@@ -37,7 +37,7 @@ Scope{
 				alignItems:FlexboxLayout.AlignCenter
 				gap:4
 					
-				ClippingWrapperRectangle {
+				ClippingWrapperRectangle{
 					implicitHeight:128
 					implicitWidth:implicitHeight
 					radius:implicitHeight/3

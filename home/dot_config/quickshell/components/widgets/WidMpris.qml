@@ -1,5 +1,6 @@
 import QtQuick
 import Quickshell
+import Quickshell.Widgets
 import Quickshell.Services.Mpris
 import qs.components
 import qs.components.prog
@@ -19,8 +20,34 @@ ListViewAuto{
 			modelData.position/modelData.length%1:
 			0
 		text:modelData.trackTitle
-		// text:value.toFixed(5)
+		// modelData.trackArtUrl?'':modelData.trackTitle
+		// value.toFixed(5)
 		disabled:!modelData.isPlaying
+
+		ClippingWrapperRectangle{
+			anchors{
+				fill:parent
+				margins:parent.borderWidth
+			}
+			z:-1
+			radius:parent.radius-parent.borderWidth
+			Image{
+				anchors.fill:parent
+				source:modelData.trackArtUrl
+				fillMode:Image.PreserveAspectCrop
+			}
+		}
+		
+		// Image{
+		// 	anchors{
+		// 		fill:parent
+		// 		margins:parent.padding
+		// 	}
+		// 	z:-1
+		// 	fillMode:Image.PreserveAspectCrop
+		// 	visible:source
+		// 	source:modelData.trackArtUrl
+		// }
 		
 		Timer{
 			running:enProg&&modelData.isPlaying

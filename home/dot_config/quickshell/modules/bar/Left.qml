@@ -1,16 +1,19 @@
 import QtQuick
 import QtQuick.Layouts
+import Quickshell
 import Quickshell.WindowManager
 import Quickshell.Wayland
 import qs.config
+import qs.components
 import qs.components.zab
 
 FlexboxLayout{
 	gap:4
 	anchors.fill:parent
 	alignItems:FlexboxLayout.AlignCenter
-	Repeater{
-		model:[...WindowManager.windowsets].sort((a,b)=>a.name.codePointAt(0)-b.name.codePointAt(0))
+	ListViewAuto{
+		model:ScriptModel{values:[...WindowManager.windowsets].sort((a,b)=>a.name.codePointAt(0)-b.name.codePointAt(0))}
+		spacing:parent.gap
 		delegate:ZabText{
 			id:ws
 			required property var modelData

@@ -27,11 +27,13 @@ FlexboxLayout{
 	// 	Behavior on value{NumberAnimation{easing.type:Easing.OutCubic}}
 	// }
 	WidMpris{
-		implicitHeight:root.size
+		itemHeight:root.size
+		orientation:ListView.Horizontal
+		spacing:parent.gap
 	}
-	Repeater{
+	ListViewAuto{
 		model:SystemTray.items
-		ZabMouse{
+		delegate:ZabMouse{
 			id:tray
 			implicitHeight:root.size
 			implicitWidth:root.size

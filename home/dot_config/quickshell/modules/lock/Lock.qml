@@ -71,13 +71,16 @@ Scope{
 				direction:FlexboxLayout.Column
 				alignItems:FlexboxLayout.AlignCenter
 				gap:center.gap
+				implicitWidth:parent.width
 				anchors{
 					top:center.bottom
 					horizontalCenter:center.horizontalCenter
 					margins:center.gap
 				}
 				WidMpris{
-					implicitHeight:inp.implicitHeight
+					itemHeight:inp.implicitHeight
+					orientation:ListView.Vertical
+					spacing:parent.gap
 				}
 			}
 		}

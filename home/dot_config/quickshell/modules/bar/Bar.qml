@@ -12,14 +12,17 @@ Scope{
 			required property var modelData
 			screen:modelData
 			WlrLayershell.namespace:'bar'
-			margins{top:4;left:4;right:4}
 			anchors{top:true;left:true;right:true}
-			implicitHeight:size
+			implicitHeight:size+container.anchors.margins*2
 			color:'transparent'
 
-			Left{anchors{left:parent.left;right:center.left}}
-			Center{anchors.centerIn:parent;id:center}
-			Right{anchors{left:center.right;right:parent.right}}
+			Item{
+				id:container
+				anchors{fill:parent;margins:4}
+				Left{anchors{left:parent.left;right:center.left}}
+				Center{anchors.centerIn:parent;id:center}
+				Right{anchors{left:center.right;right:parent.right}}
+			}
 		}
 	}
 }

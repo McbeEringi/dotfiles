@@ -88,13 +88,13 @@ hl.window_rule({name="mpv-shallow",match={class="mpv-shallow"},pseudo=true,works
 hl.window_rule({name="suppress-maximize-events",match={class=".*"},suppress_event="maximize"})
 hl.window_rule({name="fix-xwayland-drags",match={class="^$",title="^$",xwayland=true,float=true,fullscreen=false,pin=false,},no_focus=true})
 hl.window_rule({name="move-hyprland-run",match={class="hyprland-run"},move="20 monitor_h-120",float=true})
-hl.window_rule({name="opacity-qs",match={class="org.quickshell"},opacity=".9 .8 override"})
-hl.window_rule({name="float-qs-menu",match={class="org.quickshell",title="menu-.*"},float=true,pin=true,stay_focused=true,dim_around=true})
-hl.window_rule({name="float-qs-mirror",match={class="org.quickshell",title="mirror"},opacity="1 override"})
-hl.window_rule({name="float-qs-polkit",match={class="org.quickshell",title="polkit"},float=true,pin=true,stay_focused=true,dim_around=true})
+hl.window_rule({name="opacity-qs",match={class="6ca-shell"},opacity=".9 .8 override"})
+hl.window_rule({name="float-qs-menu",match={class="6ca-shell",title="menu-.*"},float=true,pin=true,stay_focused=true,dim_around=true})
+hl.window_rule({name="float-qs-mirror",match={class="6ca-shell",title="mirror"},opacity="1 override"})
+hl.window_rule({name="float-qs-polkit",match={class="6ca-shell",title="polkit"},float=true,pin=true,stay_focused=true,dim_around=true})
 
 hl.layer_rule({name="blur-bar",match={namespace="bar"},blur_popups=true,ignore_alpha=.05})
-hl.layer_rule({name="blur-wrapper",match={namespace="wrapper"},blur=true,ignore_alpha=.05})
+hl.layer_rule({name="blur-bar-bg",match={namespace="bar-bg"},blur=true,ignore_alpha=.05})
 
 local mod="SUPER+"
 local shift="SHIFT+"

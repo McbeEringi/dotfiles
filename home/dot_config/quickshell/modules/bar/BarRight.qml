@@ -1,0 +1,172 @@
+import QtQml
+import QtQuick
+import QtQuick.Layouts
+import Quickshell
+import Quickshell.Widgets
+import Quickshell.Services.UPower
+import Quickshell.Services.SystemTray
+import Quickshell.Services.Pipewire
+import Quickshell.Services.Mpris
+import qs.plte
+import qs.config
+import qs.components
+import qs.components.widgets
+import qs.components.zab
+import qs.components.prog
+import qs.singletons
+
+FlexboxLayout{
+	id:root
+	property real size:BarConf.height
+	gap:ZabConf.gap
+	alignItems:FlexboxLayout.AlignCenter
+	justifyContent:FlexboxLayout.JustifyEnd
+	// direction:FlexboxLayout.RowReverse
+
+	// Progress{
+	// 	id:net
+	// 	size:root.size
+	// 	value:.5
+	// 	text:Math.round(value*100)
+	// 	hoverEnabled:true
+
+	// 	Behavior on value{NumberAnimation{easing.type:Easing.OutCubic}}
+	// }
+	Item{
+		implicitHeight:root.size;implicitWidth:children[0].contentWidth;visible:implicitWidth
+		Behavior on implicitWidth{NumberAnimation{easing.type:Easing.OutCubic}}
+		AnmListView{
+			implicitHeight:parent.implicitHeight;implicitWidth:root.width;spacing:root.gap;orientation:ListView.Horizontal
+			model:Mpris.players
+			delegate:ProgText{
+				id:media
+				implicitHeight:root.size
+				implicitWidth:Math.min(Math.max(contentWidth,implicitHeight),implicitHeight*3)
+	
+				required property var modelData
+				property bool enProg:modelData.lengthSupported&&modelData.positionSupported
+				fadeEnabled:true
+				onClicked:modelData.togglePlaying()
+				onWheel:e=>modelData.seek(e.pixelDelta.y)
+				value:enProg?
+					modelData.position/modelData.length%1:
+					0
+				text:modelData.trackArtUrl?'':modelData.trackTitle//.slice(0,4)
+				disabled:!modelData.isPlaying
+
+				ZabPop{
+					parent:media
+					text:`${modelData.trackTitle}\n${modelData.trackAlbum}\n${modelData.trackArtist}\n${modelData.trackArtists}`
+				}
+
+				ClippingWrapperRectangle{
+					visible:modelData.trackArtUrl
+					anchors{
+						fill:parent
+						margins:parent.borderWidth
+					}
+					radius:parent.radius-parent.borderWidth
+					Image{
+						anchors.fill:parent
+						source:modelData.trackArtUrl
+						fillMode:Image.PreserveAspectCrop
+					}
+				}
+				Timer{
+					running:enProg&&modelData.isPlaying
+					interval:Math.max(modelData.length/barLength*100,50)
+					repeat:true
+					onTriggered:modelData.positionChanged()
+				}
+			}
+		}
+	}
+	Item{
+		implicitHeight:root.size;implicitWidth:children[0].contentWidth;visible:implicitWidth
+		Behavior on implicitWidth{NumberAnimation{easing.type:Easing.OutCubic}}
+		AnmListView{
+			implicitHeight:parent.implicitHeight;implicitWidth:root.width;spacing:root.gap;orientation:ListView.Horizontal
+			model:SystemTray.items
+			delegate:ZabMouse{
+				id:tray
+				implicitHeight:root.size
+				implicitWidth:root.size
+	
+				required property var modelData
+				bgColor:Plte.light_6
+
+				Image{
+					anchors{
+						fill:parent
+						margins:ZabConf.padding
+					}
+					// visible:Quickshell.hasThemeIcon(modelData.icon)
+					source:modelData.icon
+				}
+				QsMenuOpener{id:menu;menu:modelData.menu}
+				ZabPop{
+					parent:tray
+					text:menu.children.values.map(x=>x.text).join('\n')
+				}
+				acceptedButtons:Qt.LeftButton|Qt.RightButton|Qt.MiddleButton
+				onClicked:e=>({
+					[Qt.LeftButton]:x=>x.activate(),
+					[Qt.RightButton]:_=>_,//(x,p)=>x.display(root,p.x,p.y),
+					[Qt.MiddleButton]:x=>x.secondaryActivate() 
+				}[e.button])(modelData,tray.mapToGlobal(e.x,e.y))
+				onWheel:e=>modelData.scroll(e.pixelDelta.y||e.pixelDelta.x,e.pixelDelta.x)
+			}
+		}
+	}
+	ProgText{
+		id:vol
+		property PwNode sink:Pipewire.defaultAudioSink
+		implicitHeight:root.size
+		// visible:sink
+		PwObjectTracker{objects:[vol.sink]}
+		value:sink?.audio.volume??0
+		disabled:sink?.audio.muted??true
+		// text:Pipewire.defaultAudioSink?.nickname
+		onWheel:e=>(
+			e.accepted=true,
+			sink.audio.volume+=e.pixelDelta.y*.0005
+		)
+		ZabPop{
+			parent:vol
+			text:vol.sink?.nickname??''
+		}
+	}
+	ProgText{
+		id:bri
+		implicitHeight:root.size
+		// visible:Brightness.device
+		value:Brightness.value
+		onWheel:e=>(e.accepted=true,Brightness.set(e.pixelDelta.y))
+	}
+	ProgText{
+		id:ram
+		implicitHeight:root.size
+		value:Ram.value
+	}
+	ProgText{
+		id:cpu
+		implicitHeight:root.size
+		value:Cpu.value
+	}
+	ProgText{
+		property bool chg:UPowerDeviceState.Charging==UPower.displayDevice.state
+		id:batt
+		implicitHeight:root.size
+		barColor:chg?Plte.ac5_8:value<.2?Plte.ac3_8:ZabConf.barColor
+		value:UPower.displayDevice.percentage
+
+		Behavior on barColor{ColorAnimation{easing.type:Easing.OutCubic}}
+		ZabPop{
+			parent:batt
+			text:(x=>[
+				`${x.changeRate.toFixed(1)}W`,
+				(x=>`${((x/60|0)+'').padStart(2,0)}:${(x%60+'').padStart(2,0)}`)((x.timeToEmpty||x.timeToFull)/60|0)
+			].join('\n'))(UPower.displayDevice)
+		}
+	}
+}

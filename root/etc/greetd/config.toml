@@ -1,0 +1,10 @@
+[terminal]
+vt=1
+
+[default_session]
+command="tuigreet -g 'Welcome back!' -t --time-format '%y-%m-%d %H:%M' --user-menu -r --remember-user-session --asterisks --window-padding 1"
+user="greeter"
+
+# [initial_session]
+# command="start-hyprland -- "
+# user="mcbeeringi"

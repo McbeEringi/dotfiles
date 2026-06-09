@@ -1,4 +1,5 @@
-//@ pragma UseQApplication
+////@ pragma UseQApplication
+//@ pragma AppId 6ca-shell
 import Quickshell
 import qs.modules.bar
 import qs.modules.idle

@@ -10,7 +10,7 @@ ZabMouse{
 	property real fontSize:ZabConf.fontSize
 	property real padding:ZabConf.padding
 	property bool fadeEnabled:false
-	property int elide:Text.ElideNone
+	property int elide:Text.ElideRight
 	readonly property real contentWidth:text.implicitWidth+padding*2
 	readonly property real contentHeight:text.implicitHeight+padding*2
 
@@ -27,7 +27,7 @@ ZabMouse{
 			family:root.fontFamily
 			pointSize:root.fontSize
 		}
-		minimumPointSize:0
+		minimumPointSize:root.fontSize/2
 		horizontalAlignment:Text.AlignHCenter
 		verticalAlignment:Text.AlignVCenter
 		fontSizeMode:Text.Fit

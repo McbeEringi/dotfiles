@@ -5,7 +5,7 @@ bash <(curl -s https://dot.6ca.me/zsh.sh)
 
 yay -S --noconfirm \
 helix yazi chezmoi btop \
-ly bcon polkit fbgrab keyd \
+greetd-tuigreet bcon polkit keyd \
 ffmpeg imagemagick 7zip resvg \
 jq fd ripgrep fzf \
 fcitx5 fcitx5-skk skk-emoji-jisyo \
@@ -19,6 +19,10 @@ fastfetch
 # git-delta
 # grimblast wl-clipboard
 # mpv mpv-mpris
+# zip unzip 7zip
+
+# replaced by greetd
+# ly fbgrab
 
 # # replaced by qs
 # # xfce-polkit fuzzel waybar hypridle hyprpaper
@@ -38,8 +42,8 @@ sudo sed -iE "/BAT1/$(grep -l Battery /sys/class/power_supply/*/type | head -n1 
 # sudo ln -sf /usr/bin/bcon /usr/local/bin/
 
 # for tty1
-sudo systemctl disable getty@tty1 # $(systemctl show "*@tty1*" --state=loaded -P Id)
-sudo systemctl enable ly@tty1
+# sudo systemctl disable getty@tty1 # $(systemctl show "*@tty1*" --state=loaded -P Id)
+sudo systemctl enable greetd # ly@tty1
 
 # for tty2~6 (autovt)
 sudo ln -s /usr/lib/systemd/system/bcon@.service /etc/systemd/system/autovt@tty2.service

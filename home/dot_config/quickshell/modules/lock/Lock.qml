@@ -6,6 +6,7 @@ import Quickshell.Wayland
 import Quickshell.Io
 import Quickshell.Widgets
 import Quickshell.Services.Pam
+import Quickshell.Services.Mpris
 import qs.config
 import qs.singletons
 import qs.components
@@ -29,9 +30,9 @@ Scope{
 			// 	sourceComponent:BarBackground{}
 			// }
 			Item{
-				anchors{top:parent.top;left:parent.left;right:parent.right;margins:4}
+				anchors{top:parent.top;left:parent.left;right:parent.right;margins:ZabConf.gap}
 				height:BarConf.height
-				Center{
+				BarCenter{
 					anchors.centerIn:parent
 				}
 			}
@@ -72,22 +73,22 @@ Scope{
 					}
 				}
 			}
-			// FlexboxLayout{
-			// 	direction:FlexboxLayout.Column
-			// 	alignItems:FlexboxLayout.AlignCenter
-			// 	gap:center.gap
-			// 	implicitWidth:parent.width
-			// 	anchors{
-			// 		top:center.bottom
-			// 		horizontalCenter:center.horizontalCenter
-			// 		margins:center.gap
-			// 	}
-			// 	WidMpris{
-			// 		itemHeight:inp.implicitHeight
-			// 		orientation:ListView.Vertical
-			// 		spacing:parent.gap
-			// 	}
-			// }
+			ListView{
+				anchors{
+					top:center.bottom
+					horizontalCenter:center.horizontalCenter
+					margins:center.gap
+				}
+				width:parent.width
+				model:Mpris.players
+				delegate:ProgText{
+					required property var modelData
+					anchors.horizontalCenter:parent.horizontalCenter
+					text:modelData.trackTitle
+					implicitHeight:inp.implicitHeight
+					implicitWidth:Math.min(Math.max(contentWidth,implicitHeight),implicitHeight*4)
+				}
+			}
 		}
 	}
 	PamContext{

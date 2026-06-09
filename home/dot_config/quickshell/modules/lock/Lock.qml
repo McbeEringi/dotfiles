@@ -21,8 +21,13 @@ Scope{
 	WlSessionLock{
 		id:lock
 		WlSessionLockSurface{
-			color:'#222'
+			color:ZabConf.bgColorOpaque
 			WallpaperImage{}
+			// Loader{
+			// 	anchors.fill:parent
+			// 	active:BarConf.backgroundEnabled
+			// 	sourceComponent:BarBackground{}
+			// }
 			Item{
 				anchors{top:parent.top;left:parent.left;right:parent.right;margins:4}
 				height:BarConf.height
@@ -67,22 +72,22 @@ Scope{
 					}
 				}
 			}
-			FlexboxLayout{
-				direction:FlexboxLayout.Column
-				alignItems:FlexboxLayout.AlignCenter
-				gap:center.gap
-				implicitWidth:parent.width
-				anchors{
-					top:center.bottom
-					horizontalCenter:center.horizontalCenter
-					margins:center.gap
-				}
-				WidMpris{
-					itemHeight:inp.implicitHeight
-					orientation:ListView.Vertical
-					spacing:parent.gap
-				}
-			}
+			// FlexboxLayout{
+			// 	direction:FlexboxLayout.Column
+			// 	alignItems:FlexboxLayout.AlignCenter
+			// 	gap:center.gap
+			// 	implicitWidth:parent.width
+			// 	anchors{
+			// 		top:center.bottom
+			// 		horizontalCenter:center.horizontalCenter
+			// 		margins:center.gap
+			// 	}
+			// 	WidMpris{
+			// 		itemHeight:inp.implicitHeight
+			// 		orientation:ListView.Vertical
+			// 		spacing:parent.gap
+			// 	}
+			// }
 		}
 	}
 	PamContext{

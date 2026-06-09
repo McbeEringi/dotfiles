@@ -11,7 +11,7 @@ Scope{
 			id:self
 			required property var name
 			title:'mirror'
-			color:'#222'
+			color:ZabConf.bgColorOpaque
 			// fullscreen:true
 			onClosed:_=>cli.delete(self)
 			ScreencopyView{

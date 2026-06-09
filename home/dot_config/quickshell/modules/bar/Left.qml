@@ -8,9 +8,11 @@ import qs.components
 import qs.components.zab
 
 FlexboxLayout{
-	gap:4
+	gap:ZabConf.gap
 	anchors.fill:parent
 	alignItems:FlexboxLayout.AlignCenter
+	id:root
+	property real size:BarConf.height
 	ListViewAuto{
 		model:ScriptModel{values:[...WindowManager.windowsets].sort((a,b)=>a.name.codePointAt(0)-b.name.codePointAt(0))}
 		spacing:parent.gap

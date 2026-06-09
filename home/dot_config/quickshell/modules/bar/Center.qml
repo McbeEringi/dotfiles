@@ -1,11 +1,12 @@
 import QtQuick
 import QtQuick.Layouts
+import qs.config
 import qs.singletons
 
 FlexboxLayout{
 	Text{
 		text:Time.time
-		color:"#fff"
-		font.family:"monospace"
+		color:ZabConf.textColor
+		font.family:ZabConf.fontFamily
 	}
 }

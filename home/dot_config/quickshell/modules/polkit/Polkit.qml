@@ -13,7 +13,7 @@ Scope{
 			title:'polkit'
 			implicitWidth:480
 			implicitHeight:wrap.implicitHeight+4*2
-			color:'#222'
+			color:ZabConf.bgColorOpaque
 			onClosed:pka.flow.cancelAuthenticationRequest()
 			FlexboxLayout{
 				id:wrap

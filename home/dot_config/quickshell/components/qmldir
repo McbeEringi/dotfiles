@@ -4,3 +4,4 @@ FadeBehavior 1.0 FadeBehavior.qml
 WallpaperImage 1.0 WallpaperImage.qml
 ZabPop 1.0 ZabPop.qml
 ListViewAuto 1.0 ListViewAuto.qml
+BarBackground 1.0 BarBackground.qml

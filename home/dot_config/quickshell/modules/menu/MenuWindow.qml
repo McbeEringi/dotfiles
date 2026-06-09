@@ -13,7 +13,7 @@ LazyLoader{
 	property string title:''
 	property real implicitWidth:320
 	property real implicitHeight:320
-	property color bgColor:'#222'
+	property color bgColor:ZabConf.bgColorOpaque
 	required property var model
 	property real iconSize:28
 	property bool preventSortOnEmpty:true

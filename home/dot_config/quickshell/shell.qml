@@ -11,7 +11,6 @@ import qs.modules.lock
 
 ShellRoot{
 	Bar{}
-	BarBackground{}
 	Idle{}
 	Wallpaper{}
 	Drun{}

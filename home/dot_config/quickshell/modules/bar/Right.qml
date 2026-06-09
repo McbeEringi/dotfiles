@@ -5,6 +5,7 @@ import Quickshell
 import Quickshell.Services.UPower
 import Quickshell.Services.SystemTray
 import Quickshell.Services.Pipewire
+import qs.plte
 import qs.config
 import qs.components
 import qs.components.widgets
@@ -13,10 +14,13 @@ import qs.components.prog
 import qs.singletons
 
 FlexboxLayout{
-	gap:4
+	gap:ZabConf.gap
 	anchors.fill:parent
 	alignItems:FlexboxLayout.AlignCenter
 	justifyContent:FlexboxLayout.JustifyEnd
+	id:root
+	property real size:BarConf.height
+
 	// Progress{
 	// 	id:net
 	// 	size:root.size
@@ -39,7 +43,7 @@ FlexboxLayout{
 			implicitWidth:root.size
 	
 			required property var modelData
-			bgColor:'#88ffffff'
+			bgColor:Plte.light_6
 
 			Image{
 				anchors{
@@ -97,9 +101,7 @@ FlexboxLayout{
 		property bool chg:UPowerDeviceState.Charging==UPower.displayDevice.state
 		id:batt
 		implicitHeight:root.size
-		// barColor:chg?'#e9b':'#6ca'
-		// borderColor:chg?'#8866bbee':'#88aaaaaa'
-		textColor:chg?'#66bbee':ZabConf.textColor
+		barColor:chg?Plte.ac5_8:value<.2?Plte.ac3_8:ZabConf.barColor
 		value:UPower.displayDevice.percentage
 
 		Behavior on barColor{ColorAnimation{easing.type:Easing.OutCubic}}

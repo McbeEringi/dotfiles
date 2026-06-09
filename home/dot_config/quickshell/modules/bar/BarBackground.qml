@@ -6,8 +6,9 @@ import Quickshell
 import Quickshell.Wayland
 import qs.config
 
-Scope{
-	Variants{
+Loader{
+	active:BarConf.backgroundEnabled
+	sourceComponent:Variants{
 		model:Quickshell.screens
 		PanelWindow{
 			id:root

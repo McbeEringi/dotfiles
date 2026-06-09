@@ -5,4 +5,5 @@ import Quickshell
 
 Singleton{
 	property real height:28
+	property bool backgroundEnabled:true
 }

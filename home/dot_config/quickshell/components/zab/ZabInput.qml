@@ -17,9 +17,10 @@ ZabMouse{
 	readonly property real contentHeight:input.implicitHeight+borderWidth*2
 	readonly property real placeholderWidth:holder.implicitWidth+padding*2
 	readonly property real placeholderHeight:holder.implicitHeight+padding*2
+	readonly property bool placeholderVisible:holder.opacity
 
-	implicitWidth:Math.max(contentWidth,placeholderWidth*holder.opacity,implicitHeight)
-	implicitHeight:Math.max(contentHeight,placeholderHeight*holder.opacity)
+	implicitWidth:Math.max(contentWidth,placeholderWidth*placeholderVisible,implicitHeight)
+	implicitHeight:Math.max(contentHeight,placeholderHeight*placeholderVisible)
 	Text{
 		id:holder
 		anchors{

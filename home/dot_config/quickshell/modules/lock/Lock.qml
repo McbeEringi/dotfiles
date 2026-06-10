@@ -1,6 +1,7 @@
 import QtQml
 import QtQuick
 import QtQuick.Layouts
+import QtQuick.Effects
 import Quickshell
 import Quickshell.Wayland
 import Quickshell.Io
@@ -23,7 +24,13 @@ Scope{
 		id:lock
 		WlSessionLockSurface{
 			color:ZabConf.bgColorOpaque
-			WallpaperImage{}
+			MultiEffect{
+				id:effect
+				anchors.fill:parent
+				blurEnabled:true
+				blur:1
+				source:WallpaperImage{width:effect.width;height:effect.height}
+			}
 			Loader{
 				anchors.fill:parent
 				active:BarConf.backgroundEnabled

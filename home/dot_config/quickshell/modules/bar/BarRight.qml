@@ -144,16 +144,16 @@ FlexboxLayout{
 		value:Brightness.value
 		onWheel:e=>(e.accepted=true,Brightness.set(e.pixelDelta.y))
 	}
-	ProgText{
-		id:ram
-		implicitHeight:root.size
-		value:Ram.value
-	}
-	ProgText{
-		id:cpu
-		implicitHeight:root.size
-		value:Cpu.value
-	}
+	// ProgText{
+	// 	id:ram
+	// 	implicitHeight:root.size
+	// 	value:Ram.value
+	// }
+	// ProgText{
+	// 	id:cpu
+	// 	implicitHeight:root.size
+	// 	value:Cpu.value
+	// }
 	ProgText{
 		property bool chg:UPowerDeviceState.Charging==UPower.displayDevice.state
 		id:batt

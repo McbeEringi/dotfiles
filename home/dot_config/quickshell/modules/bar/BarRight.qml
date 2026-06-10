@@ -18,6 +18,7 @@ import qs.singletons
 FlexboxLayout{
 	id:root
 	property real size:BarConf.height
+	property bool isLockScreen:false
 	gap:ZabConf.gap
 	alignItems:FlexboxLayout.AlignCenter
 	justifyContent:FlexboxLayout.JustifyEnd
@@ -33,7 +34,7 @@ FlexboxLayout{
 	// 	Behavior on value{NumberAnimation{easing.type:Easing.OutCubic}}
 	// }
 	Item{
-		implicitHeight:root.size;implicitWidth:children[0].contentWidth;visible:implicitWidth
+		implicitHeight:root.size;implicitWidth:children[0].contentWidth;visible:implicitWidth&&!root.isLockScreen
 		Behavior on implicitWidth{NumberAnimation{easing.type:Easing.OutCubic}}
 		AnmListView{
 			implicitHeight:parent.implicitHeight;implicitWidth:root.width;spacing:root.gap;orientation:ListView.Horizontal
@@ -82,7 +83,7 @@ FlexboxLayout{
 		}
 	}
 	Item{
-		implicitHeight:root.size;implicitWidth:children[0].contentWidth;visible:implicitWidth
+		implicitHeight:root.size;implicitWidth:children[0].contentWidth;visible:implicitWidth&&!root.isLockScreen
 		Behavior on implicitWidth{NumberAnimation{easing.type:Easing.OutCubic}}
 		AnmListView{
 			implicitHeight:parent.implicitHeight;implicitWidth:root.width;spacing:root.gap;orientation:ListView.Horizontal

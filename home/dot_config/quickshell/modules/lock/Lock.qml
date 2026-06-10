@@ -24,24 +24,23 @@ Scope{
 		WlSessionLockSurface{
 			color:ZabConf.bgColorOpaque
 			WallpaperImage{}
-			// Loader{
-			// 	anchors.fill:parent
-			// 	active:BarConf.backgroundEnabled
-			// 	sourceComponent:BarBackground{}
-			// }
+			Loader{
+				anchors.fill:parent
+				active:BarConf.backgroundEnabled
+				sourceComponent:BarBackground{}
+			}
 			Item{
 				anchors{top:parent.top;left:parent.left;right:parent.right;margins:ZabConf.gap}
 				height:BarConf.height
-				BarCenter{
-					anchors.centerIn:parent
-				}
+				BarCenter{id:barcenter;anchors.centerIn:parent}
+				BarRight{anchors{left:barcenter.right;right:parent.right}isLockScreen:true}
 			}
 			FlexboxLayout{
 				id:center
 				anchors.centerIn:parent
 				direction:FlexboxLayout.Column
 				alignItems:FlexboxLayout.AlignCenter
-				gap:4
+				gap:ZabConf.gap
 					
 				ClippingWrapperRectangle{
 					implicitHeight:128

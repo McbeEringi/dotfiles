@@ -6,7 +6,7 @@ import Quickshell.Io
 Singleton{
 	id:root
 	property real value:0
-	property real interval:1000
+	property real interval:2000
 
 	Process{
 		property real prev_total:0

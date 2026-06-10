@@ -9,7 +9,7 @@ Singleton{
 	property real available:1
 	property real used:total-available
 	property real value:used/total
-	property real interval:1000
+	property real interval:2000
 
 	Process{
 		id:cat

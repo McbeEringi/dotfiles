@@ -19,7 +19,7 @@ void main(){
 	vec4 pos=qt_Vertex;
 	vec2 uv=qt_MultiTexCoord0;
 	float t=(uv.x-.25)*PI2;
-	pos.xy=(vec2(cos(t),sin(t))*(1.-uv.y*ratio*PI2)*.5+.5)*vec2(width,height);
+	pos.xy=(vec2(cos(t),sin(t))*(1.-uv.y*ratio)*.5+.5)*vec2(width,height);
 	gl_Position=qt_Matrix*pos;
 	qt_TexCoord0=qt_MultiTexCoord0;
 }

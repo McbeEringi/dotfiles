@@ -5,6 +5,7 @@ import qs.config
 ShaderEffect{
 	id:root
 	property string text:''
+	readonly property real innerRadius:implicitHeight/2-txt.height
 	implicitHeight:txt.width/Math.PI
 	implicitWidth:implicitHeight
 	property var source:ShaderEffectSource{
@@ -19,7 +20,7 @@ ShaderEffect{
 			}
 		}
 	}
-	property real ratio:txt.height/txt.width
+	property real ratio:txt.height/txt.width*Math.PI*2
 	mesh:GridMesh{resolution:Qt.size(256,1)}
 	vertexShader:Qt.resolvedUrl('circular.vert.qsb')
 }

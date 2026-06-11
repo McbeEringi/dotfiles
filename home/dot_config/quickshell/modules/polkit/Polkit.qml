@@ -29,7 +29,11 @@ Scope{
 					}
 				}
 				scale:opacity*.5+.5
-				NumberAnimation on rotation{
+				property real baseRot:0
+				property real anmRot:pass.input.text.length*-30
+				rotation:baseRot+anmRot
+				Behavior on anmRot{NumberAnimation{easing.type:Easing.OutCubic}}
+				NumberAnimation on baseRot{
 					running:true;loops:Animation.Infinite
 					from:0;to:-360
 					duration:Math.max(p.implicitHeight*100,1)
@@ -42,6 +46,7 @@ Scope{
 				}
 			}
 			ProgInput{
+				id:pass
 				anchors.centerIn:parent
 				implicitWidth:Math.min(Math.max(contentWidth,placeholderWidth*placeholderVisible),(p.innerRadius-ZabConf.gap)*2)
 				placeholderText:pka.flow?.inputPrompt.trim()??''

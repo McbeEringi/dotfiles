@@ -9,6 +9,7 @@ local menu        = "fuzzel"
 hl.on("hyprland.start",function()
 	hl.exec_cmd("fcitx5 -d")
 	hl.exec_cmd("qs -d")
+	hl.exec_cmd("wlsunset -l35.7 -L139.8")
 end)
 
 hl.config({

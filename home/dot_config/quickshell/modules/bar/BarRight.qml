@@ -45,24 +45,24 @@ FlexboxLayout{
 				implicitWidth:Math.min(Math.max(contentWidth,implicitHeight),implicitHeight*3)
 	
 				required property var modelData
-				property bool enProg:modelData.lengthSupported&&modelData.positionSupported
+				property bool enProg:(modelData?.lengthSupported&&modelData?.positionSupported)??false
 				fadeEnabled:true
 				acceptedButtons:Qt.LeftButton|Qt.RightButton|Qt.MiddleButton
 				onClicked:e=>({
-					[Qt.LeftButton]:x=>x.togglePlaying(),
-					[Qt.RightButton]:x=>x.next(),
-					[Qt.MiddleButton]:x=>x.previous() 
+					[Qt.LeftButton]:x=>x?.togglePlaying(),
+					[Qt.RightButton]:x=>x?.next(),
+					[Qt.MiddleButton]:x=>x?.previous() 
 				}[e.button])(modelData)
-				onWheel:e=>modelData.seek(e.pixelDelta.y)
+				onWheel:e=>modelData?.seek(e.pixelDelta.y)
 				value:enProg?
-					modelData.position/modelData.length%1:
+					(modelData?.position??0)/(modelData?.length??1)%1:
 					0
-				text:modelData.trackArtUrl?'':modelData.trackTitle//.slice(0,4)
-				disabled:!modelData.isPlaying
+				text:modelData?.trackArtUrl?'':(modelData?.trackTitle??'')//.slice(0,4)
+				disabled:!modelData?.isPlaying
 
 				ZabPop{
 					parent:media
-					text:`${modelData.trackTitle}\n${modelData.trackAlbum}\n${modelData.trackArtist}\n${modelData.trackArtists}`
+					text:`${modelData?.trackTitle??''}\n${modelData?.trackAlbum??''}\n${modelData?.trackArtist??''}\n${modelData?.trackArtists??''}`
 				}
 
 				ClippingWrapperRectangle{
@@ -76,16 +76,16 @@ FlexboxLayout{
 					Image{
 						id:artwork
 						anchors.fill:parent
-						source:modelData.trackArtUrl
+						source:modelData?.trackArtUrl??''
 						fillMode:Image.PreserveAspectCrop
 						FadeBehavior on source{}
 					}
 				}
 				Timer{
-					running:enProg&&modelData.isPlaying
-					interval:Math.max(modelData.length/barLength*100,50)
+					running:enProg&&modelData?.isPlaying
+					interval:Math.max((modelData?.length??0)/barLength*100,50)
 					repeat:true
-					onTriggered:modelData.positionChanged()
+					onTriggered:modelData?.positionChanged()
 				}
 			}
 		}

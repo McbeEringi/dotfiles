@@ -20,6 +20,7 @@ fastfetch
 # grimblast wl-clipboard
 # mpv mpv-mpris
 # zip unzip 7zip
+# wlsunset
 
 # replaced by greetd
 # ly fbgrab

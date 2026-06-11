@@ -61,7 +61,7 @@ FlexboxLayout{
 				}
 
 				ClippingWrapperRectangle{
-					visible:modelData.trackArtUrl
+					visible:artwork.source
 					color:'transparent'
 					anchors{
 						fill:parent
@@ -69,6 +69,7 @@ FlexboxLayout{
 					}
 					radius:parent.radius-parent.borderWidth
 					Image{
+						id:artwork
 						anchors.fill:parent
 						source:modelData.trackArtUrl
 						fillMode:Image.PreserveAspectCrop

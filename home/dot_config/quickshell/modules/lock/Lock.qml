@@ -80,7 +80,7 @@ Scope{
 					}
 				}
 			}
-			ListView{
+			AnmListView{
 				anchors{
 					top:center.bottom
 					bottom:parent.bottom

@@ -13,6 +13,7 @@ import qs.singletons
 import qs.components
 import qs.components.widgets
 import qs.components.prog
+import qs.components.circular
 import qs.modules.bar
 
 Scope{
@@ -82,17 +83,18 @@ Scope{
 			ListView{
 				anchors{
 					top:center.bottom
+					bottom:parent.bottom
 					horizontalCenter:center.horizontalCenter
 					margins:center.gap
 				}
-				width:parent.width
+				interactive:false
+				spacing:center.gap
+				width:contentItem.childrenRect.width
+				orientation:ListView.Horizontal
 				model:Mpris.players
-				delegate:ProgText{
+				delegate:RecordPlayer{
 					required property var modelData
-					anchors.horizontalCenter:parent.horizontalCenter
-					text:modelData.trackTitle
-					implicitHeight:inp.implicitHeight
-					implicitWidth:Math.min(Math.max(contentWidth,implicitHeight),implicitHeight*4)
+					player:modelData
 				}
 			}
 		}

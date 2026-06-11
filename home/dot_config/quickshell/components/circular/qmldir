@@ -1,2 +1,3 @@
 module qs.components.circular
 Circular 1.0 Circular.qml
+RecordPlayer 1.0 RecordPlayer.qml

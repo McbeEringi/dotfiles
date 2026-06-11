@@ -21,6 +21,7 @@ FlexboxLayout{
 			implicitWidth:root.width
 			spacing:root.gap
 			orientation:ListView.Horizontal
+			interactive:false
 			model:ScriptModel{values:[...WindowManager.windowsets].sort((a,b)=>a.name.codePointAt(0)-b.name.codePointAt(0))}
 			delegate:ZabText{
 				required property var modelData

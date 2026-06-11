@@ -19,7 +19,15 @@ Scope{
 			Circular{
 				id:p
 				anchors.centerIn:parent
-				text:(pka.flow?.message??'')+' '.repeat(8)
+				srcItem:Text{
+					text:(pka.flow?.message??'')+' '.repeat(8)
+					color:ZabConf.textColor
+					renderType:Text.NativeRendering
+					font{
+						family:ZabConf.fontFamily
+						pointSize:ZabConf.fontSize
+					}
+				}
 				scale:opacity*.5+.5
 				NumberAnimation on rotation{
 					running:true;loops:Animation.Infinite

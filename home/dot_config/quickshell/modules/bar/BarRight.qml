@@ -37,7 +37,7 @@ FlexboxLayout{
 		implicitHeight:root.size;implicitWidth:children[0].contentWidth;visible:implicitWidth&&!root.isLockScreen
 		Behavior on implicitWidth{NumberAnimation{easing.type:Easing.OutCubic}}
 		AnmListView{
-			implicitHeight:parent.implicitHeight;implicitWidth:root.width;spacing:root.gap;orientation:ListView.Horizontal
+			implicitHeight:parent.implicitHeight;implicitWidth:root.width;spacing:root.gap;orientation:ListView.Horizontal;interactive:false
 			model:Mpris.players
 			delegate:ProgText{
 				id:media
@@ -86,7 +86,7 @@ FlexboxLayout{
 		implicitHeight:root.size;implicitWidth:children[0].contentWidth;visible:implicitWidth&&!root.isLockScreen
 		Behavior on implicitWidth{NumberAnimation{easing.type:Easing.OutCubic}}
 		AnmListView{
-			implicitHeight:parent.implicitHeight;implicitWidth:root.width;spacing:root.gap;orientation:ListView.Horizontal
+			implicitHeight:parent.implicitHeight;implicitWidth:root.width;spacing:root.gap;orientation:ListView.Horizontal;interactive:false
 			model:SystemTray.items
 			delegate:ZabMouse{
 				id:tray

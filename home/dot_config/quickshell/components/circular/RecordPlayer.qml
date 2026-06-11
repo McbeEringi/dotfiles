@@ -10,37 +10,40 @@ Rectangle{
 	id:root
 	required property var player
 	property real recordRadius:96
+	property real artRatio:.8
+	property string fontFamily:ZabConf.fontFamily
+	property real fontSize:ZabConf.fontSize
 
-	implicitHeight:circle.implicitHeight
-	implicitWidth:circle.implicitWidth
+	implicitHeight:recordRadius*2
+	implicitWidth:implicitHeight
 	radius:implicitHeight/2
 	color:ZabConf.bgColor
 	rotation:Math.random()*360
 	FontMetrics{
 		id:fm
 		font{
-			family:ZabConf.fontFamily
-			pointSize:ZabConf.fontSize
+			family:root.fontFamily
+			pointSize:root.fontSize
 		}
 	}
 	Rectangle{
 		anchors.centerIn:parent
-		implicitHeight:circle.innerRadius
+		implicitHeight:root.recordRadius*root.artRatio
 		implicitWidth:implicitHeight
-		color:ZabConf.bgColor
+		color:root.color
 		radius:implicitHeight/2
 	}
 	Image{
 		anchors.centerIn:parent
-		height:circle.innerRadius/(2**.5)
+		height:root.recordRadius*root.artRatio/(2**.5)
 		width:height
 		visible:source
-		source:root.player.trackArtUrl
+		source:root.player?.trackArtUrl??''
 		FadeBehavior on source{}
 	}
 	Circular{
 		id:circle
-		property string text:` ${root.player.trackTitle} `
+		property string text:` ${root.player?.trackTitle??''} `
 		FadeBehavior on text{}
 		anchors.centerIn:parent
 		srcItem:FlexboxLayout{
@@ -62,10 +65,16 @@ Rectangle{
 	}
 	MouseArea{
 		anchors.fill:parent
-		onClicked:root.player.togglePlaying()
+		acceptedButtons:Qt.LeftButton|Qt.RightButton|Qt.MiddleButton
+		onClicked:e=>({
+			[Qt.LeftButton]:x=>x?.togglePlaying(),
+			[Qt.RightButton]:x=>x?.next(),
+			[Qt.MiddleButton]:x=>x?.previous() 
+		}[e.button])(root.player)
+		onWheel:e=>root.player?.seek(e.pixelDelta.y)
 	}
 	NumberAnimation on rotation{
-		running:root.player.isPlaying;loops:Animation.Infinite
+		running:root.player?.isPlaying??false;loops:Animation.Infinite
 		to:(root.rotation-360)
 		duration:root.recordRadius*250
 	}

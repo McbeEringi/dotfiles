@@ -80,21 +80,25 @@ Scope{
 					}
 				}
 			}
-			AnmListView{
+			Item{
 				anchors{
 					top:center.bottom
 					bottom:parent.bottom
 					horizontalCenter:center.horizontalCenter
 					margins:center.gap
 				}
-				interactive:false
-				spacing:center.gap
-				width:contentItem.childrenRect.width
-				orientation:ListView.Horizontal
-				model:Mpris.players
-				delegate:RecordPlayer{
-					required property var modelData
-					player:modelData
+				implicitWidth:children[0].contentWidth
+				Behavior on implicitWidth{NumberAnimation{easing.type:Easing.OutCubic}}
+				AnmListView{
+					flickableDirection:Flickable.AutoFlickIfNeeded
+					spacing:center.gap
+					width:parent.parent.width
+					orientation:ListView.Horizontal
+					model:Mpris.players
+					delegate:RecordPlayer{
+						required property var modelData
+						player:modelData
+					}
 				}
 			}
 		}

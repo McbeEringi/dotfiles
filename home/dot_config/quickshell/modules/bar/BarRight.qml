@@ -47,7 +47,12 @@ FlexboxLayout{
 				required property var modelData
 				property bool enProg:modelData.lengthSupported&&modelData.positionSupported
 				fadeEnabled:true
-				onClicked:modelData.togglePlaying()
+				acceptedButtons:Qt.LeftButton|Qt.RightButton|Qt.MiddleButton
+				onClicked:e=>({
+					[Qt.LeftButton]:x=>x.togglePlaying(),
+					[Qt.RightButton]:x=>x.next(),
+					[Qt.MiddleButton]:x=>x.previous() 
+				}[e.button])(modelData)
 				onWheel:e=>modelData.seek(e.pixelDelta.y)
 				value:enProg?
 					modelData.position/modelData.length%1:

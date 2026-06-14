@@ -7,22 +7,23 @@ Item{
 	property real topRightRadius:radius
 	property real bottomLeftRadius:radius
 	property real bottomRightRadius:radius
-
-	property alias acceptedButtons:ma.acceptedButtons
-	readonly property bool containsMouse:ma.containsMouse&&((
+	function sdf(mx:real,my:real):bool{
 		//https://iquilezles.org/articles/distfunctions2d/
+		const
 		b=[width/2,height/2],
-		p=[mouseX-b[0],mouseY-b[1]],
+		p=[mx-b[0],my-b[1]],
 		r=Math.min(...b,[
 			topLeftRadius,topRightRadius,
 			bottomLeftRadius,bottomRightRadius
 		][(0<p[1])*2+(0<p[0])]),
 		q=p.map((x,i)=>Math.abs(x)-b[i]+r),
-		sd=Math.min(Math.max(...q),0)+Math.hypot(...q.map(x=>Math.max(x,0)))-r
-	)=>(
-		// console.log(r,sd.toFixed(2)),
-		sd<0
-	))()
+		sd=Math.min(Math.max(...q),0)+Math.hypot(...q.map(x=>Math.max(x,0)))-r;
+		// console.log(r,sd.toFixed(2));
+		return sd<0;
+	}
+
+	property alias acceptedButtons:ma.acceptedButtons
+	readonly property bool containsMouse:ma.containsMouse&&sdf(mouseX,mouseY)
 	property alias cursorShape:ma.cursorShape
 	property alias drag:ma.drag
 	property alias enabled:ma.enabled
@@ -39,7 +40,7 @@ Item{
 		id:ma
 		anchors.fill:parent
 		propagateComposedEvents:true
-		onClicked:e=>root.containsMouse?root.clicked(e):(e.accepted=false)
-		onWheel:e=>root.containsMouse?root.wheel(e):(e.accepted=false)
+		onClicked:e=>root.sdf(e.x,e.y)?root.clicked(e):(e.accepted=false)
+		onWheel:e=>root.sdf(e.x,e.y)?root.wheel(e):(e.accepted=false)
 	}
 }

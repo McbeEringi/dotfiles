@@ -9,7 +9,7 @@ Item{
 	property real bottomRightRadius:radius
 
 	property alias acceptedButtons:ma.acceptedButtons
-	readonly property bool containsMouse:((
+	readonly property bool containsMouse:ma.containsMouse&&((
 		//https://iquilezles.org/articles/distfunctions2d/
 		b=[width/2,height/2],
 		p=[mouseX-b[0],mouseY-b[1]],
@@ -21,7 +21,7 @@ Item{
 		sd=Math.min(Math.max(...q),0)+Math.hypot(...q.map(x=>Math.max(x,0)))-r
 	)=>(
 		// console.log(r,sd.toFixed(2)),
-		ma.containsMouse&&sd<0
+		sd<0
 	))()
 	property alias cursorShape:ma.cursorShape
 	property alias drag:ma.drag

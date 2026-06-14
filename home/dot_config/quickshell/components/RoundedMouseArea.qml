@@ -40,7 +40,7 @@ Item{
 		id:ma
 		anchors.fill:parent
 		propagateComposedEvents:true
-		function handle(e:var,n:string){root.sdf(e.x,e.y)?root[n](e):(e.accepted=false)}
+		function handle(e:var,n:string):void{root.sdf(e.x,e.y)?root[n](e):(e.accepted=false)}
 		onClicked:e=>handle(e,'clicked')
 		onWheel:e=>handle(e,'wheel')
 	}

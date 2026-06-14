@@ -10,7 +10,7 @@ Scope{
 		id:win
 		FloatingWindow{
 			id:self
-			required property var name
+			required property string name
 			title:'mirror'
 			color:ZabConf.bgColorOpaque
 			// fullscreen:true

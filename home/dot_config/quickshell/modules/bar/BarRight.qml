@@ -79,6 +79,7 @@ FlexboxLayout{
 						anchors.fill:parent
 						source:modelData?.trackArtUrl??''
 						fillMode:Image.PreserveAspectCrop
+						mipmap:true
 						FadeBehavior on source{}
 					}
 				}

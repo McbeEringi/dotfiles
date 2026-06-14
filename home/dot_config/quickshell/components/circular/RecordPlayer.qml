@@ -22,6 +22,7 @@ Rectangle{
 	implicitWidth:implicitHeight
 	radius:implicitHeight/2
 	color:ZabConf.bgColor
+	layer{enabled:true;samples:4}
 	FontMetrics{
 		id:fm
 		font{
@@ -83,6 +84,7 @@ Rectangle{
 			height:root.recordRadius*root.artRatio/(2**.5)
 			width:height
 			visible:source
+			mipmap:true
 			source:root.player?.trackArtUrl??''
 			FadeBehavior on source{}
 		}

@@ -96,6 +96,7 @@ hl.window_rule({name="float-qs-polkit",match={class="6ca-shell",title="polkit"},
 
 hl.layer_rule({name="blur-bar",match={namespace="bar"},blur_popups=true,ignore_alpha=.05})
 hl.layer_rule({name="blur-bar-bg",match={namespace="bar-bg"},blur=true,ignore_alpha=.05})
+hl.layer_rule({name="noanim-notify",match={namespace="notify"},no_anim=true,blur=true,ignore_alpha=.05})
 
 local mod="SUPER+"
 local shift="SHIFT+"

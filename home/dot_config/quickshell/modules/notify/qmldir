@@ -1,0 +1,3 @@
+module qs.modules.notify
+Notify 1.0 Notify.qml
+NotifyWidget 1.0 NotifyWidget.qml

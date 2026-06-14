@@ -11,7 +11,6 @@ import Quickshell.Services.Mpris
 import qs.config
 import qs.singletons
 import qs.components
-import qs.components.widgets
 import qs.components.prog
 import qs.components.circular
 import qs.modules.bar
@@ -56,6 +55,7 @@ Scope{
 					radius:implicitHeight/3
 					Image{
 						anchors.fill:parent
+						mipmap:true
 						source:Quickshell.env('HOME')+'/.face'
 					}
 				}

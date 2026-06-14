@@ -9,6 +9,7 @@ import qs.modules.menu.exit
 import qs.modules.mirror
 import qs.modules.polkit
 import qs.modules.lock
+import qs.modules.notify
 
 ShellRoot{
 	Bar{}
@@ -19,4 +20,5 @@ ShellRoot{
 	Mirror{}
 	Polkit{}
 	Lock{}
+	Notify{}
 }

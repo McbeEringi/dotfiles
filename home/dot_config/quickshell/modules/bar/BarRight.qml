@@ -10,7 +10,6 @@ import Quickshell.Services.Mpris
 import qs.plte
 import qs.config
 import qs.components
-import qs.components.widgets
 import qs.components.zab
 import qs.components.prog
 import qs.singletons

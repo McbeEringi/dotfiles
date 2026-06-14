@@ -4,3 +4,4 @@ FadeBehavior 1.0 FadeBehavior.qml
 WallpaperImage 1.0 WallpaperImage.qml
 ZabPop 1.0 ZabPop.qml
 AnmListView 1.0 AnmListView.qml
+RoundedMouseArea 1.0 RoundedMouseArea.qml

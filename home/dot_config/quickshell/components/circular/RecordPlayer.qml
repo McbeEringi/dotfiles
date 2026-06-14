@@ -89,13 +89,15 @@ Rectangle{
 		Circular{
 			id:circle
 			property string text:` ${root.player?.trackTitle??''} `
+			property int num:(fm.xHeight,root.recordRadius*2*Math.PI/fm.advanceWidth(circle.text)|0)
 			FadeBehavior on text{}
 			anchors.centerIn:parent
+			rotation:-180/num
 			srcItem:FlexboxLayout{
 				width:root.recordRadius*2*Math.PI
 				justifyContent:FlexboxLayout.JustifySpaceAround
 				Repeater{
-					model:(fm.xHeight,root.recordRadius*2*Math.PI/fm.advanceWidth(circle.text)|0)
+					model:circle.num
 					Text{
 						id:label
 						text:circle.text
@@ -114,8 +116,9 @@ Rectangle{
 			duration:root.recordRadius*250
 		}
 	}
-	MouseArea{
+	RoundedMouseArea{
 		anchors.fill:parent
+		radius:parent.radius
 		acceptedButtons:Qt.LeftButton|Qt.RightButton|Qt.MiddleButton
 		onClicked:e=>({
 			[Qt.LeftButton]:x=>x?.togglePlaying(),

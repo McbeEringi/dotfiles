@@ -1,4 +1,5 @@
 import QtQuick
+import qs.components
 
 ZabRect{
 	id:root
@@ -8,10 +9,11 @@ ZabRect{
 	signal clicked(var e)
 	signal wheel(var e)
 
-	MouseArea{
+	RoundedMouseArea{
 		id:mouse
 		anchors.fill:parent
 		hoverEnabled:true
+		radius:parent.radius
 		onClicked:e=>root.clicked(e)
 		onWheel:e=>root.wheel(e)
 	}

@@ -5,9 +5,9 @@ import qs.components.zab
 
 LazyLoader{
 	id:root
-	activeAsync:parent.containsMouse
+	activeAsync:opacity
 	required property Item parent
-	property real opacity:activeAsync
+	property real opacity:parent.containsMouse
 	property string text:''
 	Behavior on opacity{NumberAnimation{easing.type:Easing.OutCubic}}
 	PopupWindow{

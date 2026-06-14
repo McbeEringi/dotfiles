@@ -12,6 +12,11 @@ hl.on("hyprland.start",function()
 	hl.exec_cmd("wlsunset -l35.7 -L139.8")
 end)
 
+hl.env("HYPRCURSOR_THEME","Bibata-Modern-Ice")
+hl.env("HYPRCURSOR_SIZE","20")
+hl.env("XCURSOR_THEME","Bibata-Modern-Ice")
+hl.env("XCURSOR_SIZE","20")
+
 hl.config({
 	general={
 		gaps_in=2,gaps_out=4,border_size=4,

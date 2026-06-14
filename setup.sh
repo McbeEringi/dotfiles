@@ -21,6 +21,7 @@ fastfetch
 # mpv mpv-mpris
 # zip unzip 7zip
 # wlsunset
+# bibata-cursor-git
 
 # replaced by greetd
 # ly fbgrab

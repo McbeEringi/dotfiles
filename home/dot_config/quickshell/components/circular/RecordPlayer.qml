@@ -35,37 +35,35 @@ Rectangle{
 		visible:root.player?.positionSupported&&root.player?.lengthSupported
 		opacity:root.rayColor.a
 		Shape{
-			id:s
-			anchors.centerIn:parent
-			height:circle.innerRadius*2
-			width:height
+			x:parent.width/2
+			y:parent.height/2
+			height:0;width:0
 			rotation:root.rayRot*(1-2*p.prog)
-			Behavior on height{NumberAnimation{easing.type:Easing.OutCubic}}
 			ShapePath{
 				id:p
-				property real o:s.height/2
-				property real r:o-root.rayWidth/2
+				property real r:circle.innerRadius-root.rayWidth/2
 				property bool posTrg
 				property real prog:(posTrg,root.player?.position/root.player?.length)
 				property real x:r*Math.sin(prog*Math.PI)
 				property real y:r*-Math.cos(prog*Math.PI)
-				strokeWidth:rayWidth
+				strokeWidth:root.rayWidth
 				strokeColor:(x=>Qt.rgba(x.r,x.g,x.b,1))(root.rayColor)
 				capStyle:ShapePath.RoundCap
 				joinStyle:ShapePath.RoundJoin
+				Behavior on r{NumberAnimation{easing.type:Easing.OutCubic}}
 				Behavior on prog{NumberAnimation{easing.type:Easing.OutCubic}}
 
 				fillColor:'transparent'
-				startX:o;startY:o-r
-				PathArc{x:p.o+p.x;y:p.o+p.y;radiusX:p.r;radiusY:p.r}
-				PathLine{x:p.o-p.x;y:p.o-p.y}
-				PathArc{x:p.o;y:p.o+p.r;radiusX:p.r;radiusY:p.r;direction:PathArc.Counterclockwise}
-				PathLine{x:p.o;y:p.o-p.r}
+				startX:0;startY:-r
+				PathArc{x:p.x;y:p.y;radiusX:p.r;radiusY:p.r}
+				PathLine{x:-p.x;y:-p.y}
+				PathArc{x:0;y:p.r;radiusX:p.r;radiusY:p.r;direction:PathArc.Counterclockwise}
+				PathLine{x:0;y:-p.r}
 			}
 		}
 		Timer{
 			running:visible&&root.player?.isPlaying
-			interval:Math.max(root.player?.length??0/(p.r*2*Math.PI),50)
+			interval:Math.max((root.player?.length??0)/(p.r*Math.PI)*1000,50)
 			repeat:true
 			onTriggered:p.posTrg=!p.posTrg
 		}

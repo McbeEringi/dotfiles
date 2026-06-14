@@ -13,7 +13,7 @@ Shape{
 	property real offset:0
 	property real value:0
 	property real parts:1
-	readonly property alias length:p.l
+	readonly property real length:p.l*thickness
 	opacity:disabled?colorDisabled.a:color.a
 	anchors.fill:parent
 	layer{enabled:true;samples:4}

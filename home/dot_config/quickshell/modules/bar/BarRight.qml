@@ -84,7 +84,7 @@ FlexboxLayout{
 				}
 				Timer{
 					running:enProg&&modelData?.isPlaying
-					interval:Math.max((modelData?.length??0)/barLength*100,50)
+					interval:Math.max((modelData?.length??0)/barLength*1000,50)
 					repeat:true
 					onTriggered:media.posTrg=!media.posTrg//modelData?.positionChanged()
 				}

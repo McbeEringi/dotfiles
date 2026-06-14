@@ -39,12 +39,13 @@ Rectangle{
 			rotation:root.rayRot*(1-2*p.prog)
 			ShapePath{
 				id:p
-				property real r:circle.innerRadius-root.rayWidth
-				property real prog:root.player?.position/root.player?.length
+				property real r:circle.innerRadius-root.rayWidth/2
+				property bool posTrg
+				property real prog:(posTrg,root.player?.position/root.player?.length)
 				property real x:r*Math.sin(prog*Math.PI)
 				property real y:r*-Math.cos(prog*Math.PI)
-				property real ox:0<y?r:x
-				property real oy:r
+				property real ox:(0<y?r:x)+root.rayWidth/2
+				property real oy:r+root.rayWidth/2
 				strokeWidth:rayWidth
 				strokeColor:(x=>Qt.rgba(x.r,x.g,x.b,1))(root.rayColor)
 				capStyle:ShapePath.RoundCap
@@ -59,6 +60,12 @@ Rectangle{
 				PathArc{x:p.ox;y:p.oy+p.r;radiusX:p.r;radiusY:p.r;direction:PathArc.Counterclockwise}
 				PathLine{x:p.ox;y:p.oy-p.r}
 			}
+		}
+		Timer{
+			running:visible&&root.player?.isPlaying
+			interval:Math.max(root.player?.length??0/(p.r*2*Math.PI),50)
+			repeat:true
+			onTriggered:p.posTrg=!p.posTrg
 		}
 	}
 	Item{

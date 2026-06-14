@@ -46,6 +46,7 @@ FlexboxLayout{
 	
 				required property var modelData
 				property bool enProg:(modelData?.lengthSupported&&modelData?.positionSupported)??false
+				property bool posTrg
 				fadeEnabled:true
 				acceptedButtons:Qt.LeftButton|Qt.RightButton|Qt.MiddleButton
 				onClicked:e=>({
@@ -55,7 +56,7 @@ FlexboxLayout{
 				}[e.button])(modelData)
 				onWheel:e=>modelData?.seek(e.pixelDelta.y)
 				value:enProg?
-					(modelData?.position??0)/(modelData?.length??1)%1:
+					(media.posTrg,modelData?.position??0)/(modelData?.length??1)%1:
 					0
 				text:modelData?.trackArtUrl?'':(modelData?.trackTitle??'')//.slice(0,4)
 				disabled:!modelData?.isPlaying
@@ -85,7 +86,7 @@ FlexboxLayout{
 					running:enProg&&modelData?.isPlaying
 					interval:Math.max((modelData?.length??0)/barLength*100,50)
 					repeat:true
-					onTriggered:modelData?.positionChanged()
+					onTriggered:media.posTrg=!media.posTrg//modelData?.positionChanged()
 				}
 			}
 		}

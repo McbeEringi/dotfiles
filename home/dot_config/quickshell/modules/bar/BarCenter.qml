@@ -1,12 +1,13 @@
 import QtQuick
 import QtQuick.Layouts
+import Quickshell
 import qs.config
-import qs.singletons
 
 FlexboxLayout{
 	Text{
-		text:Time.time
+		text:Qt.formatDateTime(clk.date,'yyyy-MM-dd hh:mm')
 		color:ZabConf.textColor
 		font.family:ZabConf.fontFamily
 	}
+	SystemClock{id:clk;precision:SystemClock.Minutes}
 }

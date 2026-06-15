@@ -10,7 +10,7 @@ import qs.components
 Rectangle{
 	id:root
 	required property var player
-	property real recordRadius:96
+	radius:96
 	property real artRatio:.8
 	property string fontFamily:ZabConf.fontFamily
 	property real fontSize:ZabConf.fontSize
@@ -18,9 +18,8 @@ Rectangle{
 	property real rayRot:60
 	property real rayWidth:ZabConf.borderWidth
 
-	implicitHeight:recordRadius*2
+	implicitHeight:radius*2
 	implicitWidth:implicitHeight
-	radius:implicitHeight/2
 	color:ZabConf.bgColor
 	layer{enabled:true;samples:4}
 	FontMetrics{
@@ -74,14 +73,14 @@ Rectangle{
 		anchors.fill:parent
 		Rectangle{
 			anchors.centerIn:parent
-			implicitHeight:root.recordRadius*root.artRatio
+			implicitHeight:root.radius*root.artRatio
 			implicitWidth:implicitHeight
 			color:root.color
 			radius:implicitHeight/2
 		}
 		Image{
 			anchors.centerIn:parent
-			height:root.recordRadius*root.artRatio/(2**.5)
+			height:root.radius*root.artRatio/(2**.5)
 			width:height
 			visible:source
 			mipmap:true
@@ -91,12 +90,12 @@ Rectangle{
 		Circular{
 			id:circle
 			property string text:` ${root.player?.trackTitle??''} `
-			property int num:(fm.xHeight,root.recordRadius*2*Math.PI/fm.advanceWidth(circle.text)|0)
+			property int num:(fm.xHeight,root.radius*2*Math.PI/fm.advanceWidth(circle.text)|0)
 			FadeBehavior on text{}
 			anchors.centerIn:parent
 			rotation:-180/num
 			srcItem:FlexboxLayout{
-				width:root.recordRadius*2*Math.PI
+				width:root.radius*2*Math.PI
 				justifyContent:FlexboxLayout.JustifySpaceAround
 				Repeater{
 					model:circle.num
@@ -115,7 +114,7 @@ Rectangle{
 		NumberAnimation on rotation{
 			running:root.player?.isPlaying??false;loops:Animation.Infinite
 			to:(rot.rotation-360)
-			duration:root.recordRadius*250
+			duration:root.radius*250
 		}
 	}
 	RoundedMouseArea{

@@ -20,6 +20,7 @@ Scope{
 	property string msg:''
 	property bool focus:true
 	property var inp:[]
+	property real radius:96
 	WlSessionLock{
 		id:lock
 		WlSessionLockSurface{
@@ -37,67 +38,108 @@ Scope{
 				sourceComponent:BarBackground{}
 			}
 			Item{
+				id:bar
 				anchors{top:parent.top;left:parent.left;right:parent.right;margins:ZabConf.gap}
 				height:BarConf.height
 				BarCenter{id:barcenter;anchors.centerIn:parent}
 				BarRight{anchors{left:barcenter.right;right:parent.right}isLockScreen:true}
 			}
+			// MouseArea{
+			// 	anchors.fill:parent
+			// 	onClicked:lock.locked=false
+			// }
+
 			FlexboxLayout{
 				id:center
-				anchors.centerIn:parent
-				direction:FlexboxLayout.Column
+				anchors{
+					left:parent.left
+					right:parent.right
+					verticalCenter:parent.verticalCenter
+				}
+				justifyContent:FlexboxLayout.JustifyCenter
 				alignItems:FlexboxLayout.AlignCenter
+				wrap:FlexboxLayout.Wrap
 				gap:ZabConf.gap
 					
-				ClippingWrapperRectangle{
-					implicitHeight:128
+				Clock{radius:root.radius}
+				Rectangle{
+					radius:root.radius
+					implicitHeight:radius*2
 					implicitWidth:implicitHeight
-					radius:implicitHeight/3
-					Image{
-						anchors.fill:parent
-						mipmap:true
-						source:Quickshell.env('HOME')+'/.face'
+					color:ZabConf.bgColor
+					ClippingWrapperRectangle{
+						anchors.centerIn:parent
+						radius:circle.innerRadius
+						implicitHeight:radius*2
+						implicitWidth:implicitHeight
+						Image{
+							anchors.fill:parent
+							mipmap:true
+							source:Quickshell.env('HOME')+'/.face'
+						}
 					}
-				}
-				ProgInput{
-					id:inp
-					placeholderText:root.msg
-					value:input.focus
-					input{
-						focus:root.focus
-						activeFocusOnPress:false
-						opacity:root.focus?1:.5
-						echoMode:TextInput.Password
-						inputMethodHints:Qt.ImhHiddenText
-						onAccepted:pam.responseRequired&&(
-							pam.respond(input.text),
-							root.msg='...',
-							root.focus=false
-						)
-						Keys.onPressed:e=>e.key==Qt.Key_Escape&&(input.clear(),e.accepted=true)
-						Component.onCompleted:root.inp.push(input)
-						Behavior on opacity{NumberAnimation{easing.type:Easing.OutCubic}}
+					FlexboxLayout{
+						id:circleSrc
+						visible:false
+						width:root.radius*2*Math.PI
+						alignItems:FlexboxLayout.AlignCenter
+						Text{
+							text:root.msg
+							color:ZabConf.textColor
+							horizontalAlignment:Text.AlignHCenter
+							Layout.preferredWidth:parent.width/2
+							renderType:Text.NativeRendering
+							font{family:ZabConf.fontFamily;pointSize:ZabConf.fontSize}
+						}
+						TextInput{
+							id:inp
+							rotation:180
+							opacity:root.focus?1:.5
+							focus:root.focus
+							color:ZabConf.textColor
+							echoMode:TextInput.Password
+							horizontalAlignment:Text.AlignHCenter
+							Layout.preferredWidth:parent.width/2
+							renderType:Text.NativeRendering
+							activeFocusOnPress:false
+							inputMethodHints:Qt.ImhHiddenText
+							onAccepted:pam.responseRequired&&(
+								pam.respond(inp.text),
+								root.msg='...',
+								root.focus=false
+							)
+							Keys.onPressed:e=>e.key==Qt.Key_Escape&&(inp.clear(),e.accepted=true)
+							Component.onCompleted:root.inp.push(inp)
+							selectionColor:ZabConf.cursorColor
+							padding:ZabConf.cursorWidth
+							clip:true
+							cursorDelegate:Item{
+								Rectangle{
+									width:ZabConf.cursorWidth
+									height:parent.height
+									radius:width/2
+									x:-width/2
+									color:ZabConf.cursorColor
+								}
+								SequentialAnimation on opacity{
+									loops:Animation.Infinite
+									NumberAnimation{to:0;duration:ZabConf.cursorBlink*500;easing.type:Easing.OutCubic}
+									NumberAnimation{to:1;duration:ZabConf.cursorBlink*500;easing.type:Easing.OutCubic}
+								}
+							}
+							font{family:ZabConf.fontFamily;pointSize:ZabConf.fontSize}
+
+							Behavior on opacity{NumberAnimation{easing.type:Easing.OutCubic}}
+						}
 					}
+					Circular{id:circle;srcItem:circleSrc;rotation:-90}
 				}
-			}
-			Item{
-				anchors{
-					top:center.bottom
-					bottom:parent.bottom
-					horizontalCenter:center.horizontalCenter
-					margins:center.gap
-				}
-				implicitWidth:children[0].contentWidth
-				Behavior on implicitWidth{NumberAnimation{easing.type:Easing.OutCubic}}
-				AnmListView{
-					flickableDirection:Flickable.AutoFlickIfNeeded
-					spacing:center.gap
-					width:parent.parent.width
-					orientation:ListView.Horizontal
+				Repeater{
 					model:Mpris.players
 					delegate:RecordPlayer{
 						required property var modelData
 						player:modelData
+						radius:root.radius
 					}
 				}
 			}

@@ -2,10 +2,24 @@
 
 find "$@" -type f -name '*.m4a' -print0 |
 while IFS= read -r -d '' f; do
-	if file -bi "$f" | grep -q '^audio/'; then
-		continue
+	echo "$f"
+	pic_index=$(
+		ffprobe -v error \
+			-select_streams v \
+			-show_entries stream=index:stream_disposition=attached_pic \
+			-of csv=p=0 "$f" |
+		awk -F, '$2==1 { print $1; exit }'
+	)
+	tmp="${f%.m4a}.tmp.m4a"
+
+	if [ -n "$pic_index" ]; then
+		ffmpeg -loglevel error -y -i "$f" -map 0:a \
+			-map 0:"$pic_index" -disposition:v:0 attached_pic \
+			-c copy "$tmp"
+	else
+		ffmpeg -loglevel error -y -i "$f" -map 0:a \
+			-c copy "$tmp"
 	fi
-	tmp="${f%.m4a}.fixed.m4a"
-	ffmpeg -y -i "$f" -map 0:a -c copy "$tmp" &&
-	mv "$tmp" "$f"
+
+	[ -f "$tmp" ] && mv "$tmp" "$f"
 done

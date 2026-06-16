@@ -23,7 +23,7 @@ split=async({
 	),[[0,0]]).slice(1,-1).map(x=>((x[0]+x[1])/2).toFixed(3)),
 	await Bun.$`ffmpeg -i "${file}" -f segment -segment_times ${
 		times.join()||0
-	} -reset_timestamps 1 -c copy "${dir}/%03d${file.match(/\..+?$/)?.[0]??''}"`
+	} -reset_timestamps 1 -c copy "${dir}/%02d${file.match(/\..+?$/)?.[0]??''}"`
 );
 
 // await Bun.argv.slice(2).reduce(async(a,x)=>(await a,await split({file:x})),0);

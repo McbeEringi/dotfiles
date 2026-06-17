@@ -21,6 +21,9 @@ Scope{
 	property bool focus:true
 	property var inp:[]
 	property real radius:96
+	Timer{id:msgclr;interval:2000;onTriggered:root.msg=''}
+	onMsgChanged:msgclr.stop()
+
 	WlSessionLock{
 		id:lock
 		WlSessionLockSurface{
@@ -84,12 +87,13 @@ Scope{
 						width:root.radius*2*Math.PI
 						alignItems:FlexboxLayout.AlignCenter
 						Text{
-							text:root.msg
+							text:root.msg||Quickshell.env('USER')
 							color:ZabConf.textColor
 							horizontalAlignment:Text.AlignHCenter
 							Layout.preferredWidth:parent.width/2
 							renderType:Text.NativeRendering
 							font{family:ZabConf.fontFamily;pointSize:ZabConf.fontSize}
+							FadeBehavior on text{}
 						}
 						TextInput{
 							id:inp
@@ -152,7 +156,7 @@ Scope{
 			[PamResult.Failed]:_=>(
 				pam.start(),
 				root.focus=true,
-				root.msg=':(',
+				root.msg=':(',msgclr.start(),
 				root.inp.forEach(x=>x.clear())
 			),
 			[PamResult.MaxTries]:_=>root.msg='max reached',
@@ -161,6 +165,6 @@ Scope{
 	}
 	IpcHandler{
 		target:'lock'
-		function exec():void{lock.locked=true;pam.start();root.focus=true;root.msg=Quickshell.env('USER');}
+		function exec():void{lock.locked=true;pam.start();root.focus=true;root.msg='';}
 	}
 }

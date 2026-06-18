@@ -3,6 +3,7 @@ import QtQuick.Layouts
 import QtQuick.Shapes
 import Quickshell
 import qs.config
+import qs.components
 import qs.singletons
 
 Rectangle{
@@ -53,6 +54,7 @@ Rectangle{
 				Layout.preferredWidth:parent.width/2
 				renderType:Text.NativeRendering
 				font{family:ZabConf.fontFamily;pointSize:ZabConf.fontSize}
+				FadeBehavior on text{}
 			}
 			Text{
 				text:locale.toString(clk.date,locale.timeFormat(Locale.ShortFormat))
@@ -62,6 +64,7 @@ Rectangle{
 				Layout.preferredWidth:parent.width/2
 				renderType:Text.NativeRendering
 				font{family:ZabConf.fontFamily;pointSize:ZabConf.fontSize}
+				FadeBehavior on text{}
 			}
 		}
 	}

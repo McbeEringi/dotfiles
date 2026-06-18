@@ -9,6 +9,7 @@ import qs.components.zab
 
 FlexboxLayout{
 	id:root
+	property ShellScreen screen
 	property real size:BarConf.height
 	gap:ZabConf.gap
 	alignItems:FlexboxLayout.AlignCenter

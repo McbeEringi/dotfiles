@@ -20,6 +20,7 @@ alias hexedit='hexedit --color'
 alias v=$EDITOR
 alias se='sudoedit'
 alias neofetch='fastfetch'
+alias marp='bunx @marp-team/marp-cli'
 
 HISTFILE=~/.zsh_history
 SAVEHIST=1000

@@ -9,15 +9,19 @@ Shape{
 	property real thickness:ZabConf.borderWidth
 	property color color:ZabConf.barColor
 	property color colorDisabled:ZabConf.barColorDisabled
+	property color colorCritical:ZabConf.barColorCritical
 	property bool disabled:false
+	property bool critical:false
 	property real offset:0
 	property real value:0
+	property bool valueBehaviorEnabled:true
 	property real parts:1
 	readonly property real length:p.l*thickness
-	opacity:disabled?colorDisabled.a:color.a
+	readonly property color currentColor:disabled?colorDisabled:critical?colorCritical:color
+	opacity:currentColor.a
 	anchors.fill:parent
 	layer{enabled:true;samples:4}
-	Behavior on value{NumberAnimation{easing.type:Easing.OutCubic}}
+	Behavior on value{enabled:valueBehaviorEnabled;NumberAnimation{easing.type:Easing.OutCubic}}
 	Behavior on opacity{NumberAnimation{easing.type:Easing.OutCubic}}
 	ShapePath{
 		id:p
@@ -28,7 +32,7 @@ Shape{
 		property real l:(aw+ah+r*Math.PI)*2/root.thickness
 
 		strokeWidth:root.thickness
-		strokeColor:root.disabled?Qt.rgba(root.colorDisabled.r,root.colorDisabled.g,root.colorDisabled.b,1):Qt.rgba(root.color.r,root.color.g,root.color.b,1)
+		strokeColor:(x=>Qt.rgba(x.r,x.g,x.b,1))(currentColor)
 		fillColor:'transparent'
 		capStyle:ShapePath.RoundCap
 		joinStyle:ShapePath.RoundJoin

@@ -19,6 +19,7 @@ Singleton{
 	property real padding:borderWidth*1.5
 	property color barColor:Plte.ac0_8
 	property color barColorDisabled:Plte.gray_8
+	property color barColorCritical:Plte.ac3_8
 	property string fontFamily:'monospace'
 	property real fontSize:12
 }

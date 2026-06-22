@@ -9,7 +9,7 @@ ProgMouse{
 	required property var notify
 	implicitWidth:parent?.width??0
 	implicitHeight:80
-	onClicked:notify?.dismiss()
+	onClicked:notify?.actions[0]?.invoke()??notify?.dismiss()
 	valueBehaviorEnabled:false
 	value:1
 	disabled:notify?.urgency==NotificationUrgency.Low
@@ -26,12 +26,20 @@ ProgMouse{
 			margins:ZabConf.padding
 		}
 		clip:true
+		Image{
+			Layout.fillHeight:true
+			Layout.fillWidth:true
+			visible:source
+			source:root.notify?.image??''
+		}
 		FlexboxLayout{
 			direction:FlexboxLayout.Column
 			Layout.fillHeight:true
 			Text{
 				text:root.notify?.summary??''
 				color:ZabConf.textColor
+				Layout.fillWidth:true
+				elide:Text.ElideRight
 				font{
 					bold:true
 					family:ZabConf.fontFamily
@@ -53,7 +61,7 @@ ProgMouse{
 	Timer{
 		id:timer
 		running:interval
-		interval:(x=>~x?x:10000)(root.notify?.expireTimeout??0)
+		interval:(x=>~x?x:5000)(root.notify?.expireTimeout??0)
 		onTriggered:root.notify?.expire()
 	}
 }

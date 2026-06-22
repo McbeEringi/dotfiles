@@ -36,7 +36,8 @@ Scope{
 	NotificationServer{
 		id:notify
 		// bodyImagesSupported:true
-		// imageSupported:true
+		imageSupported:true
+		actionsSupported:true
 		onNotification:e=>e.tracked=true
 	}
 }

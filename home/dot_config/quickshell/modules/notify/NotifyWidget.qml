@@ -29,6 +29,7 @@ ProgMouse{
 		Image{
 			Layout.fillHeight:true
 			Layout.fillWidth:true
+			fillMode:Image.PreserveAspectFit
 			visible:source
 			source:root.notify?.image??''
 		}

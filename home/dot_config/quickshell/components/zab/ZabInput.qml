@@ -4,6 +4,7 @@ import qs.config
 ZabMouse{
 	id:root
 	property alias input:input
+	property alias text:input.text
 	property string placeholderText:''
 	property color textColor:ZabConf.textColor
 	property color cursorColor:ZabConf.cursorColor

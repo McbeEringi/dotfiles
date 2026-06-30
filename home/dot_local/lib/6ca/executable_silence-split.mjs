@@ -23,7 +23,7 @@ split=async({
 		dry
 	}=args.values
 })=>(
-	await Bun.$`mkdir -p "${dir}"`,
+	dry||await Bun.$`mkdir -p "${dir}"`,
 	segment_times??(
 		segment_times=[
 			...new TextDecoder().decode(
@@ -44,7 +44,7 @@ split=async({
 			segment_times:segment_times=segment_times.slice(1,-1).join(),
 		})
 	),
-	!dry&&await Bun.$`ffmpeg -v error -i "${file}" -f segment -segment_start_number 1 -segment_times ${
+	dry||await Bun.$`ffmpeg -v error -i "${file}" -f segment -segment_start_number 1 -segment_times ${
 		segment_times||0
 	} -reset_timestamps 1 -c copy "${dir}/%02d${file.match(/\..+?$/)?.[0]??''}"`
 );

@@ -110,6 +110,7 @@ local ctrl="CTRL+"
 hl.bind(mod.."C",hl.dsp.window.close())
 hl.bind(mod.."Q",hl.dsp.exec_cmd("gnome-terminal"))
 hl.bind(mod.."SPACE",hl.dsp.exec_cmd("gnome-terminal node",{float=true}))
+hl.bind(mod.."W",hl.dsp.exec_cmd("gnome-terminal iwctl"))
 hl.bind(mod.."E",hl.dsp.exec_cmd(fileManager))
 hl.bind(mod..shift.."R",hl.dsp.exec_cmd(menu))
 hl.bind(mod.."R",hl.dsp.exec_cmd("qs ipc call drun exec"))

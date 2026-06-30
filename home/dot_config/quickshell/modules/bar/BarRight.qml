@@ -3,6 +3,7 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Widgets
+import Quickshell.Io
 import Quickshell.Services.UPower
 import Quickshell.Services.SystemTray
 import Quickshell.Services.Pipewire
@@ -23,15 +24,6 @@ FlexboxLayout{
 	justifyContent:FlexboxLayout.JustifyEnd
 	// direction:FlexboxLayout.RowReverse
 
-	// Progress{
-	// 	id:net
-	// 	size:root.size
-	// 	value:.5
-	// 	text:Math.round(value*100)
-	// 	hoverEnabled:true
-
-	// 	Behavior on value{NumberAnimation{easing.type:Easing.OutCubic}}
-	// }
 	Item{
 		implicitHeight:root.size;implicitWidth:children[0].contentWidth;visible:implicitWidth&&!root.isLockScreen
 		Behavior on implicitWidth{NumberAnimation{easing.type:Easing.OutCubic}}
@@ -125,6 +117,27 @@ FlexboxLayout{
 					[Qt.MiddleButton]:x=>x.secondaryActivate() 
 				}[e.button])(modelData,tray.mapToGlobal(e.x,e.y))
 				onWheel:e=>modelData.scroll(e.pixelDelta.y||e.pixelDelta.x,e.pixelDelta.x)
+			}
+		}
+	}
+	ZabText{
+		id:net
+		property var log
+		property bool up:log?.new=='connected'
+		implicitHeight:root.size
+		borderColor:up?ZabConf.barColor:ZabConf.borderColor
+		text:(up?log?.ssid:log?.new)??''
+		fadeEnabled:true
+		onClicked:Quickshell.execDetached({command:'gnome-terminal iwctl'.split(' ')})
+
+		Process{
+			running:true
+			command:'journalctl -f -b -g event -u iwd'.split(' ')
+			stdout:SplitParser{
+				onRead:e=>net.log=Object.assign(
+					{},net.log,
+					e.match(/iwd\[\d+\]:\s*(.*)$/)?.[1].split(/,\s*/).reduce((a,x)=>(x=x.split(/:\s*/,2),a[x[0]]=x[1],a),{})
+				)
 			}
 		}
 	}

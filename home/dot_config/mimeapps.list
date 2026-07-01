@@ -1,7 +1,13 @@
 [Default Applications]
 application/xml=helix.desktop
 application/json=helix.desktop
+application/schema+json=helix.desktop
+text/html=helix.desktop
+image/svg+xml=helix.desktop
 
 [Added Associations]
 application/xml=helix.desktop;
 application/json=helix.desktop;
+application/schema+json=helix.desktop;
+text/html=helix.desktop;
+image/svg+xml=helix.desktop;

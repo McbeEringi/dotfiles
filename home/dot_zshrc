@@ -21,6 +21,7 @@ alias v=$EDITOR
 alias se='sudoedit'
 alias neofetch='fastfetch'
 alias marp='bunx @marp-team/marp-cli'
+alias wrangler='bunx wrangler'
 
 HISTFILE=~/.zsh_history
 SAVEHIST=1000

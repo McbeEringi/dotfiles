@@ -4,6 +4,7 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Widgets
 import Quickshell.Io
+import Quickshell.Bluetooth
 import Quickshell.Services.UPower
 import Quickshell.Services.SystemTray
 import Quickshell.Services.Pipewire
@@ -117,6 +118,36 @@ FlexboxLayout{
 					[Qt.MiddleButton]:x=>x.secondaryActivate() 
 				}[e.button])(modelData,tray.mapToGlobal(e.x,e.y))
 				onWheel:e=>modelData.scroll(e.pixelDelta.y||e.pixelDelta.x,e.pixelDelta.x)
+			}
+		}
+	}
+	Item{
+		implicitHeight:root.size;implicitWidth:children[0].contentWidth;visible:implicitWidth&&!root.isLockScreen
+		Behavior on implicitWidth{NumberAnimation{easing.type:Easing.OutCubic}}
+		AnmListView{
+			implicitHeight:parent.implicitHeight;implicitWidth:root.width;spacing:root.gap;orientation:ListView.Horizontal;interactive:false
+			model:ScriptModel{values:Bluetooth.devices.values.filter(x=>x.connected)}
+			delegate:ProgMouse{
+				id:dev
+				implicitHeight:root.size
+				implicitWidth:root.size
+				value:modelData.battery
+	
+				required property var modelData
+				Image{
+					anchors{
+						fill:parent
+						margins:ZabConf.padding
+					}
+					source:Quickshell.iconPath(modelData.icon)
+				}
+				ZabPop{
+					parent:dev
+					text:[
+						modelData.name,
+						...(modelData.batteryAvailable?[Math.round(modelData.battery*100)]:[])
+					].join('\n')
+				}
 			}
 		}
 	}

@@ -11,17 +11,18 @@ jq fd ripgrep fzf \
 fcitx5 fcitx5-skk skk-emoji-jisyo \
 pipewire-jack wireplumber \
 otf-monaspace noto-fonts noto-fonts-emoji noto-fonts-cjk \
-fastfetch
-
-# npm
-# hyprland xdg-desktop-portal-hyprland foot pavucontrol firefox fcitx5-gtk fcitx5-qt qt5-wayland qt6-wayland \
-# thunar gvfs tumbler ffmpegthumbnailer thunar-media-tags-plugin
-# git-delta
-# grimblast wl-clipboard
-# mpv mpv-mpris
-# zip unzip 7zip
-# wlsunset
-# bibata-cursor-git
+fastfetch \
+npm \
+hyprland xdg-desktop-portal-hyprland foot pavucontrol firefox fcitx5-gtk fcitx5-qt qt5-wayland qt6-wayland qt5ct qt6ct\
+thunar gvfs tumbler ffmpegthumbnailer thunar-media-tags-plugin \
+git-delta \
+grimblast wl-clipboard \
+mpv mpv-mpris \
+zip unzip 7zip \
+wlsunset \
+bibata-cursor-git \
+lsplug platformio-core platformio-core-udev python-pip \
+quickshell upower papirus-icon-theme \
 
 # replaced by greetd
 # ly fbgrab
@@ -29,9 +30,6 @@ fastfetch
 # # replaced by qs
 # # xfce-polkit fuzzel waybar hypridle hyprpaper
 
-# lsplug platformio-core platformio-core-udev python-pip
-
-# quickshell upower papirus-icon-theme
 
 chezmoi status||chezmoi init mcbeeringi --branch dev -a
 

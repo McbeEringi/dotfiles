@@ -1,0 +1,5 @@
+#!/bin/bash
+
+env|grep -om1 HYPR
+env|grep -om1 SWAY
+env|grep -om1 NIRI

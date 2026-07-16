@@ -20,7 +20,7 @@ git-delta \
 grimblast wl-clipboard \
 mpv mpv-mpris \
 zip unzip 7zip \
-wlsunset \
+wlsunset libinput-tools\
 bibata-cursor-git \
 lsplug platformio-core platformio-core-udev python-pip \
 quickshell upower papirus-icon-theme \

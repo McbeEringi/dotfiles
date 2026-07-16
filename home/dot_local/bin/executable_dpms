@@ -2,7 +2,7 @@
 
 main(){
 	case $(wm-name) in
-		"HYPR") hyprctl dispatch dpms $1;;
+		"HYPR") hyprctl dispatch "hl.dsp.dpms({action=\"$1\"})";;
 		"SWAY") swaymsg "output * dpms $1";;
 		"NIRI") niri msg action power-${1}-monitors;;
 		# *) brightnessctl s 0;;

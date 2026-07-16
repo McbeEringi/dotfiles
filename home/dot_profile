@@ -1,3 +1,8 @@
 export QT_QPA_PLATFORMTHEME=qt5ct
 export PATH="$PATH:$HOME/.local/bin:$HOME/.bun/bin"
 export EDITOR=helix
+export INPUT_METHOD=fcitx
+export GTK_IM_MODULE=$INPUT_METHOD
+export QT_IM_MODULE=$INPUT_METHOD
+export SDL_IM_MODULE=$INPUT_METHOD
+export XMODIFIERS=@im=$INPUT_METHOD

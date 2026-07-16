@@ -24,6 +24,7 @@ wlsunset \
 bibata-cursor-git \
 lsplug platformio-core platformio-core-udev python-pip \
 quickshell upower papirus-icon-theme \
+cups
 
 # replaced by greetd
 # ly fbgrab
@@ -50,4 +51,4 @@ sudo systemctl enable greetd # ly@tty1
 sudo ln -s /usr/lib/systemd/system/bcon@.service /etc/systemd/system/autovt@tty2.service
 sudo ln -s /usr/lib/systemd/system/bcon@.service /etc/systemd/system/autovt@tty3.service
 
-sudo systemctl enable keyd avahi-daemon
+sudo systemctl enable keyd avahi-daemon cups

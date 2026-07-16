@@ -13,7 +13,8 @@ pipewire-jack wireplumber \
 otf-monaspace noto-fonts noto-fonts-emoji noto-fonts-cjk \
 fastfetch \
 npm \
-hyprland xdg-desktop-portal-hyprland foot pavucontrol firefox fcitx5-gtk fcitx5-qt qt5-wayland qt6-wayland qt5ct qt6ct\
+hyprland xdg-desktop-portal-hyprland foot pavucontrol firefox fcitx5-gtk fcitx5-qt qt5-wayland qt6-wayland \
+qt5ct qt6ct kvantum kvantum-qt5 \
 thunar gvfs tumbler ffmpegthumbnailer thunar-media-tags-plugin \
 git-delta \
 grimblast wl-clipboard \

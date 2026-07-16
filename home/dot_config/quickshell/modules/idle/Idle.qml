@@ -12,6 +12,6 @@ Scope{
 	Process{
 		running:sleep.isIdle
 		command:`systemctl suspend`.split(' ')
-		// command:`dpms`
+		// command:[`dpms`]
 	}
 }

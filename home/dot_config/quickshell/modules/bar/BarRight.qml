@@ -154,11 +154,14 @@ FlexboxLayout{
 	ZabText{
 		id:net
 		implicitHeight:root.size
-		borderColor:Iwd.up?ZabConf.barColor:ZabConf.borderColor
-		text:(Iwd.up?Iwd.log?.ssid:Iwd.log?.new)??''
+		borderColor:Networkd.up?ZabConf.barColor:ZabConf.borderColor
+		text:Networkd.log?.SSID??Networkd.log?.Name??'NC'
 		fadeEnabled:true
-		onClicked:Iwd.iwctl()
-
+		onClicked:Networkd.iwctl()
+		ZabPop{
+			parent:net
+			text:(x=>x?`${x.AddressString}/${x.PrefixLength}`:'NC')(Networkd.log?.Addresses.find(x=>x.ConfigSource=='DHCPv4'))
+		}
 	}
 	ProgText{
 		id:vol

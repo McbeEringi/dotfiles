@@ -13,6 +13,7 @@ LazyLoader{
 	PopupWindow{
 		color:'transparent'
 		visible:root.opacity
+		implicitWidth:320
 		anchor{
 			item:root.parent
 			edges:Edges.Bottom

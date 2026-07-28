@@ -32,7 +32,7 @@ Singleton{
 	}
 	Process{
 		running:true
-		command:'journalctl -f -n1 -g DHCP -u systemd-networkd'.split(' ')
+		command:'journalctl -f -b -g DHCP -u systemd-networkd'.split(' ')
 		stdout:SplitParser{onRead:e=>ip.running=true}
 	}
 }

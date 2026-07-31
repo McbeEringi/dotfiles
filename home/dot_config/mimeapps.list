@@ -4,10 +4,14 @@ application/json=Helix.desktop
 application/schema+json=Helix.desktop
 text/html=Helix.desktop
 image/svg+xml=Helix.desktop
+image/png=imv.desktop
+image/jpeg=imv.desktop
 
 [Added Associations]
 application/xml=Helix.desktop;
 application/json=Helix.desktop;
 application/schema+json=Helix.desktop;
-text/html=Helix.desktop;
-image/svg+xml=Helix.desktop;
+text/html=firefox.desktop;Helix.desktop;
+image/svg+xml=firefox.desktop;Helix.desktop;
+image/png=imv.desktop;
+image/jpeg=imv.desktop;

@@ -1,6 +1,7 @@
 -- require("myColors")
 
 hl.monitor({output="",mode="preferred",position="auto",scale="1"})
+hl.monitor({output="desc:Nreal XREAL 1S",mode="preferred",position="auto-center-up",scale="0.75"})
 
 local terminal="foot"
 local fileManager = "thunar"

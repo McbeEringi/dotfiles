@@ -13,7 +13,7 @@ Singleton{
 		id:nctl
 		stdout:StdioCollector{
 			id:nctlo
-			onStreamFinished:_=>root.log=JSON.parse(nctlo.text)
+			onStreamFinished:_=>nctlo.text&&(root.log=JSON.parse(nctlo.text))
 		}
 	}
 	Process{

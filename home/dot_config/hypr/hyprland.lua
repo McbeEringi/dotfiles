@@ -120,6 +120,12 @@ hl.bind(mod.."R",hl.dsp.exec_cmd("qs ipc call drun exec"))
 hl.bind(mod.."M",hl.dsp.exec_cmd("qs ipc call exit exec"))
 hl.bind(mod.."P",hl.dsp.exec_cmd("qs ipc call mirror exec e"))
 
+hl.bind(mod.."escape",function()hl.config({decoration={screen_shader=""},cursor={no_hardware_cursors=2},debug={damage_tracking=2}})end)
+hl.bind(mod.."F1",function()hl.config({decoration={screen_shader="shader/gb.frag"},cursor={no_hardware_cursors=1},debug={damage_tracking=2}})end)
+hl.bind(mod.."F2",function()hl.config({decoration={screen_shader="shader/sunlight.frag"},cursor={no_hardware_cursors=1},debug={damage_tracking=2}})end)
+hl.bind(mod.."F3",function()hl.config({decoration={screen_shader="shader/edge.frag"},cursor={no_hardware_cursors=1},debug={damage_tracking=1}})end)
+hl.bind(mod.."F4",function()hl.config({decoration={screen_shader="shader/edge-inv.frag"},cursor={no_hardware_cursors=1},debug={damage_tracking=1}})end)
+
 for _,x in ipairs({"left","right","up","down"}) do
 	hl.bind(mod..x,hl.dsp.focus({direction=x}))
 	hl.bind(mod..shift..x,hl.dsp.window.swap({direction=x}))
@@ -196,10 +202,18 @@ hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_
 hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),      { locked = true, repeating = true })
 hl.bind("XF86AudioMute",        hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"),     { locked = true, repeating = true })
 hl.bind("XF86AudioMicMute",     hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"),   { locked = true, repeating = true })
+
 hl.bind("XF86MonBrightnessUp",  hl.dsp.exec_cmd("brightnessctl -e2 set 5%+"),                  { locked = true, repeating = true })
 hl.bind("XF86MonBrightnessDown",hl.dsp.exec_cmd("brightnessctl -e2 set 5%-"),                  { locked = true, repeating = true })
+
 hl.bind("Print",hl.dsp.exec_cmd("grimblast copy"),{locked=true})
+hl.bind(shift.."Print",hl.dsp.exec_cmd("grimblast copy area"),{locked=true})
+hl.bind(ctrl.."Print",hl.dsp.exec_cmd("grimblast save screen -|satty -f -"),{locked=true})
+hl.bind(ctrl..shift.."Print",hl.dsp.exec_cmd("grimblast save area -|satty -f -"),{locked=true})
 hl.bind(mod.."Zenkaku_Hankaku",hl.dsp.exec_cmd("grimblast copy"),{locked=true})
+hl.bind(shift..mod.."Zenkaku_hankaku",hl.dsp.exec_cmd("grimblast copy area"),{locked=true})
+hl.bind(ctrl..mod.."Zenkaku_Hankaku",hl.dsp.exec_cmd("grimblast save screen -|satty -f -"),{locked=true})
+hl.bind(ctrl..shift..mod.."Zenkaku_Hankaku",hl.dsp.exec_cmd("grimblast save area -|satty -f -"),{locked=true})
 
 hl.bind("XF86AudioNext",hl.dsp.exec_cmd("playerctl next"),{locked=true})
 hl.bind("XF86AudioPause",hl.dsp.exec_cmd("playerctl pause"),{locked=true})

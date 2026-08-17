@@ -186,7 +186,7 @@ FlexboxLayout{
 		implicitHeight:root.size
 		// visible:Brightness.device
 		value:Brightness.value
-		onWheel:e=>(e.accepted=true,Brightness.set(e.pixelDelta.y))
+		onWheel:e=>(e.accepted=true,Brightness.delta(e.pixelDelta.y*.01))
 	}
 	// ProgText{
 	// 	id:ram

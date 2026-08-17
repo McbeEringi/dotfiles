@@ -26,7 +26,10 @@ Singleton{
 	}
 	FileView{id:watcher;watchChanges:true;onFileChanged:getbri.running=true}
 
-	property var set:d=>d&&proc.exec({
-		command:`brightnessctl ${root.args} s ${Math.abs(d)}%${0<Math.sign(d)?'+':'-'}`.split(' ')
+	property var delta:d=>d&&proc.exec({
+		command:`brightnessctl ${root.args} s ${Math.abs(d)*100}%${0<d?'+':'-'}`.split(' ')
+	})
+	property var set:x=>proc.exec({
+		command:`brightnessctl ${root.args} s ${x*100}%`.split(' ')
 	})
 }

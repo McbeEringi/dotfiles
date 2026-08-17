@@ -6,7 +6,7 @@ import qs.singletons
 Scope{
 	IdleMonitor{
 		id:mon
-		timeout:5
+		timeout:30
 		property real min:.05
 		property real mem:0
 		onIsIdleChanged:_=>mon.isIdle?

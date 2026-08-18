@@ -74,6 +74,7 @@ hl.config({
 		touchpad={disable_while_typing=true,natural_scroll=true},
 	},
 	dwindle={preserve_split=true},
+	xwayland={force_zero_scaling=true},
 })
 
 

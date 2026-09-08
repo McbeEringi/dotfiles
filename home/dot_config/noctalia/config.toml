@@ -1,0 +1,212 @@
+[audio]
+enable_overdrive = true
+
+[bar]
+order = [ "main" ]
+
+    [bar.main]
+    background_opacity = 0.4999999888241291
+    capsule = true
+    capsule_thickness = 0.79999998584389687
+    end = [ "media", "tray", "clipboard", "network", "bluetooth", "volume", "brightness", "battery" ]
+    layer = "top"
+    margin_edge = 4
+    margin_ends = 4
+    padding = 8
+    reserve_space = true
+    shadow = false
+    smart_auto_hide = false
+    start = [ "launcher", "workspaces" ]
+    thickness = 32
+
+[battery]
+warning_threshold = 20
+
+[calendar]
+enabled = true
+event_date_format = "%F"
+
+[control_center]
+width = 960
+
+    [control_center.calendar]
+    show_week_numbers = true
+
+[desktop_widgets]
+enabled = false
+schema_version = 2
+widget_order = []
+
+    [desktop_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [desktop_widgets.widget]
+
+[idle]
+behavior_order = [ "lock", "lock-and-suspend" ]
+pre_action_fade_seconds = 5
+
+    [idle.behavior.lock]
+    action = "lock"
+    enabled = true
+    timeout = 120.0
+
+    [idle.behavior.lock-and-suspend]
+    action = "lock_and_suspend"
+    enabled = true
+    timeout = 300.0
+
+[location]
+latitude = 35.700000000000003
+longitude = 139.80000000000001
+
+[lockscreen_widgets]
+enabled = false
+schema_version = 2
+widget_order = [ "lockscreen-login-box@eDP-1" ]
+
+    [lockscreen_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@eDP-1"]
+    box_height = 196.0
+    box_width = 810.0
+    cx = 960.0
+    cy = 1018.0
+    output = "eDP-1"
+    placement_height = 1200.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@eDP-1".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
+
+[nightlight]
+enabled = true
+
+[osd.kinds]
+keyboard_layout = false
+
+[shell]
+avatar_path = "/home/mcbeeringi/.face"
+date_format = "%F"
+font_family = "monospace"
+polkit_agent = true
+settings_window_translucent = true
+
+    [shell.launcher]
+    app_grid = true
+    categories = false
+    compact = true
+    show_app_actions = true
+
+    [shell.panel]
+    shadow = false
+    transparency_mode = "glass"
+
+    [shell.screen_corners]
+    enabled = true
+    size = 16
+
+    [shell.session]
+    show_shortcuts = false
+
+        [[shell.session.actions]]
+        action = "lock"
+        countdown_seconds = 0.0
+        enabled = true
+        label = "lock"
+        shortcut = "l"
+        variant = "default"
+
+        [[shell.session.actions]]
+        action = "lock_and_suspend"
+        countdown_seconds = 0.0
+        enabled = true
+        label = "suspend"
+        shortcut = "s"
+        variant = "default"
+
+        [[shell.session.actions]]
+        action = "logout"
+        countdown_seconds = 0.0
+        enabled = true
+        label = "exit"
+        shortcut = "e"
+        variant = "default"
+
+        [[shell.session.actions]]
+        action = "command"
+        command = "systemctl kexec"
+        countdown_seconds = 0.0
+        enabled = true
+        glyph = "reboot"
+        label = "kexec"
+        shortcut = "k"
+        variant = "default"
+
+        [[shell.session.actions]]
+        action = "reboot"
+        countdown_seconds = 0.0
+        enabled = true
+        label = "reboot"
+        shortcut = "r"
+        variant = "default"
+
+        [[shell.session.actions]]
+        action = "shutdown"
+        countdown_seconds = 0.0
+        enabled = true
+        label = "poweroff"
+        shortcut = "p"
+        variant = "destructive"
+
+[theme]
+community_palette = "One"
+custom_palette = "6ca"
+source = "custom"
+wallpaper_scheme = "m3-content"
+
+[wallpaper]
+directory = "/home/mcbeeringi/Pictures/wp"
+transition = [ "fade" ]
+
+    [wallpaper.default]
+    path = "/home/mcbeeringi/Pictures/wp/hanabi.jpg"
+
+    [wallpaper.last]
+    path = "/home/mcbeeringi/Pictures/wp/hanabi.jpg"
+
+    [wallpaper.monitors.eDP-1]
+    path = "/home/mcbeeringi/Pictures/wp/hanabi.jpg"
+
+[weather]
+enabled = false
+
+[widget.clock]
+format = "{:%F %H:%M}"
+
+[widget.media]
+album_art_only = true
+hide_when_no_media = true
+
+[widget.workspaces]
+style = "regular"

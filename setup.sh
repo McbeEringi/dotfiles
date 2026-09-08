@@ -23,14 +23,15 @@ zip unzip 7zip \
 wlsunset libinput-tools\
 bibata-cursor-git \
 lsplug platformio-core platformio-core-udev python-pip \
-quickshell upower papirus-icon-theme \
+noctalia wl-mirror \
 cups
 
 # replaced by greetd
 # ly fbgrab
 
-# # replaced by qs
-# # xfce-polkit fuzzel waybar hypridle hyprpaper
+# quickshell upower papirus-icon-theme
+# # or
+# xfce-polkit fuzzel waybar hypridle hyprpaper
 
 
 chezmoi status||chezmoi init mcbeeringi --branch dev -a

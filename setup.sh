@@ -23,7 +23,7 @@ zip unzip 7zip \
 wlsunset libinput-tools\
 bibata-cursor-git \
 lsplug platformio-core platformio-core-udev python-pip \
-noctalia wl-mirror \
+noctalia wl-mirror ddcutil \
 cups
 
 # replaced by greetd

@@ -5,7 +5,7 @@ enable_overdrive = true
 order = [ "main" ]
 
     [bar.main]
-    background_opacity = 0.4999999888241291
+    background_opacity = 0.79999998211860657
     capsule = true
     capsule_thickness = 0.79999998584389687
     end = [ "media", "tray", "clipboard", "network", "bluetooth", "volume", "brightness", "battery" ]

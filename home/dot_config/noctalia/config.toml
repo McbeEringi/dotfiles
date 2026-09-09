@@ -351,7 +351,7 @@ hide_when_no_connected_device = true
 show_label = false
 
 [widget.clock]
-format = "{:%F %H:%M}"
+format = "%F %R"
 
 [widget.media]
 album_art_only = true
@@ -362,6 +362,3 @@ show_label = false
 
 [widget.volume]
 show_label = false
-
-[widget.workspaces]
-style = "regular"

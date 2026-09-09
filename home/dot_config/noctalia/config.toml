@@ -8,7 +8,7 @@ order = [ "main" ]
     background_opacity = 0.79999998211860657
     capsule = true
     capsule_thickness = 0.79999998584389687
-    end = [ "media", "tray", "clipboard", "network", "bluetooth", "volume", "brightness", "battery" ]
+    end = [ "media", "tray", "bluetooth", "network", "volume", "brightness", "battery" ]
     layer = "top"
     margin_edge = 4
     margin_ends = 4
@@ -28,6 +28,7 @@ enable_ddcutil = true
 [calendar]
 enabled = true
 event_date_format = "%F"
+event_time_format = "%R"
 
 [control_center]
 width = 960
@@ -66,27 +67,35 @@ latitude = 35.700000000000003
 longitude = 139.80000000000001
 
 [lockscreen_widgets]
-enabled = false
+enabled = true
 schema_version = 2
-widget_order = [ "lockscreen-login-box@eDP-1" ]
+widget_order = [
+    "lockscreen-login-box@HDMI-A-1",
+    "lockscreen-login-box@DP-2",
+    "lockscreen-login-box@eDP-1",
+    "lockscreen-widget-0000000000000001",
+    "lockscreen-widget-0000000000000005",
+    "lockscreen-widget-0000000000000006",
+    "lockscreen-widget-0000000000000007"
+]
 
     [lockscreen_widgets.grid]
     cell_size = 16
     major_interval = 4
     visible = true
 
-    [lockscreen_widgets.widget."lockscreen-login-box@eDP-1"]
+    [lockscreen_widgets.widget."lockscreen-login-box@DP-2"]
     box_height = 196.0
     box_width = 810.0
-    cx = 960.0
-    cy = 1018.0
-    output = "eDP-1"
-    placement_height = 1200.0
-    placement_width = 1920.0
+    cx = 1920.0
+    cy = 1978.0
+    output = "DP-2"
+    placement_height = 2160.0
+    placement_width = 3840.0
     rotation = 0.0
     type = "login_box"
 
-        [lockscreen_widgets.widget."lockscreen-login-box@eDP-1".settings]
+        [lockscreen_widgets.widget."lockscreen-login-box@DP-2".settings]
         background_color = "surface_variant"
         background_opacity = 0.88
         background_radius = 12.0
@@ -102,6 +111,132 @@ widget_order = [ "lockscreen-login-box@eDP-1" ]
         show_unlock_hint = true
         show_weather = true
 
+    [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1"]
+    box_height = 196.0
+    box_width = 810.0
+    cx = 1920.0
+    cy = 1978.0
+    output = "HDMI-A-1"
+    placement_height = 2160.0
+    placement_width = 3840.0
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "regular"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = true
+        show_weather = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@eDP-1"]
+    box_height = 70.0
+    box_width = 256.0
+    cx = 960.0
+    cy = 824.0
+    output = "eDP-1"
+    placement_height = 1200.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@eDP-1".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        center_password_text = false
+        input_opacity = 1.0
+        input_radius = 6.0
+        layout = "compact"
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = false
+        show_media = true
+        show_session_buttons = true
+        show_unlock_hint = false
+        show_weather = true
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000001]
+    box_height = 256.0
+    box_width = 256.0
+    cx = 960.0
+    cy = 536.0
+    output = "eDP-1"
+    placement_height = 1200.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "clock"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000001.settings]
+        background = false
+        background_color = "surface"
+        background_opacity = 0.80000000000000004
+        background_padding = 10
+        background_radius = 12
+        center_text = true
+        circle = false
+        clock_style = "analog"
+        color = "on_surface"
+        font_family = ""
+        format = "{:%H:%M}"
+        shadow = true
+        timezone = ""
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000005]
+    box_height = 192.0
+    box_width = 384.0
+    cx = 960.0
+    cy = 1016.0
+    output = "eDP-1"
+    placement_height = 1200.0
+    placement_width = 1920.0
+    rotation = -0.0
+    type = "media_player"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000005.settings]
+        hide_when_no_media = true
+        layout = "horizontal"
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000006]
+    box_height = 128.0
+    box_width = 256.0
+    cx = 960.0
+    cy = 248.0
+    output = "eDP-1"
+    placement_height = 1200.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "clock"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000006.settings]
+        background = false
+        format = "%R"
+
+    [lockscreen_widgets.widget.lockscreen-widget-0000000000000007]
+    box_height = 32.0
+    box_width = 256.0
+    cx = 960.0
+    cy = 168.0
+    output = "eDP-1"
+    placement_height = 1200.0
+    placement_width = 1920.0
+    rotation = 0.0
+    type = "clock"
+
+        [lockscreen_widgets.widget.lockscreen-widget-0000000000000007.settings]
+        background = false
+        color = "on_surface_variant"
+        format = "%F"
+
 [nightlight]
 enabled = true
 
@@ -114,6 +249,7 @@ date_format = "%F"
 font_family = "monospace"
 polkit_agent = true
 settings_window_translucent = true
+time_format = "%R"
 
     [shell.launcher]
     app_grid = true
@@ -204,12 +340,28 @@ transition = [ "fade" ]
 [weather]
 enabled = false
 
+[widget.battery]
+display_mode = "graphic"
+show_label = false
+
+[widget.bluetooth]
+hide_when_no_connected_device = true
+
+[widget.brightness]
+show_label = false
+
 [widget.clock]
 format = "{:%F %H:%M}"
 
 [widget.media]
 album_art_only = true
 hide_when_no_media = true
+
+[widget.network]
+show_label = false
+
+[widget.volume]
+show_label = false
 
 [widget.workspaces]
 style = "regular"

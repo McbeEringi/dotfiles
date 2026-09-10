@@ -10,12 +10,9 @@ order = [ "main" ]
     capsule_thickness = 0.8
     end = [ "media", "tray", "bluetooth", "network", "volume", "brightness", "battery" ]
     layer = "top"
-    margin_edge = 4
-    margin_ends = 4
-    padding = 8
-    reserve_space = true
+    margin_edge = 0
+    margin_ends = 0
     shadow = false
-    smart_auto_hide = false
     start = [ "launcher", "workspaces" ]
     thickness = 32
 
@@ -87,104 +84,6 @@ longitude = 139.8
 
 [lockscreen_widgets]
 enabled = true
-schema_version = 2
-widget_order = [
-    "lockscreen-login-box",
-    "lockscreen-widget-0000000000000001",
-    "lockscreen-widget-0000000000000005",
-    "lockscreen-widget-0000000000000006",
-    "lockscreen-widget-0000000000000007"
-]
-
-    [lockscreen_widgets.grid]
-    cell_size = 16
-    major_interval = 4
-    visible = true
-
-    [lockscreen_widgets.widget.lockscreen-login-box]
-    box_height = 70.0
-    box_width = 256.0
-    cx = 960.0
-    cy = 763.0
-    placement_height = 1200.0
-    placement_width = 1920.0
-    rotation = 0.0
-    type = "login_box"
-
-        [lockscreen_widgets.widget.lockscreen-login-box.settings]
-        background_color = "surface_variant"
-        background_opacity = 0.0
-        background_radius = 12.0
-        center_password_text = false
-        input_opacity = 1.0
-        input_radius = 6.0
-        layout = "compact"
-        show_caps_lock = true
-        show_keyboard_layout = true
-        show_login_button = false
-        show_media = true
-        show_session_buttons = true
-        show_unlock_hint = false
-        show_weather = true
-
-    [lockscreen_widgets.widget.lockscreen-widget-0000000000000001]
-    box_height = 256.0
-    box_width = 256.0
-    cx = 960.0
-    cy = 536.0
-    placement_height = 1200.0
-    placement_width = 1920.0
-    rotation = 0.0
-    type = "clock"
-
-        [lockscreen_widgets.widget.lockscreen-widget-0000000000000001.settings]
-        background = false
-        circle = false
-        clock_style = "analog"
-
-    [lockscreen_widgets.widget.lockscreen-widget-0000000000000005]
-    box_height = 192.0
-    box_width = 384.0
-    cx = 960.0
-    cy = 1016.0
-    placement_height = 1200.0
-    placement_width = 1920.0
-    rotation = -0.0
-    type = "media_player"
-
-        [lockscreen_widgets.widget.lockscreen-widget-0000000000000005.settings]
-        hide_when_no_media = true
-        layout = "horizontal"
-
-    [lockscreen_widgets.widget.lockscreen-widget-0000000000000006]
-    box_height = 128.0
-    box_width = 256.0
-    cx = 960.0
-    cy = 248.0
-    placement_height = 1200.0
-    placement_width = 1920.0
-    rotation = 0.0
-    type = "clock"
-
-        [lockscreen_widgets.widget.lockscreen-widget-0000000000000006.settings]
-        background = false
-        font_family = "Kikai Chokoku JIS Medium"
-        format = "%R"
-
-    [lockscreen_widgets.widget.lockscreen-widget-0000000000000007]
-    box_height = 32.0
-    box_width = 256.0
-    cx = 960.0
-    cy = 168.0
-    placement_height = 1200.0
-    placement_width = 1920.0
-    rotation = 0.0
-    type = "clock"
-
-        [lockscreen_widgets.widget.lockscreen-widget-0000000000000007.settings]
-        background = false
-        color = "on_surface"
-        format = "%F"
 
 [nightlight]
 enabled = true

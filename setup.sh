@@ -13,8 +13,8 @@ pipewire-jack wireplumber \
 otf-monaspace noto-fonts noto-fonts-emoji noto-fonts-cjk \
 fastfetch \
 npm \
-hyprland xdg-desktop-portal-hyprland foot pavucontrol firefox fcitx5-gtk fcitx5-qt qt5-wayland qt6-wayland \
-qt5ct qt6ct kvantum kvantum-qt5 \
+hyprland xdg-desktop-portal-hyprland foot firefox fcitx5-gtk fcitx5-qt \
+qt5-wayland qt6-wayland qt5ct qt6ct \
 thunar gvfs tumbler ffmpegthumbnailer thunar-media-tags-plugin \
 git-delta \
 grimblast wl-clipboard \
@@ -29,7 +29,7 @@ cups
 # replaced by greetd
 # ly fbgrab
 
-# quickshell papirus-icon-theme
+# quickshell papirus-icon-theme pavucontrol
 # # or
 # xfce-polkit fuzzel waybar hypridle hyprpaper
 

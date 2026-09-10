@@ -114,6 +114,16 @@ time_format = "%R"
         variant = "default"
 
         [[shell.session.actions]]
+        action = "command"
+        command = "loginctl lock-session self;noctalia msg dpms-off"
+        countdown_seconds = 0.0
+        enabled = true
+        glyph = "powersaver"
+        label = "dpms"
+        shortcut = "d"
+        variant = "default"
+
+        [[shell.session.actions]]
         action = "lock_and_suspend"
         countdown_seconds = 0.0
         enabled = true

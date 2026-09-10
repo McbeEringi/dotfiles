@@ -115,7 +115,7 @@ time_format = "%R"
 
         [[shell.session.actions]]
         action = "command"
-        command = "loginctl lock-session self;noctalia msg dpms-off"
+        command = "loginctl lock-session self;sleep .2;noctalia msg dpms-off"
         countdown_seconds = 0.0
         enabled = true
         glyph = "powersaver"

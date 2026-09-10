@@ -23,13 +23,13 @@ zip unzip 7zip \
 wlsunset libinput-tools\
 bibata-cursor-git \
 lsplug platformio-core platformio-core-udev python-pip \
-noctalia wl-mirror ddcutil \
+noctalia wl-mirror ddcutil power-profiles-daemon upower adw3-gtk-theme \
 cups
 
 # replaced by greetd
 # ly fbgrab
 
-# quickshell upower papirus-icon-theme
+# quickshell papirus-icon-theme
 # # or
 # xfce-polkit fuzzel waybar hypridle hyprpaper
 

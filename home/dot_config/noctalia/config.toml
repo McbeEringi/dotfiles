@@ -171,6 +171,9 @@ custom_palette = "6ca"
 source = "custom"
 wallpaper_scheme = "m3-content"
 
+    [theme.templates]
+    builtin_ids = [ "gtk3", "gtk4", "qt" ]
+
 [wallpaper]
 transition = [ "fade" ]
 

@@ -1,47 +1,53 @@
 {
-  "dark": {
-    "mPrimary": "#6ca",
-    "mOnPrimary": "#223",
-    "mSecondary": "#999",
-    "mOnSecondary": "#223",
-    "mTertiary": "#666",
-    "mOnTertiary": "#def",
-    "mError": "#e9b",
-    "mOnError": "#223",
-    "mSurface": "#223",
-    "mOnSurface": "#def",
-    "mSurfaceVariant": "#333",
-    "mOnSurfaceVariant": "#999",
-    "mOutline": "#999",
-    "mShadow": "#333",
-    "mHover": "#666",
-    "mOnHover": "#def",
-    "terminal": {
-      "background": "#000",
-      "foreground": "#fff",
-      "cursor": "#fff",
-      "cursorText": "#000",
-      "selectionBg": "#fff",
-      "selectionFg": "#000",
-      "normal": {
-        "red": "#f00",
-        "green": "#0f0",
-        "blue": "#00f",
-        "cyan": "#0ff",
-        "magenta": "#f0f",
-        "yellow": "#ff0",
-        "black": "#000",
-        "white": "#fff"
+  "dark":{
+    "mPrimary":"#6ca","mOnPrimary":"#223",
+    "mSecondary":"#8be","mOnSecondary":"#223",
+    "mTertiary":"#8c8","mOnTertiary":"#223",
+    "mError":"#f66","mOnError":"#223",
+    "mSurface":"#223","mOnSurface":"#def",
+    "mSurfaceVariant":"#333","mOnSurfaceVariant":"#ccc",
+    "mHover":"#666","mOnHover":"#fff",
+    "mOutline":"#999",
+    "mShadow":"#333",
+    "terminal":{
+      "background":"#223","foreground":"#def",
+      "cursor":"#def","cursorText":"#223",
+      "selectionBg":"#def","selectionFg":"#223",
+      "normal":{
+        "red":"#f00","green":"#0f0","blue":"#00f",
+        "cyan":"#0ff","magenta":"#f0f","yellow":"#ff0",
+        "black":"#000","white":"#fff"
       },
-      "bright": {
-        "red": "#f00",
-        "green": "#0f0",
-        "blue": "#00f",
-        "cyan": "#0ff",
-        "magenta": "#f0f",
-        "yellow": "#ff0",
-        "black": "#000",
-        "white": "#fff"
+      "bright":{
+        "red":"#f66","green":"#66f","blue":"#66f",
+        "cyan":"#6ff","magenta":"#f6f","yellow":"#ff6",
+        "black":"#333","white":"#ccc"
+      }
+    }
+  },
+  "light":{
+    "mPrimary":"#076","mOnPrimary":"#eed",
+    "mSecondary":"#47a","mOnSecondary":"#eed",
+    "mTertiary":"#484","mOnTertiary":"#eed",
+    "mError":"#c00","mOnError":"#eed",
+    "mSurface":"#eed","mOnSurface":"#210",
+    "mSurfaceVariant":"#ccc","mOnSurfaceVariant":"#333",
+    "mHover":"#fff","mOnHover":"#666",
+    "mOutline":"#666",
+    "mShadow":"#ccc",
+    "terminal":{
+      "background":"#eed","foreground":"#210",
+      "cursor":"#210","cursorText":"#eed",
+      "selectionBg":"#210","selectionFg":"#eed",
+      "normal":{
+        "red":"#f00","green":"#0f0","blue":"#00f",
+        "cyan":"#0ff","magenta":"#f0f","yellow":"#ff0",
+        "black":"#000","white":"#fff"
+      },
+      "bright":{
+        "red":"#f66","green":"#66f","blue":"#66f",
+        "cyan":"#6ff","magenta":"#f6f","yellow":"#ff6",
+        "black":"#333","white":"#ccc"
       }
     }
   }

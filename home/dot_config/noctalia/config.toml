@@ -53,18 +53,6 @@ width = 960
     type = "dark_mode"
 
 
-[desktop_widgets]
-enabled = false
-schema_version = 2
-widget_order = []
-
-    [desktop_widgets.grid]
-    cell_size = 16
-    major_interval = 4
-    visible = true
-
-    [desktop_widgets.widget]
-
 [idle]
 behavior_order = [ "lock", "lock-and-suspend" ]
 pre_action_fade_seconds = 5
@@ -112,7 +100,7 @@ time_format = "%R"
 
     [shell.screen_corners]
     enabled = true
-    size = 16
+    size = 20
 
     [shell.session]
     show_shortcuts = false

@@ -9,19 +9,19 @@
     "mHover":"#666","mOnHover":"#fff",
     "mOutline":"#999",
     "mShadow":"#333",
-    "terminal":{
+    "terminal":{# based on onehalf-dark
       "background":"#223","foreground":"#def",
       "cursor":"#def","cursorText":"#223",
       "selectionBg":"#def","selectionFg":"#223",
       "normal":{
         "red":"#e06c75","green":"#98c379","blue":"#61afef",
-        "cyan":"#56b6c2","magenta":"#be5046","yellow":"#e5c07b",
-        "black":"#282c34","white":"#979eab"
+        "cyan":"#56b6c2","magenta":"#c678dd","yellow":"#e5c07b",
+        "black":"#282c34","white":"#dcdfe4"
       },
       "bright":{
         "red":"#e06c75","green":"#98c379","blue":"#61afef",
         "cyan":"#56b6c2","magenta":"#be5046","yellow":"#e5c07b",
-        "black":"#393e48","white":"#abb2bf"
+        "black":"#5d677a","white":"#dcdfe4"
       }
     }
   },
@@ -41,13 +41,13 @@
       "selectionBg":"#210","selectionFg":"#eed",
       "normal":{
         "red":"#e06c75","green":"#98c379","blue":"#61afef",
-        "cyan":"#56b6c2","magenta":"#be5046","yellow":"#e5c07b",
-        "black":"#282c34","white":"#979eab"
+        "cyan":"#56b6c2","magenta":"#c678dd","yellow":"#e5c07b",
+        "black":"#282c34","white":"#dcdfe4"
       },
       "bright":{
         "red":"#e06c75","green":"#98c379","blue":"#61afef",
         "cyan":"#56b6c2","magenta":"#be5046","yellow":"#e5c07b",
-        "black":"#393e48","white":"#abb2bf"
+        "black":"#5d677a","white":"#dcdfe4"
       }
     }
   }

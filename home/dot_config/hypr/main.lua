@@ -87,6 +87,8 @@ hl.animation({leaf="monitorAdded",enabled=false})
 
 hl.gesture({fingers=3,direction="horizontal",action="workspace"})
 hl.gesture({fingers=3,direction="vertical",action="fullscreen"})
+hl.gesture({fingers=3,direction="pinchin",action="cursor_zoom",zoom_level=2.,mode ="live"})
+hl.gesture({fingers=3,direction="pinchout",action="cursor_zoom",zoom_level=.5,mode ="live"})
 hl.gesture({fingers=4,direction="swipe",action="move"})
 hl.gesture({fingers=4,direction="pinchout",action=function()hl.dispatch(drun)end})
 

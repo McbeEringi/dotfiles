@@ -121,7 +121,7 @@ hl.bind(mod.."E",    hl.dsp.exec_cmd(fileManager))
 hl.bind(mod.."R",    drun)
 hl.bind(mod.."M",    hl.dsp.exec_cmd(msg.."panel-open session"))
 hl.bind(mod.."V",    hl.dsp.exec_cmd(msg.."panel-open clipboard"))
-hl.bind(mod.."P",    hl.dsp.exec_cmd(""))
+hl.bind(mod.."P",    hl.dsp.exec_cmd("wl-mirror-menu"))
 hl.bind(mod.."Comma",hl.dsp.exec_cmd(msg.."settings-open"))
 hl.bind(mod.."Tab",  hl.dsp.exec_cmd(msg.."window-switcher"))
 

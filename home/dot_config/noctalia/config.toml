@@ -141,7 +141,7 @@ time_format = "%R"
 
         [[shell.session.actions]]
         action = "command"
-        command = "systemctl kexec"
+        command = "custom-exit kexec"
         countdown_seconds = 3.0
         enabled = true
         glyph = "reboot"
@@ -155,6 +155,16 @@ time_format = "%R"
         enabled = true
         label = "reboot"
         shortcut = "r"
+        variant = "default"
+
+        [[shell.session.actions]]
+        action = "command"
+        command = "custom-exit windows"
+        countdown_seconds = 3.0
+        enabled = true
+        glyph = "brand-windows"
+        label = "windows"
+        shortcut = "w"
         variant = "default"
 
         [[shell.session.actions]]

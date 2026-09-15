@@ -28,6 +28,10 @@ setopt hist_ignore_all_dups
 setopt hist_save_no_dups
 setopt share_history
 
+[ -f ~/.cache/term-ps1 ] && source ~/.cache/term-ps1
+
+[ $PS1_COLOR ] && [ -e "${XDG_RUNTIME_DIR:-/tmp}/noctalia-${WAYLAND_DISPLAY:-wayland-0}.sock" ] &&
+PS1=" %F{$PS1_COLOR}%.%f %# "||
 PS1=" %F{#66ccaa}%.%f %# "
 # PS1="[%n@%m %c]%# "
 

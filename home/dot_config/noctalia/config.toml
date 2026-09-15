@@ -172,8 +172,13 @@ source = "custom"
 wallpaper_scheme = "m3-content"
 
     [theme.templates]
-    builtin_ids = [ "gtk3", "gtk4", "qt", "foot" ]
+    builtin_ids = [ "gtk3", "gtk4", "qt", "foot", "hyperland" ]
     community_ids = [ "pywalfox-beta4" ]
+
+    [theme.templates.user.term-PS1]
+    input_path = '~/.config/noctalia/templates/term-ps1'
+    output_path = '~/.cache/term-ps1'
+    # post_hook = 'tee /dev/pts/[0-9]* < ~/.cache/term-ps1'
 
 [wallpaper]
 transition = [ "fade" ]

@@ -1,4 +1,4 @@
--- require("myColors")
+return function()
 
 hl.monitor({output="",mode="preferred",position="auto",scale="1"})
 hl.monitor({output="desc:Nreal XREAL 1S",mode="preferred",position="auto-center-up",scale="0.75"})
@@ -150,20 +150,19 @@ hl.bind("F11",             hl.dsp.window.fullscreen({action="toggle"}))
 hl.bind(mod.."mouse:272",  hl.dsp.window.drag(),  {mouse=true})
 hl.bind(mod.."mouse:273",  hl.dsp.window.resize(),{mouse=true})
 
-local swapws=function(dst)
-	local mv=function(src,dst)
-		for i,x in ipairs(hl.get_workspace_windows(src)) do
-			hl.dispatch(hl.dsp.window.move({window=x,workspace=dst,follow=false}))
-		end
-	end
+local swapws=function(dst_id)
 	return function()
 		local src=hl.get_active_workspace()
-		local tmp="special:swaptmp"
-		mv(dst,tmp)
-		mv(src,dst)
-		mv(tmp,src)
-		if 0<#hl.get_workspace_windows(dst) then
-			hl.dispatch(hl.dsp.focus({workspace=dst}))
+		local dst=hl.get_workspace(dst_id)
+		if dst then
+			local src_id=src.id
+			local tmp_id=32767
+			hl.dispatch(hl.dsp.workspace.change_id({workspace=dst,id=tmp_id}))
+			hl.dispatch(hl.dsp.workspace.change_id({workspace=src,id=dst_id}))
+			local tmp=hl.get_workspace(tmp_id)
+			hl.dispatch(hl.dsp.workspace.change_id({workspace=tmp,id=src_id}))
+		else
+			hl.dispatch(hl.dsp.workspace.change_id({workspace=src,id=dst_id}))
 		end
 	end
 end
@@ -233,3 +232,9 @@ hl.bind("XF86AudioPause",hl.dsp.exec_cmd(msg.."media pause"),   {locked=true})
 hl.bind("XF86AudioPlay", hl.dsp.exec_cmd(msg.."media toggle"),  {locked=true})
 hl.bind("XF86AudioPrev", hl.dsp.exec_cmd(msg.."media previous"),{locked=true})
 
+
+-- if package.searchpath("noctalia", package.path) then
+-- 	require("noctalia")
+-- end
+
+end

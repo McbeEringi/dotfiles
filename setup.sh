@@ -15,7 +15,7 @@ fastfetch \
 npm \
 hyprland xdg-desktop-portal-hyprland foot firefox fcitx5-gtk fcitx5-qt \
 qt5-wayland qt6-wayland qt5ct qt6ct \
-thunar gvfs tumbler ffmpegthumbnailer thunar-media-tags-plugin \
+thunar gvfs tumbler ffmpegthumbnailer thunar-media-tags-plugin ntfs-3g \
 git-delta \
 grimblast wl-clipboard \
 mpv mpv-mpris \

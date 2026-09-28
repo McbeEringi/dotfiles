@@ -71,6 +71,10 @@ pre_action_fade_seconds = 5
 latitude = 35.7
 longitude = 139.8
 
+[lockscreen]
+transition = [ "fade" ]
+transition_duration = 500
+
 [lockscreen_widgets]
 enabled = true
 

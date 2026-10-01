@@ -1,6 +1,6 @@
 # dotfiles
 
-- [dotfiles](#dotfiles-1) : [ArchLinux](https://archlinux.org) + [Hyprland](https://hyprland.org) & [sway](https://swaywm.org) & [niri](https://github.com/YaLTeR/niri) setup
+- [dotfiles](#dotfiles-1) : [ArchLinux](https://archlinux.org) + [Hyprland](https://hyprland.org) setup
 	- home : [chezmoi](https://chezmoi.io) configs
 	- root : non chezmoi configs
 - [part.sh](#partsh) : partition setup script
@@ -42,8 +42,8 @@ For usage, refer to [`install.sh`](#installsh) section.
 
 ### args
 - BLK: block device path
-  default is `/dev/sda`.
-  ex:`BLK=/dev/nvme0n1`
+  default is `/dev/nvme0n1`.
+  ex:`BLK=/dev/sda`
 - SWAP: swap creation flag
   set any value (including empty) to activate.
   default is unset. 
@@ -62,9 +62,9 @@ loadkeys jp106
 iwctl
 
 # part.sh : create partition, format mount
-BLK=/dev/nvme0n1 bash <(curl -s https://dot.6ca.me/part.sh)
+bash <(curl -s https://dot.6ca.me/part.sh)
 # set SWAP to any value (including enpty) to make swap
-# BLK=/dev/nvme0n1 SWAP=1 bash <(curl -s https://dot.6ca.me/part.sh)
+# BLK=/dev/sda SWAP=1 bash <(curl -s https://dot.6ca.me/part.sh)
 
 # or do manually
 #
@@ -75,7 +75,7 @@ BLK=/dev/nvme0n1 bash <(curl -s https://dot.6ca.me/part.sh)
 # mkfs.ext4 /dev/~
 # mkswap /dev/~
 #
-# swapon /dev~
+# swapon /dev/vga_arbiter~
 # mount /dev/~ /mnt
 # mount --mkdir /dev/~ /mnt/boot
 
@@ -86,7 +86,7 @@ ROOT_PASS=password USER_NAME=user bash <(curl -s https://dot.6ca.me/install.sh)
 
 ### args
 - ROOT_PASS: password for root
-  default is `password`
+  default is unset
 - USER_NAME: username for new user
   default is `user`
 - USER_PASS: password for new user
@@ -120,7 +120,7 @@ Can be called from history.
 
 ## setup.sh
 
-Setup Hyprland & sway with recommended packages.
+Setup Hyprland with recommended packages.
 
 [source](setup.sh)
 

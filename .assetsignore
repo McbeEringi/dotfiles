@@ -1,0 +1,4 @@
+.**
+node_modules
+!.chezmoiroot
+wrangler.jsonc

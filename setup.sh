@@ -5,7 +5,7 @@ bash <(curl -s https://dot.6ca.me/zsh.sh)
 
 yay -S --noconfirm \
 helix yazi chezmoi btop \
-greetd-tuigreet bcon polkit keyd \
+ly fbgrab bcon polkit keyd \
 ffmpeg imagemagick 7zip resvg \
 jq fd ripgrep fzf \
 fcitx5 fcitx5-skk skk-emoji-jisyo \
@@ -15,38 +15,31 @@ fastfetch \
 npm \
 hyprland xdg-desktop-portal-hyprland foot firefox fcitx5-gtk fcitx5-qt \
 qt5-wayland qt6-wayland qt5ct qt6ct \
-thunar gvfs tumbler ffmpegthumbnailer thunar-media-tags-plugin ntfs-3g \
+thunar gvfs tumbler ffmpegthumbnailer thunar-media-tags-plugin \
+gvfs-smb ntfs-3g \
 git-delta \
 grimblast wl-clipboard \
 mpv mpv-mpris \
-zip unzip 7zip \
-wlsunset libinput-tools\
+zip unzip \
+libinput-tools \
 bibata-cursor-git \
 lsplug platformio-core platformio-core-udev python-pip \
 noctalia wl-mirror ddcutil power-profiles-daemon upower adw3-gtk-theme \
 cups
 
-# replaced by greetd
-# ly fbgrab
-
-# quickshell papirus-icon-theme pavucontrol
-# # or
-# xfce-polkit fuzzel waybar hypridle hyprpaper
-
-
 chezmoi status||chezmoi init mcbeeringi --branch dev -a
 
 sudo cp -r root/* /
-sudo sed -iE "/BAT1/$(grep -l Battery /sys/class/power_supply/*/type | head -n1 | xargs dirname | xargs basename)/" /etc/ly/config.ini
 
+sudo sed -iE "/BAT1/$(grep -l Battery /sys/class/power_supply/*/type | head -n1 | xargs dirname | xargs basename)/" /etc/ly/config.ini
 
 # bcon via ly failed to resume input when back from other tty ?
 # sudo ln -sf /usr/share/xsessions/bcon.desktop /etc/ly/custom-sessions/
 # sudo ln -sf /usr/bin/bcon /usr/local/bin/
 
 # for tty1
-# sudo systemctl disable getty@tty1 # $(systemctl show "*@tty1*" --state=loaded -P Id)
-sudo systemctl enable greetd # ly@tty1
+sudo systemctl disable getty@tty1 # $(systemctl show "*@tty1*" --state=loaded -P Id)
+sudo systemctl enable ly@tty1
 
 # for tty2~6 (autovt)
 sudo ln -s /usr/lib/systemd/system/bcon@.service /etc/systemd/system/autovt@tty2.service

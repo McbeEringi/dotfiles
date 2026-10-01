@@ -116,7 +116,7 @@ local ctrl="CTRL+"
 hl.bind(mod.."C",    hl.dsp.window.close())
 hl.bind(mod.."Q",    hl.dsp.exec_cmd("gnome-terminal"))
 hl.bind(mod.."Space",hl.dsp.exec_cmd("gnome-terminal node",{float=true}))
-hl.bind(mod.."W",    hl.dsp.exec_cmd("gnome-terminal iwctl"))
+hl.bind(mod.."W",    hl.dsp.exec_cmd(msg.."panel-open control-center network"))
 hl.bind(mod.."E",    hl.dsp.exec_cmd(fileManager))
 hl.bind(mod.."R",    drun)
 hl.bind(mod.."M",    hl.dsp.exec_cmd(msg.."panel-open session"))

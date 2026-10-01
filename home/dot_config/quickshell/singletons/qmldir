@@ -1,5 +1,0 @@
-module qs.singletons
-singleton Brightness 1.0 Brightness.qml
-singleton Cpu 1.0 Cpu.qml
-singleton Ram 1.0 Ram.qml
-singleton Networkd 1.0 Networkd.qml

@@ -69,6 +69,6 @@ await Bun.write(
 			.shiki,.shiki span{color:var(--shiki-dark);}
 		}
 	</style>`,{html:1})})
-	.transform(new Response(await Bun.file('index.tmpl.html').text()))
+	.transform(new Response(await Bun.file('index.tmpl.html').stream()))
 );
 

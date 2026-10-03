@@ -6,6 +6,9 @@ text/html=Helix.desktop
 image/svg+xml=Helix.desktop
 image/png=imv.desktop
 image/jpeg=imv.desktop
+image/heif=imv.desktop
+audio/x-opus+ogg=mpv.desktop
+text/markdown=Helix.desktop
 
 [Added Associations]
 application/xml=Helix.desktop;
@@ -15,3 +18,7 @@ text/html=firefox.desktop;Helix.desktop;
 image/svg+xml=firefox.desktop;Helix.desktop;
 image/png=imv.desktop;
 image/jpeg=imv.desktop;
+image/heif=imv.desktop;
+video/webm=mpv.desktop;
+audio/x-opus+ogg=mpv.desktop;
+text/markdown=Helix.desktop;

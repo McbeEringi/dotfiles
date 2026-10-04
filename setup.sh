@@ -18,7 +18,7 @@ qt5-wayland qt6-wayland qt5ct qt6ct \
 thunar gvfs tumbler ffmpegthumbnailer thunar-media-tags-plugin \
 gvfs-smb ntfs-3g \
 git-delta \
-grimblast wl-clipboard \
+wl-clipboard \
 mpv mpv-mpris \
 zip unzip \
 bibata-cursor-git \

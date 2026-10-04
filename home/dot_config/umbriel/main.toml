@@ -1,0 +1,126 @@
+[general]
+autostart=["noctalia"]
+show_cheatsheet=false
+focus_on_activate=true
+
+# [output.eDP-1]
+# workspace_axis="horizontal"
+
+
+[input]
+middle_click_paste=true
+[input.keyboard]
+layout="jp"
+numlock_toggle=false
+[input.touchpad]
+natural_scroll=true
+disable_while_typing=false
+[input.cursor]
+theme="Bibata-Modern-Ice"
+size=20
+follows_focus=true
+[input.focus]
+follows_mouse=true
+
+[appearance]
+border_width=4
+corner_radius=12
+[appearance.blur]
+passes=2
+[appearance.shadow]
+enabled=false
+
+[layout]
+# mode="dwindle"
+gap=4
+[layout.scrolling]
+default_extent_fraction=0.5
+[layout.dwindle]
+preserve_split=true
+
+
+[[window_rule]]
+blur=true
+blur_optimized=true
+[[window_rule]]
+match.app_id="^foot-float$"
+default_floating =true
+[[window_rule]]
+match.app_id="^foot|thunar$"
+opacity=0.9
+[[window_rule]]
+match.app_id="^mpv-shallow$"
+default_scratchpad="s"
+
+[[layer_rule]]
+match.namespace="^noctalia-(bar-[^\"]+|notification|dock|panel|attached-panel|osd)$"
+blur=true
+blur_ignore_alpha=0.05
+
+[[scratchpad]]
+name="s"
+[[scratchpad]]
+name="d"
+
+[keybinds]
+"Mod+C"="window-close"
+"Mod+Q"="spawn:gnome-terminal"
+"Mod+Space"="spawn:gnome-terminal -a foot-float node"
+"Mod+W"="spawn:noctalia msg panel-open control-center network"
+"Mod+B"="spawn:noctalia msg panel-open control-center bluetooth"
+"Mod+E"="spawn:thunar"
+"Mod+R"="spawn:noctalia msg panel-open launcher"
+"Mod+M"="spawn:noctalia msg panel-open session"
+"Mod+V"="spawn:noctalia msg panel-open clipboard"
+"Mod+P"="spawn:wl-mirror-menu"
+"Mod+Comma"="spawn:noctalia msg settings-open"
+"Mod+Tab"="spawn:noctalia msg window-switcher"
+
+"Mod+Left"="window-focus-left"
+"Mod+Right"="window-focus-right"
+"Mod+Up"="window-focus-up"
+"Mod+Down"="window-focus-down"
+"Mod+Prior"="window-focus-switch-floating"
+"Mod+F"="window-toggle-floating"
+"F11"="window-toggle-fullscreen"
+
+"Mod+1"="workspace-switch:1"
+"Mod+2"="workspace-switch:2"
+"Mod+3"="workspace-switch:3"
+"Mod+4"="workspace-switch:4"
+"Mod+5"="workspace-switch:5"
+"Mod+6"="workspace-switch:6"
+"Mod+7"="workspace-switch:7"
+"Mod+8"="workspace-switch:8"
+"Mod+9"="workspace-switch:9"
+"Mod+Shift+1"="window-move-to-workspace:1"
+"Mod+Shift+2"="window-move-to-workspace:2"
+"Mod+Shift+3"="window-move-to-workspace:3"
+"Mod+Shift+4"="window-move-to-workspace:4"
+"Mod+Shift+5"="window-move-to-workspace:5"
+"Mod+Shift+6"="window-move-to-workspace:6"
+"Mod+Shift+7"="window-move-to-workspace:7"
+"Mod+Shift+8"="window-move-to-workspace:8"
+"Mod+Shift+9"="window-move-to-workspace:9"
+
+"Mod+Shift+S"="window-toggle-scratchpad:s"
+"Mod+S"="scratchpad-toggle:s"
+"Mod+Shift+D"="window-toggle-scratchpad:d"
+"Mod+D"="scratchpad-toggle:d"
+
+"XF86AudioRaiseVolume"={action="spawn:noctalia msg volume-up",allow_when_locked=true}
+"XF86AudioLowerVolume"={action="spawn:noctalia msg volume-down",allow_when_locked=true}
+"XF86AudioMute"={action="spawn:noctalia msg volume-mute",allow_when_locked=true}
+"XF86AudioMicMute"={action="spawn:noctalia msg mic-mute",allow_when_locked=true}
+
+"XF86MonBrightnessUp"={action="spawn:noctalia msg brightness-up",allow_when_locked=true}
+"XF86MonBrightnessDown"={action="spawn:noctalia msg brightness-down",allow_when_locked=true}
+
+"Print"="spawn:noctalia msg screenshot-fullscreen"
+"Shift+Print"="spawn:noctalia msg screenshot-region"
+"Ctrl+Print"="spawn:noctalia msg annotate"
+
+"XF86AudioNext"={action="spawn:noctalia msg media next",allow_when_locked=true}
+"XF86AudioPause"={action="spawn:noctalia msg media pause",allow_when_locked=true}
+"XF86AudioPlay"={action="spawn:noctalia msg media toggle",allow_when_locked=true}
+"XF86AudioPrev"={action="spawn:noctalia msg media previous",allow_when_locked=true}

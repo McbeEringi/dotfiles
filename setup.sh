@@ -21,7 +21,6 @@ git-delta \
 grimblast wl-clipboard \
 mpv mpv-mpris \
 zip unzip \
-libinput-tools \
 bibata-cursor-git \
 lsplug platformio-core platformio-core-udev python-pip \
 noctalia wl-mirror ddcutil power-profiles-daemon upower adw3-gtk-theme \

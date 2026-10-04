@@ -1,6 +1,6 @@
 # dotfiles
 
-- [dotfiles](#dotfiles-1) : [ArchLinux](https://archlinux.org) + [Hyprland](https://hyprland.org) setup
+- [dotfiles](#dotfiles-1) : [ArchLinux](https://archlinux.org) + [Hyprland](https://hyprland.org)&[Umbriel](https://github.com/noctalia-dev/umbriel) + [Noctalia](https://github.com/noctalia-dev/noctalia) setup
 	- home : [chezmoi](https://chezmoi.io) configs
 	- root : non chezmoi configs
 - [part.sh](#partsh) : partition setup script

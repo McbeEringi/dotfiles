@@ -9,7 +9,7 @@
     "mHover":"#666","mOnHover":"#fff",
     "mOutline":"#999",
     "mShadow":"#333",
-    "terminal":{# based on onehalf-dark
+    "terminal":{
       "background":"#223","foreground":"#def",
       "cursor":"#def","cursorText":"#223",
       "selectionBg":"#def","selectionFg":"#223",

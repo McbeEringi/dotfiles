@@ -106,6 +106,10 @@ time_format = "%R"
     enabled = true
     size = 20
 
+    [shell.screenshot]
+    remember_last_region = true
+    save_to_file = false
+
     [shell.session]
     show_shortcuts = false
 
@@ -182,11 +186,11 @@ time_format = "%R"
 [theme]
 community_palette = "One"
 custom_palette = "6ca"
-source = "custom"
+source = "wallpaper"
 wallpaper_scheme = "m3-content"
 
     [theme.templates]
-    builtin_ids = [ "gtk3", "gtk4", "qt", "foot", "hyperland" ]
+    builtin_ids = [ "gtk3", "gtk4", "qt", "foot", "hyperland", "umbriel" ]
     community_ids = [ "pywalfox-beta4" ]
 
     [theme.templates.user.term-PS1]

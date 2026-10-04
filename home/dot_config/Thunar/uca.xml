@@ -24,5 +24,22 @@
 	<startup-notify/>
 	<directories/>
 </action>
+<action>
+	<icon>utilities-terminal</icon>
+	<name>paste as file</name>
+	<submenu></submenu>
+	<unique-id>paste-as-file</unique-id>
+	<command>wl-paste-file</command>
+	<description></description>
+	<range>*</range>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<directories/>
+	<audio-files/>
+	<image-files/>
+	<other-files/>
+	<text-files/>
+	<video-files/>
+</action>
 </actions>
 

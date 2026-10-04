@@ -11,4 +11,8 @@ EOF
 (gtk_accel_path "<Actions>/ThunarActions/uca-action-open-with-mpv" "F6")
 EOF
 
+[[ $(grep -oP 'uca-action-paste-as-file' "${tempfile}") ]]||cat << EOF >> "${tempfile}"
+(gtk_accel_path "<Actions>/ThunarActions/uca-action-paste-as-file" "F7")
+EOF
+
 cat "${tempfile}"

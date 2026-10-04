@@ -1,0 +1,2 @@
+#!/usr/bin/bash
+wl-paste > clipboard_$(date +%F_%T).$(wl-paste|file -b -i -|grep -oP '/\K.+?(?=;|$)')

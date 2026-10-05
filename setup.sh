@@ -24,7 +24,7 @@ zip unzip \
 bibata-cursor-git \
 lsplug platformio-core platformio-core-udev python-pip \
 noctalia wl-mirror ddcutil power-profiles-daemon upower adw3-gtk-theme \
-cups
+cups system-config-printer
 
 chezmoi status||chezmoi init mcbeeringi --branch dev -a
 

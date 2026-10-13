@@ -1,7 +1,7 @@
 return function()
 
 hl.monitor({output="",mode="preferred",position="auto",scale="1"})
-hl.monitor({output="desc:Nreal XREAL 1S",mode="preferred",position="auto-center-up",scale="0.75"})
+hl.monitor({output="desc:Nreal XREAL 1S",mode="preferred",position="auto-center-up",scale="1"})
 
 local terminal="foot"
 local fileManager="thunar"

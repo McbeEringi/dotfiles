@@ -9,6 +9,9 @@ image/jpeg=imv.desktop
 image/heif=imv.desktop
 audio/x-opus+ogg=mpv.desktop
 text/markdown=Helix.desktop
+image/jxl=imv.desktop
+image/avif=imv.desktop
+text/csv=Helix.desktop
 
 [Added Associations]
 application/xml=Helix.desktop;
@@ -22,3 +25,6 @@ image/heif=imv.desktop;
 video/webm=mpv.desktop;
 audio/x-opus+ogg=mpv.desktop;
 text/markdown=Helix.desktop;
+image/jxl=imv.desktop;
+image/avif=imv.desktop;
+text/csv=Helix.desktop;

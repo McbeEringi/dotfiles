@@ -96,7 +96,7 @@ hl.window_rule({name="border-xwayland",match={xwayland=true},border_color="rgba(
 hl.window_rule({name="float",match={title="float"},float=true})
 hl.window_rule({name="opacity",match={class=table.concat({fileManager,terminal},"|")},opacity=".9 .8 override"})
 hl.window_rule({name="mpv",match={class="mpv"},pseudo=true,workspace="special:s"})
-hl.window_rule({name="mpv-shallow",match={class="mpv-shallow"},pseudo=true,workspace="special:s silent",size={720,720}})
+hl.window_rule({name="mpv-shallow",match={class="mpv-shallow"},pseudo=true,workspace="special:s silent",size={480,480}})
 hl.window_rule({name="suppress-maximize-events",match={class=".*"},suppress_event="maximize"})
 hl.window_rule({name="fix-xwayland-drags",match={class="^$",title="^$",xwayland=true,float=true,fullscreen=false,pin=false},no_focus=true})
 hl.window_rule({name="move-hyprland-run",match={class="hyprland-run"},move="20 monitor_h-120",float=true})

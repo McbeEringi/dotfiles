@@ -12,9 +12,9 @@ w=await({
 			title:'dot.6ca.me',
 			description:'McbeEringi dotfiles',
 			url:'https://dot.6ca.me/',
-			image:'https://mcbeeringi.dev/img/icon.png'
+			image:'https://6ca.me/img/icon.png'
 		},
-		style:['https://mcbeeringi.dev/src/style.css']
+		style:['https://6ca.me/src/style.css','https://6ca.me/src/shiki.css']
 	}),
 	gh:_=>({
 		og:{
@@ -55,20 +55,10 @@ await Bun.write(
 		w.style.map(x=>`<link rel="stylesheet" href="${x}">`).join(''),
 		{html:1}
 	)})
-	.on('head',{element:e=>e.append(`<style>
-		.shiki{position:relative;--bg:var(--shiki-light-bg);}
-		.shiki::before{
-			content:"";display:block;
-			position:absolute;top:0;left:0;width:100%;height:100%;z-index:-1;
-			background-color:var(--bg);opacity:.8;border-radius:1ex;
-		}
-		.shiki code{display:block;overflow:auto;padding:1ex;}
-		.shiki,.shiki span{color:var(--shiki-light);}
-		@media(prefers-color-scheme:dark){
-			.shiki{--bg:var(--shiki-dark-bg);}
-			.shiki,.shiki span{color:var(--shiki-dark);}
-		}
-	</style>`,{html:1})})
+	.on('head',{element:async e=>w.style.some(x=>x.endsWith('shiki.css'))||e.append(
+		`<style>\n${await(await fetch('https://6ca.me/src/shiki.css')).text()}</style>`,
+		{html:1}
+	)})
 	.transform(new Response(await Bun.file('index.tmpl.html').stream()))
 );
 

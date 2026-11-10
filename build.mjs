@@ -12,7 +12,7 @@ w=await({
 			title:'dot.6ca.me',
 			description:'McbeEringi dotfiles',
 			url:'https://dot.6ca.me/',
-			image:'https://6ca.me/img/icon.png'
+			image:'https://dot.6ca.me/img/apple-touch-icon.png'
 		},
 		style:['https://6ca.me/src/style.css','https://6ca.me/src/shiki.css']
 	}),
@@ -22,7 +22,7 @@ w=await({
 			title:'dotfiles',
 			description:'McbeEringi dotfiles',
 			url:'https://mcbeeringi.github.io/dotfiles/',
-			image:'https://mcbeeringi.github.io/img/icon.png'
+			image:'https://mcbeeringi.github.io/dotfiles/img/apple-touch-icon.png'
 		},
 		style:['https://mcbeeringi.github.io/src/style.css','https://mcbeeringi.github.io/src/shiki.css']
 	})

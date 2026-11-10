@@ -24,7 +24,7 @@ w=await({
 			url:'https://mcbeeringi.github.io/dotfiles/',
 			image:'https://mcbeeringi.github.io/img/icon.png'
 		},
-		style:['https://mcbeeringi.github.io/src/style.css']
+		style:['https://mcbeeringi.github.io/src/style.css','https://mcbeeringi.github.io/src/shiki.css']
 	})
 }[Bun.argv[2]]??(_=>Promise.reject(`Unknown dst "${Bun.argv[2]}"`)))();
 
@@ -53,10 +53,6 @@ await Bun.write(
 	)})
 	.on('meta[style]',{element:e=>e.replace(
 		w.style.map(x=>`<link rel="stylesheet" href="${x}">`).join(''),
-		{html:1}
-	)})
-	.on('head',{element:async e=>w.style.some(x=>x.endsWith('shiki.css'))||e.append(
-		`<style>\n${await(await fetch('https://6ca.me/src/shiki.css')).text()}</style>`,
 		{html:1}
 	)})
 	.transform(new Response(await Bun.file('index.tmpl.html').stream()))

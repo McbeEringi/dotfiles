@@ -1,5 +1,5 @@
 {
-  "name": "dot.6ca.me",
+  "name": "dotfiles-workers",
   "type": "module",
   "scripts": {
     "deploy": "wrangler deploy",

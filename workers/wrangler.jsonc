@@ -1,6 +1,6 @@
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "dot-6ca-me",
+	"name": "dotfiles",
 	"compatibility_date": "2026-11-09",
 	"build":{"command":"bun 6ca-ssg cf","watch_dir":["src","modules.mjs"]},
 	"routes":[

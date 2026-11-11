@@ -1,0 +1,12 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "dot-6ca-me",
+	"compatibility_date": "2026-11-09",
+	"build":{"command":"bun 6ca-ssg cf","watch_dir":["src","modules.mjs"]},
+	"routes":[
+		{"pattern":"l.6ca.me","custom_domain":true}
+	],
+	"assets":{"directory":"./dst","not_found_handling":"404-page"},
+	"observability":{"enabled":true},
+	"upload_source_maps": true
+}

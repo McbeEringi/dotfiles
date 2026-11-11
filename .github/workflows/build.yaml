@@ -1,4 +1,4 @@
-name: build.mjs
+name: 6ca-ssg
 
 on:
   push:
@@ -14,6 +14,10 @@ concurrency:
   group: "pages"
   cancel-in-progress: false
 
+defaults:
+  run:
+    working-directory: ./workers
+
 jobs:
   deploy:
     environment:
@@ -26,17 +30,15 @@ jobs:
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
       - name: Install deps
-        run : bun i
-      - name: Run build.mjs
-        run : bun build.mjs gh
-      - name: Filtering .assetsignore
-        run : rm -rf $(bun assetsignore.mjs)
+        run : bun i -p
+      - name: Run 6ca-ssg
+        run : bun 6ca-ssg
       - name: Setup Pages
         uses: actions/configure-pages@v6
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5
         with:
-          path: '.'
+          path: ./dst
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5

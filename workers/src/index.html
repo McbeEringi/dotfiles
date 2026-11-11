@@ -1,0 +1,30 @@
+<script type="build">
+import cfg from'config_default';
+import tmpl from'html_tmpl';
+import readme from'../../README.md';
+import{fromAsyncCodeToHtml}from'@shikijs/markdown-it/async';
+import MarkdownItAsync from'markdown-it-async';
+import{codeToHtml}from'shiki';
+
+console.log(
+[...new Bun.Glob('!(workers)').scanSync({cwd:'../',onlyFiles:false})]
+)
+
+export default async x=>(
+	x=tmpl(cfg)(x),
+	x.html=await new HTMLRewriter()
+		.on('main',{element:async(e,md)=>(
+			md=MarkdownItAsync(),
+			md.use(fromAsyncCodeToHtml(codeToHtml,{
+				themes:{light:'one-light',dark:'one-dark-pro'},
+				defaultColor:false,
+			})),
+			e.append(await md.renderAsync(await readme.text()),{html:1})
+		)})
+		.on('head',{element:e=>e.append('<link rel="stylesheet" href="/src/shiki.css">',{html:1})})
+		.transform(new Response(x.html)),
+	x
+);
+</script>
+
+<main></main>

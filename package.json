@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "@shikijs/markdown-it": "^4.5.0",
-    "markdown-it-async": "^2.2.0"
-  }
-}

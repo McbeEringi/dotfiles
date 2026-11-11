@@ -32,7 +32,7 @@ jobs:
       - name: Install deps
         run : bun i -p
       - name: Run 6ca-ssg
-        run : bun 6ca-ssg
+        run : bun 6ca-ssg gh
       - name: Setup Pages
         uses: actions/configure-pages@v6
       - name: Upload artifact

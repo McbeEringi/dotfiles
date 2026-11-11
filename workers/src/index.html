@@ -6,9 +6,7 @@ import{fromAsyncCodeToHtml}from'@shikijs/markdown-it/async';
 import MarkdownItAsync from'markdown-it-async';
 import{codeToHtml}from'shiki';
 
-console.log(
-[...new Bun.Glob('!(workers)').scanSync({cwd:'../',onlyFiles:false})]
-)
+await Bun.$`ln -sf ${['../../.chezmoiroot',...new Bun.Glob('../../!(workers)').scanSync({cwd:import.meta.dir,onlyFiles:false})]} .`.cwd(import.meta.dir)
 
 export default async x=>(
 	x=tmpl(cfg)(x),

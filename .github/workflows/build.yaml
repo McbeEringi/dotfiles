@@ -38,7 +38,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5
         with:
-          path: ./workers/dst
+          path: ./dst
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5

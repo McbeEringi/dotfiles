@@ -1,5 +1,6 @@
 import{dirname,relative}from'node:path';
 
+export * as md from'./md.mjs';
 export default ({args})=>({
 
 config_default:{

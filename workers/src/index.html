@@ -2,26 +2,15 @@
 import cfg from'config_default';
 import tmpl from'html_tmpl';
 import readme from'../../README.md';
-import{fromAsyncCodeToHtml}from'@shikijs/markdown-it/async';
-import MarkdownItAsync from'markdown-it-async';
-import{codeToHtml}from'shiki';
-
-const copy=(md,opt,{f=md.renderer.rules.fence}={})=>md.renderer.rules.fence=(...arg)=>`<div class="fence">${f(...arg)}<button>📎</button></div>`;
+import{MD,client_js}from'md';
 
 await Bun.$`ln -sf ${['../../.chezmoiroot',...new Bun.Glob('../../!(workers)').scanSync({cwd:import.meta.dir,onlyFiles:false})]} .`.cwd(import.meta.dir)
 
 export default async x=>(
 	x=tmpl(cfg)(x),
 	x.html=await new HTMLRewriter()
-		.on('main',{element:async(e,md)=>(
-			md=MarkdownItAsync(),
-			md.use(fromAsyncCodeToHtml(codeToHtml,{
-				themes:{light:'one-light',dark:'one-dark-pro'},
-				defaultColor:false,
-			})),
-			md.use(copy,{}),
-			e.append(await md.renderAsync(await readme.text()),{html:1})
-		)})
+		.on('main',{element:async e=>e.append(await MD().renderAsync(await readme.text()),{html:1})})
+		.on(...client_js)
 		.on('head',{element:e=>e.append('<link rel="stylesheet" href="/src/shiki.css">',{html:1})})
 		.transform(new Response(x.html)),
 	x
@@ -29,17 +18,3 @@ export default async x=>(
 </script>
 
 <main></main>
-
-<style head>
-.fence{position:relative;}
-.fence>button{position:absolute;top:1ex;right:1ex;opacity:.7;}
-</style>
-<script>
-document.querySelectorAll('.fence>button').forEach((e,x)=>(
-	x=e.textContent,
-	e.onclick=async _=>(
-		await navigator.clipboard.writeText(e.previousElementSibling.textContent),
-		e.textContent='☑️',setTimeout(_=>e.textContent=x,500)
-	)
-))
-</script>

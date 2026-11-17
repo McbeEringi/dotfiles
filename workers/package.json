@@ -10,6 +10,7 @@
     "wrangler": "^4.160.1"
   },
   "dependencies": {
-    "6ca-ssg": "git+https://github.com/mcbeeringi/6ca-ssg.git"
+    "6ca-ssg": "git+https://github.com/mcbeeringi/6ca-ssg.git",
+    "@shikijs/markdown-it": "^4.6.0"
   }
 }
